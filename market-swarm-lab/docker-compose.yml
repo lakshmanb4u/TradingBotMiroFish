@@ -142,5 +142,22 @@ services:
         condition: service_healthy
     command: uvicorn services.mirofish-bridge.app:app --host 0.0.0.0 --port 8004 --reload
 
+  agent-seeder:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile
+    working_dir: /app
+    environment: *common-env
+    volumes:
+      - .:/app
+    ports:
+      - "8006:8006"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: uvicorn services.agent-seeder.app:app --host 0.0.0.0 --port 8006 --reload
+
 volumes:
   postgres_data:

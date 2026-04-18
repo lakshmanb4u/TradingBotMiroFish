@@ -219,6 +219,82 @@ class RedditCollectorService:
 
     # ──────────────────────────── fixtures
 
+    def extract_seed_data(self, ticker: str) -> dict[str, Any]:
+        """Collect Reddit data and extract seed information for the agent seeder."""
+        data = self.collect(ticker)
+        threads = data.get("threads", [])
+
+        # Score each thread
+        for thread in threads:
+            text = (thread.get("title", "") + " " + thread.get("body", "")).strip()
+            scored = score_text(text)
+            thread["_sentiment_val"] = scored["sentiment"]
+
+        # Top 3 bullish by score field (highest score, positive sentiment)
+        bullish_threads = sorted(
+            [t for t in threads if t.get("_sentiment_val", 0) > 0],
+            key=lambda t: t.get("score", 0),
+            reverse=True,
+        )[:3]
+
+        # Top 3 bearish by score field (highest score, negative sentiment)
+        bearish_threads = sorted(
+            [t for t in threads if t.get("_sentiment_val", 0) < 0],
+            key=lambda t: t.get("score", 0),
+            reverse=True,
+        )[:3]
+
+        key_bullish_points = [t.get("title", "") for t in bullish_threads]
+        key_bearish_points = [t.get("title", "") for t in bearish_threads]
+
+        # Themes: tokenize all titles+bodies, count word frequency, skip stopwords
+        _STOPWORDS = {
+            "a", "the", "is", "in", "of", "to", "and", "for", "with",
+            "that", "this", "it", "on", "at", "by", "from", "or", "an",
+            "be", "are", "was", "not", "have", "has", "had", "will", "can",
+        }
+        word_freq: dict[str, int] = {}
+        import re
+        for t in threads:
+            combined = t.get("title", "") + " " + t.get("body", "")
+            words = re.findall(r"\b\w+\b", combined.lower())
+            for w in words:
+                if w not in _STOPWORDS and len(w) > 2:
+                    word_freq[w] = word_freq.get(w, 0) + 1
+        themes = [w for w, _ in sorted(word_freq.items(), key=lambda x: x[1], reverse=True)][:5]
+
+        # Disagreement score from extract_features
+        feats = extract_features(threads)
+        disagreement_score = feats.get("disagreement_index", 0.0)
+
+        # Weighted sentiment = sum(score * sentiment_val) / max(sum(abs scores), 1)
+        abs_scores_sum = sum(abs(t.get("_sentiment_val", 0)) for t in threads)
+        weighted_sentiment = (
+            sum(t.get("score", 0) * t.get("_sentiment_val", 0) for t in threads)
+            / max(abs_scores_sum, 1)
+        )
+        weighted_sentiment = round(weighted_sentiment, 4)
+
+        avg_sentiment = feats.get("avg_sentiment", 0.0)
+        bull_ratio = feats.get("bullish_ratio", 0.0)
+        bear_ratio = feats.get("bearish_ratio", 0.0)
+        label = "bullish" if avg_sentiment > 0.05 else ("bearish" if avg_sentiment < -0.05 else "neutral")
+        sentiment_summary = (
+            f"Reddit is {label} with avg sentiment {avg_sentiment:+.2f}. "
+            f"Bullish posts: {bull_ratio:.0%}, bearish posts: {bear_ratio:.0%}. "
+            f"Disagreement index: {disagreement_score:.2f}."
+        )
+
+        return {
+            "ticker": ticker.upper(),
+            "sentiment_summary": sentiment_summary,
+            "key_bullish_points": key_bullish_points,
+            "key_bearish_points": key_bearish_points,
+            "themes": themes,
+            "disagreement_score": disagreement_score,
+            "weighted_sentiment": weighted_sentiment,
+        }
+
     def _load_fixture(self, ticker: str) -> dict[str, Any]:
         path = _FIXTURE_ROOT / "reddit" / f"{ticker.upper()}.json"
         if path.exists():
