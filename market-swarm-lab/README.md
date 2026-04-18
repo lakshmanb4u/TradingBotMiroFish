@@ -1,43 +1,62 @@
 # market-swarm-lab
 
-A local-first prototype that combines:
-- MiroFish-style agent simulation via a bridge service
-- TimesFM-compatible forecasting with a safe local fallback
-- Multi-source ingestion for SEC filings, news, Reddit, prediction markets, and market data
-- A unified FastAPI endpoint to run a report for a ticker
+Simple local-first monorepo for market simulations and forecasts.
 
-## Quick start
+## Structure
 
-One-command demo for NVDA and SPY:
+- `services/collector`
+- `services/reddit-collector`
+- `services/normalizer`
+- `services/forecasting`
+- `services/mirofish-bridge`
+- `services/reporting`
+- `apps/api`
+- `infra`
+- `docs`
+
+## Prerequisites
+
+- Docker
+- Docker Compose
+
+## Setup
+
+```bash
+make setup
+```
+
+This will:
+- create `.env` from `.env.example` if needed
+- build the local containers
+
+## Run everything locally
+
+```bash
+make run
+```
+
+Services:
+- API: `http://localhost:8000`
+- Collector: `http://localhost:8001`
+- Forecasting: `http://localhost:8002`
+- Reporting: `http://localhost:8003`
+- Postgres: `localhost:5432`
+- Redis: `localhost:6379`
+
+## Demo
 
 ```bash
 make demo
 ```
 
-That command runs the API container with Postgres + Redis dependencies, executes the demo workflow for `NVDA` and `SPY`, and writes:
-- `state/reports/NVDA.json`
-- `state/reports/NVDA.md`
-- `state/reports/SPY.json`
-- `state/reports/SPY.md`
+That runs the demo workflow for `NVDA` and `SPY` and writes JSON + Markdown reports to `state/reports/`.
 
-## API
+## Environment
 
-Start the stack:
+`.env.example` includes:
+- `NEWSAPI_API_KEY`
+- `ALPHAVANTAGE_API_KEY`
+- `REDDIT_CLIENT_ID`
+- `REDDIT_CLIENT_SECRET`
 
-```bash
-make up
-```
-
-Run a ticker workflow:
-
-```bash
-curl -X POST http://localhost:8000/v1/tickers/NVDA/run
-```
-
-## Reddit behavior
-
-Reddit is treated as a first-class source in two ways:
-- Simulation seed, retail sentiment narratives, and agent personas for the MiroFish bridge
-- Derived numeric features for the forecasting input window
-
-If Reddit OAuth credentials are not available, the system automatically falls back to bundled fixtures and continues.
+Reddit is optional. If credentials are missing, the system falls back to local fixtures and keeps running.

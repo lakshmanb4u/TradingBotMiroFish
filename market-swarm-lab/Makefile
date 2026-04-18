@@ -1,9 +1,9 @@
-up:
-	docker compose up --build api postgres redis
+setup:
+	@if [ ! -f .env ]; then cp .env.example .env; fi
+	docker compose build
 
-api:
-	docker compose up --build api
-
+run:
+	docker compose up --build postgres redis api collector forecasting reporting
 
 demo:
 	docker compose run --rm api python -m apps.api.demo NVDA SPY

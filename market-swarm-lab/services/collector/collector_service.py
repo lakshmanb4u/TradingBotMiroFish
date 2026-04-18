@@ -2,10 +2,15 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 from pathlib import Path
 from typing import Any
 
 import httpx
+
+REDDIT_COLLECTOR_DIR = Path(__file__).resolve().parents[1] / "reddit-collector"
+if str(REDDIT_COLLECTOR_DIR) not in sys.path:
+    sys.path.append(str(REDDIT_COLLECTOR_DIR))
 
 from reddit_collector_service import RedditCollectorService
 
@@ -15,8 +20,8 @@ class MultiSourceCollector:
         self.root = Path(__file__).resolve().parents[2]
         self.fixture_root = self.root / "infra" / "fixtures"
         self.reddit = RedditCollectorService()
-        self.newsapi_key = os.getenv("NEWSAPI_KEY", "")
-        self.alpha_vantage_key = os.getenv("ALPHA_VANTAGE_API_KEY", "")
+        self.newsapi_key = os.getenv("NEWSAPI_API_KEY", os.getenv("NEWSAPI_KEY", ""))
+        self.alpha_vantage_key = os.getenv("ALPHAVANTAGE_API_KEY", os.getenv("ALPHA_VANTAGE_API_KEY", ""))
 
     def collect(self, ticker: str) -> dict[str, Any]:
         ticker = ticker.upper()
