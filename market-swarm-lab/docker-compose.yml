@@ -103,5 +103,25 @@ services:
         condition: service_healthy
     command: uvicorn services.reporting.app:app --host 0.0.0.0 --port 8003 --reload
 
+  mirofish-bridge:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile
+    working_dir: /app
+    environment:
+      <<: *common-env
+      MIROFISH_BASE_URL: ${MIROFISH_BASE_URL:-}
+      MIROFISH_FILE_ADAPTER_DIR: /app/state/mirofish_seeds
+    volumes:
+      - .:/app
+    ports:
+      - "8004:8004"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: uvicorn services.mirofish-bridge.app:app --host 0.0.0.0 --port 8004 --reload
+
 volumes:
   postgres_data:
