@@ -11,6 +11,7 @@ SERVICE_DIRS = [
     ROOT / "services" / "forecasting",
     ROOT / "services" / "mirofish-bridge",
     ROOT / "services" / "reporting",
+    ROOT / "services" / "seed-builder",
 ]
 
 for service_dir in SERVICE_DIRS:

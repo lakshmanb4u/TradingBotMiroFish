@@ -1,0 +1,84 @@
+{
+  "ticker": "NVDA",
+  "provider_mode": "fixture_fallback",
+  "features": {
+    "post_count": 3,
+    "comment_count": 6,
+    "bullish_ratio": 0.0,
+    "bearish_ratio": 0.0,
+    "avg_sentiment": 0.0,
+    "engagement_velocity": 900.33,
+    "disagreement_index": 1.0,
+    "top_subreddits": [
+      "stocks",
+      "investing",
+      "wallstreetbets"
+    ]
+  },
+  "activity": [
+    {
+      "date": "2026-04-08",
+      "mentions": 19,
+      "comments": 112,
+      "bullish_ratio": 0.63,
+      "bearish_ratio": 0.12,
+      "avg_sentiment": 0.34
+    },
+    {
+      "date": "2026-04-09",
+      "mentions": 21,
+      "comments": 126,
+      "bullish_ratio": 0.65,
+      "bearish_ratio": 0.1,
+      "avg_sentiment": 0.36
+    },
+    {
+      "date": "2026-04-10",
+      "mentions": 24,
+      "comments": 138,
+      "bullish_ratio": 0.67,
+      "bearish_ratio": 0.09,
+      "avg_sentiment": 0.39
+    },
+    {
+      "date": "2026-04-13",
+      "mentions": 28,
+      "comments": 156,
+      "bullish_ratio": 0.7,
+      "bearish_ratio": 0.08,
+      "avg_sentiment": 0.41
+    },
+    {
+      "date": "2026-04-14",
+      "mentions": 31,
+      "comments": 188,
+      "bullish_ratio": 0.72,
+      "bearish_ratio": 0.09,
+      "avg_sentiment": 0.44
+    },
+    {
+      "date": "2026-04-15",
+      "mentions": 34,
+      "comments": 205,
+      "bullish_ratio": 0.74,
+      "bearish_ratio": 0.08,
+      "avg_sentiment": 0.46
+    },
+    {
+      "date": "2026-04-16",
+      "mentions": 39,
+      "comments": 244,
+      "bullish_ratio": 0.77,
+      "bearish_ratio": 0.07,
+      "avg_sentiment": 0.51
+    },
+    {
+      "date": "2026-04-17",
+      "mentions": 42,
+      "comments": 267,
+      "bullish_ratio": 0.79,
+      "bearish_ratio": 0.06,
+      "avg_sentiment": 0.55
+    }
+  ]
+}

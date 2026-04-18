@@ -1,0 +1,39 @@
+{
+  "ticker": "NVDA",
+  "fundamental_summary": "NVDA SEC risk score is low (0.05). Recent filings: []  filed 2010-08-30; []  filed 2010-12-07.",
+  "retail_sentiment_summary": "Reddit is bullish with avg sentiment +0.55 across 42 tracked mentions. Bullish posts: 0%, bearish posts: 0%. Community is significantly split (disagreement index 1.00) — retail conviction is low. Top post: \"NVDA still has room if hyperscalers keep spending Retail sees another capex leg coming from cloud bu\" (neutral)",
+  "news_summary": "News sentiment is positive (+0.31). Catalysts: NVIDIA supply chain tightens as AI server demand stays elevated Partners point t | Semiconductor multiples stretch as investors debate durability of capex cycle Va | Cloud providers continue to prioritize GPU infrastructure build-outs Spending pl.",
+  "prediction_market_summary": "Prediction market consensus is risk-on at 64%. Contracts: Kalshi: AI infrastructure spending accelerates this quarter (64% yes).",
+  "timesfm_summary": "TimesFM (local_fallback) projects up over 5 days: target 1010.45 (+43.75), confidence 86%.",
+  "key_bullish_points": [
+    "[prediction_market] AI infrastructure spending accelerates this quarter at 64% yes"
+  ],
+  "key_bearish_points": [],
+  "disagreement_level": 1.0,
+  "agent_personas": [
+    {
+      "name": "NVDA Retail Momentum Trader",
+      "archetype": "retail",
+      "stance": "bullish",
+      "weight": 0.95
+    },
+    {
+      "name": "NVDA Sell-Side Analyst",
+      "archetype": "analyst",
+      "stance": "constructive",
+      "weight": 0.61
+    },
+    {
+      "name": "NVDA Prediction Market Arb",
+      "archetype": "arb",
+      "stance": "risk-on",
+      "weight": 0.64
+    },
+    {
+      "name": "NVDA Compliance Watcher",
+      "archetype": "sec",
+      "stance": "monitoring",
+      "weight": 0.35
+    }
+  ]
+}

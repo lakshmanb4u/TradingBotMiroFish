@@ -54,19 +54,23 @@ class ReportingService:
     def _summary_line(self, payload: dict[str, Any]) -> str:
         forecast = payload["forecast"]
         simulation = payload["simulation"]
+        regime = simulation.get("regime") or simulation.get("final_direction", "unknown")
+        outlook = simulation.get("outlook_score", simulation.get("distribution", {}).get("bullish", 0))
         return (
-            f"{payload['ticker']} forecast {forecast['direction']} to {forecast['forecast_close_5d']} "
-            f"with simulation regime {simulation['regime']} and outlook score {simulation['outlook_score']}."
+            f"{payload['ticker']} forecast {forecast.get('direction','?')} to {forecast.get('forecast_close_5d', '?')} "
+            f"with simulation regime {regime} and outlook score {outlook}."
         )
 
     def _render_markdown(self, payload: dict[str, Any], raw_bundle: dict[str, Any], normalized_bundle: dict[str, Any]) -> str:
         snapshot = payload["snapshot"]
         forecast = payload["forecast"]
         simulation = payload["simulation"]
-        narratives = normalized_bundle["simulation_seed"]["key_narratives"]
+        narratives = normalized_bundle.get("simulation_seed", {}).get("key_narratives", [])
         news = raw_bundle["news"].get("articles", [])[:3]
         markets = raw_bundle["prediction_markets"].get("markets", [])[:3]
         sec = raw_bundle["sec_filings"].get("filings", [])[:2]
+        regime = simulation.get("regime") or simulation.get("final_direction", "unknown")
+        outlook = simulation.get("outlook_score", simulation.get("distribution", {}).get("bullish", 0))
 
         lines = [
             f"# {payload['ticker']} market-swarm-lab report",
@@ -77,7 +81,7 @@ class ReportingService:
             "",
             f"- Latest close: {snapshot['latest_close']}",
             f"- Forecast 5d: {forecast['forecast_close_5d']} ({forecast['direction']}, confidence {forecast['confidence']})",
-            f"- MiroFish bridge regime: {simulation['regime']} (score {simulation['outlook_score']})",
+            f"- MiroFish bridge regime: {regime} (score {outlook})",
             f"- Reddit sentiment: {snapshot['reddit_sentiment']} from {snapshot['reddit_mentions']} mentions",
             f"- Prediction market consensus: {snapshot['prediction_market_consensus']}",
             "",
@@ -103,8 +107,8 @@ class ReportingService:
             "",
         ])
         lines.extend(
-            f"- Round {item['round']}: {item['focus']} | dominant signal: {item['dominant_signal']} | score: {item['score']}"
-            for item in simulation["rounds"]
+            f"- Round {item.get('round',i+1)}: {item.get('focus', item.get('signal',''))} | score: {item.get('score', item.get('running_score','?'))}"
+            for i, item in enumerate(simulation.get("rounds", []))
         )
         lines.extend(["", "## News", ""])
         lines.extend(f"- {item['source']}: {item['title']}" for item in news)

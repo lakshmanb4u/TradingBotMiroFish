@@ -105,6 +105,23 @@ services:
         condition: service_healthy
     command: uvicorn services.reporting.app:app --host 0.0.0.0 --port 8003 --reload
 
+  seed-builder:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile
+    working_dir: /app
+    environment: *common-env
+    volumes:
+      - .:/app
+    ports:
+      - "8005:8005"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: uvicorn services.seed-builder.app:app --host 0.0.0.0 --port 8005 --reload
+
   mirofish-bridge:
     build:
       context: .

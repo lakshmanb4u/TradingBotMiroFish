@@ -10,11 +10,16 @@ if str(REDDIT_COLLECTOR_DIR) not in sys.path:
     sys.path.append(str(REDDIT_COLLECTOR_DIR))
 
 from reddit_collector_service import RedditCollectorService
-from .fetchers import sec as sec_fetcher
-from .fetchers import news as news_fetcher
-from .fetchers import polymarket as poly_fetcher
-from .fetchers import kalshi as kalshi_fetcher
-from .fetchers import ohlcv as ohlcv_fetcher
+
+_FETCHER_DIR = str(Path(__file__).resolve().parent / "fetchers")
+if _FETCHER_DIR not in sys.path:
+    sys.path.insert(0, _FETCHER_DIR)
+
+import sec as sec_fetcher      # noqa: E402
+import news as news_fetcher     # noqa: E402
+import polymarket as poly_fetcher  # noqa: E402
+import kalshi as kalshi_fetcher  # noqa: E402
+import ohlcv as ohlcv_fetcher   # noqa: E402
 
 
 class MultiSourceCollector:
