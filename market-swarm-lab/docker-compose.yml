@@ -73,6 +73,8 @@ services:
     build:
       context: .
       dockerfile: infra/Dockerfile
+      args:
+        INSTALL_TIMESFM: ${INSTALL_TIMESFM:-false}
     working_dir: /app
     environment: *common-env
     volumes:
