@@ -1,0 +1,12 @@
+{
+  "ticker": "SPY",
+  "markets": [
+    {
+      "venue": "Kalshi",
+      "contract": "US avoids recession headline this quarter",
+      "probability_yes": 0.59
+    }
+  ],
+  "provider_mode": "fixture_fallback",
+  "live_error": "Client error '401 Unauthorized' for url 'https://trading-api.kalshi.com/trade-api/v2/markets?limit=100&status=open'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401"
+}

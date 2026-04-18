@@ -1,0 +1,24 @@
+{
+  "ticker": "NVDA",
+  "provider_mode": "csv_upload",
+  "series": [
+    {
+      "date": "2026-04-17",
+      "open": 959.0,
+      "high": 972.0,
+      "low": 955.0,
+      "close": 966.7,
+      "volume": 53800000,
+      "vwap": 964.5667
+    },
+    {
+      "date": "2026-04-16",
+      "open": 950.0,
+      "high": 963.0,
+      "low": 947.0,
+      "close": 958.4,
+      "volume": 52100000,
+      "vwap": 956.1333
+    }
+  ]
+}

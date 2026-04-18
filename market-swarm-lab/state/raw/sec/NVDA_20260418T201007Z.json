@@ -1,0 +1,42 @@
+{
+  "ticker": "NVDA",
+  "provider_mode": "edgar_live",
+  "cik": null,
+  "filings": [
+    {
+      "form": "",
+      "filed_at": "2010-08-30",
+      "entity": "NVDA",
+      "summary": " filed 2010-08-30",
+      "risk_score": 0.05
+    },
+    {
+      "form": "",
+      "filed_at": "2010-12-07",
+      "entity": "NVDA",
+      "summary": " filed 2010-12-07",
+      "risk_score": 0.05
+    },
+    {
+      "form": "",
+      "filed_at": "2010-08-30",
+      "entity": "NVDA",
+      "summary": " filed 2010-08-30",
+      "risk_score": 0.05
+    },
+    {
+      "form": "",
+      "filed_at": "2011-03-16",
+      "entity": "NVDA",
+      "summary": " filed 2011-03-16",
+      "risk_score": 0.05
+    },
+    {
+      "form": "",
+      "filed_at": "2010-12-07",
+      "entity": "NVDA",
+      "summary": " filed 2010-12-07",
+      "risk_score": 0.05
+    }
+  ]
+}
