@@ -1,0 +1,8 @@
+{
+  "ticker": "NVDA",
+  "markets": [
+    {"venue": "Polymarket", "contract": "NVIDIA beats next earnings revenue guide", "probability_yes": 0.67},
+    {"venue": "Kalshi", "contract": "AI infrastructure spending accelerates this quarter", "probability_yes": 0.64},
+    {"venue": "Polymarket", "contract": "Semis lead S&P over next month", "probability_yes": 0.61}
+  ]
+}

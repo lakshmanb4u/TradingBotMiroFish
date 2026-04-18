@@ -1,0 +1,7 @@
+{
+  "ticker": "NVDA",
+  "filings": [
+    {"form": "10-Q", "filed_at": "2026-04-11T21:00:00Z", "summary": "Management highlights continued AI datacenter backlog strength and supply coordination risk.", "risk_score": 0.18},
+    {"form": "8-K", "filed_at": "2026-04-04T21:00:00Z", "summary": "Board authorizes expanded capex planning around advanced packaging and networking integration.", "risk_score": 0.08}
+  ]
+}

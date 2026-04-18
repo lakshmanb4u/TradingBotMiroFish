@@ -1,0 +1,56 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: market_swarm_lab
+      POSTGRES_USER: market_swarm
+      POSTGRES_PASSWORD: market_swarm
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U market_swarm -d market_swarm_lab"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile
+    working_dir: /app
+    environment:
+      POSTGRES_DSN: postgresql://market_swarm:market_swarm@postgres:5432/market_swarm_lab
+      REDIS_URL: redis://redis:6379/0
+      REDDIT_CLIENT_ID: ${REDDIT_CLIENT_ID:-}
+      REDDIT_CLIENT_SECRET: ${REDDIT_CLIENT_SECRET:-}
+      REDDIT_USER_AGENT: ${REDDIT_USER_AGENT:-market-swarm-lab-demo/0.1}
+      NEWSAPI_KEY: ${NEWSAPI_KEY:-}
+      ALPHA_VANTAGE_API_KEY: ${ALPHA_VANTAGE_API_KEY:-}
+      MIROFISH_BASE_URL: ${MIROFISH_BASE_URL:-}
+      ENABLE_TIMESFM: ${ENABLE_TIMESFM:-false}
+      REPORT_OUTPUT_DIR: /app/state/reports
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: uvicorn apps.api.main:app --host 0.0.0.0 --port 8000 --reload
+
+volumes:
+  postgres_data:

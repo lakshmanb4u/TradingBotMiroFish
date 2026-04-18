@@ -1,0 +1,18 @@
+{
+  "ticker": "SPY",
+  "activity": [
+    {"date": "2026-04-08", "mentions": 14, "comments": 96, "bullish_ratio": 0.49, "bearish_ratio": 0.22, "avg_sentiment": 0.08},
+    {"date": "2026-04-09", "mentions": 13, "comments": 91, "bullish_ratio": 0.44, "bearish_ratio": 0.25, "avg_sentiment": 0.03},
+    {"date": "2026-04-10", "mentions": 16, "comments": 110, "bullish_ratio": 0.47, "bearish_ratio": 0.23, "avg_sentiment": 0.05},
+    {"date": "2026-04-13", "mentions": 17, "comments": 118, "bullish_ratio": 0.52, "bearish_ratio": 0.19, "avg_sentiment": 0.09},
+    {"date": "2026-04-14", "mentions": 19, "comments": 124, "bullish_ratio": 0.45, "bearish_ratio": 0.27, "avg_sentiment": 0.01},
+    {"date": "2026-04-15", "mentions": 21, "comments": 131, "bullish_ratio": 0.53, "bearish_ratio": 0.2, "avg_sentiment": 0.07},
+    {"date": "2026-04-16", "mentions": 20, "comments": 127, "bullish_ratio": 0.56, "bearish_ratio": 0.17, "avg_sentiment": 0.11},
+    {"date": "2026-04-17", "mentions": 18, "comments": 119, "bullish_ratio": 0.51, "bearish_ratio": 0.2, "avg_sentiment": 0.06}
+  ],
+  "threads": [
+    {"subreddit": "stocks", "title": "SPY grind higher but breadth still feels weird", "body": "Index is up but retail keeps debating if this is just mega-cap concentration.", "score": 734, "comments": ["Dip buying still works until it doesn\u2019t.", "Feels okay but not cleanly bullish."]},
+    {"subreddit": "wallstreetbets", "title": "SPY calls if earnings hold up?", "body": "Some posters want upside exposure but are hedging with puts because yields are sticky.", "score": 589, "comments": ["I\u2019m bullish but keeping it tactical.", "Macro can still whipsaw this fast."]},
+    {"subreddit": "investing", "title": "Prediction markets look calmer than Reddit on SPY", "body": "Retail is noisy while macro odds stay moderately constructive.", "score": 313, "comments": ["Feels rangebound unless data breaks hard.", "Need rates to cool for a bigger move."]}
+  ]
+}

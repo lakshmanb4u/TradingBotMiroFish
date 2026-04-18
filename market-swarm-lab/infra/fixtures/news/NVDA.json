@@ -1,0 +1,8 @@
+{
+  "ticker": "NVDA",
+  "articles": [
+    {"source": "NewsAPI fixture", "title": "NVIDIA supply chain tightens as AI server demand stays elevated", "summary": "Partners point to continued accelerator demand into the second half.", "published_at": "2026-04-17T13:15:00Z", "sentiment": 0.45},
+    {"source": "Alpha Vantage fixture", "title": "Semiconductor multiples stretch as investors debate durability of capex cycle", "summary": "Valuation concerns rise but earnings revisions remain positive.", "published_at": "2026-04-16T09:00:00Z", "sentiment": 0.1},
+    {"source": "NewsAPI fixture", "title": "Cloud providers continue to prioritize GPU infrastructure build-outs", "summary": "Spending plans support near-term revenue confidence.", "published_at": "2026-04-15T17:45:00Z", "sentiment": 0.38}
+  ]
+}

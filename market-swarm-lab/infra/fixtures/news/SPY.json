@@ -1,0 +1,8 @@
+{
+  "ticker": "SPY",
+  "articles": [
+    {"source": "NewsAPI fixture", "title": "Mega-cap earnings support index resilience even as breadth stays uneven", "summary": "Index leadership remains concentrated.", "published_at": "2026-04-17T12:20:00Z", "sentiment": 0.18},
+    {"source": "Alpha Vantage fixture", "title": "Treasury yields drift higher as traders trim aggressive rate-cut bets", "summary": "Higher discount rates create mild pressure on broad equities.", "published_at": "2026-04-16T15:05:00Z", "sentiment": -0.12},
+    {"source": "NewsAPI fixture", "title": "Systematic flows keep buying dips in US equities", "summary": "Positioning remains constructive but less euphoric than Q1.", "published_at": "2026-04-15T18:30:00Z", "sentiment": 0.15}
+  ]
+}

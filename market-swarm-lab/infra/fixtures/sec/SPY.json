@@ -1,0 +1,6 @@
+{
+  "ticker": "SPY",
+  "filings": [
+    {"form": "N-CSR", "filed_at": "2026-04-09T20:00:00Z", "summary": "ETF reporting indicates continued concentration in top technology holdings and moderate sector rotation risk.", "risk_score": 0.12}
+  ]
+}

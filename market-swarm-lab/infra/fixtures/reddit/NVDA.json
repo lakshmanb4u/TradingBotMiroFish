@@ -1,0 +1,18 @@
+{
+  "ticker": "NVDA",
+  "activity": [
+    {"date": "2026-04-08", "mentions": 19, "comments": 112, "bullish_ratio": 0.63, "bearish_ratio": 0.12, "avg_sentiment": 0.34},
+    {"date": "2026-04-09", "mentions": 21, "comments": 126, "bullish_ratio": 0.65, "bearish_ratio": 0.1, "avg_sentiment": 0.36},
+    {"date": "2026-04-10", "mentions": 24, "comments": 138, "bullish_ratio": 0.67, "bearish_ratio": 0.09, "avg_sentiment": 0.39},
+    {"date": "2026-04-13", "mentions": 28, "comments": 156, "bullish_ratio": 0.7, "bearish_ratio": 0.08, "avg_sentiment": 0.41},
+    {"date": "2026-04-14", "mentions": 31, "comments": 188, "bullish_ratio": 0.72, "bearish_ratio": 0.09, "avg_sentiment": 0.44},
+    {"date": "2026-04-15", "mentions": 34, "comments": 205, "bullish_ratio": 0.74, "bearish_ratio": 0.08, "avg_sentiment": 0.46},
+    {"date": "2026-04-16", "mentions": 39, "comments": 244, "bullish_ratio": 0.77, "bearish_ratio": 0.07, "avg_sentiment": 0.51},
+    {"date": "2026-04-17", "mentions": 42, "comments": 267, "bullish_ratio": 0.79, "bearish_ratio": 0.06, "avg_sentiment": 0.55}
+  ],
+  "threads": [
+    {"subreddit": "wallstreetbets", "title": "NVDA still has room if hyperscalers keep spending", "body": "Retail sees another capex leg coming from cloud buildouts.", "score": 1642, "comments": ["I am staying long into next quarter.", "Valuation is hot but momentum still rules."]},
+    {"subreddit": "stocks", "title": "Anyone else tracking NVDA supply chain updates?", "body": "Packaging constraints look better than last quarter.", "score": 618, "comments": ["This is why revenue guide keeps surprising higher.", "Need to watch gross margin if they rush supply."]},
+    {"subreddit": "investing", "title": "NVIDIA sentiment looks euphoric, but is it too crowded?", "body": "Some posters worry retail is chasing late.", "score": 441, "comments": ["I would trim if RSI gets extreme.", "Still not fighting the trend."]}
+  ]
+}

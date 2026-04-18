@@ -1,0 +1,8 @@
+{
+  "ticker": "SPY",
+  "markets": [
+    {"venue": "Polymarket", "contract": "S&P 500 closes above current level in 1 week", "probability_yes": 0.54},
+    {"venue": "Kalshi", "contract": "US avoids recession headline this quarter", "probability_yes": 0.59},
+    {"venue": "Polymarket", "contract": "Fed stays data dependent through next meeting", "probability_yes": 0.57}
+  ]
+}
