@@ -166,6 +166,11 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
         ROOT / "services" / "agent-seeder",
         ROOT / "services" / "price-collector",
         ROOT / "services" / "news-collector",
+        ROOT / "services" / "strategy-engine",
+        ROOT / "services" / "risk-engine",
+        ROOT / "services" / "execution-engine",
+        ROOT / "services" / "portfolio-engine",
+        ROOT / "services" / "backtester",
     ]
     for sd in SERVICE_DIRS:
         sp = str(sd)
@@ -356,6 +361,26 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
     # 10. Generate trade signal
     trade_signal = seeder.generate_trade_signal(simulation_result, forecast, normalized_bundle)
 
+    # 10b. Strategy + risk engine
+    strategy_signal: dict = {}
+    risk_eval: dict = {}
+    try:
+        from strategy_engine_service import StrategyEngineService
+        from risk_engine_service import RiskEngineService
+        strategy_context = {
+            "timesfm": normalized_bundle.get("timesfm") or forecast,
+            "divergence": normalized_bundle.get("divergence", {}),
+            "price": normalized_bundle.get("price_rich") or normalized_bundle.get("price", {}),
+            "reddit": normalized_bundle.get("reddit", {}),
+            "news": normalized_bundle.get("news", {}),
+            "simulation": simulation_result,
+            "source_audit": normalized_bundle.get("source_audit", {}),
+        }
+        strategy_signal = StrategyEngineService().generate_signal(ticker, strategy_context, horizon="1d")
+        risk_eval = RiskEngineService().evaluate(strategy_signal, strategy_context)
+    except Exception:
+        pass
+
     # 11. Unified report
     report = UnifiedReporter().report(
         ticker, forecast, reddit_seed, normalized_bundle, mirofish_result, seed,
@@ -383,4 +408,204 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
         "mirofish": mirofish_result,
         "report": report,
         "trade_signal": trade_signal,
+        "strategy_signal": strategy_signal,
+        "risk_eval": risk_eval,
     }
+
+
+def _build_signal_context(ticker: str, ROOT: "Path") -> tuple[dict, dict]:
+    """Shared helper: collect live context and return (normalized_bundle, strategy_context)."""
+    import sys
+    from pathlib import Path as _Path
+
+    SERVICE_DIRS = [
+        ROOT / "services" / "price-collector",
+        ROOT / "services" / "news-collector",
+        ROOT / "services" / "reddit-collector",
+        ROOT / "services" / "forecasting",
+        ROOT / "services" / "seed-builder",
+    ]
+    for sd in SERVICE_DIRS:
+        sp = str(sd)
+        if sp not in sys.path:
+            sys.path.insert(0, sp)
+
+    nb: dict = {"source_audit": {}}
+
+    try:
+        from price_service import PriceService
+        price_rich = PriceService().collect(ticker)
+        nb["price_rich"] = price_rich
+        nb["source_audit"]["ohlcv"] = price_rich.get("source_audit", {}).get(
+            "ohlcv", {"status": "fallback", "provider": "fixture", "record_count": 0}
+        )
+        close_prices = price_rich.get("close_prices", [])
+    except Exception:
+        nb["source_audit"]["ohlcv"] = {"status": "fallback", "provider": "fixture", "record_count": 0}
+        close_prices = []
+
+    try:
+        from news_service import NewsService
+        news_rich = NewsService().collect(ticker)
+        nb["news"] = news_rich
+        nb["source_audit"]["news"] = news_rich.get("source_audit", {}).get("news", {"status": "fallback"})
+    except Exception:
+        try:
+            from news_collector_service import NewsCollectorService
+            news_data = NewsCollectorService().collect(ticker)
+            nb["news"] = news_data
+            nb["source_audit"]["news"] = news_data.get("source_audit", {}).get("news", {"status": "fallback"})
+        except Exception:
+            nb["source_audit"]["news"] = {"status": "fallback"}
+
+    try:
+        from reddit_collector_service import RedditCollectorService
+        reddit_data = RedditCollectorService().collect_subreddit(ticker=ticker)
+        nb["reddit"] = reddit_data
+        provider_mode = reddit_data.get("provider_mode", "fixture_fallback")
+        nb["source_audit"]["reddit"] = {
+            "status": "live" if provider_mode in ("apify_live", "oauth_live") else "fallback",
+        }
+    except Exception:
+        pass
+
+    try:
+        from forecasting_service import TimesFMForecastingService
+        if close_prices:
+            timesfm = TimesFMForecastingService().forecast_from_prices(ticker, close_prices)
+            nb["timesfm"] = timesfm
+    except Exception:
+        pass
+
+    try:
+        from divergence_engine import compute_divergence
+        divergence = compute_divergence(
+            nb.get("timesfm", {}),
+            nb.get("reddit", {}),
+            None,
+        )
+        nb["divergence"] = divergence
+    except Exception:
+        pass
+
+    strategy_context = {
+        "timesfm": nb.get("timesfm", {}),
+        "divergence": nb.get("divergence", {}),
+        "price": nb.get("price_rich", {}),
+        "reddit": nb.get("reddit", {}),
+        "news": nb.get("news", {}),
+        "simulation": {"final_confidence": 0.5},
+        "source_audit": nb.get("source_audit", {}),
+    }
+    return nb, strategy_context
+
+
+@app.get("/signal")
+def get_signal(
+    ticker: str = Query(default="SPY"),
+    horizon: str = Query(default="1d"),
+) -> dict:
+    import sys
+    from pathlib import Path
+
+    ROOT = Path(__file__).resolve().parents[2]
+    for sd in [
+        ROOT / "services" / "strategy-engine",
+        ROOT / "services" / "risk-engine",
+    ]:
+        sp = str(sd)
+        if sp not in sys.path:
+            sys.path.insert(0, sp)
+
+    from strategy_engine_service import StrategyEngineService
+    from risk_engine_service import RiskEngineService
+
+    try:
+        _nb, strategy_context = _build_signal_context(ticker, ROOT)
+        signal = StrategyEngineService().generate_signal(ticker, strategy_context, horizon)
+        risk = RiskEngineService().evaluate(signal, strategy_context)
+        return {"signal": signal, "risk": risk}
+    except Exception as exc:
+        return {"error": str(exc), "signal": {}, "risk": {}}
+
+
+@app.get("/trade-plan")
+def get_trade_plan(
+    ticker: str = Query(default="SPY"),
+    horizon: str = Query(default="1d"),
+) -> dict:
+    import sys
+    from pathlib import Path
+
+    ROOT = Path(__file__).resolve().parents[2]
+    for sd in [
+        ROOT / "services" / "strategy-engine",
+        ROOT / "services" / "risk-engine",
+        ROOT / "services" / "execution-engine",
+        ROOT / "services" / "portfolio-engine",
+    ]:
+        sp = str(sd)
+        if sp not in sys.path:
+            sys.path.insert(0, sp)
+
+    from strategy_engine_service import StrategyEngineService
+    from risk_engine_service import RiskEngineService
+    from execution_engine_service import ExecutionEngineService
+    from portfolio_engine_service import PortfolioEngineService
+
+    try:
+        _nb, strategy_context = _build_signal_context(ticker, ROOT)
+        signal = StrategyEngineService().generate_signal(ticker, strategy_context, horizon)
+        risk = RiskEngineService().evaluate(signal, strategy_context)
+
+        order_ticket: dict = {}
+        portfolio_record: dict = {}
+        if risk.get("approved"):
+            order_ticket = ExecutionEngineService().execute(signal, risk, ticker)
+            # Enrich order with signal metadata before recording
+            enriched_order = {
+                **order_ticket,
+                "strategy_type": signal.get("strategy_type", ""),
+                "drivers": signal.get("drivers", []),
+                "source_audit_snapshot": strategy_context.get("source_audit", {}),
+                "position_size_pct": risk.get("position_size_pct", 0.0),
+            }
+            portfolio_record = PortfolioEngineService().record_trade(enriched_order)
+
+        return {
+            "signal": signal,
+            "risk": risk,
+            "trade_plan": order_ticket,
+            "portfolio_record": portfolio_record,
+            "execution_mode": order_ticket.get("mode", "paper"),
+        }
+    except Exception as exc:
+        return {"error": str(exc), "signal": {}, "risk": {}, "trade_plan": {}, "execution_mode": "paper"}
+
+
+@app.post("/backtest")
+def run_backtest(
+    ticker: str = Query(default="SPY"),
+    horizon: str = Query(default="1d"),
+) -> dict:
+    import sys
+    from pathlib import Path
+
+    ROOT = Path(__file__).resolve().parents[2]
+    for sd in [
+        ROOT / "services" / "backtester",
+        ROOT / "services" / "strategy-engine",
+        ROOT / "services" / "risk-engine",
+        ROOT / "services" / "forecasting",
+    ]:
+        sp = str(sd)
+        if sp not in sys.path:
+            sys.path.insert(0, sp)
+
+    from backtester_service import BacktesterService
+
+    try:
+        result = BacktesterService().run(ticker, horizon)
+        return result
+    except Exception as exc:
+        return {"error": str(exc), "ticker": ticker.upper(), "horizon": horizon}
