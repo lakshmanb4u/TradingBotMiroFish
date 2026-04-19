@@ -2,279 +2,864 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>market-swarm-lab — Architecture</title>
+<title>market-swarm-lab — System Architecture</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #0d1117; color: #e6edf3; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 32px; }
-  h1 { text-align: center; font-size: 22px; color: #58a6ff; margin-bottom: 6px; letter-spacing: 1px; }
-  .subtitle { text-align: center; color: #8b949e; font-size: 13px; margin-bottom: 32px; }
-  .layer { margin-bottom: 12px; }
-  .layer-label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #8b949e; margin-bottom: 8px; padding-left: 4px; }
-  .row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-  .box {
-    border-radius: 8px; padding: 12px 14px; font-size: 12px; line-height: 1.6;
-    min-width: 140px; flex: 1; max-width: 200px; border: 1px solid;
-  }
-  .box .title { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
-  .box .sub { font-size: 11px; opacity: 0.75; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #f8f9fa;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 40px;
+  min-width: 1100px;
+}
 
-  /* colors */
-  .orange  { background: #1c1300; border-color: #e3701a; }
-  .orange .title { color: #f0883e; }
-  .red     { background: #1a0000; border-color: #da3633; }
-  .red .title { color: #ff7b72; }
-  .blue    { background: #00111a; border-color: #1f6feb; }
-  .blue .title { color: #58a6ff; }
-  .purple  { background: #12001a; border-color: #8957e5; }
-  .purple .title { color: #bc8cff; }
-  .green   { background: #001a0a; border-color: #238636; }
-  .green .title { color: #3fb950; }
-  .cyan    { background: #001a1a; border-color: #0097a7; }
-  .cyan .title { color: #39d5d5; }
-  .yellow  { background: #1a1500; border-color: #d29922; }
-  .yellow .title { color: #e3b341; }
-  .magenta { background: #1a0012; border-color: #bf4b8a; }
-  .magenta .title { color: #f778ba; }
-  .gray    { background: #161b22; border-color: #30363d; }
-  .gray .title { color: #e6edf3; }
+h1 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: 0.3px;
+  margin-bottom: 4px;
+}
+.meta { font-size: 12px; color: #888; margin-bottom: 32px; }
 
-  /* wide boxes */
-  .wide { max-width: 100%; width: 100%; }
-  .wide-inner { display: flex; gap: 0; }
-  .wide-inner .segment {
-    flex: 1; padding: 10px 14px; font-size: 12px; border-right: 1px solid #30363d;
-  }
-  .wide-inner .segment:last-child { border-right: none; }
-  .wide-inner .segment .t { font-weight: 700; font-size: 12px; margin-bottom: 3px; }
-  .wide-inner .segment .s { font-size: 11px; opacity: 0.7; }
+/* SWIMLANE WRAPPER */
+.diagram {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1.5px solid #dde1e7;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
 
-  /* arrows */
-  .arrow { text-align: center; color: #484f58; font-size: 20px; margin: 4px 0; line-height: 1; }
+/* SWIMLANE ROW */
+.lane {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1.5px solid #dde1e7;
+}
+.lane:last-child { border-bottom: none; }
 
-  /* agent box */
-  .agent-box {
-    background: #161b22; border: 1px solid #30363d; border-radius: 8px;
-    overflow: hidden; width: 100%;
-  }
-  .agent-header {
-    background: #1c2128; padding: 8px 14px; font-size: 12px; font-weight: 700;
-    color: #e6edf3; border-bottom: 1px solid #30363d;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .agent-header span { font-size: 11px; color: #8b949e; font-weight: 400; }
+/* LANE LABEL */
+.lane-label {
+  width: 120px;
+  min-width: 120px;
+  background: #f2f4f7;
+  border-right: 1.5px solid #dde1e7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 8px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #555;
+}
 
-  /* output row */
-  .output-box {
-    border-radius: 8px; padding: 12px 14px; font-size: 12px; flex: 1;
-    min-width: 160px; max-width: 220px; border: 2px solid;
-  }
-  .output-box .title { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
-  .output-box .detail { font-size: 11px; opacity: 0.8; line-height: 1.7; }
+/* LANE CONTENT */
+.lane-content {
+  flex: 1;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+/* NODE */
+.node {
+  border-radius: 8px;
+  border: 1.5px solid;
+  padding: 10px 14px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  min-width: 130px;
+  max-width: 180px;
+  position: relative;
+  background: #fff;
+}
+.node .n-title {
+  font-weight: 700;
+  font-size: 12px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.node .n-body {
+  font-size: 10.5px;
+  color: #555;
+  line-height: 1.6;
+}
+.node .n-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-top: 5px;
+  letter-spacing: 0.5px;
+}
+
+/* ARROW between nodes */
+.arrow-h {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.arrow-h .arrow-line {
+  width: 28px;
+  height: 1.5px;
+  background: #c0c8d8;
+  position: relative;
+}
+.arrow-h .arrow-line::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: -4px;
+  border: 5px solid transparent;
+  border-left: 7px solid #c0c8d8;
+}
+.arrow-h .arrow-label {
+  font-size: 9px;
+  color: #aaa;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+/* DOWN ARROW between lanes */
+.lane-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background: #f8f9fa;
+  border-bottom: 1.5px solid #dde1e7;
+  position: relative;
+}
+.lane-arrow-label-col {
+  width: 120px;
+  min-width: 120px;
+  background: #f2f4f7;
+  border-right: 1.5px solid #dde1e7;
+}
+.lane-arrow-content {
+  flex: 1;
+  padding: 6px 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.arrow-down {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.arrow-down .shaft {
+  width: 1.5px;
+  height: 14px;
+  background: #c0c8d8;
+}
+.arrow-down .head {
+  width: 0; height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid #c0c8d8;
+}
+.arrow-down .alabel {
+  font-size: 9px;
+  color: #aaa;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+/* COLOR THEMES */
+.ext   { border-color: #bdc8e8; background: #f4f6fd; }
+.ext   .n-title { color: #3b5bdb; }
+.ext   .n-badge { background: #e8edff; color: #3b5bdb; }
+
+.svc   { border-color: #b8dfc8; background: #f2fbf5; }
+.svc   .n-title { color: #1a7f4b; }
+.svc   .n-badge { background: #dcf5e7; color: #1a7f4b; }
+
+.intel { border-color: #fddcaa; background: #fffbf2; }
+.intel .n-title { color: #b06a00; }
+.intel .n-badge { background: #fff0d0; color: #b06a00; }
+
+.agent { border-color: #e8c8f8; background: #fdf5ff; }
+.agent .n-title { color: #7c3aed; }
+.agent .n-badge { background: #f3e8ff; color: #7c3aed; }
+
+.dec   { border-color: #ffc8c8; background: #fff5f5; }
+.dec   .n-title { color: #c0392b; }
+.dec   .n-badge { background: #ffe8e8; color: #c0392b; }
+
+.out   { border-color: #b8dff8; background: #f2f9ff; }
+.out   .n-title { color: #0a6496; }
+.out   .n-badge { background: #d0ecff; color: #0a6496; }
+
+/* NORMALIZER special wide box */
+.wide-node {
+  flex: 1;
+  border-radius: 8px;
+  border: 1.5px dashed #c0c8d8;
+  background: #fafbfc;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.wide-node .wn-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #333;
+  white-space: nowrap;
+}
+.wide-node .wn-key {
+  display: inline-block;
+  background: #eef0f4;
+  border: 1px solid #dde1e7;
+  border-radius: 4px;
+  font-size: 10px;
+  padding: 2px 6px;
+  color: #555;
+  font-family: 'SF Mono', monospace;
+}
+
+/* audit strip */
+.audit-strip {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1;
+}
+.audit-pill {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.live  { background: #dcf5e7; color: #1a7f4b; border: 1px solid #b8dfc8; }
+.fall  { background: #fff0d0; color: #b06a00; border: 1px solid #fddcaa; }
+
+/* legend */
+.legend {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  font-size: 11px;
+  color: #777;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; }
 </style>
 </head>
 <body>
 
-<h1>market-swarm-lab</h1>
-<p class="subtitle">Multi-Agent Market Intelligence · Option Signal Generator · Paper Trading Engine</p>
+<h1>market-swarm-lab — Technical System Architecture</h1>
+<p class="meta">Multi-source market intelligence · 100-agent simulation · Option signal generation · Paper trading engine</p>
 
-<!-- LAYER 1: DATA SOURCES -->
-<div class="layer">
-  <div class="layer-label">① Data Sources</div>
-  <div class="row">
-    <div class="box orange">
-      <div class="title">📈 Alpha Vantage</div>
-      <div class="sub">100-day OHLCV<br>Adjusted close<br>TIME_SERIES_DAILY</div>
-    </div>
-    <div class="box red">
-      <div class="title">🤖 Apify / Reddit</div>
-      <div class="sub">trudax/reddit-scraper<br>r/wallstreetbets<br>r/stocks · r/options</div>
-    </div>
-    <div class="box blue">
-      <div class="title">📰 NewsAPI</div>
-      <div class="sub">Last 3–5 days<br>Up to 20 articles<br>Financial headlines</div>
-    </div>
-    <div class="box purple">
-      <div class="title">🎲 Kalshi / Polymarket</div>
-      <div class="sub">Open prediction markets<br>YES probabilities<br>Market consensus</div>
-    </div>
-    <div class="box green">
-      <div class="title">🏛 SEC / EDGAR</div>
-      <div class="sub">10-K · 10-Q · 8-K<br>Risk score analysis<br>Filing summaries</div>
+<div class="diagram">
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- LANE 1: EXTERNAL DATA SOURCES -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="lane">
+    <div class="lane-label">External Sources</div>
+    <div class="lane-content">
+
+      <div class="node ext">
+        <div class="n-title">📈 Alpha Vantage</div>
+        <div class="n-body">TIME_SERIES_DAILY_ADJUSTED<br>100 trading days<br>OHLCV + adjusted close</div>
+        <span class="n-badge" style="background:#e8edff;color:#3b5bdb;">REST API</span>
+      </div>
+
+      <div class="arrow-h"><div class="arrow-line"></div><div class="arrow-label">HTTP GET</div></div>
+
+      <div class="node ext">
+        <div class="n-title">🤖 Apify</div>
+        <div class="n-body">trudax/reddit-scraper<br>r/wsb · r/stocks · r/options<br>Posts + comments</div>
+        <span class="n-badge" style="background:#e8edff;color:#3b5bdb;">Actor API</span>
+      </div>
+
+      <div class="arrow-h"><div class="arrow-line"></div><div class="arrow-label">HTTP POST</div></div>
+
+      <div class="node ext">
+        <div class="n-title">📰 NewsAPI</div>
+        <div class="n-body">Everything endpoint<br>Last 3–5 days<br>Up to 20 articles</div>
+        <span class="n-badge" style="background:#e8edff;color:#3b5bdb;">REST API</span>
+      </div>
+
+      <div class="arrow-h"><div class="arrow-line"></div><div class="arrow-label">HTTP GET</div></div>
+
+      <div class="node ext">
+        <div class="n-title">🎲 Kalshi</div>
+        <div class="n-body">Open prediction markets<br>YES/NO probabilities<br>No key required</div>
+        <span class="n-badge" style="background:#e8edff;color:#3b5bdb;">REST API</span>
+      </div>
+
+      <div class="arrow-h"><div class="arrow-line"></div><div class="arrow-label">HTTP GET</div></div>
+
+      <div class="node ext">
+        <div class="n-title">🏛 SEC / EDGAR</div>
+        <div class="n-body">10-K · 10-Q · 8-K filings<br>Risk language NLP<br>Filing digest</div>
+        <span class="n-badge" style="background:#e8edff;color:#3b5bdb;">REST API</span>
+      </div>
+
     </div>
   </div>
-</div>
 
-<div class="arrow">▼ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ▼ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ▼ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ▼ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ▼</div>
-
-<!-- LAYER 2: COLLECTION -->
-<div class="layer">
-  <div class="layer-label">② Collection &amp; Normalization</div>
-  <div class="row">
-    <div class="box orange">
-      <div class="title">price-collector</div>
-      <div class="sub">RSI-14 · VWAP<br>Rolling vol 5d/10d<br>10d momentum<br>Parquet output</div>
-    </div>
-    <div class="box red">
-      <div class="title">reddit-collector</div>
-      <div class="sub">Apify → OAuth → fixture<br>NLP sentiment scoring<br>bullish/bearish ratio<br>disagreement_index</div>
-    </div>
-    <div class="box blue">
-      <div class="title">news-collector</div>
-      <div class="sub">NewsAPI → AV → fixture<br>narrative_strength<br>breaking_news_flag<br>theme extraction</div>
-    </div>
-    <div class="box purple">
-      <div class="title">kalshi-collector</div>
-      <div class="sub">Open markets fetch<br>YES probability avg<br>Direction signal<br>No key required</div>
-    </div>
-    <div class="box green">
-      <div class="title">sec-collector</div>
-      <div class="sub">EDGAR filing fetch<br>Risk language NLP<br>sec_risk_score<br>Filing digest</div>
+  <!-- DOWN ARROWS 1→2 -->
+  <div class="lane lane-arrow" style="border-bottom:1.5px solid #dde1e7;">
+    <div class="lane-arrow-label-col"></div>
+    <div class="lane-arrow-content">
+      <div class="arrow-down"><div class="shaft"></div><div class="head"></div><div class="alabel">raw OHLCV</div></div>
+      <div class="arrow-down"><div class="shaft"></div><div class="head"></div><div class="alabel">posts + comments</div></div>
+      <div class="arrow-down"><div class="shaft"></div><div class="head"></div><div class="alabel">articles[]</div></div>
+      <div class="arrow-down"><div class="shaft"></div><div class="head"></div><div class="alabel">markets[]</div></div>
+      <div class="arrow-down"><div class="shaft"></div><div class="head"></div><div class="alabel">filings[]</div></div>
     </div>
   </div>
-</div>
 
-<div class="arrow">▼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼</div>
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- LANE 2: COLLECTION SERVICES -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="lane">
+    <div class="lane-label">Collection Services</div>
+    <div class="lane-content">
 
-<!-- NORMALIZER -->
-<div class="layer">
-  <div class="row">
-    <div class="box gray wide" style="max-width:100%; text-align:center; padding: 10px;">
-      <div class="title" style="color:#58a6ff;">🔀 Unified Normalizer → <code>normalized_bundle</code></div>
-      <div class="sub">snapshot · feature_window · documents · simulation_seed · source_audit · timesfm_inputs</div>
-    </div>
-  </div>
-</div>
-
-<div class="arrow">▼</div>
-
-<!-- LAYER 3: INTELLIGENCE -->
-<div class="layer">
-  <div class="layer-label">③ Intelligence Layer</div>
-  <div class="row">
-    <div class="box cyan">
-      <div class="title">⚡ TimesFM Forecasting</div>
-      <div class="sub">60–100 day close input<br>direction: bullish/bearish/neutral<br>predicted_return · confidence<br>trend_strength · forecast_deviation<br>Persists input/output JSON</div>
-    </div>
-    <div class="box yellow">
-      <div class="title">⚖️ Divergence Engine</div>
-      <div class="sub">TimesFM vs Reddit vs Kalshi<br>pairwise divergence scores<br>divergence_score (0–1)<br>alignment_score (0–1)<br>signal: reversal · trend · mixed</div>
-    </div>
-    <div class="box magenta">
-      <div class="title">🌱 Seed Builder</div>
-      <div class="sub">Unified seed_pack:<br>price_summary · timesfm_summary<br>news_summary · reddit_summary<br>kalshi_summary · bull/bear points<br>sources_used · disagreement_level</div>
-    </div>
-  </div>
-</div>
-
-<div class="arrow">▼</div>
-
-<!-- LAYER 4: AGENTS -->
-<div class="layer">
-  <div class="layer-label">④ Agent Simulation (100 Agents)</div>
-  <div class="row">
-    <div class="agent-box">
-      <div class="agent-header">🤖 Agent Swarm <span>Each archetype receives only its relevant data sources</span></div>
-      <div class="wide-inner">
-        <div class="segment">
-          <div class="t" style="color:#ff7b72;">🛍 Retail ×40</div>
-          <div class="s">Reddit sentiment<br>News context<br>bullish/bearish ratio<br>engagement velocity</div>
+      <div class="node svc">
+        <div class="n-title">price-collector</div>
+        <div class="n-body">
+          alpha_vantage_client.py<br>
+          price_service.py<br>
+          RSI-14 · VWAP<br>
+          Rolling vol 5d/10d<br>
+          10d momentum<br>
+          → state/raw/ohlcv/<br>
+          → data/ohlcv/*.parquet
         </div>
-        <div class="segment">
-          <div class="t" style="color:#58a6ff;">🏦 Institutional ×30</div>
-          <div class="s">SEC risk score<br>TimesFM forecast<br>Kalshi probabilities<br>Filing summaries</div>
+        <span class="n-badge">Parquet + JSON</span>
+      </div>
+
+      <div class="arrow-h"><div class="arrow-line"></div></div>
+
+      <div class="node svc">
+        <div class="n-title">reddit-collector</div>
+        <div class="n-body">
+          apify_reddit_fetcher.py<br>
+          apify_normalizer.py<br>
+          NLP sentiment scoring<br>
+          bullish/bearish ratios<br>
+          engagement_velocity<br>
+          disagreement_index<br>
+          → state/raw/reddit/
         </div>
-        <div class="segment">
-          <div class="t" style="color:#f0883e;">📊 Momentum ×20</div>
-          <div class="s">RSI · VWAP · Vol<br>10d momentum<br>Price trend<br>TimesFM direction</div>
+        <span class="n-badge">JSON artifacts</span>
+      </div>
+
+      <div class="arrow-h"><div class="arrow-line"></div></div>
+
+      <div class="node svc">
+        <div class="n-title">news-collector</div>
+        <div class="n-body">
+          newsapi_client.py<br>
+          news_service.py<br>
+          Sentiment scoring<br>
+          narrative_strength<br>
+          breaking_news_flag<br>
+          bullish/bearish themes<br>
+          → state/raw/news/
         </div>
-        <div class="segment">
-          <div class="t" style="color:#bc8cff;">🔄 Contrarian ×10</div>
-          <div class="s">Divergence scores<br>TimesFM vs Reddit<br>TimesFM vs Kalshi<br>reversal signal</div>
+        <span class="n-badge">JSON artifacts</span>
+      </div>
+
+      <div class="arrow-h"><div class="arrow-line"></div></div>
+
+      <div class="node svc">
+        <div class="n-title">kalshi-collector</div>
+        <div class="n-body">
+          kalshi.py<br>
+          polymarket.py<br>
+          Keyword match<br>
+          YES probability avg<br>
+          Direction signal<br>
+          Volume weighting
         </div>
+        <span class="n-badge">Live / fixture</span>
+      </div>
+
+      <div class="arrow-h"><div class="arrow-line"></div></div>
+
+      <div class="node svc">
+        <div class="n-title">sec-collector</div>
+        <div class="n-body">
+          sec.py<br>
+          EDGAR filings fetch<br>
+          Risk NLP scoring<br>
+          sec_risk_score<br>
+          Filing summaries
+        </div>
+        <span class="n-badge">Live / fixture</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DOWN ARROWS 2→3 -->
+  <div class="lane lane-arrow">
+    <div class="lane-arrow-label-col"></div>
+    <div class="lane-arrow-content" style="justify-content:center;">
+      <div class="arrow-down"><div class="shaft" style="height:18px;"></div><div class="head"></div><div class="alabel">all source data → normalize</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- LANE 3: NORMALIZATION -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="lane">
+    <div class="lane-label">Normalization</div>
+    <div class="lane-content">
+      <div class="wide-node">
+        <div class="wn-title">🔀 UnifiedNormalizerService → <code style="font-size:11px;background:#eef0f4;padding:1px 5px;border-radius:3px;">normalized_bundle</code></div>
+        <span class="wn-key">snapshot{}</span>
+        <span class="wn-key">close_prices[]</span>
+        <span class="wn-key">returns[]</span>
+        <span class="wn-key">volatility</span>
+        <span class="wn-key">rsi_14</span>
+        <span class="wn-key">momentum</span>
+        <span class="wn-key">vwap</span>
+        <span class="wn-key">feature_window[]</span>
+        <span class="wn-key">reddit_features{}</span>
+        <span class="wn-key">kalshi_contracts[]</span>
+        <span class="wn-key">documents[]</span>
+        <span class="wn-key">simulation_seed{}</span>
+        <span class="wn-key">source_audit{}</span>
+        <span class="wn-key">timesfm_inputs[]</span>
       </div>
     </div>
   </div>
-</div>
 
-<div class="arrow">▼</div>
-
-<!-- LAYER 5: DECISION -->
-<div class="layer">
-  <div class="layer-label">⑤ Decision Layer</div>
-  <div class="row">
-    <div class="box cyan">
-      <div class="title">🎯 Strategy Engine</div>
-      <div class="sub">6 signal rules:<br>trend_confirmation<br>reversal_bullish/bearish<br>volatility_play · no_trade<br>CALL / PUT / HOLD<br>option_plan per horizon</div>
-    </div>
-    <div class="box yellow">
-      <div class="title">🛡 Risk Engine</div>
-      <div class="sub">Confidence gate ≥0.60<br>Source fallback checks<br>Position sizing:<br>25% · 50% · 75%<br>Stop loss + take profit<br>Disagreement guard</div>
-    </div>
-    <div class="box green">
-      <div class="title">📉 Backtester</div>
-      <div class="sub">Rolling 60-bar replay<br>3× option leverage approx<br>Win rate · Sharpe ratio<br>Max drawdown<br>Equity curve CSV<br>By-strategy breakdown</div>
-    </div>
-  </div>
-</div>
-
-<div class="arrow">▼</div>
-
-<!-- LAYER 6: OUTPUTS -->
-<div class="layer">
-  <div class="layer-label">⑥ Outputs</div>
-  <div class="row">
-    <div class="output-box" style="border-color:#3fb950; background:#001a0a;">
-      <div class="title" style="color:#3fb950;">✅ Trade Signal</div>
-      <div class="detail">
-        trade: CALL/PUT/HOLD<br>
-        strategy_type: trend/reversal<br>
-        confidence: 0.0–1.0<br>
-        expected_move_pct<br>
-        drivers + risk_flags<br>
-        option_plan (DTE, strike)
-      </div>
-    </div>
-    <div class="output-box" style="border-color:#e3b341; background:#1a1500;">
-      <div class="title" style="color:#e3b341;">📋 Paper Orders</div>
-      <div class="detail">
-        state/orders/*.json<br>
-        BUY_TO_OPEN tickets<br>
-        stop_loss_pct<br>
-        take_profit_pct<br>
-        max_hold_time<br>
-        Live mode: disabled*
-      </div>
-    </div>
-    <div class="output-box" style="border-color:#1f6feb; background:#00111a;">
-      <div class="title" style="color:#58a6ff;">📊 Reports</div>
-      <div class="detail">
-        state/reports/*.json<br>
-        state/reports/*.md<br>
-        backtest_report.json<br>
-        trades.csv<br>
-        equity_curve.csv<br>
-        source_audit (all 5)
-      </div>
-    </div>
-    <div class="output-box" style="border-color:#0097a7; background:#001a1a;">
-      <div class="title" style="color:#39d5d5;">💼 Portfolio</div>
-      <div class="detail">
-        trade_journal.json<br>
-        open/closed positions<br>
-        realized PnL<br>
-        unrealized PnL<br>
-        win_rate<br>
-        daily_summary.md
+  <!-- SOURCE AUDIT ROW -->
+  <div class="lane">
+    <div class="lane-label" style="font-size:9px;">Source Audit</div>
+    <div class="lane-content" style="padding: 10px 24px;">
+      <span style="font-size:10px;font-weight:700;color:#555;margin-right:8px;">source_audit</span>
+      <div class="audit-strip">
+        <span class="audit-pill live">ohlcv: live · alphavantage · 100 records</span>
+        <span class="audit-pill live">reddit: live · apify · 60 posts</span>
+        <span class="audit-pill live">news: live · newsapi · 20 articles</span>
+        <span class="audit-pill live">kalshi: live · kalshi · 3 markets</span>
+        <span class="audit-pill fall">sec: fallback · sec_api · 0 records</span>
       </div>
     </div>
   </div>
+
+  <!-- DOWN ARROWS 3→4 -->
+  <div class="lane lane-arrow">
+    <div class="lane-arrow-label-col"></div>
+    <div class="lane-arrow-content" style="justify-content:center; gap: 60px;">
+      <div class="arrow-down"><div class="shaft" style="height:18px;"></div><div class="head"></div><div class="alabel">close_prices[]</div></div>
+      <div class="arrow-down"><div class="shaft" style="height:18px;"></div><div class="head"></div><div class="alabel">normalized_bundle</div></div>
+      <div class="arrow-down"><div class="shaft" style="height:18px;"></div><div class="head"></div><div class="alabel">normalized_bundle</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- LANE 4: INTELLIGENCE -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="lane">
+    <div class="lane-label">Intelligence</div>
+    <div class="lane-content">
+
+      <div class="node intel" style="max-width:210px;">
+        <div class="n-title">⚡ TimesFM Forecasting</div>
+        <div class="n-body">
+          forecast_from_prices()<br>
+          Input: 60–100 close prices<br>
+          ─────────────────<br>
+          direction: bullish/bearish/neutral<br>
+          predicted_return: float<br>
+          confidence: float<br>
+          trend_strength: float<br>
+          forecast_deviation: float<br>
+          quantiles: p10 · p50 · p90<br>
+          ─────────────────<br>
+          Mode: TimesFM 2.5 200M<br>
+          Fallback: local trend extrap
+        </div>
+        <span class="n-badge">→ state/raw/ohlcv/timesfm_*</span>
+      </div>
+
+      <div class="arrow-h"><div class="arrow-line"></div><div class="arrow-label">forecast{}</div></div>
+
+      <div class="node intel" style="max-width:210px;">
+        <div class="n-title">⚖️ Divergence Engine</div>
+        <div class="n-body">
+          compute_divergence()<br>
+          ─────────────────<br>
+          Scores TimesFM/Reddit/Kalshi<br>
+          each mapped to [-1, +1]<br>
+          ─────────────────<br>
+          timesfm_vs_reddit: float<br>
+          timesfm_vs_kalshi: float<br>
+          reddit_vs_kalshi: float<br>
+          divergence_score: 0–1<br>
+          alignment_score: 0–1<br>
+          signal: reversal_candidate<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; trend_confirmation<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mixed
+        </div>
+        <span class="n-badge">→ normalized_bundle[divergence]</span>
+      </div>
+
+      <div class="arrow-h"><div class="arrow-line"></div><div class="arrow-label">divergence{}</div></div>
+
+      <div class="node intel" style="max-width:230px;">
+        <div class="n-title">🌱 Seed Builder</div>
+        <div class="n-body">
+          build_seed_pack()<br>
+          ─────────────────<br>
+          price_summary: str<br>
+          timesfm_summary: str<br>
+          news_summary: str<br>
+          reddit_summary: str<br>
+          kalshi_summary: str<br>
+          key_bullish_points: []<br>
+          key_bearish_points: []<br>
+          disagreement_level: float<br>
+          sources_used: []<br>
+          news_confidence: float<br>
+          reddit_confidence: float
+        </div>
+        <span class="n-badge">→ seed_pack{}</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DOWN ARROWS 4→5 -->
+  <div class="lane lane-arrow">
+    <div class="lane-arrow-label-col"></div>
+    <div class="lane-arrow-content" style="justify-content:center;">
+      <div class="arrow-down"><div class="shaft" style="height:18px;"></div><div class="head"></div><div class="alabel">seed{} + forecast{} + divergence{} → per-archetype context injection</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- LANE 5: AGENT SIMULATION -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="lane">
+    <div class="lane-label">Agent Simulation</div>
+    <div class="lane-content" style="align-items:stretch; gap:10px;">
+
+      <div class="node agent">
+        <div class="n-title">🛍 Retail ×40</div>
+        <div class="n-body">
+          <b>Receives:</b><br>
+          reddit_context{}<br>
+          · bullish_ratio<br>
+          · bearish_ratio<br>
+          · engagement_velocity<br>
+          · disagreement_index<br>
+          news_context{}<br>
+          · news_summary<br>
+          · bullish_points[]<br>
+          · sentiment_score
+        </div>
+      </div>
+
+      <div class="node agent">
+        <div class="n-title">🏦 Institutional ×30</div>
+        <div class="n-body">
+          <b>Receives:</b><br>
+          timesfm_context{}<br>
+          · direction<br>
+          · confidence<br>
+          · predicted_return<br>
+          kalshi_context{}<br>
+          · avg_yes_prob<br>
+          · summary<br>
+          sec: risk_score<br>
+          filing summaries
+        </div>
+      </div>
+
+      <div class="node agent">
+        <div class="n-title">📊 Momentum ×20</div>
+        <div class="n-body">
+          <b>Receives:</b><br>
+          price_context{}<br>
+          · rsi_14<br>
+          · rolling_vol_5d/10d<br>
+          · momentum (10d)<br>
+          · vwap<br>
+          · price_trend<br>
+          timesfm_context{}<br>
+          · direction<br>
+          · trend_strength
+        </div>
+      </div>
+
+      <div class="node agent">
+        <div class="n-title">🔄 Contrarian ×10</div>
+        <div class="n-body">
+          <b>Receives:</b><br>
+          divergence_context{}<br>
+          · divergence_score<br>
+          · alignment_score<br>
+          · signal<br>
+          · timesfm_vs_reddit<br>
+          · timesfm_vs_kalshi<br>
+          · reddit_vs_kalshi<br>
+          Prompt includes<br>
+          reversal thesis
+        </div>
+      </div>
+
+      <div class="arrow-h"><div class="arrow-line"></div><div class="arrow-label">votes</div></div>
+
+      <div class="node agent" style="background:#fdf5ff; border-color:#e8c8f8;">
+        <div class="n-title">🗳 Simulation Engine</div>
+        <div class="n-body">
+          run_simulation()<br>
+          ─────────────<br>
+          Aggregates 100 votes<br>
+          buy_sell_ratio<br>
+          final_direction<br>
+          outlook_score<br>
+          sentiment_per_day<br>
+          price_trajectory<br>
+          agent_memory_summary<br>
+          final_confidence
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DOWN ARROWS 5→6 -->
+  <div class="lane lane-arrow">
+    <div class="lane-arrow-label-col"></div>
+    <div class="lane-arrow-content" style="justify-content:center; gap:60px;">
+      <div class="arrow-down"><div class="shaft" style="height:18px;"></div><div class="head"></div><div class="alabel">simulation_result{}</div></div>
+      <div class="arrow-down"><div class="shaft" style="height:18px;"></div><div class="head"></div><div class="alabel">strategy_context{}</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- LANE 6: DECISION LAYER -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="lane">
+    <div class="lane-label">Decision Layer</div>
+    <div class="lane-content" style="align-items:stretch;">
+
+      <div class="node dec" style="max-width:220px;">
+        <div class="n-title">🎯 Strategy Engine</div>
+        <div class="n-body">
+          generate_signal()<br>
+          ─────────────────<br>
+          Rule 1: trend_confirmation_bullish<br>
+          &nbsp; TF bullish + align≥0.65 → CALL<br>
+          Rule 2: trend_confirmation_bearish<br>
+          &nbsp; TF bearish + align≥0.65 → PUT<br>
+          Rule 3: reversal_bullish<br>
+          &nbsp; crowd bearish + TF bullish → CALL<br>
+          Rule 4: reversal_bearish<br>
+          &nbsp; crowd bullish + TF bearish → PUT<br>
+          Rule 5: volatility_play<br>
+          &nbsp; diverg>0.6 + vol>0.25 → HOLD<br>
+          Rule 6: no_trade → HOLD<br>
+          ─────────────────<br>
+          confidence = weighted avg:<br>
+          TF×0.35 + align×0.25<br>
+          + sim×0.25 + freshness×0.15<br>
+          ─────────────────<br>
+          option_plan by horizon:<br>
+          1h: same-day · ATM<br>
+          1d: 2 DTE · ATM<br>
+          3d: 4 DTE · ATM±1%<br>
+          5d: 7 DTE · delta-based
+        </div>
+      </div>
+
+      <div class="arrow-h"><div class="arrow-line"></div><div class="arrow-label">signal{}</div></div>
+
+      <div class="node dec" style="max-width:200px;">
+        <div class="n-title">🛡 Risk Engine</div>
+        <div class="n-body">
+          evaluate()<br>
+          ─────────────────<br>
+          Gate 1: conf &lt; 0.60 → HOLD<br>
+          Gate 2: OHLCV fallback → HOLD<br>
+          Gate 3: disagreement>0.7 → HOLD<br>
+          Gate 4: HOLD signal → size=0<br>
+          ─────────────────<br>
+          Position sizing:<br>
+          conf ≥ 0.80 → 75%<br>
+          conf ≥ 0.70 → 50%<br>
+          conf ≥ 0.60 → 25%<br>
+          ─────────────────<br>
+          Stop loss / take profit:<br>
+          1h: 25% SL · 50% TP<br>
+          1d: 30% SL · 60% TP<br>
+          3d: 35% SL · 80% TP<br>
+          5d: 40% SL · 100% TP
+        </div>
+      </div>
+
+      <div class="arrow-h"><div class="arrow-line"></div><div class="arrow-label">risk{}</div></div>
+
+      <div class="node dec" style="max-width:185px;">
+        <div class="n-title">📉 Backtester</div>
+        <div class="n-body">
+          run()<br>
+          ─────────────────<br>
+          Rolling 60-bar window<br>
+          Phase 1 approx:<br>
+          3× leverage on ATM<br>
+          Slippage: 0.02<br>
+          ─────────────────<br>
+          Metrics:<br>
+          win_rate<br>
+          avg_return<br>
+          max_drawdown<br>
+          sharpe_ratio<br>
+          by_strategy{}<br>
+          ─────────────────<br>
+          Output files:<br>
+          backtest.json<br>
+          backtest.md<br>
+          trades.csv<br>
+          equity_curve.csv
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DOWN ARROWS 6→7 -->
+  <div class="lane lane-arrow">
+    <div class="lane-arrow-label-col"></div>
+    <div class="lane-arrow-content" style="justify-content:center; gap:80px;">
+      <div class="arrow-down"><div class="shaft" style="height:18px;"></div><div class="head"></div><div class="alabel">approved signal → paper order</div></div>
+      <div class="arrow-down"><div class="shaft" style="height:18px;"></div><div class="head"></div><div class="alabel">position record</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- LANE 7: EXECUTION & OUTPUT -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="lane">
+    <div class="lane-label">Execution & Output</div>
+    <div class="lane-content" style="align-items:stretch; flex-wrap:wrap; gap:12px;">
+
+      <div class="node out">
+        <div class="n-title">📋 Execution Engine</div>
+        <div class="n-body">
+          execute()<br>
+          Mode: <b>paper</b> (default)<br>
+          ─────────────────<br>
+          Generates order ticket:<br>
+          BUY_TO_OPEN / NONE<br>
+          instrument: CALL/PUT<br>
+          expiry_days · strike<br>
+          quantity · entry_style<br>
+          stop_loss · take_profit<br>
+          ─────────────────<br>
+          → state/orders/*.json<br>
+          ─────────────────<br>
+          ⚠ Live requires:<br>
+          EXECUTION_MODE=live<br>
+          LIVE_TRADING_ENABLED=true
+        </div>
+      </div>
+
+      <div class="node out">
+        <div class="n-title">💼 Portfolio Engine</div>
+        <div class="n-body">
+          record_trade()<br>
+          get_portfolio_state()<br>
+          ─────────────────<br>
+          open_positions[]<br>
+          closed_positions[]<br>
+          realized_pnl: float<br>
+          unrealized_pnl: float<br>
+          win_rate: float<br>
+          total_trades: int<br>
+          ─────────────────<br>
+          → state/portfolio/<br>
+          &nbsp;&nbsp; trade_journal.json<br>
+          &nbsp;&nbsp; daily_summary.md
+        </div>
+      </div>
+
+      <div class="node out">
+        <div class="n-title">📊 Unified Reporter</div>
+        <div class="n-body">
+          report()<br>
+          ─────────────────<br>
+          Full structured report<br>
+          seed_pack summary<br>
+          agent vote breakdown<br>
+          simulation trajectory<br>
+          trade signal<br>
+          source_audit (all 5)<br>
+          ─────────────────<br>
+          → state/reports/<br>
+          &nbsp;&nbsp; {TICKER}_{DATE}.json<br>
+          &nbsp;&nbsp; {TICKER}_{DATE}.md
+        </div>
+      </div>
+
+      <div class="node out" style="border-color:#a0c8f0; background:#f0f7ff;">
+        <div class="n-title">🌐 API Endpoints</div>
+        <div class="n-body">
+          GET /run-demo<br>
+          GET /signal<br>
+          GET /trade-plan<br>
+          POST /backtest<br>
+          ─────────────────<br>
+          GET /debug/price<br>
+          GET /debug/news<br>
+          GET /debug/reddit<br>
+          GET /debug/timesfm<br>
+          ─────────────────<br>
+          GET /health<br>
+          POST /v1/tickers/{t}/run
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 
-<br>
-<div style="text-align:center; font-size:11px; color:#484f58; margin-top: 16px;">
-  * Live trading requires: <code>EXECUTION_MODE=live</code> AND <code>LIVE_TRADING_ENABLED=true</code> &nbsp;·&nbsp;
-  Default: <strong>paper mode</strong> &nbsp;·&nbsp;
-  All data sources have fixture fallbacks
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#3b5bdb;"></div> External APIs</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#1a7f4b;"></div> Collection Services</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#b06a00;"></div> Intelligence Layer</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#7c3aed;"></div> Agent Simulation</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#c0392b;"></div> Decision Layer</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#0a6496;"></div> Execution & Output</div>
+  <div style="margin-left:auto; font-size:10px; color:#aaa;">All sources have fixture fallbacks · Default: paper trading · Live mode requires explicit env vars</div>
 </div>
 
 </body>
