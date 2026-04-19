@@ -38,6 +38,12 @@ class SimulateRequest(BaseModel):
     horizon_days: int = Field(default=5)
 
 
+class TradeSignalRequest(BaseModel):
+    simulation_result: dict = Field(default_factory=dict)
+    forecast: dict = Field(default_factory=dict)
+    normalized: dict = Field(default_factory=dict)
+
+
 @app.get("/health")
 def health() -> dict:
     return {"status": "ok", "service": "agent-seeder"}
@@ -57,4 +63,13 @@ def simulate(request: SimulateRequest) -> dict:
     return _service.run_simulation(
         agent_roster=request.agent_roster,
         horizon_days=request.horizon_days,
+    )
+
+
+@app.post("/agents/trade-signal")
+def trade_signal(request: TradeSignalRequest) -> dict:
+    return _service.generate_trade_signal(
+        simulation_result=request.simulation_result,
+        forecast=request.forecast,
+        normalized=request.normalized,
     )

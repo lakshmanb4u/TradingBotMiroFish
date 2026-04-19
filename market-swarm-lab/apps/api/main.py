@@ -106,9 +106,13 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
     if "outlook_score" not in mirofish_result:
         mirofish_result["outlook_score"] = simulation_result.get("buy_sell_ratio", 1.0)
 
-    # 10. Unified report
+    # 10. Generate trade signal
+    trade_signal = seeder.generate_trade_signal(simulation_result, forecast, normalized_bundle)
+
+    # 11. Unified report
     report = UnifiedReporter().report(
-        ticker, forecast, reddit_seed, normalized_bundle, mirofish_result, seed
+        ticker, forecast, reddit_seed, normalized_bundle, mirofish_result, seed,
+        trade_signal=trade_signal,
     )
 
     return {
@@ -128,4 +132,5 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
         },
         "mirofish": mirofish_result,
         "report": report,
+        "trade_signal": trade_signal,
     }

@@ -29,6 +29,7 @@ class UnifiedReporter:
         normalized: dict[str, Any],
         simulation: dict[str, Any],
         seed: dict[str, Any],
+        trade_signal: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         snapshot = normalized.get("snapshot", {})
         sim_seed = normalized.get("simulation_seed", {})
@@ -163,6 +164,7 @@ class UnifiedReporter:
             divergence=divergence,
             key_drivers=key_drivers,
             timestamp=timestamp,
+            trade_signal=trade_signal,
         )
 
         # ── Save to file
@@ -170,7 +172,7 @@ class UnifiedReporter:
         report_path.write_text(markdown_report, encoding="utf-8")
         stored_at = str(report_path)
 
-        return {
+        result: dict[str, Any] = {
             "ticker": ticker.upper(),
             "direction": direction,
             "confidence": confidence,
@@ -180,6 +182,9 @@ class UnifiedReporter:
             "markdown_report": markdown_report,
             "stored_at": stored_at,
         }
+        if trade_signal is not None:
+            result["trade_signal"] = trade_signal
+        return result
 
     # ── helpers
 
@@ -235,6 +240,7 @@ class UnifiedReporter:
         divergence: dict[str, Any],
         key_drivers: list[str],
         timestamp: str,
+        trade_signal: dict[str, Any] | None = None,
     ) -> str:
         lines = [
             f"# {ticker.upper()} Unified Market Report",
@@ -282,4 +288,18 @@ class UnifiedReporter:
             f"with {confidence:.1%} confidence.",
             "",
         ])
+        if trade_signal:
+            lines.extend([
+                "## Trade Signal",
+                "",
+                f"**Trade:** {trade_signal.get('trade', 'N/A')}",
+                f"**Type:** {trade_signal.get('type', 'N/A')}",
+                f"**Confidence:** {trade_signal.get('confidence', 0):.1%}",
+                f"**Reason:** {trade_signal.get('reason', '')}",
+                "",
+                "### Divergence",
+                f"- Reddit vs TimesFM: {trade_signal.get('divergence', {}).get('reddit_vs_timesfm', 0):.3f}",
+                f"- Agents vs Prediction Markets: {trade_signal.get('divergence', {}).get('agents_vs_prediction_markets', 0):.3f}",
+                "",
+            ])
         return "\n".join(lines)
