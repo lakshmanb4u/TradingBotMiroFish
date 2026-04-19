@@ -1,6 +1,24 @@
+# Python
 .venv/
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# Secrets — never commit
+.env
+*.env
+
+# State & artifacts
 state/reports/*.json
 state/reports/*.md
 !state/reports/.gitkeep
+state/raw/
+state/seeds/
+state/cache/
+
+# Internal task files
+.tasks/
+
+# macOS
+.DS_Store

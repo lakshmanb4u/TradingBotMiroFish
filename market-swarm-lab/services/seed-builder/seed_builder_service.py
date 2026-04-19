@@ -24,6 +24,12 @@ from __future__ import annotations
 
 from typing import Any
 
+_REDDIT_CONFIDENCE_MAP: dict[str, float] = {
+    "apify_live": 1.0,
+    "oauth_live": 0.6,
+    "fixture_fallback": 0.2,
+}
+
 
 class SeedBuilderService:
     def build(
@@ -32,19 +38,52 @@ class SeedBuilderService:
         normalized_bundle: dict[str, Any],
         forecast: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
-        snap    = normalized_bundle["snapshot"]
-        docs    = normalized_bundle.get("documents", [])
+        snap     = normalized_bundle.get("snapshot", {})
+        docs     = normalized_bundle.get("documents", [])
         sim_seed = normalized_bundle.get("simulation_seed", {})
 
-        fundamental_summary     = self._fundamental_summary(ticker, snap, sim_seed)
-        retail_sentiment_summary = self._retail_summary(snap, sim_seed, docs)
-        news_summary            = self._news_summary(snap, docs)
-        prediction_market_summary = self._prediction_summary(snap, sim_seed)
-        timesfm_summary         = self._timesfm_summary(ticker, snap, forecast)
-        bullish, bearish         = self._extract_bull_bear(docs, sim_seed)
-        disagreement             = round(snap.get("reddit_disagreement_index", 0.0), 3)
+        # Features at top level (legacy path) or nested under "reddit" key (apify path)
+        reddit_features: dict[str, Any] = normalized_bundle.get("features", {})
 
-        return {
+        # Dedicated reddit key injected by run-demo / apify path
+        reddit_data = normalized_bundle.get("reddit", {})
+        reddit_ctx: dict[str, Any] = {}
+        if reddit_data.get("provider_mode"):
+            if reddit_data.get("features"):
+                reddit_features = {**reddit_features, **reddit_data["features"]}
+            reddit_ctx = self.build_reddit_context(reddit_data)
+
+        fundamental_summary = self._fundamental_summary(ticker, snap, sim_seed)
+
+        if reddit_ctx.get("retail_sentiment_summary"):
+            retail_sentiment_summary = reddit_ctx["retail_sentiment_summary"]
+        else:
+            retail_sentiment_summary = self._retail_summary(snap, sim_seed, docs, reddit_features)
+
+        news_summary              = self._news_summary(snap, docs)
+        prediction_market_summary = self._prediction_summary(snap, sim_seed)
+        timesfm_summary           = self._timesfm_summary(ticker, snap, forecast)
+        bullish, bearish          = self._extract_bull_bear(docs, sim_seed)
+
+        provider_mode = reddit_data.get("provider_mode", "")
+        if provider_mode in ("apify_live", "oauth_live"):
+            reddit_bullish = reddit_ctx.get("key_bullish_points", [])
+            reddit_bearish = reddit_ctx.get("key_bearish_points", [])
+            bullish = reddit_bullish + [b for b in bullish if b not in reddit_bullish]
+            bearish = reddit_bearish + [b for b in bearish if b not in reddit_bearish]
+
+        disagreement = round(
+            reddit_ctx.get(
+                "disagreement_level",
+                reddit_features.get(
+                    "disagreement_index",
+                    snap.get("reddit_disagreement_index", 0.0),
+                ),
+            ),
+            3,
+        )
+
+        result: dict[str, Any] = {
             "ticker":                    ticker.upper(),
             "fundamental_summary":       fundamental_summary,
             "retail_sentiment_summary":  retail_sentiment_summary,
@@ -55,6 +94,66 @@ class SeedBuilderService:
             "key_bearish_points":        bearish[:5],
             "disagreement_level":        disagreement,
             "agent_personas":            sim_seed.get("agent_personas", []),
+        }
+        if reddit_ctx:
+            result["reddit_confidence"] = reddit_ctx.get("reddit_confidence", 0.2)
+            result["most_upvoted_arguments"] = reddit_ctx.get("most_upvoted_arguments", [])
+        return result
+
+    # ─────────────────────── reddit context builder
+
+    def build_reddit_context(self, reddit_data: dict[str, Any]) -> dict[str, Any]:
+        threads: list[dict] = reddit_data.get("threads", [])
+        features: dict = reddit_data.get("features", {})
+        provider_mode: str = reddit_data.get("provider_mode", "fixture_fallback")
+
+        sorted_threads = sorted(threads, key=lambda t: t.get("score", 0), reverse=True)
+        most_upvoted_arguments = [
+            {
+                "title": t.get("title", ""),
+                "score": t.get("score", 0),
+                "sentiment_label": t.get("sentiment_label", "neutral"),
+            }
+            for t in sorted_threads[:3]
+        ]
+
+        key_bullish_points = [
+            t.get("title", "") for t in threads if t.get("sentiment_label") == "bullish"
+        ][:5]
+        key_bearish_points = [
+            t.get("title", "") for t in threads if t.get("sentiment_label") == "bearish"
+        ][:5]
+
+        disagreement_level = round(float(features.get("disagreement_index", 0.0)), 3)
+        if not features.get("disagreement_index") and threads:
+            sentiments = [float(t.get("sentiment", 0.0)) for t in threads]
+            mean_s = sum(sentiments) / len(sentiments)
+            variance = sum((s - mean_s) ** 2 for s in sentiments) / len(sentiments)
+            disagreement_level = round(min(1.0, variance ** 0.5), 3)
+
+        reddit_confidence = _REDDIT_CONFIDENCE_MAP.get(provider_mode, 0.2)
+        bullish_ratio = float(features.get("bullish_ratio", 0.0))
+        bearish_ratio = float(features.get("bearish_ratio", 0.0))
+        engagement_velocity = float(features.get("engagement_velocity", 0.0))
+
+        label = (
+            "bullish" if bullish_ratio > bearish_ratio + 0.1
+            else ("bearish" if bearish_ratio > bullish_ratio + 0.1 else "mixed")
+        )
+        retail_sentiment_summary = (
+            f"Reddit sentiment is {label} with {bullish_ratio:.0%} bullish"
+            f" and {bearish_ratio:.0%} bearish posts."
+            f" Engagement velocity: {engagement_velocity:.1f}."
+            f" Disagreement index: {disagreement_level:.2f}."
+        )
+
+        return {
+            "retail_sentiment_summary": retail_sentiment_summary,
+            "key_bullish_points":       key_bullish_points,
+            "key_bearish_points":       key_bearish_points,
+            "most_upvoted_arguments":   most_upvoted_arguments,
+            "disagreement_level":       disagreement_level,
+            "reddit_confidence":        reddit_confidence,
         }
 
     # ─────────────────────── section builders
@@ -72,22 +171,44 @@ class SeedBuilderService:
         return base + " No recent filings parsed."
 
     def _retail_summary(
-        self, snap: dict, sim_seed: dict, docs: list[dict]
+        self,
+        snap: dict,
+        sim_seed: dict,
+        docs: list[dict],
+        reddit_features: dict | None = None,
     ) -> str:
-        sentiment   = snap.get("reddit_sentiment", 0.0)
-        mentions    = snap.get("reddit_mentions", 0)
-        bullish_r   = sim_seed.get("retail_sentiment", {}).get("bullish_ratio", 0.0)
-        bearish_r   = sim_seed.get("retail_sentiment", {}).get("bearish_ratio", 0.0)
-        disagreement = sim_seed.get("retail_sentiment", {}).get("disagreement", 0.0)
+        rf = reddit_features or {}
+
+        # Prefer new apify-sourced feature keys; fall back to snap/sim_seed
+        sentiment    = rf.get("avg_sentiment", snap.get("reddit_sentiment", 0.0))
+        mentions     = rf.get("post_count", snap.get("reddit_mentions", 0))
+        bullish_r    = rf.get("bullish_ratio",
+                              sim_seed.get("retail_sentiment", {}).get("bullish_ratio", 0.0))
+        bearish_r    = rf.get("bearish_ratio",
+                              sim_seed.get("retail_sentiment", {}).get("bearish_ratio", 0.0))
+        neutral_r    = rf.get("neutral_ratio", max(0.0, 1.0 - bullish_r - bearish_r))
+        disagreement = rf.get("disagreement_index",
+                              sim_seed.get("retail_sentiment", {}).get("disagreement", 0.0))
+        eng_velocity = rf.get("engagement_velocity", 0.0)
+        unique_authors = rf.get("unique_author_count", 0)
+
         label = "bullish" if sentiment > 0.05 else "bearish" if sentiment < -0.05 else "mixed"
         lines = [
             f"Reddit is {label} with avg sentiment {sentiment:+.2f} across {mentions} tracked mentions.",
-            f"Bullish posts: {bullish_r:.0%}, bearish posts: {bearish_r:.0%}.",
+            f"Bullish posts: {bullish_r:.0%}, bearish posts: {bearish_r:.0%}, neutral: {neutral_r:.0%}.",
         ]
+        if eng_velocity:
+            lines.append(f"Engagement velocity: {eng_velocity:.1f} avg score/post.")
+        if unique_authors:
+            lines.append(f"Unique authors: {unique_authors}.")
         if disagreement > 0.6:
-            lines.append(f"Community is significantly split (disagreement index {disagreement:.2f}) — retail conviction is low.")
+            lines.append(
+                f"Community is significantly split (disagreement index {disagreement:.2f}) — retail conviction is low."
+            )
         elif disagreement < 0.3:
-            lines.append(f"Sentiment is largely one-directional (disagreement index {disagreement:.2f}) — retail has high conviction.")
+            lines.append(
+                f"Sentiment is largely one-directional (disagreement index {disagreement:.2f}) — retail has high conviction."
+            )
         top_post = next((d for d in docs if d.get("type") == "reddit_post"), None)
         if top_post:
             lines.append(f'Top post: "{top_post["text"][:100]}" ({top_post["label"]})')

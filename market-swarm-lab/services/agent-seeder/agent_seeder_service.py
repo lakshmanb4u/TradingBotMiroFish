@@ -21,7 +21,53 @@ class AgentSeederService:
         normalized_bundle: dict[str, Any],
     ) -> dict[str, Any]:
         snapshot = normalized_bundle.get("snapshot", {})
-        reddit_sentiment = float(seed.get("weighted_sentiment", snapshot.get("reddit_sentiment", 0.0)))
+
+        # New: pull apify/live reddit features from normalized_bundle when available
+        reddit_features: dict[str, Any] = normalized_bundle.get("features", {})
+
+        # Build reddit_context for retail agents from dedicated "reddit" key when present
+        reddit_data = normalized_bundle.get("reddit", {})
+        reddit_context_for_retail: dict[str, Any] = {}
+        if reddit_data.get("provider_mode"):
+            _pm = reddit_data["provider_mode"]
+            _provider_map = {
+                "apify_live": "apify",
+                "oauth_live": "oauth",
+                "fixture_fallback": "fixture",
+            }
+            _confidence_map = {"apify_live": 1.0, "oauth_live": 0.6, "fixture_fallback": 0.2}
+            _rf = reddit_data.get("features", reddit_features)
+            _threads = reddit_data.get("threads", [])
+            _top_threads = sorted(_threads, key=lambda t: t.get("score", 0), reverse=True)[:3]
+            _bull = float(_rf.get("bullish_ratio", 0.0))
+            _bear = float(_rf.get("bearish_ratio", 0.0))
+            reddit_context_for_retail = {
+                "bullish_ratio": _bull,
+                "bearish_ratio": _bear,
+                "neutral_ratio": round(max(0.0, 1.0 - _bull - _bear), 4),
+                "engagement_velocity": float(_rf.get("engagement_velocity", 0.0)),
+                "disagreement_index": float(_rf.get("disagreement_index", 0.0)),
+                "unique_author_count": int(_rf.get("unique_author_count", 0)),
+                "most_upvoted_arguments": [
+                    {
+                        "title": t.get("title", ""),
+                        "score": t.get("score", 0),
+                        "sentiment_label": t.get("sentiment_label", "neutral"),
+                    }
+                    for t in _top_threads
+                ],
+                "reddit_confidence": _confidence_map.get(_pm, 0.2),
+                "provider": _provider_map.get(_pm, "fixture"),
+            }
+            # Also prefer nested features for downstream sentiment
+            if _rf:
+                reddit_features = {**reddit_features, **_rf}
+
+        reddit_sentiment = float(
+            reddit_features.get("avg_sentiment",
+                seed.get("weighted_sentiment",
+                    snapshot.get("reddit_sentiment", 0.0)))
+        )
         forecast_direction = forecast.get("direction", "sideways")
         forecast_confidence = float(forecast.get("confidence", 0.5))
         forecast_close_5d = forecast.get("forecast_close_5d", snapshot.get("latest_close", 0.0))
@@ -33,8 +79,8 @@ class AgentSeederService:
 
         # ── Reddit influence model
         # Weight posts/comments by upvote score, compute per-theme influence
-        reddit_posts = seed.get("reddit_posts", [])
-        reddit_comments = seed.get("reddit_comments", [])
+        reddit_posts = normalized_bundle.get("threads", seed.get("reddit_posts", []))
+        reddit_comments = normalized_bundle.get("comments", seed.get("reddit_comments", []))
         themes = seed.get("themes", [])
 
         # Build upvote-weighted influence scores per theme
@@ -59,13 +105,13 @@ class AgentSeederService:
         roster: list[dict] = []
 
         # ── retail (40) — upvote-weighted bias strength
-        retail_prompt = self._retail_prompt(seed, snapshot)
+        retail_prompt = self._retail_prompt(seed, snapshot, reddit_features)
         for i in range(40):
             bias = "bullish" if reddit_sentiment > 0 else ("bearish" if reddit_sentiment < 0 else "neutral")
             base_strength = round(min(1.0, abs(reddit_sentiment) + 0.1 * (i % 5)), 3)
             # Higher upvote weight → stronger initial bias
             strength = round(min(1.0, base_strength * reddit_influence_score), 3)
-            roster.append({
+            agent: dict[str, Any] = {
                 "id": f"retail_{i+1:03d}",
                 "archetype": "retail",
                 "prompt_section": retail_prompt,
@@ -79,7 +125,10 @@ class AgentSeederService:
                     "confidence": 0.5,
                     "influence": 1.0,
                 },
-            })
+            }
+            if reddit_context_for_retail:
+                agent["reddit_context"] = reddit_context_for_retail
+            roster.append(agent)
 
         # ── institutional (30)
         inst_prompt = self._institutional_prompt(seed, forecast_direction, forecast_close_5d, delta_5d, horizon_days, forecast_confidence)
@@ -597,18 +646,37 @@ class AgentSeederService:
 
     # ──────────────────────────────────────────── prompt builders
 
-    def _retail_prompt(self, seed: dict, snapshot: dict) -> str:
+    def _retail_prompt(
+        self, seed: dict, snapshot: dict, reddit_features: dict | None = None
+    ) -> str:
+        rf = reddit_features or {}
         ret_summary = seed.get("retail_sentiment_summary", seed.get("sentiment_summary", "No retail sentiment available."))
         news_summary = seed.get("news_summary", "No news available.")
         bullish_pts = seed.get("key_bullish_points", [])
         bearish_pts = seed.get("key_bearish_points", [])
-        disagreement = seed.get("disagreement_score", seed.get("disagreement_level", 0.0))
+        disagreement = rf.get(
+            "disagreement_index",
+            seed.get("disagreement_score", seed.get("disagreement_level", 0.0)),
+        )
+        bullish_ratio = rf.get("bullish_ratio", 0.0)
+        bearish_ratio = rf.get("bearish_ratio", 0.0)
+        eng_velocity  = rf.get("engagement_velocity", 0.0)
 
         bull_text = "; ".join(str(p)[:80] for p in bullish_pts[:2]) if bullish_pts else "none"
         bear_text = "; ".join(str(p)[:80] for p in bearish_pts[:2]) if bearish_pts else "none"
 
+        extra = ""
+        if bullish_ratio or bearish_ratio:
+            extra = (
+                f"Reddit breakdown — bullish: {bullish_ratio:.0%}, "
+                f"bearish: {bearish_ratio:.0%}. "
+            )
+        if eng_velocity:
+            extra += f"Engagement velocity: {eng_velocity:.1f} avg score/post. "
+
         return (
             f"Retail perspective: {ret_summary} "
+            f"{extra}"
             f"News context: {news_summary} "
             f"Top bullish signals: {bull_text}. "
             f"Top bearish signals: {bear_text}. "

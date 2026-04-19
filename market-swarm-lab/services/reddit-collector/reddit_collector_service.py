@@ -1,15 +1,17 @@
 """
 Reddit collector service.
 
-Modes (auto-selected):
-  oauth_live     - REDDIT_CLIENT_ID + REDDIT_CLIENT_SECRET present and reachable
-  fixture_fallback - credentials missing or API down; loads from infra/fixtures/reddit/
+Modes (auto-selected by priority):
+  apify_live       - APIFY_API_TOKEN present; uses trudax/reddit-scraper actor
+  oauth_live       - REDDIT_CLIENT_ID + REDDIT_CLIENT_SECRET present and reachable
+  fixture_fallback - credentials missing or all live modes fail; loads from infra/fixtures/reddit/
 """
 from __future__ import annotations
 
 import base64
 import json
 import os
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -20,13 +22,18 @@ _HERE_RC = __file__
 import os as _os
 _sys.path.insert(0, _os.path.dirname(_os.path.abspath(_HERE_RC)))
 from nlp import build_comment_tree, extract_features, score_text
+from apify_reddit_fetcher import fetch_subreddits as _apify_fetch
+from apify_normalizer import derive_features as _derive_features
+from apify_normalizer import normalize as _apify_normalize
 
 _FIXTURE_ROOT = Path(os.getenv("FIXTURE_ROOT", "infra/fixtures"))
 _CLIENT_ID     = os.getenv("REDDIT_CLIENT_ID", "")
 _CLIENT_SECRET = os.getenv("REDDIT_CLIENT_SECRET", "")
 _USER_AGENT    = os.getenv("REDDIT_USER_AGENT", "market-swarm-lab/0.1")
+_APIFY_TOKEN   = os.getenv("APIFY_API_TOKEN", "")
 
 _SUBREDDITS = ["wallstreetbets", "stocks", "investing", "options", "SecurityAnalysis"]
+_APIFY_SUBREDDITS = ["wallstreetbets", "stocks", "options"]
 
 
 class RedditCollectorService:
@@ -46,6 +53,17 @@ class RedditCollectorService:
         limit: int = 10,
     ) -> dict[str, Any]:
         subreddits = subreddits or _SUBREDDITS
+
+        # Priority 1: Apify
+        if _APIFY_TOKEN:
+            try:
+                return self._apify_subreddit(ticker, subreddits, limit)
+            except (httpx.TimeoutException, httpx.HTTPStatusError, ValueError) as exc:
+                pass  # fall through to oauth or fixture
+            except Exception:
+                pass
+
+        # Priority 2: Reddit OAuth
         if _CLIENT_ID and _CLIENT_SECRET:
             try:
                 return self._live_subreddit(ticker, subreddits, limit)
@@ -53,9 +71,13 @@ class RedditCollectorService:
                 data = self._load_fixture(ticker)
                 data["provider_mode"] = "fixture_fallback"
                 data["live_error"] = str(exc)
+                data.setdefault("source_audit", {})["reddit"] = "fixture_fallback"
                 return data
+
+        # Priority 3: fixture
         data = self._load_fixture(ticker)
         data["provider_mode"] = "fixture_fallback"
+        data.setdefault("source_audit", {})["reddit"] = "fixture_fallback"
         return data
 
     def collect_thread(self, post_url: str) -> dict[str, Any]:
@@ -76,6 +98,34 @@ class RedditCollectorService:
             "provider_mode": data.get("provider_mode"),
             "features": feats,
             "activity": data.get("activity", []),
+        }
+
+    # ──────────────────────────── apify
+
+    def _apify_subreddit(self, ticker: str, subreddits: list[str], limit: int) -> dict[str, Any]:
+        apify_subs = _APIFY_SUBREDDITS if subreddits == _SUBREDDITS else subreddits
+        raw_items = _apify_fetch(apify_subs, limit=limit)
+
+        # Persist raw artifact
+        ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        artifact_rel = f"state/raw/reddit/{ticker.upper()}_apify_{ts}.json"
+        artifact_path = Path(artifact_rel)
+        artifact_path.parent.mkdir(parents=True, exist_ok=True)
+        artifact_path.write_text(json.dumps(raw_items, default=str), encoding="utf-8")
+
+        posts, comments = _apify_normalize(raw_items)
+        features = _derive_features(posts, comments)
+        activity = self._build_activity(posts)
+
+        return {
+            "ticker": ticker.upper(),
+            "provider_mode": "apify_live",
+            "threads": posts,
+            "comments": comments,
+            "features": features,
+            "activity": activity,
+            "source_audit": {"reddit": "apify_live"},
+            "raw_artifact_path": artifact_rel,
         }
 
     # ──────────────────────────── live

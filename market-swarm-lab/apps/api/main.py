@@ -40,6 +40,31 @@ def run_ticker(ticker: str, request: RunRequest | None = None) -> dict:
     return run_ticker_workflow(ticker=ticker, persist=persist)
 
 
+@app.get("/debug/reddit")
+def debug_reddit(ticker: str = Query(default="SPY")) -> dict:
+    import sys
+    import os
+    from pathlib import Path
+
+    ROOT = Path(__file__).resolve().parents[2]
+    rc_dir = str(ROOT / "services" / "reddit-collector")
+    if rc_dir not in sys.path:
+        sys.path.insert(0, rc_dir)
+
+    from reddit_collector_service import RedditCollectorService
+
+    data = RedditCollectorService().collect_subreddit(ticker=ticker)
+    posts = data.get("threads", [])
+    comments = data.get("comments", [])
+    return {
+        "provider_mode": data.get("provider_mode"),
+        "sample_posts": posts[:3],
+        "sample_comments": comments[:5],
+        "features": data.get("features", {}),
+        "source_audit": data.get("source_audit", {}),
+    }
+
+
 @app.get("/run-demo")
 def run_demo(ticker: str = Query(default="NVDA")) -> dict:
     import sys
@@ -81,10 +106,27 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
     # 3. Forecast
     forecast = TimesFMForecastingService().forecast(ticker, normalized_bundle)
 
-    # 4. Reddit seed data
-    reddit_seed = RedditCollectorService().extract_seed_data(ticker)
+    # 4. Reddit — Apify → OAuth → fixture priority via collect_subreddit()
+    reddit_data = RedditCollectorService().collect_subreddit(ticker=ticker)
+    normalized_bundle["reddit"] = reddit_data
 
-    # 5. Build seed
+    # Enrich source_audit with reddit provenance
+    threads = reddit_data.get("threads", [])
+    provider_mode = reddit_data.get("provider_mode", "fixture_fallback")
+    normalized_bundle.setdefault("source_audit", {})["reddit"] = {
+        "status": "live" if provider_mode in ("apify_live", "oauth_live") else "fallback",
+        "provider": (
+            "apify" if provider_mode == "apify_live"
+            else ("oauth" if provider_mode == "oauth_live" else "fixture")
+        ),
+        "record_count": len(threads),
+        "sample_post_titles": [t.get("title", "") for t in threads[:3]],
+    }
+
+    # reddit_data is also used as reddit_seed for the unified reporter
+    reddit_seed = reddit_data
+
+    # 5. Build seed (build_reddit_context called internally via normalized_bundle["reddit"])
     seed = SeedBuilderService().build(ticker, normalized_bundle, forecast)
 
     # 6. Seed agents
