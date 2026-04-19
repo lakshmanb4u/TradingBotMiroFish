@@ -30,6 +30,12 @@ _REDDIT_CONFIDENCE_MAP: dict[str, float] = {
     "fixture_fallback": 0.2,
 }
 
+_NEWS_CONFIDENCE_MAP: dict[str, float] = {
+    "newsapi_live": 1.0,
+    "alpha_vantage_news_live": 0.7,
+    "fixture_fallback": 0.2,
+}
+
 
 class SeedBuilderService:
     def build(
@@ -60,7 +66,26 @@ class SeedBuilderService:
         else:
             retail_sentiment_summary = self._retail_summary(snap, sim_seed, docs, reddit_features)
 
-        news_summary              = self._news_summary(snap, docs)
+        # Prefer live news from NewsCollectorService when present
+        news_collected = normalized_bundle.get("news", {})
+        news_provider_mode = news_collected.get("provider_mode", "")
+        news_confidence = _NEWS_CONFIDENCE_MAP.get(news_provider_mode, 0.2)
+        if news_collected.get("articles") or news_collected.get("headlines"):
+            _bullish = news_collected.get("bullish_themes", [])
+            _bearish = news_collected.get("bearish_themes", [])
+            _score = news_collected.get("sentiment_score", 0.0)
+            _label = news_collected.get("sentiment_label", "neutral")
+            _heads = news_collected.get("headlines", [])[:3]
+            _parts = [f"News sentiment is {_label} (score: {_score:+.3f})."]
+            if _bullish:
+                _parts.append(f"Bullish catalysts: {'; '.join(h[:70] for h in _bullish[:2])}.")
+            if _bearish:
+                _parts.append(f"Bearish risks: {'; '.join(h[:70] for h in _bearish[:2])}.")
+            if _heads:
+                _parts.append(f"Headlines: {' | '.join(h[:60] for h in _heads)}.")
+            news_summary = " ".join(_parts)
+        else:
+            news_summary = self._news_summary(snap, docs)
         prediction_market_summary = self._prediction_summary(snap, sim_seed)
         timesfm_summary           = self._timesfm_summary(ticker, snap, forecast)
         bullish, bearish          = self._extract_bull_bear(docs, sim_seed)
@@ -98,6 +123,14 @@ class SeedBuilderService:
         if reddit_ctx:
             result["reddit_confidence"] = reddit_ctx.get("reddit_confidence", 0.2)
             result["most_upvoted_arguments"] = reddit_ctx.get("most_upvoted_arguments", [])
+        if news_provider_mode:
+            result["news_confidence"] = news_confidence
+            result["news_sentiment_label"] = news_collected.get("sentiment_label", "neutral")
+            result["news_sentiment_score"] = news_collected.get("sentiment_score", 0.0)
+            if news_collected.get("bullish_themes"):
+                result["news_bullish_themes"] = news_collected["bullish_themes"][:5]
+            if news_collected.get("bearish_themes"):
+                result["news_bearish_themes"] = news_collected["bearish_themes"][:5]
         return result
 
     # ─────────────────────── reddit context builder

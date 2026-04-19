@@ -151,12 +151,23 @@ class AgentSeederService:
                 },
             })
 
+        # Extract price features for momentum agents when available
+        price_features: dict[str, Any] | None = None
+        price_bundle = normalized_bundle.get("price")
+        if price_bundle:
+            price_features = {
+                "volatility": price_bundle.get("volatility", 0.0),
+                "price_trend": price_bundle.get("price_trend", "flat"),
+                "returns": price_bundle.get("returns", []),
+                "close_prices": price_bundle.get("close_prices", []),
+            }
+
         # ── momentum (20)
-        mom_prompt = self._momentum_prompt(seed, snapshot, forecast_direction)
+        mom_prompt = self._momentum_prompt(seed, snapshot, forecast_direction, price_features=price_features)
         for i in range(20):
             bias = "bullish" if forecast_direction == "up" else ("bearish" if forecast_direction == "down" else "neutral")
             strength = round(min(1.0, forecast_confidence * 1.2 + 0.05 * (i % 3)), 3)
-            roster.append({
+            agent_m: dict[str, Any] = {
                 "id": f"momentum_{i+1:03d}",
                 "archetype": "momentum",
                 "prompt_section": mom_prompt,
@@ -170,7 +181,15 @@ class AgentSeederService:
                     "confidence": 0.5,
                     "influence": 1.0,
                 },
-            })
+            }
+            if price_features:
+                agent_m["price_context"] = {
+                    "volatility": price_features["volatility"],
+                    "price_trend": price_features["price_trend"],
+                    "returns_last5": price_features["returns"][-5:],
+                    "closes_last10": price_features["close_prices"][-10:],
+                }
+            roster.append(agent_m)
 
         # ── contrarian (10)
         cont_prompt = self._contrarian_prompt(seed)
@@ -699,18 +718,36 @@ class AgentSeederService:
             f"TimesFM insight: {timesfm}"
         )
 
-    def _momentum_prompt(self, seed: dict, snapshot: dict, direction: str) -> str:
+    def _momentum_prompt(
+        self,
+        seed: dict,
+        snapshot: dict,
+        direction: str,
+        price_features: dict | None = None,
+    ) -> str:
         timesfm = seed.get("timesfm_summary", "No forecast available.")
         close = snapshot.get("latest_close", 0.0)
         rsi = snapshot.get("latest_rsi", 50.0)
         vwap = snapshot.get("latest_vwap", 0.0)
         trend = "uptrend" if direction == "up" else ("downtrend" if direction == "down" else "sideways trend")
-        return (
+        base = (
             f"Momentum perspective: {timesfm} "
             f"Current price: {close}, RSI: {rsi:.1f}, VWAP: {vwap:.2f}. "
             f"Technical indicators confirm a {trend}. "
             f"Momentum traders are aligned with the prevailing direction."
         )
+        if price_features:
+            volatility = price_features.get("volatility", 0.0)
+            price_trend = price_features.get("price_trend", "flat")
+            recent_returns = price_features.get("returns", [])[-5:]
+            recent_closes = price_features.get("close_prices", [])[-10:]
+            base += (
+                f" Annualized volatility: {volatility:.4f}."
+                f" Price trend (5d vs 20d avg): {price_trend}."
+                f" Recent returns (last 5d): {[round(r, 4) for r in recent_returns]}."
+                f" Recent closes (last 10d): {[round(c, 2) for c in recent_closes]}."
+            )
+        return base
 
     def _contrarian_prompt(self, seed: dict) -> str:
         disagreement = seed.get("disagreement_level", seed.get("disagreement_score", 0.0))

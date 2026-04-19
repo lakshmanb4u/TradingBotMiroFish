@@ -40,6 +40,55 @@ def run_ticker(ticker: str, request: RunRequest | None = None) -> dict:
     return run_ticker_workflow(ticker=ticker, persist=persist)
 
 
+@app.get("/debug/price")
+def debug_price(ticker: str = Query(default="SPY")) -> dict:
+    import sys
+    from pathlib import Path
+
+    ROOT = Path(__file__).resolve().parents[2]
+    pc_dir = str(ROOT / "services" / "price-collector")
+    if pc_dir not in sys.path:
+        sys.path.insert(0, pc_dir)
+
+    from price_collector_service import PriceCollectorService
+
+    data = PriceCollectorService().collect(ticker)
+    return {
+        "provider_mode": data.get("provider_mode"),
+        "sample_series": data.get("series", [])[-5:],
+        "close_prices": data.get("close_prices", [])[-10:],
+        "returns": data.get("returns", [])[-10:],
+        "volatility": data.get("volatility"),
+        "price_trend": data.get("price_trend"),
+        "source_audit": data.get("source_audit", {}),
+    }
+
+
+@app.get("/debug/news")
+def debug_news(ticker: str = Query(default="SPY")) -> dict:
+    import sys
+    from pathlib import Path
+
+    ROOT = Path(__file__).resolve().parents[2]
+    nc_dir = str(ROOT / "services" / "news-collector")
+    if nc_dir not in sys.path:
+        sys.path.insert(0, nc_dir)
+
+    from news_collector_service import NewsCollectorService
+
+    data = NewsCollectorService().collect(ticker)
+    return {
+        "provider_mode": data.get("provider_mode"),
+        "sample_articles": data.get("articles", [])[:3],
+        "headlines": data.get("headlines", [])[:5],
+        "bullish_themes": data.get("bullish_themes", []),
+        "bearish_themes": data.get("bearish_themes", []),
+        "sentiment_score": data.get("sentiment_score"),
+        "sentiment_label": data.get("sentiment_label"),
+        "source_audit": data.get("source_audit", {}),
+    }
+
+
 @app.get("/debug/reddit")
 def debug_reddit(ticker: str = Query(default="SPY")) -> dict:
     import sys
@@ -81,6 +130,8 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
         ROOT / "services" / "reporting",
         ROOT / "services" / "seed-builder",
         ROOT / "services" / "agent-seeder",
+        ROOT / "services" / "price-collector",
+        ROOT / "services" / "news-collector",
     ]
     for sd in SERVICE_DIRS:
         sp = str(sd)
@@ -91,6 +142,8 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
     from normalizer_service import UnifiedNormalizerService
     from forecasting_service import TimesFMForecastingService
     from reddit_collector_service import RedditCollectorService
+    from price_collector_service import PriceCollectorService
+    from news_collector_service import NewsCollectorService
     from seed_builder_service import SeedBuilderService
     from agent_seeder_service import AgentSeederService
     from prompt_generator import SimulationPromptGenerator
@@ -125,6 +178,45 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
 
     # reddit_data is also used as reddit_seed for the unified reporter
     reddit_seed = reddit_data
+
+    # 4b. Price — Alpha Vantage live → fixture
+    try:
+        price_data = PriceCollectorService().collect(ticker)
+    except Exception as _price_exc:
+        import logging as _logging
+        _logging.getLogger(__name__).error("Price collection failed: %s", _price_exc)
+        price_data = {
+            "ticker": ticker.upper(), "provider_mode": "fixture_fallback",
+            "series": [], "close_prices": [], "returns": [],
+            "volatility": 0.0, "avg_volume": 0.0, "price_trend": "flat",
+            "source_audit": {"ohlcv": {"status": "fallback", "provider": "fixture",
+                                       "record_count": 0, "date_range": {"from": "", "to": ""}}},
+        }
+    normalized_bundle["price"] = price_data
+    normalized_bundle.setdefault("source_audit", {})["ohlcv"] = price_data["source_audit"]["ohlcv"]
+
+    if "snapshot" in normalized_bundle:
+        normalized_bundle["snapshot"]["close_prices"] = price_data.get("close_prices", [])
+        normalized_bundle["snapshot"]["returns"] = price_data.get("returns", [])
+        normalized_bundle["snapshot"]["volatility"] = price_data.get("volatility", 0.0)
+        normalized_bundle["snapshot"]["price_trend"] = price_data.get("price_trend", "flat")
+
+    # 4c. News — NewsAPI live → AV news → fixture
+    try:
+        news_data = NewsCollectorService().collect(ticker)
+    except Exception as _news_exc:
+        import logging as _logging
+        _logging.getLogger(__name__).error("News collection failed: %s", _news_exc)
+        news_data = {
+            "ticker": ticker.upper(), "provider_mode": "fixture_fallback",
+            "articles": [], "headlines": [], "summaries": [],
+            "bullish_themes": [], "bearish_themes": [],
+            "sentiment_score": 0.0, "sentiment_label": "neutral",
+            "source_audit": {"news": {"status": "fallback", "provider": "fixture",
+                                      "record_count": 0, "sample_headlines": []}},
+        }
+    normalized_bundle["news"] = news_data
+    normalized_bundle.setdefault("source_audit", {})["news"] = news_data["source_audit"]["news"]
 
     # 5. Build seed (build_reddit_context called internally via normalized_bundle["reddit"])
     seed = SeedBuilderService().build(ticker, normalized_bundle, forecast)
