@@ -8,7 +8,19 @@ Reddit influence modelling, and trade signal generation.
 from __future__ import annotations
 
 import random
+import sys
+from pathlib import Path
 from typing import Any
+
+_SEED_BUILDER_DIR = Path(__file__).resolve().parent.parent / "seed-builder"
+if str(_SEED_BUILDER_DIR) not in sys.path:
+    sys.path.insert(0, str(_SEED_BUILDER_DIR))
+
+try:
+    from divergence_engine import compute_divergence as _compute_divergence
+    _HAS_DIVERGENCE = True
+except ImportError:
+    _HAS_DIVERGENCE = False
 
 
 class AgentSeederService:
@@ -62,6 +74,60 @@ class AgentSeederService:
             # Also prefer nested features for downstream sentiment
             if _rf:
                 reddit_features = {**reddit_features, **_rf}
+
+        # Build news_context for retail agents
+        news_data = normalized_bundle.get("news", {})
+        news_context_for_retail: dict[str, Any] | None = None
+        if news_data.get("news_summary") or news_data.get("headlines"):
+            news_context_for_retail = {
+                "news_summary": news_data.get("news_summary", ""),
+                "bullish_points": (
+                    news_data.get("bullish_points") or news_data.get("bullish_themes") or []
+                )[:5],
+                "bearish_points": (
+                    news_data.get("bearish_points") or news_data.get("bearish_themes") or []
+                )[:5],
+                "sentiment_score": float(news_data.get("sentiment_score", 0.0)),
+            }
+
+        # Build timesfm_context for institutional + momentum agents
+        timesfm_source = normalized_bundle.get("timesfm") or forecast
+        timesfm_context: dict[str, Any] = {
+            "direction": timesfm_source.get("direction", "neutral"),
+            "confidence": float(timesfm_source.get("confidence", 0.5)),
+            "predicted_return": float(timesfm_source.get("predicted_return", 0.0)),
+            "trend_strength": float(timesfm_source.get("trend_strength", 0.0)),
+        }
+
+        # Build kalshi_context for institutional agents
+        kalshi_contracts = snapshot.get("kalshi_contracts", [])
+        kalshi_context: dict[str, Any] | None = None
+        if kalshi_contracts:
+            yes_probs = [
+                float(c.get("yes_price", c.get("probability_yes", 0.5)))
+                for c in kalshi_contracts
+                if isinstance(c, dict)
+            ]
+            avg_yes = sum(yes_probs) / len(yes_probs) if yes_probs else 0.5
+            kalshi_context = {
+                "summary": f"Kalshi: {len(kalshi_contracts)} markets, avg YES prob {avg_yes:.0%}.",
+                "avg_yes_prob": round(avg_yes, 4),
+            }
+
+        # Build divergence_context for contrarian agents
+        divergence_context: dict[str, Any] = {}
+        if _HAS_DIVERGENCE:
+            existing_div = normalized_bundle.get("divergence")
+            if existing_div:
+                divergence_context = existing_div
+            else:
+                try:
+                    forecast_for_div = normalized_bundle.get("timesfm") or forecast
+                    divergence_context = _compute_divergence(
+                        forecast_for_div, reddit_data, kalshi_contracts or None
+                    )
+                except Exception:
+                    pass
 
         reddit_sentiment = float(
             reddit_features.get("avg_sentiment",
@@ -128,6 +194,8 @@ class AgentSeederService:
             }
             if reddit_context_for_retail:
                 agent["reddit_context"] = reddit_context_for_retail
+            if news_context_for_retail:
+                agent["news_context"] = news_context_for_retail
             roster.append(agent)
 
         # ── institutional (30)
@@ -135,7 +203,7 @@ class AgentSeederService:
         for i in range(30):
             bias = "bullish" if forecast_direction == "up" else ("bearish" if forecast_direction == "down" else "neutral")
             strength = round(min(1.0, forecast_confidence + 0.05 * (i % 4)), 3)
-            roster.append({
+            inst_agent: dict[str, Any] = {
                 "id": f"institutional_{i+1:03d}",
                 "archetype": "institutional",
                 "prompt_section": inst_prompt,
@@ -149,7 +217,11 @@ class AgentSeederService:
                     "confidence": 0.5,
                     "influence": 1.0,
                 },
-            })
+                "timesfm_context": timesfm_context,
+            }
+            if kalshi_context:
+                inst_agent["kalshi_context"] = kalshi_context
+            roster.append(inst_agent)
 
         # Extract price features for momentum agents when available
         price_features: dict[str, Any] | None = None
@@ -210,14 +282,15 @@ class AgentSeederService:
                     "momentum": price_features.get("momentum", 0.0),
                     "vwap": price_features.get("vwap", 0.0),
                 }
+            agent_m["timesfm_context"] = timesfm_context
             roster.append(agent_m)
 
         # ── contrarian (10)
-        cont_prompt = self._contrarian_prompt(seed)
+        cont_prompt = self._contrarian_prompt(seed, divergence_context if divergence_context else None)
         for i in range(10):
             bias = "bearish" if majority_bias == "bullish" else "bullish"
             strength = round(min(1.0, 0.4 + 0.05 * (i % 4)), 3)
-            roster.append({
+            cont_agent: dict[str, Any] = {
                 "id": f"contrarian_{i+1:03d}",
                 "archetype": "contrarian",
                 "prompt_section": cont_prompt,
@@ -231,7 +304,17 @@ class AgentSeederService:
                     "confidence": 0.5,
                     "influence": 1.0,
                 },
-            })
+            }
+            if divergence_context:
+                cont_agent["divergence_context"] = {
+                    "divergence_score": divergence_context.get("divergence_score", 0.0),
+                    "alignment_score": divergence_context.get("alignment_score", 1.0),
+                    "signal": divergence_context.get("signal", "mixed"),
+                    "timesfm_vs_reddit": divergence_context.get("timesfm_vs_reddit", 0.0),
+                    "timesfm_vs_kalshi": divergence_context.get("timesfm_vs_kalshi", 0.0),
+                    "reddit_vs_kalshi": divergence_context.get("reddit_vs_kalshi", 0.0),
+                }
+            roster.append(cont_agent)
 
         archetypes = {
             "retail": {
@@ -783,17 +866,29 @@ class AgentSeederService:
                 base += f" VWAP (100d): {pf_vwap:.2f}."
         return base
 
-    def _contrarian_prompt(self, seed: dict) -> str:
+    def _contrarian_prompt(
+        self, seed: dict, divergence_context: dict | None = None
+    ) -> str:
         disagreement = seed.get("disagreement_level", seed.get("disagreement_score", 0.0))
         pred_summary = seed.get("prediction_market_summary", "No prediction market data.")
         bearish_pts = seed.get("key_bearish_points", [])
         bear_text = "; ".join(str(p)[:80] for p in bearish_pts[:2]) if bearish_pts else "none"
-        return (
+        base = (
             f"Contrarian perspective: The crowd currently shows a disagreement index of {disagreement:.2f}. "
             f"Prediction markets suggest: {pred_summary} "
             f"Key bearish risks the crowd may be overlooking: {bear_text}. "
             f"When crowd conviction is high, consider the opposite trade."
         )
+        if divergence_context:
+            div_score = divergence_context.get("divergence_score", 0.0)
+            signal = divergence_context.get("signal", "mixed")
+            tfm_vs_reddit = divergence_context.get("timesfm_vs_reddit", 0.0)
+            base += (
+                f" Divergence signal: {signal.upper()} "
+                f"(divergence score: {div_score:.2f}, TimesFM vs Reddit: {tfm_vs_reddit:.2f}). "
+                f"High divergence between model and sentiment is a contrarian opportunity."
+            )
+        return base
 
     def _generate_top_reasons(
         self,

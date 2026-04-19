@@ -131,7 +131,144 @@ class SeedBuilderService:
                 result["news_bullish_themes"] = news_collected["bullish_themes"][:5]
             if news_collected.get("bearish_themes"):
                 result["news_bearish_themes"] = news_collected["bearish_themes"][:5]
+        try:
+            result["seed_pack"] = self.build_seed_pack(ticker, normalized_bundle)
+        except Exception:
+            pass
         return result
+
+    # ─────────────────────── seed_pack builder
+
+    def build_seed_pack(self, ticker: str, normalized_bundle: dict[str, Any]) -> dict[str, Any]:
+        ticker = ticker.upper()
+
+        # price_summary
+        price_data = normalized_bundle.get("price_rich") or normalized_bundle.get("price") or {}
+        price_summary = self._build_price_summary(ticker, price_data, normalized_bundle)
+
+        # timesfm_summary
+        timesfm_data = normalized_bundle.get("timesfm", {})
+        if timesfm_data:
+            direction = timesfm_data.get("direction", "neutral")
+            confidence = float(timesfm_data.get("confidence", 0.5))
+            predicted_return = float(timesfm_data.get("predicted_return", 0.0))
+            timesfm_summary = (
+                f"TimesFM predicts {direction.upper()} with confidence {confidence:.2f}, "
+                f"predicted return {predicted_return * 100:+.1f}%."
+            )
+        else:
+            timesfm_summary = "TimesFM forecast not available."
+
+        # news_summary
+        news_data = normalized_bundle.get("news", {})
+        news_summary = (
+            news_data.get("news_summary")
+            or (f"News sentiment: {news_data['sentiment_label']}." if news_data.get("sentiment_label") else "")
+            or "No news data."
+        )
+
+        # reddit_summary
+        reddit_data = normalized_bundle.get("reddit", {})
+        reddit_features = reddit_data.get("features", {})
+        bullish_ratio = float(reddit_features.get("bullish_ratio", 0.0))
+        bearish_ratio = float(reddit_features.get("bearish_ratio", 0.0))
+        disagreement = float(reddit_features.get("disagreement_index", 0.0))
+        if reddit_data.get("provider_mode"):
+            label = (
+                "bullish" if bullish_ratio > bearish_ratio + 0.1
+                else ("bearish" if bearish_ratio > bullish_ratio + 0.1 else "mixed")
+            )
+            reddit_summary = (
+                f"Reddit sentiment is {label} ({bullish_ratio:.0%} bullish, {bearish_ratio:.0%} bearish). "
+                f"Disagreement index: {disagreement:.2f}."
+            )
+        else:
+            reddit_summary = "No Reddit data."
+
+        # kalshi_summary
+        snapshot = normalized_bundle.get("snapshot", {})
+        kalshi_contracts = snapshot.get("kalshi_contracts") or normalized_bundle.get("kalshi") or []
+        if kalshi_contracts:
+            n_markets = len(kalshi_contracts)
+            yes_probs = [
+                float(c.get("yes_price", c.get("probability_yes", 0.5)))
+                for c in kalshi_contracts
+            ]
+            avg_yes = sum(yes_probs) / len(yes_probs) if yes_probs else 0.5
+            k_direction = "bullish" if avg_yes > 0.55 else ("bearish" if avg_yes < 0.45 else "neutral")
+            kalshi_summary = (
+                f"Kalshi: {n_markets} relevant markets, avg YES prob {avg_yes:.0%}. "
+                f"Direction: {k_direction}."
+            )
+        else:
+            kalshi_summary = "No Kalshi data."
+
+        # merge bullish/bearish points from news + reddit
+        news_bullish = news_data.get("bullish_points") or news_data.get("bullish_themes") or []
+        news_bearish = news_data.get("bearish_points") or news_data.get("bearish_themes") or []
+        reddit_ctx = self.build_reddit_context(reddit_data) if reddit_data.get("provider_mode") else {}
+        reddit_bullish = reddit_ctx.get("key_bullish_points", [])
+        reddit_bearish = reddit_ctx.get("key_bearish_points", [])
+
+        seen_bull: set[str] = set()
+        key_bullish_points: list[str] = []
+        for pt in news_bullish + reddit_bullish:
+            lpt = pt.lower().strip()
+            if lpt not in seen_bull:
+                seen_bull.add(lpt)
+                key_bullish_points.append(pt)
+
+        seen_bear: set[str] = set()
+        key_bearish_points: list[str] = []
+        for pt in news_bearish + reddit_bearish:
+            lpt = pt.lower().strip()
+            if lpt not in seen_bear:
+                seen_bear.add(lpt)
+                key_bearish_points.append(pt)
+
+        # sources_used: provider_mode is live (not fallback/fixture)
+        sources_used: list[str] = []
+        for key in ("price", "price_rich", "news", "reddit", "timesfm"):
+            data = normalized_bundle.get(key)
+            if isinstance(data, dict):
+                pm = data.get("provider_mode", "")
+                if pm and "fallback" not in pm.lower() and "fixture" not in pm.lower():
+                    sources_used.append(key)
+
+        return {
+            "ticker": ticker,
+            "price_summary": price_summary,
+            "timesfm_summary": timesfm_summary,
+            "news_summary": news_summary,
+            "reddit_summary": reddit_summary,
+            "kalshi_summary": kalshi_summary,
+            "key_bullish_points": key_bullish_points[:5],
+            "key_bearish_points": key_bearish_points[:5],
+            "disagreement_level": disagreement,
+            "sources_used": sources_used,
+        }
+
+    def _build_price_summary(
+        self, ticker: str, price_data: dict[str, Any], normalized_bundle: dict[str, Any]
+    ) -> str:
+        if not price_data:
+            return f"{ticker} price data not available."
+        trend = price_data.get("price_trend", "flat")
+        vol = (
+            price_data.get("rolling_volatility_5d")
+            or price_data.get("rolling_volatility_10d")
+            or price_data.get("volatility", 0.0)
+        )
+        rsi = price_data.get("rsi_14", 0.0)
+        if not rsi:
+            snap = normalized_bundle.get("snapshot", {})
+            rsi = snap.get("rsi_14", snap.get("latest_rsi", 50.0))
+        vol_label = "low" if float(vol) < 0.15 else ("high" if float(vol) > 0.3 else "moderate")
+        trend_label = trend.upper() if trend != "flat" else "FLAT"
+        parts = [f"{ticker} is trending {trend_label} with {vol_label} volatility (vol={float(vol):.2f})."]
+        if rsi:
+            parts.append(f"RSI: {float(rsi):.1f}.")
+        return " ".join(parts)
 
     # ─────────────────────── reddit context builder
 

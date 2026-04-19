@@ -120,6 +120,34 @@ def debug_reddit(ticker: str = Query(default="SPY")) -> dict:
     }
 
 
+@app.get("/debug/timesfm")
+def debug_timesfm(ticker: str = Query(default="SPY")) -> dict:
+    import sys
+    from pathlib import Path
+
+    ROOT = Path(__file__).resolve().parents[2]
+    for sd in [
+        ROOT / "services" / "price-collector",
+        ROOT / "services" / "forecasting",
+        ROOT / "services" / "news-collector",
+        ROOT / "services" / "seed-builder",
+    ]:
+        sp = str(sd)
+        if sp not in sys.path:
+            sys.path.insert(0, sp)
+
+    from price_service import PriceService
+    from forecasting_service import TimesFMForecastingService
+
+    features = PriceService().features(ticker)
+    close_prices = features["close_prices"]
+    result = TimesFMForecastingService().forecast_from_prices(ticker, close_prices)
+    return {
+        **result,
+        "input_length": len(close_prices),
+    }
+
+
 @app.get("/run-demo")
 def run_demo(ticker: str = Query(default="NVDA")) -> dict:
     import sys
@@ -238,8 +266,73 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
     normalized_bundle["news"] = news_data
     normalized_bundle.setdefault("source_audit", {})["news"] = news_data["source_audit"]["news"]
 
+    # 4d. TimesFM with real prices
+    try:
+        close_prices = (
+            normalized_bundle.get("snapshot", {}).get("close_prices")
+            or normalized_bundle.get("price", {}).get("close_prices", [])
+        )
+        if close_prices:
+            timesfm_rich = TimesFMForecastingService().forecast_from_prices(ticker, close_prices)
+            normalized_bundle["timesfm"] = timesfm_rich
+    except Exception:
+        pass
+
+    # 4e. NewsService — richer news with sentiment + persistence
+    try:
+        from news_service import NewsService
+        news_rich = NewsService().collect(ticker)
+        normalized_bundle["news"] = news_rich
+        normalized_bundle.setdefault("source_audit", {})["news"] = news_rich["source_audit"]["news"]
+    except Exception:
+        pass
+
+    # 4f. Divergence detection
+    try:
+        from divergence_engine import compute_divergence
+        _reddit_for_div = normalized_bundle.get("reddit", {})
+        _kalshi_for_div = normalized_bundle.get("snapshot", {}).get("kalshi_contracts")
+        _forecast_for_div = normalized_bundle.get("timesfm") or forecast
+        divergence = compute_divergence(_forecast_for_div, _reddit_for_div, _kalshi_for_div)
+        normalized_bundle["divergence"] = divergence
+    except Exception:
+        pass
+
+    # Part 8: ensure complete source_audit for all 5 sources
+    _sa = normalized_bundle.setdefault("source_audit", {})
+
+    if "price" in normalized_bundle:
+        _sa.setdefault("ohlcv", normalized_bundle["price"].get("source_audit", {}).get("ohlcv", {
+            "status": "fallback", "provider": "fixture", "record_count": 0,
+        }))
+
+    _snap_for_audit = normalized_bundle.get("snapshot", {})
+    _sa.setdefault("sec", {
+        "status": "live" if _snap_for_audit.get("sec_risk_score") is not None else "fallback",
+        "provider": "sec_api",
+        "record_count": len(
+            normalized_bundle.get("simulation_seed", {}).get("sec_digest", [])
+        ),
+        "sample_ids": [],
+    })
+
+    _kalshi_contracts_audit = _snap_for_audit.get("kalshi_contracts", [])
+    _sa.setdefault("kalshi", {
+        "status": "live" if _kalshi_contracts_audit else "fallback",
+        "provider": "kalshi",
+        "record_count": len(_kalshi_contracts_audit),
+        "sample_ids": [c.get("ticker_kalshi", "") for c in _kalshi_contracts_audit[:3]],
+    })
+
     # 5. Build seed (build_reddit_context called internally via normalized_bundle["reddit"])
     seed = SeedBuilderService().build(ticker, normalized_bundle, forecast)
+
+    # seed_pack (also built internally by build(), but ensure it's set)
+    try:
+        seed_pack = SeedBuilderService().build_seed_pack(ticker, normalized_bundle)
+        seed["seed_pack"] = seed_pack
+    except Exception:
+        pass
 
     # 6. Seed agents
     seeder = AgentSeederService()
@@ -275,6 +368,9 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
         "forecast": forecast,
         "reddit_seed": reddit_seed,
         "seed": seed,
+        "seed_pack": seed.get("seed_pack", {}),
+        "divergence": normalized_bundle.get("divergence", {}),
+        "source_audit": normalized_bundle.get("source_audit", {}),
         "agent_roster_summary": {
             "total_agents": len(agent_roster_result.get("agent_roster", [])),
             "archetypes": {k: v["count"] for k, v in agent_roster_result.get("archetypes", {}).items()},

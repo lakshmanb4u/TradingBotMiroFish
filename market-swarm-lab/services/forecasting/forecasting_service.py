@@ -11,8 +11,11 @@ Quantile mapping from TimesFM 2.5 output:
 """
 from __future__ import annotations
 
+import json
 import math
 import os
+from datetime import date
+from pathlib import Path
 from statistics import mean, stdev
 from typing import Any
 
@@ -21,6 +24,7 @@ _timesfm_model = None
 _timesfm_config_cls = None
 
 ENABLE_TIMESFM = os.getenv("ENABLE_TIMESFM", "false").lower() == "true"
+_ROOT = Path(__file__).resolve().parents[2]
 
 
 def _load_timesfm():
@@ -93,6 +97,65 @@ class TimesFMForecastingService:
         result["forecast_close_5d"] = round(result["forecast"][-1], 2)
         result["timesfm_inputs_used"] = normalized_bundle["timesfm_inputs"]
         return result
+
+    def forecast_from_prices(
+        self,
+        ticker: str,
+        close_prices: list[float],
+        horizon: int = 5,
+    ) -> dict[str, Any]:
+        """Forecast directly from raw close prices, bypassing feature_window."""
+        series = {"close": close_prices}
+        result = self._run_forecast(ticker=ticker, series=series, horizon=horizon)
+
+        _dir_map = {"up": "bullish", "down": "bearish", "sideways": "neutral"}
+        direction = _dir_map.get(result.get("direction", "sideways"), "neutral")
+
+        forecast_pts = result.get("forecast", [])
+        last_close = close_prices[-1] if close_prices else 0.0
+        predicted_return = 0.0
+        if last_close and forecast_pts:
+            predicted_return = round((forecast_pts[-1] - last_close) / last_close, 6)
+
+        confidence = result.get("confidence", 0.5)
+        trend_strength = round(abs(predicted_return) * confidence, 4)
+
+        forecast_deviation = 0.0
+        if len(forecast_pts) > 1:
+            forecast_deviation = round(stdev(forecast_pts), 4)
+
+        output: dict[str, Any] = {
+            "ticker": result["ticker"],
+            "provider_mode": result["provider_mode"],
+            "direction": direction,
+            "predicted_return": predicted_return,
+            "confidence": confidence,
+            "forecast": forecast_pts,
+            "quantiles": result.get("quantiles", {"p10": [], "p50": [], "p90": []}),
+            "trend_strength": trend_strength,
+            "forecast_deviation": forecast_deviation,
+        }
+
+        today_str = date.today().strftime("%Y%m%d")
+        raw_dir = _ROOT / "state" / "raw" / "ohlcv"
+        raw_dir.mkdir(parents=True, exist_ok=True)
+
+        try:
+            with open(raw_dir / f"{ticker.upper()}_timesfm_input_{today_str}.json", "w") as f:
+                json.dump(
+                    {"ticker": ticker, "close_prices": close_prices, "horizon": horizon, "date": today_str},
+                    f, indent=2,
+                )
+        except Exception:
+            pass
+
+        try:
+            with open(raw_dir / f"{ticker.upper()}_timesfm_output_{today_str}.json", "w") as f:
+                json.dump(output, f, indent=2)
+        except Exception:
+            pass
+
+        return output
 
     def run_api(
         self,
