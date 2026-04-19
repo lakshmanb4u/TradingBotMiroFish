@@ -162,6 +162,22 @@ class AgentSeederService:
                 "close_prices": price_bundle.get("close_prices", []),
             }
 
+        # Enrich with richer features from PriceService when available
+        price_rich = normalized_bundle.get("price_rich")
+        if price_rich:
+            if price_features is None:
+                price_features = {
+                    "volatility": 0.0,
+                    "price_trend": price_rich.get("price_trend", "flat"),
+                    "returns": price_rich.get("daily_returns", []),
+                    "close_prices": price_rich.get("close_prices", []),
+                }
+            price_features["rsi_14"] = price_rich.get("rsi_14", 50.0)
+            price_features["rolling_volatility_5d"] = price_rich.get("rolling_volatility_5d", 0.0)
+            price_features["rolling_volatility_10d"] = price_rich.get("rolling_volatility_10d", 0.0)
+            price_features["momentum"] = price_rich.get("momentum", 0.0)
+            price_features["vwap"] = price_rich.get("vwap", 0.0)
+
         # ── momentum (20)
         mom_prompt = self._momentum_prompt(seed, snapshot, forecast_direction, price_features=price_features)
         for i in range(20):
@@ -188,6 +204,11 @@ class AgentSeederService:
                     "price_trend": price_features["price_trend"],
                     "returns_last5": price_features["returns"][-5:],
                     "closes_last10": price_features["close_prices"][-10:],
+                    "rsi_14": price_features.get("rsi_14", 50.0),
+                    "rolling_volatility_5d": price_features.get("rolling_volatility_5d", 0.0),
+                    "rolling_volatility_10d": price_features.get("rolling_volatility_10d", 0.0),
+                    "momentum": price_features.get("momentum", 0.0),
+                    "vwap": price_features.get("vwap", 0.0),
                 }
             roster.append(agent_m)
 
@@ -747,6 +768,19 @@ class AgentSeederService:
                 f" Recent returns (last 5d): {[round(r, 4) for r in recent_returns]}."
                 f" Recent closes (last 10d): {[round(c, 2) for c in recent_closes]}."
             )
+            rsi_14 = price_features.get("rsi_14")
+            rv5 = price_features.get("rolling_volatility_5d")
+            rv10 = price_features.get("rolling_volatility_10d")
+            mom = price_features.get("momentum")
+            pf_vwap = price_features.get("vwap")
+            if rsi_14 is not None:
+                base += f" RSI-14: {rsi_14:.2f}."
+            if rv5 is not None:
+                base += f" Rolling vol 5d: {rv5:.4f}, 10d: {rv10:.4f}."
+            if mom is not None:
+                base += f" 10d momentum: {mom:.4f}."
+            if pf_vwap is not None:
+                base += f" VWAP (100d): {pf_vwap:.2f}."
         return base
 
     def _contrarian_prompt(self, seed: dict) -> str:

@@ -50,17 +50,23 @@ def debug_price(ticker: str = Query(default="SPY")) -> dict:
     if pc_dir not in sys.path:
         sys.path.insert(0, pc_dir)
 
-    from price_collector_service import PriceCollectorService
+    from price_service import PriceService
 
-    data = PriceCollectorService().collect(ticker)
+    data = PriceService().collect(ticker)
     return {
         "provider_mode": data.get("provider_mode"),
         "sample_series": data.get("series", [])[-5:],
         "close_prices": data.get("close_prices", [])[-10:],
-        "returns": data.get("returns", [])[-10:],
-        "volatility": data.get("volatility"),
+        "daily_returns": data.get("daily_returns", [])[-10:],
+        "rolling_volatility_5d": data.get("rolling_volatility_5d"),
+        "rolling_volatility_10d": data.get("rolling_volatility_10d"),
+        "momentum": data.get("momentum"),
         "price_trend": data.get("price_trend"),
+        "vwap": data.get("vwap"),
+        "rsi_14": data.get("rsi_14"),
         "source_audit": data.get("source_audit", {}),
+        "raw_artifact_path": data.get("raw_artifact_path"),
+        "parquet_path": data.get("parquet_path"),
     }
 
 
@@ -200,6 +206,20 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
         normalized_bundle["snapshot"]["returns"] = price_data.get("returns", [])
         normalized_bundle["snapshot"]["volatility"] = price_data.get("volatility", 0.0)
         normalized_bundle["snapshot"]["price_trend"] = price_data.get("price_trend", "flat")
+
+    try:
+        from price_service import PriceService
+        price_rich = PriceService().collect(ticker)
+        if "snapshot" in normalized_bundle:
+            snap = normalized_bundle["snapshot"]
+            snap["rsi_14"] = price_rich.get("rsi_14", 50.0)
+            snap["rolling_volatility_5d"] = price_rich.get("rolling_volatility_5d", 0.0)
+            snap["rolling_volatility_10d"] = price_rich.get("rolling_volatility_10d", 0.0)
+            snap["momentum"] = price_rich.get("momentum", 0.0)
+            snap["vwap"] = price_rich.get("vwap", 0.0)
+        normalized_bundle["price_rich"] = price_rich
+    except Exception as _pe:
+        pass
 
     # 4c. News — NewsAPI live → AV news → fixture
     try:
