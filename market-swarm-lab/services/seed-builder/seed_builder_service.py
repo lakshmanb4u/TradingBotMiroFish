@@ -235,6 +235,53 @@ class SeedBuilderService:
                 if pm and "fallback" not in pm.lower() and "fixture" not in pm.lower():
                     sources_used.append(key)
 
+        # vix / macro enrichment
+        vix_data = normalized_bundle.get("vix", {})
+        if vix_data.get("vix_regime"):
+            price_summary = (
+                price_summary
+                + f" VIX regime: {vix_data['vix_regime']} ({vix_data.get('fear_signal','')})."
+            )
+
+        macro_data = normalized_bundle.get("macro", {})
+        macro_regime = macro_data.get("macro_regime", "")
+        if macro_regime:
+            macro_summary = (
+                f"Macro regime: {macro_regime}. "
+                f"Yield curve {macro_data.get('yield_curve_signal','')}, "
+                f"credit spread {macro_data.get('credit_signal','')}."
+            )
+        else:
+            macro_summary = ""
+
+        # stocktwits → merge into reddit_summary if present
+        st_data = normalized_bundle.get("stocktwits", {})
+        if st_data.get("message_volume"):
+            reddit_summary = (
+                reddit_summary
+                + f" StockTwits: {st_data['sentiment_label']} ({st_data.get('message_volume',0)} msgs)."
+            )
+
+        # earnings risk flag
+        earnings_data = normalized_bundle.get("earnings", {})
+        earnings_risk = earnings_data.get("earnings_risk", "none")
+
+        # prefer reddit_spy over existing reddit data if present
+        reddit_spy = normalized_bundle.get("reddit_spy", {})
+        if reddit_spy.get("total_posts", 0) > 0:
+            reddit_summary = (
+                f"Reddit SPY sentiment: {reddit_spy['sentiment_label']} "
+                f"({reddit_spy.get('bullish_pct',0):.0%} bull, {reddit_spy.get('bearish_pct',0):.0%} bear) "
+                f"across {reddit_spy.get('total_posts',0)} posts."
+            )
+
+        for key in ("vix", "macro", "stocktwits", "earnings", "reddit_spy"):
+            data = normalized_bundle.get(key)
+            if isinstance(data, dict):
+                pm = data.get("provider_mode", "")
+                if pm and "fallback" not in pm.lower() and "fixture" not in pm.lower():
+                    sources_used.append(key)
+
         return {
             "ticker": ticker,
             "price_summary": price_summary,
@@ -242,6 +289,8 @@ class SeedBuilderService:
             "news_summary": news_summary,
             "reddit_summary": reddit_summary,
             "kalshi_summary": kalshi_summary,
+            "macro_summary": macro_summary,
+            "earnings_risk": earnings_risk,
             "key_bullish_points": key_bullish_points[:5],
             "key_bearish_points": key_bearish_points[:5],
             "disagreement_level": disagreement,

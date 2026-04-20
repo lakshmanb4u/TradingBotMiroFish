@@ -171,6 +171,7 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
         ROOT / "services" / "execution-engine",
         ROOT / "services" / "portfolio-engine",
         ROOT / "services" / "backtester",
+        ROOT / "services" / "macro-collector",
     ]
     for sd in SERVICE_DIRS:
         sp = str(sd)
@@ -290,6 +291,35 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
         normalized_bundle["news"] = news_rich
         normalized_bundle.setdefault("source_audit", {})["news"] = news_rich["source_audit"]["news"]
     except Exception:
+        pass
+
+    # 4g. Macro + sentiment collectors
+    try:
+        from vix_service import VIXService
+        from fred_service import FREDService
+        from stocktwits_service import StockTwitsService
+        from earnings_calendar_service import EarningsCalendarService
+        from reddit_spy_service import RedditSPYService
+
+        vix_data = VIXService().collect()
+        normalized_bundle["vix"] = vix_data
+        normalized_bundle.setdefault("source_audit", {})["vix"] = vix_data["source_audit"]["vix"]
+
+        macro_data = FREDService().collect()
+        normalized_bundle["macro"] = macro_data
+        normalized_bundle.setdefault("source_audit", {})["macro"] = macro_data["source_audit"]["macro"]
+
+        st_data = StockTwitsService().collect(ticker)
+        normalized_bundle["stocktwits"] = st_data
+
+        earnings_data = EarningsCalendarService().collect(ticker)
+        normalized_bundle["earnings"] = earnings_data
+        normalized_bundle.setdefault("source_audit", {})["earnings"] = earnings_data["source_audit"]["earnings"]
+
+        reddit_spy_data = RedditSPYService().collect(ticker)
+        normalized_bundle["reddit_spy"] = reddit_spy_data
+        normalized_bundle.setdefault("source_audit", {})["reddit_spy"] = reddit_spy_data["source_audit"]["reddit_spy"]
+    except Exception as _me:
         pass
 
     # 4f. Divergence detection
@@ -581,6 +611,85 @@ def get_trade_plan(
         }
     except Exception as exc:
         return {"error": str(exc), "signal": {}, "risk": {}, "trade_plan": {}, "execution_mode": "paper"}
+
+
+@app.get("/debug/macro")
+def debug_macro() -> dict:
+    import sys
+    from pathlib import Path
+
+    ROOT = Path(__file__).resolve().parents[2]
+    mc_dir = str(ROOT / "services" / "macro-collector")
+    if mc_dir not in sys.path:
+        sys.path.insert(0, mc_dir)
+
+    from vix_service import VIXService
+    from fred_service import FREDService
+
+    vix_data = VIXService().collect()
+    macro_data = FREDService().collect()
+    return {
+        "vix": {
+            "vix_current": vix_data.get("vix_current"),
+            "vix_5d_avg": vix_data.get("vix_5d_avg"),
+            "vix_regime": vix_data.get("vix_regime"),
+            "vix_trend": vix_data.get("vix_trend"),
+            "fear_signal": vix_data.get("fear_signal"),
+            "source_audit": vix_data.get("source_audit", {}),
+        },
+        "fred": {
+            "fed_funds_rate": macro_data.get("fed_funds_rate"),
+            "yield_curve": macro_data.get("yield_curve"),
+            "yield_curve_signal": macro_data.get("yield_curve_signal"),
+            "credit_spread": macro_data.get("credit_spread"),
+            "credit_signal": macro_data.get("credit_signal"),
+            "consumer_sentiment": macro_data.get("consumer_sentiment"),
+            "macro_regime": macro_data.get("macro_regime"),
+            "source_audit": macro_data.get("source_audit", {}),
+        },
+    }
+
+
+@app.get("/debug/sentiment")
+def debug_sentiment(ticker: str = Query(default="SPY")) -> dict:
+    import sys
+    from pathlib import Path
+
+    ROOT = Path(__file__).resolve().parents[2]
+    mc_dir = str(ROOT / "services" / "macro-collector")
+    if mc_dir not in sys.path:
+        sys.path.insert(0, mc_dir)
+
+    from stocktwits_service import StockTwitsService
+    from reddit_spy_service import RedditSPYService
+
+    st_data = StockTwitsService().collect(ticker)
+    reddit_spy_data = RedditSPYService().collect(ticker)
+    return {
+        "stocktwits": {
+            "ticker": st_data.get("ticker"),
+            "bullish_count": st_data.get("bullish_count"),
+            "bearish_count": st_data.get("bearish_count"),
+            "sentiment_score": st_data.get("sentiment_score"),
+            "sentiment_label": st_data.get("sentiment_label"),
+            "message_volume": st_data.get("message_volume"),
+            "sample_messages": st_data.get("sample_messages", []),
+            "source_audit": st_data.get("source_audit", {}),
+        },
+        "reddit_spy": {
+            "ticker": reddit_spy_data.get("ticker"),
+            "subreddits_fetched": reddit_spy_data.get("subreddits_fetched"),
+            "total_posts": reddit_spy_data.get("total_posts"),
+            "relevant_posts": reddit_spy_data.get("relevant_posts"),
+            "bullish_pct": reddit_spy_data.get("bullish_pct"),
+            "bearish_pct": reddit_spy_data.get("bearish_pct"),
+            "avg_sentiment": reddit_spy_data.get("avg_sentiment"),
+            "sentiment_label": reddit_spy_data.get("sentiment_label"),
+            "top_posts": reddit_spy_data.get("top_posts", [])[:5],
+            "key_themes": reddit_spy_data.get("key_themes", []),
+            "source_audit": reddit_spy_data.get("source_audit", {}),
+        },
+    }
 
 
 @app.post("/backtest")
