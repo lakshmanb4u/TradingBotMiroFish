@@ -23,7 +23,8 @@ _timesfm_error: str | None = None
 _timesfm_model = None
 _timesfm_config_cls = None
 
-ENABLE_TIMESFM = os.getenv("ENABLE_TIMESFM", "false").lower() == "true"
+# TimesFM 1.0 200M is installed in .venv-timesfm — enabled by default
+ENABLE_TIMESFM = os.getenv("ENABLE_TIMESFM", "true").lower() == "true"
 _ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -34,25 +35,29 @@ def _load_timesfm():
     if _timesfm_error is not None:
         return False
     try:
+        # Add .venv-timesfm site-packages so timesfm is importable
+        import sys, glob
+        _root = Path(__file__).resolve().parents[2]
+        _venv_lib = str(_root / ".venv-timesfm" / "lib")
+        for _sp in glob.glob(f"{_venv_lib}/python*/site-packages"):
+            if _sp not in sys.path:
+                sys.path.insert(0, _sp)
+
         import torch  # noqa: F401
         import numpy as np  # noqa: F401
-        import timesfm  # noqa: F401
+        import timesfm
 
-        torch.set_float32_matmul_precision("high")
-        _timesfm_config_cls = timesfm.ForecastConfig
-        model = timesfm.TimesFM_2p5_200M_torch.from_pretrained(
-            "google/timesfm-2.5-200m-pytorch"
-        )
-        model.compile(
-            timesfm.ForecastConfig(
-                max_context=1024,
-                max_horizon=256,
-                normalize_inputs=True,
-                use_continuous_quantile_head=True,
-                force_flip_invariance=True,
-                infer_is_positive=True,
-                fix_quantile_crossing=True,
-            )
+        model = timesfm.TimesFm(
+            hparams=timesfm.TimesFmHparams(
+                backend="pytorch",
+                per_core_batch_size=32,
+                horizon_len=5,
+                num_layers=20,
+                model_dims=1280,
+            ),
+            checkpoint=timesfm.TimesFmCheckpoint(
+                huggingface_repo_id="google/timesfm-1.0-200m-pytorch"
+            ),
         )
         _timesfm_model = model
         return True
@@ -196,20 +201,25 @@ class TimesFMForecastingService:
         import numpy as np
 
         inputs = [np.array(closes, dtype=np.float32)]
+        # TimesFM 1.0 API: forecast(inputs, freq)
         point_forecast, quantile_forecast = _timesfm_model.forecast(
-            horizon=horizon,
             inputs=inputs,
+            freq=[0],
         )
         # point_forecast: (1, horizon)
-        # quantile_forecast: (1, horizon, 10) -> [mean, q10..q90]
+        # quantile_forecast: (1, horizon, N_quantiles)
         pts = [round(float(v), 4) for v in point_forecast[0]]
-        q10 = [round(float(v), 4) for v in quantile_forecast[0, :, 1]]
-        q50 = [round(float(v), 4) for v in quantile_forecast[0, :, 5]]
-        q90 = [round(float(v), 4) for v in quantile_forecast[0, :, 9]]
+        nq = quantile_forecast.shape[2]
+        q10_idx = max(1, nq // 10)
+        q50_idx = nq // 2
+        q90_idx = min(nq - 1, nq * 9 // 10)
+        q10 = [round(float(v), 4) for v in quantile_forecast[0, :, q10_idx]]
+        q50 = [round(float(v), 4) for v in quantile_forecast[0, :, q50_idx]]
+        q90 = [round(float(v), 4) for v in quantile_forecast[0, :, q90_idx]]
         direction, confidence = _derive_direction(closes[-1] if closes else 0.0, pts)
         return {
             "ticker": ticker.upper(),
-            "provider_mode": "timesfm_2p5_pytorch",
+            "provider_mode": "timesfm_1p0_200m_pytorch",
             "horizon": horizon,
             "forecast": pts,
             "quantiles": {"p10": q10, "p50": q50, "p90": q90},
