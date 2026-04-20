@@ -13,6 +13,11 @@ class StrategyEngineService:
         news: dict = context.get("news") or {}
         simulation: dict = context.get("simulation") or {}
         source_audit: dict = context.get("source_audit") or {}
+        intraday: dict = context.get("intraday") or {}
+        intraday_trend: str = intraday.get("intraday_trend", "flat")
+        intraday_momentum: float = float(intraday.get("intraday_momentum", 0.0))
+        intraday_available: bool = bool(intraday)
+        last_15min_trend: str = intraday.get("last_15min_trend", intraday_trend)
 
         reddit_features: dict = reddit.get("features") or {}
 
@@ -95,6 +100,13 @@ class StrategyEngineService:
             4,
         )
 
+        # Intraday confirmation boost
+        if intraday_available:
+            if intraday_trend == "up" and trade == "CALL":
+                confidence = round(min(1.0, confidence + 0.1), 4)
+            elif intraday_trend == "down" and trade == "PUT":
+                confidence = round(min(1.0, confidence + 0.1), 4)
+
         # --- Expected move ---
         raw_predicted_return = float(timesfm.get("predicted_return", 0.0))
         if raw_predicted_return and momentum:
@@ -119,6 +131,10 @@ class StrategyEngineService:
         news_strength: float = float(news.get("narrative_strength", 0.0))
         if news_strength > 0.5:
             drivers.append("Breaking news detected")
+        if intraday_momentum > 0.01:
+            drivers.append("Intraday momentum positive")
+        elif intraday_momentum < -0.01:
+            drivers.append("Intraday momentum negative")
 
         # --- Risk flags ---
         risk_flags: list[str] = []
@@ -131,9 +147,14 @@ class StrategyEngineService:
             risk_flags.append(f"High disagreement index ({disagreement_index:.2f})")
         if news_strength < 0.3 and news:
             risk_flags.append("Low narrative strength")
+        if horizon == "1h" and not intraday_available:
+            risk_flags.append("No intraday data — 1h horizon requires Massive.com")
 
         # --- Option plan ---
-        option_plan = self._option_plan(horizon, trade, direction, confidence)
+        effective_horizon = horizon
+        if horizon == "1h" and (not intraday_available or confidence < 0.65):
+            effective_horizon = "1d"
+        option_plan = self._option_plan(effective_horizon, trade, direction, confidence)
 
         # --- Reason ---
         reason = f"Rule: {rule}. Direction: {tf_direction}. Divergence score: {div_score:.2f}. Alignment: {align_score:.2f}."

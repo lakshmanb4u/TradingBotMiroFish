@@ -255,6 +255,15 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
     except Exception as _pe:
         pass
 
+    # 4b2. Intraday — Massive.com live → fixture
+    try:
+        from intraday_service import IntradayService
+        intraday = IntradayService().collect_intraday(ticker)
+        normalized_bundle["intraday"] = intraday
+        normalized_bundle.setdefault("source_audit", {})["intraday"] = intraday["source_audit"]["intraday"]
+    except Exception:
+        pass
+
     # 4c. News — NewsAPI live → AV news → fixture
     try:
         news_data = NewsCollectorService().collect(ticker)
@@ -405,6 +414,7 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
             "news": normalized_bundle.get("news", {}),
             "simulation": simulation_result,
             "source_audit": normalized_bundle.get("source_audit", {}),
+            "intraday": normalized_bundle.get("intraday", {}),
         }
         strategy_signal = StrategyEngineService().generate_signal(ticker, strategy_context, horizon="1d")
         risk_eval = RiskEngineService().evaluate(strategy_signal, strategy_context)
@@ -518,6 +528,14 @@ def _build_signal_context(ticker: str, ROOT: "Path") -> tuple[dict, dict]:
     except Exception:
         pass
 
+    try:
+        from intraday_service import IntradayService
+        intraday = IntradayService().collect_intraday(ticker)
+        nb["intraday"] = intraday
+        nb["source_audit"]["intraday"] = intraday["source_audit"]["intraday"]
+    except Exception:
+        pass
+
     strategy_context = {
         "timesfm": nb.get("timesfm", {}),
         "divergence": nb.get("divergence", {}),
@@ -526,6 +544,7 @@ def _build_signal_context(ticker: str, ROOT: "Path") -> tuple[dict, dict]:
         "news": nb.get("news", {}),
         "simulation": {"final_confidence": 0.5},
         "source_audit": nb.get("source_audit", {}),
+        "intraday": nb.get("intraday", {}),
     }
     return nb, strategy_context
 
@@ -647,6 +666,28 @@ def debug_macro() -> dict:
             "macro_regime": macro_data.get("macro_regime"),
             "source_audit": macro_data.get("source_audit", {}),
         },
+    }
+
+
+@app.get("/debug/intraday")
+def debug_intraday(ticker: str = Query(default="SPY")) -> dict:
+    import sys
+    from pathlib import Path
+
+    ROOT = Path(__file__).resolve().parents[2]
+    pc_dir = str(ROOT / "services" / "price-collector")
+    if pc_dir not in sys.path:
+        sys.path.insert(0, pc_dir)
+
+    from intraday_service import IntradayService
+
+    data = IntradayService().collect_intraday(ticker)
+    return {
+        "bars": data.get("bars", [])[-10:],
+        "intraday_trend": data.get("intraday_trend"),
+        "intraday_momentum": data.get("intraday_momentum"),
+        "intraday_volatility": data.get("intraday_volatility"),
+        "source_audit": data.get("source_audit", {}),
     }
 
 
