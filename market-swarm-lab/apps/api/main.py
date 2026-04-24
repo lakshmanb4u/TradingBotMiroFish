@@ -219,21 +219,34 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
     # reddit_data is also used as reddit_seed for the unified reporter
     reddit_seed = reddit_data
 
-    # 4b. Price — Alpha Vantage live → fixture
+    # 4b. Price — Schwab live → Alpha Vantage → fixture
+    schwab_dir = str(ROOT / "services" / "schwab-collector")
+    if schwab_dir not in sys.path:
+        sys.path.insert(0, schwab_dir)
     try:
-        price_data = PriceCollectorService().collect(ticker)
-    except Exception as _price_exc:
+        from schwab_price_service import SchwabPriceService
+        price_data = SchwabPriceService().collect(ticker)
         import logging as _logging
-        _logging.getLogger(__name__).error("Price collection failed: %s", _price_exc)
-        price_data = {
-            "ticker": ticker.upper(), "provider_mode": "fixture_fallback",
-            "series": [], "close_prices": [], "returns": [],
-            "volatility": 0.0, "avg_volume": 0.0, "price_trend": "flat",
-            "source_audit": {"ohlcv": {"status": "fallback", "provider": "fixture",
-                                       "record_count": 0, "date_range": {"from": "", "to": ""}}},
-        }
+        _logging.getLogger(__name__).info("Price via Schwab: %s candles", len(price_data.get("close_prices", [])))
+    except Exception as _schwab_exc:
+        import logging as _logging
+        _logging.getLogger(__name__).warning("Schwab price failed, falling back to Alpha Vantage: %s", _schwab_exc)
+        try:
+            price_data = PriceCollectorService().collect(ticker)
+        except Exception as _price_exc:
+            _logging.getLogger(__name__).error("Price collection failed: %s", _price_exc)
+            price_data = {
+                "ticker": ticker.upper(), "provider_mode": "fixture_fallback",
+                "series": [], "close_prices": [], "returns": [],
+                "volatility": 0.0, "avg_volume": 0.0, "price_trend": "flat",
+                "source_audit": {"ohlcv": {"status": "fallback", "provider": "fixture",
+                                           "record_count": 0, "date_range": {"from": "", "to": ""}}},
+            }
     normalized_bundle["price"] = price_data
     normalized_bundle.setdefault("source_audit", {})["ohlcv"] = price_data["source_audit"]["ohlcv"]
+    # Wire options features into bundle for agent-seeder
+    if price_data.get("options_features"):
+        normalized_bundle["options_features"] = price_data["options_features"]
 
     if "snapshot" in normalized_bundle:
         normalized_bundle["snapshot"]["close_prices"] = price_data.get("close_prices", [])
@@ -241,19 +254,16 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
         normalized_bundle["snapshot"]["volatility"] = price_data.get("volatility", 0.0)
         normalized_bundle["snapshot"]["price_trend"] = price_data.get("price_trend", "flat")
 
-    try:
-        from price_service import PriceService
-        price_rich = PriceService().collect(ticker)
-        if "snapshot" in normalized_bundle:
-            snap = normalized_bundle["snapshot"]
-            snap["rsi_14"] = price_rich.get("rsi_14", 50.0)
-            snap["rolling_volatility_5d"] = price_rich.get("rolling_volatility_5d", 0.0)
-            snap["rolling_volatility_10d"] = price_rich.get("rolling_volatility_10d", 0.0)
-            snap["momentum"] = price_rich.get("momentum", 0.0)
-            snap["vwap"] = price_rich.get("vwap", 0.0)
-        normalized_bundle["price_rich"] = price_rich
-    except Exception as _pe:
-        pass
+    # Use Schwab data as price_rich directly (already has all fields)
+    price_rich = price_data
+    if "snapshot" in normalized_bundle:
+        snap = normalized_bundle["snapshot"]
+        snap["rsi_14"] = price_rich.get("rsi_14", 50.0)
+        snap["rolling_volatility_5d"] = price_rich.get("rolling_volatility_5d", 0.0)
+        snap["rolling_volatility_10d"] = price_rich.get("rolling_volatility_10d", 0.0)
+        snap["momentum"] = price_rich.get("momentum", 0.0)
+        snap["vwap"] = price_rich.get("vwap", 0.0)
+    normalized_bundle["price_rich"] = price_rich
 
     # 4b2. Intraday — Massive.com live → fixture
     try:
@@ -472,17 +482,31 @@ def _build_signal_context(ticker: str, ROOT: "Path") -> tuple[dict, dict]:
 
     nb: dict = {"source_audit": {}}
 
+    schwab_dir = str(ROOT / "services" / "schwab-collector")
+    if schwab_dir not in sys.path:
+        sys.path.insert(0, schwab_dir)
     try:
-        from price_service import PriceService
-        price_rich = PriceService().collect(ticker)
+        from schwab_price_service import SchwabPriceService
+        price_rich = SchwabPriceService().collect(ticker)
         nb["price_rich"] = price_rich
         nb["source_audit"]["ohlcv"] = price_rich.get("source_audit", {}).get(
-            "ohlcv", {"status": "fallback", "provider": "fixture", "record_count": 0}
+            "ohlcv", {"status": "fallback", "provider": "schwab", "record_count": 0}
         )
+        if price_rich.get("options_features"):
+            nb["options_features"] = price_rich["options_features"]
         close_prices = price_rich.get("close_prices", [])
     except Exception:
-        nb["source_audit"]["ohlcv"] = {"status": "fallback", "provider": "fixture", "record_count": 0}
-        close_prices = []
+        try:
+            from price_service import PriceService
+            price_rich = PriceService().collect(ticker)
+            nb["price_rich"] = price_rich
+            nb["source_audit"]["ohlcv"] = price_rich.get("source_audit", {}).get(
+                "ohlcv", {"status": "fallback", "provider": "fixture", "record_count": 0}
+            )
+            close_prices = price_rich.get("close_prices", [])
+        except Exception:
+            nb["source_audit"]["ohlcv"] = {"status": "fallback", "provider": "fixture", "record_count": 0}
+            close_prices = []
 
     try:
         from news_service import NewsService

@@ -99,6 +99,27 @@ class AgentSeederService:
             "trend_strength": float(timesfm_source.get("trend_strength", 0.0)),
         }
 
+        # Build options_flow_context for institutional + momentum agents (Schwab)
+        options_features = normalized_bundle.get("options_features", {})
+        options_flow_context: dict[str, Any] | None = None
+        if options_features:
+            flow_bias = options_features.get("flow_bias", "neutral")
+            iv_rank = options_features.get("iv_rank", 0.0)
+            cpr = options_features.get("call_put_ratio", 1.0)
+            options_flow_context = {
+                "summary": (
+                    f"Options flow: {flow_bias.upper()} bias. "
+                    f"Call/Put ratio {cpr:.2f}, IV rank {iv_rank:.1f}, "
+                    f"ATM IV {options_features.get('atm_iv', 0):.2f}. "
+                    f"Call vol {options_features.get('total_call_volume', 0):,}, "
+                    f"Put vol {options_features.get('total_put_volume', 0):,}."
+                ),
+                "flow_bias": flow_bias,
+                "iv_rank": iv_rank,
+                "call_put_ratio": cpr,
+                "atm_iv": options_features.get("atm_iv", 0.0),
+            }
+
         # Build kalshi_context for institutional agents
         kalshi_contracts = snapshot.get("kalshi_contracts", [])
         kalshi_context: dict[str, Any] | None = None
@@ -221,6 +242,8 @@ class AgentSeederService:
             }
             if kalshi_context:
                 inst_agent["kalshi_context"] = kalshi_context
+            if options_flow_context:
+                inst_agent["options_flow_context"] = options_flow_context
             roster.append(inst_agent)
 
         # Extract price features for momentum agents when available
@@ -283,6 +306,8 @@ class AgentSeederService:
                     "vwap": price_features.get("vwap", 0.0),
                 }
             agent_m["timesfm_context"] = timesfm_context
+            if options_flow_context:
+                agent_m["options_flow_context"] = options_flow_context
             roster.append(agent_m)
 
         # ── contrarian (2)
