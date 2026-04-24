@@ -170,9 +170,9 @@ class AgentSeederService:
 
         roster: list[dict] = []
 
-        # ── retail (40) — upvote-weighted bias strength
+        # ── retail (3) — upvote-weighted bias strength
         retail_prompt = self._retail_prompt(seed, snapshot, reddit_features)
-        for i in range(40):
+        for i in range(3):
             bias = "bullish" if reddit_sentiment > 0 else ("bearish" if reddit_sentiment < 0 else "neutral")
             base_strength = round(min(1.0, abs(reddit_sentiment) + 0.1 * (i % 5)), 3)
             # Higher upvote weight → stronger initial bias
@@ -198,9 +198,9 @@ class AgentSeederService:
                 agent["news_context"] = news_context_for_retail
             roster.append(agent)
 
-        # ── institutional (30)
+        # ── institutional (3)
         inst_prompt = self._institutional_prompt(seed, forecast_direction, forecast_close_5d, delta_5d, horizon_days, forecast_confidence)
-        for i in range(30):
+        for i in range(3):
             bias = "bullish" if forecast_direction == "up" else ("bearish" if forecast_direction == "down" else "neutral")
             strength = round(min(1.0, forecast_confidence + 0.05 * (i % 4)), 3)
             inst_agent: dict[str, Any] = {
@@ -250,9 +250,9 @@ class AgentSeederService:
             price_features["momentum"] = price_rich.get("momentum", 0.0)
             price_features["vwap"] = price_rich.get("vwap", 0.0)
 
-        # ── momentum (20)
+        # ── momentum (2)
         mom_prompt = self._momentum_prompt(seed, snapshot, forecast_direction, price_features=price_features)
-        for i in range(20):
+        for i in range(2):
             bias = "bullish" if forecast_direction == "up" else ("bearish" if forecast_direction == "down" else "neutral")
             strength = round(min(1.0, forecast_confidence * 1.2 + 0.05 * (i % 3)), 3)
             agent_m: dict[str, Any] = {
@@ -285,9 +285,9 @@ class AgentSeederService:
             agent_m["timesfm_context"] = timesfm_context
             roster.append(agent_m)
 
-        # ── contrarian (10)
+        # ── contrarian (2)
         cont_prompt = self._contrarian_prompt(seed, divergence_context if divergence_context else None)
-        for i in range(10):
+        for i in range(2):
             bias = "bearish" if majority_bias == "bullish" else "bullish"
             strength = round(min(1.0, 0.4 + 0.05 * (i % 4)), 3)
             cont_agent: dict[str, Any] = {

@@ -35,10 +35,10 @@ class SimulationPromptGenerator:
         }
 
         # ── simulation prompt
-        retail_count = archetypes.get("retail", {}).get("count", 40)
-        inst_count = archetypes.get("institutional", {}).get("count", 30)
-        mom_count = archetypes.get("momentum", {}).get("count", 20)
-        cont_count = archetypes.get("contrarian", {}).get("count", 10)
+        retail_count = archetypes.get("retail", {}).get("count", 3)
+        inst_count = archetypes.get("institutional", {}).get("count", 3)
+        mom_count = archetypes.get("momentum", {}).get("count", 2)
+        cont_count = archetypes.get("contrarian", {}).get("count", 2)
 
         simulation_prompt = (
             f"This is a {horizon_days}-day market simulation for {ticker.upper()} with {len(roster)} agents. "
