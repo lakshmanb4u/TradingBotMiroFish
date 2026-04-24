@@ -265,14 +265,21 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
         snap["vwap"] = price_rich.get("vwap", 0.0)
     normalized_bundle["price_rich"] = price_rich
 
-    # 4b2. Intraday — Massive.com live → fixture
+    # 4b2. Intraday — Schwab 5-min bars → Massive.com → fixture
     try:
-        from intraday_service import IntradayService
-        intraday = IntradayService().collect_intraday(ticker)
+        from schwab_intraday_service import SchwabIntradayService
+        intraday = SchwabIntradayService().collect(ticker)
         normalized_bundle["intraday"] = intraday
+        normalized_bundle["intraday_signals"] = intraday.get("signals", [])
         normalized_bundle.setdefault("source_audit", {})["intraday"] = intraday["source_audit"]["intraday"]
-    except Exception:
-        pass
+    except Exception as _intra_exc:
+        try:
+            from intraday_service import IntradayService
+            intraday = IntradayService().collect_intraday(ticker)
+            normalized_bundle["intraday"] = intraday
+            normalized_bundle.setdefault("source_audit", {})["intraday"] = intraday["source_audit"]["intraday"]
+        except Exception:
+            pass
 
     # 4c. News — NewsAPI live → AV news → fixture
     try:
@@ -425,6 +432,8 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
             "simulation": simulation_result,
             "source_audit": normalized_bundle.get("source_audit", {}),
             "intraday": normalized_bundle.get("intraday", {}),
+            "intraday_signals": normalized_bundle.get("intraday_signals", []),
+            "options_features": normalized_bundle.get("options_features", {}),
         }
         strategy_signal = StrategyEngineService().generate_signal(ticker, strategy_context, horizon="1d")
         risk_eval = RiskEngineService().evaluate(strategy_signal, strategy_context)
@@ -553,12 +562,19 @@ def _build_signal_context(ticker: str, ROOT: "Path") -> tuple[dict, dict]:
         pass
 
     try:
-        from intraday_service import IntradayService
-        intraday = IntradayService().collect_intraday(ticker)
+        from schwab_intraday_service import SchwabIntradayService
+        intraday = SchwabIntradayService().collect(ticker)
         nb["intraday"] = intraday
+        nb["intraday_signals"] = intraday.get("signals", [])
         nb["source_audit"]["intraday"] = intraday["source_audit"]["intraday"]
     except Exception:
-        pass
+        try:
+            from intraday_service import IntradayService
+            intraday = IntradayService().collect_intraday(ticker)
+            nb["intraday"] = intraday
+            nb["source_audit"]["intraday"] = intraday["source_audit"]["intraday"]
+        except Exception:
+            pass
 
     strategy_context = {
         "timesfm": nb.get("timesfm", {}),
