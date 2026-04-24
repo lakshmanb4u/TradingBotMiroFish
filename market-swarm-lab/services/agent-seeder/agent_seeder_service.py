@@ -101,6 +101,7 @@ class AgentSeederService:
 
         # Enrich options_features with UW data if available
         uw_data = normalized_bundle.get("uw", {})
+        options_features = normalized_bundle.get("options_features", {})
         if uw_data:
             options_features = dict(options_features)  # copy
             options_features["uw_flow_bias"] = uw_data.get("flow_bias", "neutral")
