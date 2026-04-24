@@ -104,16 +104,30 @@ def score_ticker(
         score += 1; reasons.append(f"intraday surge +{ireturn:.1f}%")
 
     # ── Decision ───────────────────────────────────────────────────────────────
-    if score >= 4:
+    # ── Masi time-of-day filter: first 2h (9:30-11:30 ET) + last 2h (14:00-16:00 ET) ──
+    # Outside high-vol windows, require higher conviction (score>=6) to fire
+    from datetime import datetime, timezone as _tz
+    _now_et_min = None
+    try:
+        _now_utc = datetime.now(_tz.utc)
+        _et_offset = -4 * 60  # EDT (UTC-4)
+        _et_min = (_now_utc.hour * 60 + _now_utc.minute + _et_offset) % (24 * 60)
+        _in_hv = (9*60+30 <= _et_min <= 11*60+30) or (14*60 <= _et_min <= 16*60)
+    except Exception:
+        _in_hv = True  # default open if can't determine time
+
+    _signal_threshold = 4 if _in_hv else 6  # Masi: only trade high-vol windows
+
+    if score >= _signal_threshold:
         action = "BUY"
         confidence = min(95, 50 + score * 7)
-    elif score >= 2:
+    elif score >= 2 and _in_hv:
         action = "BUY"
         confidence = min(75, 50 + score * 7)
-    elif score <= -4:
+    elif score <= -_signal_threshold:
         action = "SELL/SHORT"
         confidence = min(95, 50 + abs(score) * 7)
-    elif score <= -2:
+    elif score <= -2 and _in_hv:
         action = "SELL/SHORT"
         confidence = min(75, 50 + abs(score) * 7)
     else:
@@ -147,13 +161,13 @@ def score_ticker(
             score += masi_delta
             reasons.extend([s["reason"] for s in masi_result.get("strategies_fired", [])])
             # Re-evaluate action with updated score
-            if score >= 4:
+            if score >= _signal_threshold:
                 action = "BUY"; confidence = min(95, 50 + score * 7)
-            elif score >= 2:
+            elif score >= 2 and _in_hv:
                 action = "BUY"; confidence = min(75, 50 + score * 7)
-            elif score <= -4:
+            elif score <= -_signal_threshold:
                 action = "SELL/SHORT"; confidence = min(95, 50 + abs(score) * 7)
-            elif score <= -2:
+            elif score <= -2 and _in_hv:
                 action = "SELL/SHORT"; confidence = min(75, 50 + abs(score) * 7)
             # Recalculate entry/target/stop
             if action == "BUY":
