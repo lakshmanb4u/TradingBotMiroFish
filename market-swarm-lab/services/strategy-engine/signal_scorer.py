@@ -14,6 +14,12 @@ from __future__ import annotations
 
 from typing import Any
 
+try:
+    from masi_strategies import apply_masi_strategies, get_masi_exit_plan
+    _MASI_AVAILABLE = True
+except ImportError:
+    _MASI_AVAILABLE = False
+
 
 def score_ticker(
     price: dict[str, Any],
@@ -131,6 +137,35 @@ def score_ticker(
 
     rr = round(abs(target - entry) / abs(stop - entry), 2) if stop != entry else 0
 
+    # ── Masi Strategy Layer ────────────────────────────────────────────────────
+    masi_result = {}
+    masi_exit = {}
+    if _MASI_AVAILABLE:
+        masi_result = apply_masi_strategies(price, intraday, uw)
+        masi_delta = masi_result.get("score_delta", 0)
+        if masi_delta != 0:
+            score += masi_delta
+            reasons.extend([s["reason"] for s in masi_result.get("strategies_fired", [])])
+            # Re-evaluate action with updated score
+            if score >= 4:
+                action = "BUY"; confidence = min(95, 50 + score * 7)
+            elif score >= 2:
+                action = "BUY"; confidence = min(75, 50 + score * 7)
+            elif score <= -4:
+                action = "SELL/SHORT"; confidence = min(95, 50 + abs(score) * 7)
+            elif score <= -2:
+                action = "SELL/SHORT"; confidence = min(75, 50 + abs(score) * 7)
+            # Recalculate entry/target/stop
+            if action == "BUY":
+                entry = round(last, 2); target = round(last + atr * 3, 2); stop = round(last - atr * 1.5, 2)
+            elif action == "SELL/SHORT":
+                entry = round(last, 2); target = round(last - atr * 3, 2); stop = round(last + atr * 1.5, 2)
+            rr = round(abs(target - entry) / abs(stop - entry), 2) if stop != entry else 0
+        masi_exit = get_masi_exit_plan(
+            "BUY_CALLS" if action == "BUY" else ("BUY_PUTS" if action == "SELL/SHORT" else "HOLD"),
+            last, atr
+        )
+
     return {
         "ticker":       price.get("ticker", ""),
         "price":        last,
@@ -142,6 +177,9 @@ def score_ticker(
         "stop_loss":    stop,
         "risk_reward":  f"1:{rr}",
         "reasons":      reasons,
+        "masi_strategies": masi_result.get("strategies_fired", []),
+        "masi_warnings":   masi_result.get("warnings", []),
+        "masi_exit_plan":  masi_exit,
         "why": {
             "forecast":  f"{fdir} {fconf:.0%}",
             "uw_flow":   uw_bias,

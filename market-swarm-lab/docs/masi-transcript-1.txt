@@ -1,0 +1,804 @@
+﻿Skip to Main Content
+Accessibility Overview
+ Zoom Logo 
+
+January Options Course Session 1- Shared screen with speaker view
+Jan 26, 2024 04:50 PM
+Download (4 files)
+00:00:36/02:33:13
+Speed
+Summary and smart chapters
+Meeting coach
+Summary
+Masi shared his personal trading experience and introduced a three-day options trading course. He emphasized the importance of risk management and the cost efficiency of options trading. Masi also discussed various trading strategies, the impact of implied volatility, the significance of price action and candlestick patterns, and the use of fundamental analysis. He concluded the meeting by outlining the next session's topics, which include technical indicators and trading strategies.
+Masi shared his personal trading experience and introduced a three-day options trading course. He emphasized the importance of risk management and the cost efficiency of options trading. Masi also discussed various trading strategies, the impact of implied volatility, the significance of price action and candlestick patterns, and the use of fundamental analysis. He concluded the meeting by outlining the next session's topics, which include technical indicators and trading strategies.
+Smart Chapters
+Playing...
+From 00:00
+Masi's Trading Journey and Options Trading Success
+From 16:16
+Trading Course Structure and Basics
+From 25:29
+Options Trading Basics and Strategies
+From 34:47
+Options Contracts and Strike Prices Explained
+From 46:19
+Theta and Delta Significance in Trading Discussed
+From 58:49
+Implied Volatility and Trading Strategies
+From 01:22:54
+Price Action Concept Explained in Technical Analysis
+From 01:37:11
+Charting and Candlestick Analysis in Trading
+From 01:50:33
+Candlestick Patterns and Market Sentiment
+From 02:03:12
+Technical Analysis and Trading Signals
+From 02:15:39
+Significance of Fundamental Analysis in Trading
+From 02:24:00
+Quiet moment
+From 02:25:10
+Trading Strategies and Support Levels
+Masi's Trading Journey and Options Trading Success
+Masi introduced himself and shared his experience about his journey in trading. He mentioned that he started with equities in May 2018 and moved to options in July 2019, finding more success and ease in understanding options trading. He also noted that options trading required less capital risk, making it a more suitable choice for his training style. The meeting was the first session of a three-day course that Masi was conducting.
+Audio Transcript
+Chat Messages
+*  Masi * Masi
+* I had. I've been 90%.
+* Alright guys. Hello! Hello! Let's go ahead and get started.
+* With the first session.
+* Let me just share my screen here. Can everyone just confirm in the chat that you guys can hear me?
+* Alright great!
+* Alright!
+* So so this is session. One of the 3 day course first session. Well, before I go into that.
+* let me tell you guys a little bit about myself. Most of you have either followed me for a while, or have recently found my channel, but basically one. My name is Mossy. I started trading in
+* May of 2,018. I was trading equities. I was treating equities for about a year before I moved into options. I didn't become profitable until about a year into trading equities to the last half of the time that I was kind of trading equities, I found some consistency in the markets, but prior to that, I, you know, was struggling.
+* I switched over to options in July of 2,019, and options really just clicked. For me. It was a lot easier to understand. It was a lot easier to comprehend. At the same time I got more use out of the capital that I had. I, you know trading options is a lot
+* you don't have to risk as much capital which we'll go through
+* as well. But overall, I just found options a lot better for me and my training style than I did equity. So I've been training options since July 2,019.
+* And yeah, that's pretty much my story.
+* So basically, how the course is kind of broken down is the first section we're going to go through kind of intro level options review. Pretty much all everything you need to know about options and how to trade options
+* in the second session, and we'll go through charting as well today. In the second session. We go through technical indicators. We'll go through order, flow. We go through.
+* What else do we go through?
+* Order, flow technical indicators, or we'll go through chart patterns we'll go through level 2 in time. Sales a book map, and then we'll go through some fundamentals as well.
+* And then on the third day we'll go through all of the trading strategies. So day trading strategies swing, trading, scalping trend line breaks supply and demand zones, and we kinda bring everything together. So if it's a lot to capture on the first 2 days, don't worry. By the end of day 3. Everything will kind of come together, and you'll fully be able to have a grasp on having an entire trading plan, and how each strategy can. You can implement a strategy into your trading style.
+* That being said, what we do offer, since everyone signs up is the 6 months discord access. So
+* what will happen is you guys will gain access to the discord at the end of Sunday's class. So I will send out an email with a discord link you guys will join. I'll go through more of that on Sunday.
+* But basically how I would like everyone to take this course is, take your time with it. It is a lot of information in the next 3 days, and that you're going to get thrown at you, so don't feel too overwhelmed to have to learn everything or grasp every single concept over the next 3 days. We give you guys that time so that you're able to take the time and learn trading is a marathon. It's not a sprint. So it's gonna take you guys some time. And some people it might take longer than others, but
+* for as much effort that you guys put in, I will put in as well. I'm here for you guys with whatever questions you have, any issues you have anything like that? We're here for support.
+* I'm here to answer all of your questions. As I go through the slides today, through the different sections. I'll stop every couple of slides, and if you have any questions I just ask that you keep yourselves muted. Type. Your question in the chat box. I will then read it out and answer your question as well. So you guys will have
+* plenty of chances to ask whatever questions you have. As I go through all of this if I go through it, and I'm speaking a little too fast. Feel free to slow me down.
+* Sometimes I tend to speak a little bit fast as well. But yeah, all that being said, we're gonna go ahead and get started.
+* Also, you'll get access to the recordings and the Powerpoints once you get access to the discord on Sunday, so everything will be in the discord for everyone to see as well.
+* Right, excuse me.
+* so let's get started. So trading 101, move this over a little bit
+* alright. So the market trading hours are gonna be from 9 30 until 4 Pm. Eastern Standard time spy, which is the Etf. Which we'll go through if you guys are not familiar, spy can be traded until 4, 15,
+* and then we'll market volume tends to be the highest from 9 30 to 11, the first 2 h of market open, and then the last 2 h. So after one, mostly into around 2 0 to 4 0, you'll start to see volume increase as well. So these are going to be your higher volume hours. These are the gonna be the hours that you'd want to trade. So the first 2 h and last 2 h of market open during the middle of the market open. Usually volume tends to be
+* a lot lower. You won't see as many significant moves now, depending on what happens throughout the week. If we have news if there is a fed member speaking anything like that that could shift market momentum for the day. So if you know, for example, the Federal reserve chairman is J. Jerome Powell. Next week he speaks. I think he speaks around 10'clock or 2 Pm.
+* We'll start to see more volume towards the end of the day instead of the first half of the day. So, depending on what's going on in the market that day or a week will also shift a volume hours as well. But for the most part these are going to be your higher volume hours. These are going to be the hours that you're going to look to trade.
+* The second thing is, you need to pick a broker. I did send you guys 2 Pdfs on how to open a Td Ameritrade account and interact interactive brokers account. Hopefully, everyone has done that. I personally use interactive brokers to fill in and out of my trades. And then I use Td. Ameritrade to chart.
+* Now, I know Td. Ameritrade is not available in some countries. So a lot of people like to use interactive brokers or trading view to chart. So if you want to use interactive brokers to fill in and out of your positions, you can use a trading view to actually chart and look at your chart, time frames, etc., etc. The only reason I don't use interactive brokers for both is because the Ui isn't as user friendly. It's a little bit outdated, but on the
+* positive side it's it fills in and out of your trades very, very quickly. I've never not gotten filled into a trade or filled out of a trade utilizing interactive brokers. Which is why
+* I currently use it. Okay?
+* So section one is going to be options review. Like, I said. so what is options training? So basically an option. So when you're trading equities, you're buying shares on the stock. So you're buying a piece of the stock
+* when you're trading options, you're buying a contract. Okay? So what that contract does? It gives you the right
+* but not the obligation to buy or sell the underlying stock
+* at a specific price, or before a specific date which will go through that in a second. Just understand that you're buying a contract versus buying actual shares of the stock. That contract that you purchase.
+* Every contract is equal to 100 shares of the underlying stock. Okay? So if you buy one
+* test, the contract, that contract is equal to a hundred Tesla shares.
+* Okay.
+* So, for example, 20 contracts on a stock, you buy 20 contracts, and that's going to give you an equivalent to 2,000 shares of that stock
+* with options. Your risk is the amount you pay for on the contract. So what that means is, if you pay, let's say, $500 for your position. Okay, the most you can lose on that position is that $500, plus whatever commissions your broker charges you. Okay, that is a Max loss you can take could out lose more than what your contract is worth.
+* So in hindsight, you can really limit your losses. Okay.
+* each contract is going to have a couple of things attached to
+* the most important thing attached to it is going to be an expiration date. Okay? So whatever contract you buy when you're trading options. Every single contract has an expiration date.
+* Okay? Your expiration date is going to be a key factor in how the contract plays out. Okay, how much money you make, how much money you lose. So on and so forth. The volatility on it.
+* etc.
+* Okay.
+* Each contract also has a premium fee. Okay, this is the price that you're going to pay for the contract. It's called the premium. It's just the price of the contract. So if someone refers, you know, the premium is moving, or this isn't there talking about the price of the contract?
+* So the strategy basic strategy that I'm going to go through is, we're going to be flipping premiums. So basically, you want to buy at a low premium and sell at a high premium. Okay, similar to trading equities. You want to buy low, sell high unless you're shorting, but regardless whether you're on the upside or downside with options, your goal is to flip your premium. So you want to buy a lower premium and sell at a higher premium. That is the goal.
+* Okay.
+* how much a contract cost depends on multiple factors which we'll go through. Okay.
+* there's 2 types of contracts you can buy. You can buy your calls. And you can buy your puts. Okay?
+* So what's a call. And what's it put in basic terms? If you are buying call options, you're anticipating that the stock is going to go up.
+* Okay.
+* if you're buying, put options. You're anticipating that stock is going to go down.
+* Okay? So with call options. As the stock goes up.
+* the premium price goes up with put options as a stock goes down, the premium price goes up. Okay?
+* An example.
+* Okay. Let's say, Sam wants to buy
+* Meta. Oh, this was Miss needs to say, Meta, okay, Feda. So feta. Sam wants to buy Meta calls. Okay. So he wants to buy a call on Meta. So if he wants to buy a call on Meta. He's anticipating that the stock is going to make a move up.
+* Okay, Meta is currently trading at $250. Let's say he's looking at April fifteenth, 2025. Let's say, expiration.
+* Okay?
+* The premium price
+* on this call contract for Meta
+* is $2.
+* Okay? So one contract is gonna cost him $200, plus whatever Commission says broker charges. So how you calculate, that is.
+* you take the cost per premium. The cost per contract, which is your premium price. So this is $2.
+* You tip. Multiply that by the number of contracts that you want. So he's buying one contract.
+* You then multiply that by 100 you multiply it by 100, because that is a number of shares. Each contract is worth
+* that, then gives you
+* your costs per position
+* cost per contract. Okay. let's say, Facebook goes from 2 50 to 2, 55. So it goes up
+* in turn. The premium price goes from $2 to, let's say, $2 and 50 cents.
+* Now his contract is worth $250. Same thing. You take $2 and 50 cents.
+* You multiply it by the number of contracts you have times one times 100. Sorry
+* gives you $250. So he's made a $50 profit
+* off of this play on Meta.
+* Okay? So he can then close the position and take his $50 contract or take his $50 profit.
+* Okay.
+* let's do the opposite side. Let's say you want to buy put. So you're anticipating that the stock is going to make a move down.
+* So Mark wants to buy a put on Nvidia trading at $300. Currently.
+* Okay, the expiration date here and then the premium price is $4 per contract. So each contract costs $4.
+* So he wants to buy one contract. It's gonna cost him $400, plus whatever commissions his broker charges again
+* 4 times the number of contracts multiplied by 100 gives you cost per contract.
+* Nvidia drops from 300 to 2, 98. So it drops $2.
+* The premium goes from $4, let's say, to $6 and 20 cents. Okay, now, the entire position and that contract is worth $620.
+* Okay? So he then closes out the position and takes takes that $220 profit off of that plan
+* right?
+* Anyone have any questions on those examples.
+* Alright moving right along.
+* Alright.
+* The next thing we're gonna go through is kind of the different options, trading strategies that you can implement. Okay, there's a couple of different strategies that you can implement when you're trading.
+* the first one is scalping. So I would say, about 80 to 90% of my trades are scalp trades. So what this usually means is that you enter a position and you're usually holding the position for anywhere from a few seconds to 10 to 15 min. Usually I consider anything under 15 min a scalp.
+* Okay?
+* So when you're scalping, you're looking for quite quick price movements in the stock. You're not looking for big
+* percentage gains. You're looking kind of for like one to $2 premium flips very quick. One to 2 point moves on the stock for you to be able to take a position. Get out with scalpers. Usually they like to enter and exit fairly quickly. They could take multiple positions on a stock multiple times, because they're only in the position a couple of minutes if that
+* okay.
+* So for scalping, you're looking for more of a technical analysis, you're looking at support and resistance levels. And we'll go through in-depth exactly. But for now just. That's what scalping is.
+* The second strategy or method that you can utilize is day trading. So with day trading, it's
+* signifies, as
+* you open and close your position in that same day. So if you open the position and you close it within the same day, that is considered a day trade. Okay, anything over 10 to 15 min. I consider a day trade at that point.
+* This requires more of a technical analysis, fundamental analysis. You're looking at news surrounding the stock. Usually, when a stock has news for example, earnings or any product releases that could potentially
+* give the stock the momentum to be able to trend either to the upside or to the downside on a given day.
+* Okay.
+* you're looking for bigger price movements when you are day trading. So you're gonna look for bigger percentage gains.
+* And then we have swing trading. So for swing trading, you're holding for a few days to several months. Okay with swing trading. You want to use technical and fundamental analysis to you, you know, understand? Overall price trends overall picture of the stock.
+* And usually you want to swing trade when there is a specific trend already in the stock, and it's either continuing that trend or reversing.
+* and then the last one. I don't usually implement this too much. But you have your leaps. So these are going to be long term options, positions similar to, you know, investing in a stock. So you're looking for 2, 3 years out. Options, contracts.
+* Okay?
+* Alright.
+* So why should you trade options versus equities? So there's a couple of reason why reasons why people like trading options. One is, it's cost efficient. Okay? So trading options is a lot cheaper than trading equities. For example, you're if you purchase a hundred shares of a stock that's trading at $100. It's gonna cost you $10,000 versus if you purchase one call, let's say, and the premium price of that call is $20,
+* and that call is equal to a hundred shares of that stock.
+* Your total investment would only be $2,000. Okay? So it's a lot more cost efficient. Which is why it's become so saturated and so many people are looking to trade options because it's an easy way into the stock market overall without having to have a lot of capital.
+* Okay? So usually, I recommend anyone that's starting out trading to start with an account of no more than $2,000 when you're trading options, that's more than enough to trade with.
+* So
+* yeah. okay.
+* any questions so far.
+* The one thing I will say with options is, it is a lot of people say it's high risk, high reward, but I really think it depends on how you're trading. I don't think options is high risk. If you are not just blindly throwing money into the market. If you
+* know exactly what type of expiration to purchase will go through strike prices and all of that, and you're doing it. You're managing your risk properly. There's there's a lot more advantages to trading options.
+* I'll go through the Pdt. Rule and what that entails. There's a way to get it around Pdt rule, and that's a cash account, so I'll go through that. I think it's the last day we go through. What type of account to make sure you have
+* Umhm.
+* Great?
+* Alright. So next thing I'm gonna go through is exercising options contracts. You guys don't have to worry too much about this, because I've never exercised an options contract, and I don't recommend anyone to do this. But basically what it means to exercise a contract is, let's say, your contract is finally in profit.
+* and it's hit. Your strike price.
+* What happens is at that point. You have 2 options. You can take your profit and close the position, or you can potentially exercise the position or exercise and contract. So what this means is that simultaneously, when you exercise a position and options position, it's going to close
+* the options position, and then it's going to buy the shares. So let's say you have 2 sh 2 contracts on Tesla, and 2 call contracts on Tesla, and you're looking. You're in profit, and you're looking to exercise it. It will simultaneously close those 2 contracts and purchase 200 shares of Tesla. Now you have to make sure that you do have the capital in your account to be able to do that. And
+* it will ex. You can exercise the position. Now, one thing that you guys should know is that if your contract
+* goes into expiration and it's profitable, it's in the money which we'll go through. What in the money is. But if the contract goes in the money at expiration and you don't close the position out.
+* it will automatically assign you the shares of that stock. So we'll automatically auto exercise the position if you don't close it. Okay? So it's really important to pay attention to that. Make sure you close out your position so you don't get auto exercised
+* right.
+* I wouldn't like, I said, worry too much about this, because it's not something that any one of you should be implementing anyways. Alright.
+* the next thing we're gonna go through is Strike price. So like I mentioned in the beginning, there's a couple of things attached to an options contract. One is gonna be the expiration date 2 is gonna be the premium, and then 3 is, gonna be your strike price. Okay, your strike price is gonna play an important role into how your options contract plays out.
+* If you don't select the correct strike price, it can ultimately deter your position and hinder your profit.
+* Okay.
+* your strike price is the price at which your options contract can be exercised. So we said it. When it's in the money you can exercise. And that's what this means. There's 3 types of strike prices that you can select from
+* you have. You're at the money strike prices. You have your in the money, strike prices and you have your out of the money. Strike prices. Okay?
+* And I'm going to show you guys a visual, because I think it's easier to look at it this way.
+* Let's say this is your option chain. This is what an option chain looks like for those of you that haven't seen it. Okay? So what we call the option chain.
+* And this is Mrna. Okay, so, Moderna.
+* this is the option, Shane. This is the ticker, the name, and the price at that time.
+* Okay. so on your left-hand side you have your calls on your right hand side, you have your puts alright.
+* So in the middle. Here you have your strikes. Okay? So you can see right here, it says strikes. These are the strikes that you can select.
+* Alright.
+* Now
+* you're at the money. Strikes are going to be the strikes that are trading closest to the current price of the stock.
+* Okay? So in this case
+* you're at the money strikes because Moderna is trading at 6, 69, 31. You're at the money. Strikes are going to be 69 and 70, both on the call side and on the put side.
+* Okay, you're at the money. Strikes are going to be
+* a little bit more expensive than your out of the money, but they're gonna be the safest strikes to play
+* the reason behind. That is, when you enter a position, an options position your goal as an option trader is to get that strike that you purchased
+* as far into the money while you're in the position as you can the further in the money
+* your contract goes, the more expensive it becomes, the more valuable it becomes.
+* Alright.
+* So you're in. The money. Contracts are gonna be the most valuable. So this is the in the money calls
+* you're in. The money. Calls are going to be. Price points that the stock to the upside has already hit. So these are going to be price points
+* that are
+* less than what the current price of the stock is. Okay.
+* You're in. The money puts
+* are going to be. Price points that the stock to the Downside has already cleared. Okay, so they're going to be greater than what the current price of the stock is
+* okay.
+* And you can see here, this is the price
+* of these contracts. How much more expensive the in the money calls and puts are than your out of the money puts, and your out of the money calls.
+* Your out of the money. Calls are going to be. Price points that the stock to the upside has yet to hit has not hit them yet.
+* Okay, so they are not in the money yet.
+* They're out of the money.
+* You're out of the money puts are going to be. Price points that the stock to the down side
+* has not hit yet, so it's going to be less than the current price of the stock.
+* Okay.
+* does this make sense for now.
+* where your out of the money calls are in the money, and so on and so forth.
+* Okay.
+* both hopeful.
+* Moving right along. Oops
+* office thing won't work.
+* I'm not ready.
+* So this is the option chain. I'm just gonna do a quick rundown of for the people that haven't seen an option chain before. Your options chain is where you're going to enter and exit your positions where you're gonna fill in and out of your positions.
+* So this is in videos, options chain. And I'm actually gonna ex exit out of this and go into thinkorswim. So everyone's options chain depending on the
+* broker that you're using is going to look a little bit different. But overall the same. This is really what your option chain looks like on all brokers or similar.
+* These are your strike prices. You can put 1410, however many you want to see, or you can see all of them. It'll show all the available strike prices for purchase.
+* Okay, I usually keep mine right at 14, because I never buy way far out of the money unless I'm swinging trading
+* alright. So this is Nvidia. This is the ticker up here. So in order to change the ticker, you just type another one in. So let's say, for example, you're looking at Tesla. You just type Tesla in here, or whatever. Okay? So that's the ticker. Next to the ticker. You have the name of the ticker.
+* So, Nvidia. the price that it's currently trading at. Okay?
+* And then when you come down here, this is the options chain. Okay? So you click down whoops where to go
+* to open it again on the left-hand side. You have your calls on the right hand side. You have your puts
+* right. Here is the expiration date. So these expired today we have next week's expiration date the following week, one month out, 2 months out all the way into 2026.
+* Alright.
+* you have the asking price, so the cost of your contract right here
+* on each side.
+* and we'll go through the other columns later. But just understand that this is what it looks like. So these are all of your strike prices here
+* with the expiration date.
+* Okay, so this is the basics of an option chain kind of what the main things that you need to know where they're at.
+* Okay, any questions so far.
+* Someone asked, What's the rule of thumb when buying a contract always go for in the money, so we'll go through exactly what strikes to purchase when you're depending on the strategy that you're implementing. But the rule of thumb is
+* usually you want to buy at the money when you're scalping. Okay when you're day trading or swing trading, you can buy out of the money the there's only one time where you buy in the money contracts, and I'll go through that later but usually you don't want to purchase in the money contracts, as they've already
+* kind of the premium has already spiked. So what you want to look for, and they're extremely expensive. So for a scalp, if it pulls back, you're losing some more more on that premium versus if you were to purchase and add the money or out of the money contract.
+* The difference is is that purchasing in the money contracts is a lot safer. Because they have higher deltas, and we'll go through the Greeks, too, as well. But for rule of thumb just to basic knowledge. For right now, until I go into the strategies is if you're scalping, you buy at the money contracts for day trading and swing trading. You want to buy slightly out of the money contracts. But we'll go through all the intricacies of that later.
+* Nick.
+* Everyone good so far on the options shape and strike prices.
+* Okay, we'll go through everything step by step, like limit orders, market orders. All of that. Don't worry about it, so don't go too far ahead. All of it's in there yet.
+* So that's why we at the way that I've broken it down, and so everything you kind of get in pieces instead of all at once. But we'll go through all of it. Alright. The next thing we're gonna go through is options Greeks. So
+* before I go through these, I do just want to preface this by saying that
+* I don't look at the Greeks with every single trade that I take. It's just not feasible, especially if you're scalping to look at the Greeks before every single trade you take.
+* The reason why I go through the Greeks is it's good to understand how your premium price changes, and why it changes, and how it fluctuates. and the Greeks are one of the main reasons in how your premium gets priced and how it moves when you're in a tree.
+* These are your most important ones. Here you have your Delta Gamma, Theta Vega, and Zeta.
+* the 2 most important ones, and the ones that we're going to focus on are going to be your delta and your theta. Okay? So first. we have theta. So.
+* as I mentioned before, each contract that you purchase has an expiration date
+* because it has an expiration date, it has time decay. Okay, so theta is a measure of that time decay
+*  Unknown Speaker * Unknown Speaker
+* 00:47:19
+* as your contract
+*  Masi * Masi
+* 00:47:21
+* approaches expiration date. If it is not in the money.
+* the contract loses value over time. Okay, the closer your expiration date gets the more that contract loses value.
+* Okay.
+* longer term contracts. For example, if you buy a month out 2 months, 6 months a year, they're not. Gonna they're gonna have a theta of 0 because it doesn't lose value on a day to day basis. Okay, you'll start to see Theta. It affect your premium price and affect your contract usually within about 2 weeks of
+* when the expiration is okay.
+* data is going to be higher for your at the money contracts. They have more premium to lose every day. So you're at the money in the money contracts.
+* Okay.
+* when you're trading weekly expirations. Okay, let's say it's a Monday, and you're buying a Friday expiration for a scalp
+* or a day trade. Let's say
+* usually what you'll see on Monday, Tuesday, and Wednesday. You won't see that theta decay hit your premium so much.
+* But on Thursdays and Fridays. if you are in a position.
+* what you'll usually see is, if you, for example, are day trading or swing trading a weekly expiration which is not good to do in general. But let's say you're day trading a weekly expiration, and it's Thursday
+* you'll start to see that your premium.
+* Even if the stock moves up on every pull back, it's losing more and more of its value. It has to make an even bigger move up for you go back to the original premium price, and so on and so forth. That's because the time decay is moving against you. Okay? So you don't have a lot of time left on that contract before it expires for you to be able to get your contract in the money
+* so that the theta drops. Because of that.
+* you'll start to see that time decay. Hit your premium.
+* Okay?
+* So for example. how this kind of works? Okay.
+* a call option. Okay, with a premium price of $3. Okay?
+* And a theta of negative point 5.0 5
+* is going to experience a drop in price of 5 cents per day. This is, with all other things, constant. Okay, with all other things constant. If you have a premium, if you have a contract, that's $3 has a theta of point 0 5, it's gonna lose 5 cents per day.
+* Okay? So if all else remains constant, the options premium would fall to $2 and 90 cents. I did this wrong.
+* Okay, so lose 10 cents in 2 days. and so on and so forth. Okay, this is with no other factors just to understand how Theta affects the premium.
+* Higher volatility contracts. They're going to have higher thetas. Lower volatility contracts such as apple Amd are going to have lower thetas.
+* Okay?
+* Now Theta goes hand in hand with your delta. Okay.
+* so what is Delta
+* Delta is the measure of how much an options contract is going to move per one dollars change in the price of the stock. So every dollar that the stock moves your Delta measures. How much your premium price is going to move.
+* So your call options have a positive delta that can range from 0 to a dollar at the money. Options are gonna have a delta of near point 5
+* Delta is going to increase as the option gets deeper in the money. Okay.
+* so that's our goal is to get that strike as far into the money as possible, because at that point you're getting a one to one. Move $1 move in the stock gives you a dollar move in your premium. And that's what you want.
+* Okay.
+* put options. Same thing. They have a negative delta 0 point negative one
+* delta will decrease approach negative one as the options goes deeper in the money.
+* Okay. So, for example.
+* a delta of point 5 means that with all other things constant, theoretically
+* okay.
+* the contract will move
+* 50 cents for every dollar that the stock moves up or down.
+* Okay.
+* now, how do these 2 work together?
+* Delta kind of works the same way as Theta. Let's say, for example. And this is kind of
+* how I how you determine what strike price to select. Okay.
+* your out of the money contracts are, gonna have a lower delta. Okay?
+* So let's say. you are trading
+* a stock. Okay?
+*  Unknown Speaker * Unknown Speaker
+* 00:52:50
+* And
+*  Masi * Masi
+* 00:52:51
+* let's say it's trading at like $390. You buy a call contract. It is a Thursday. Okay? And it's, let's say, towards the end of the day you buy weekly call contract spires Friday, and it's a Thursday
+* you bought an out of the money strike. Let's say your price point. Your price. Target was 3 92.
+* You bought a 3, 95 strike.
+* Okay, let's say you enter at the 3 90 break right before it hits 3, 92. The stock pulls back.
+* Okay, you are profitable here.
+* Once it pulls back as the stock makes the move back up. Let's say, you see that you're negative here.
+* Okay, the reason behind that. Okay, this is why you don't want to buy an out of the money contract when you're trading late in the day, or when you're scalping.
+* is because you're losing more
+* as the stock pulls back then, and at the money are in the money contract, and you're not gaining as much as it makes the move back up. The reason behind that is because the Delta is lower and you're getting the time decay off of that Theta with the weekly expiration that stock now has to make an even bigger move for you to be back positive what you were before.
+* hey?
+* Pulls back again again, has to make an even bigger move until that out of the money contract goes into the money or at the money. This is what you're going to experience.
+* Now, this can also happen to add the money contracts as well, and in the money contracts, because they all work the same. You just won't experience that high of a theta decay, and you'll still have a higher delta to be able to make up for that pullback.
+* The problem with out of the money contracts and contracts that are further out of the money is because the delta is so low that the theta is still working against you. You're not able to gain as much back if you get caught in a pullback.
+* Okay? Which is why we trade at the money contracts. Okay?
+* Also, when you're scalping, you're looking for quick price movements. So for
+* a stock to go from 3 90 to 3 95, let's say it's like apple, and for apple to move 5 points, it takes almost all day. Okay, so if you're scalping it, your goal is to get your your contract to go into the money. So it's a lot
+* more feasible, for, let's say, a 3, 91, or a 3, 92 strike, or even the 3 90 strike to go in the money than it is for that stock to hit 3, 95, and for it to go in the money
+* a.
+* Does the concept
+* of these Greeks make sense
+* like? I said, it's not something that you need to watch every single time you take a treat.
+* however, to understand how and why your contract is moving a certain way.
+* You need to understand the strikes you're selecting, and then your Greeks working with them as well.
+* Everyone good.
+* Okay. See?
+* Is there ever a time? Delta and Theta would deter you from taking a trade now.
+* like I said, I don't look at them every time I take a trade. It's just good to understand how they work in your favor or against you depending on the contract you're purchasing.
+* How far in the money would you take in terms of a contract. I don't trade in the money like I said, I trade at the money. The only time that I would buy slightly in the money, which is. One or 2 points in the money is if I'm trading 0 day expiration, and it's late in the day. So if it's like a Friday and I'm trading 0 dte, or if it's I'm trading spire, Spx, 0, DT. 0 dte, which means 0 days to expiration, which will go through
+* I'll buy slightly in the money if it's later in the day to make it a little bit less risky.
+* The out of the money versus in the money contracts make sense. I've been burned by your exact example. Yeah, I think a lot of people have. So it's good to understand how it works. So you don't put yourself in that position because a lot of people will get into the trade, and they're like, Well, I don't understand. The stock made a pull back. But it's now back. Why am I still red? And that's the reason behind it.
+* Okay.
+* alright. Moving along
+* alright. Next thing we're gonna go through is implied volatility. Now we went through
+* expiration date.
+* I'm sorry we went through how your premium price is affected. Your strike price the Greeks, and now implied volatility
+* implied. Volatility also plays a very big role in how your premium is priced and how it moves. Usually implied volatility is re referenced to. As Iv. So if you hear us saying, Iv, it's just short for implied volatility.
+* What this represents is a projection of how much and how fast the stock that you're trading is likely to move in price. Okay.
+* it's utilized in pricing the options contract, which is your premium price.
+* High implied volatility
+* results in higher premiums, low implied volatility. Lower premiums. Okay. So if IV is high, your premiums are going to be more expensive. If IV is low, your premiums are going to be cheaper.
+* Iv changes based off of multiple things. Main things that are going to affect implied volatility is earnings, product releases news.
+* Any type of news regarding the stock regarding the overall market. But main main thing that you'll usually see, and it's a little bit easier to see whether Iv is increased or not is earnings round earning season which we're in right. Now
+* go ahead and look at your favorite stocks, and usually you'll see that most of them have a higher than normal. Iv. And their premiums are higher than normal as well.
+* It's directly influenced by the supply and demand of the stock demand is high. Iv is high.
+* The simplest way to explain Iv is like this. Okay.
+* let's say
+* your birthday is coming up. Okay? And
+* you're really excited. You're, you know, anticipating. Let's say you're having a party, and you're really really excited for your birthday. Okay? Anticipation is building. This excitement is building. The day of your birthday comes. Okay, the party happens. Everything's done and over with. And that excitement that anticipation drops. Okay, that is, Iv.
+* A staff is reporting earnings, or they have news or something is going on with the sector.
+* There's a lot of excitement around it. Okay, investors are wondering what's going to happen.
+* They think that it's gonna move. They start putting more volume into the stock, more volume, more volume, more volume. What happens?
+* Iv is inflated. Okay?
+* In turn, premiums are inflated that news comes out and it hits
+* that excitement dies. What happens to Iv and the premiums? They go back down to normal levels. Okay? And that is what you call Iv crush. And usually when you swing earnings or you play earnings, or you gamble earnings
+* 90% of the time you're not going to make a profit, because the premium that you purchased was already inflated.
+* Once that Iv hits you get, IV. Crush the premium, drops. The stock has to make a huge move for you to even be profitable on that position.
+* Okay.
+* that is implied volatility.
+* Now.
+* Iv can be good and bad. You want a good Iv, so that when the stock does move you're getting a good fluctuation in your premium. You're getting good premium prices. You're you're getting a good Roi on the move. If IV. Is too low, your premium is not going to move in conjunction with the stock. It's not going to give you the the return that you want.
+* Okay, now I know someone's gonna ask, what is a good id.
+* So where you look at where you look at Ib on the option. Sheen is right here.
+* You can't see it on this one, because it it expired today. But this is Ib right here. If you put your cursor over it should say, Ib, I don't know if it will or not. But
+* yeah, implied volatility. So 40% here you can also put the implied volatility on each contract.
+* I don't do that. I just look at the overall implied. Oh, sorry! Implied volatility. So you can have it here as well. I just look at the overall implied volatility on the stock. Okay.
+* if you're trading a stock like Nvidia Tesla Netflix, usually you'll see Iv anywhere from 40 to 60. Anything above 60 is high. I would probably even see like 55 is high.
+* Anything below 50, 40 is low.
+* Okay? Whereas let's say you're looking at apple Apple's normal. Iv is about 20 to 25 to about 35%. Anything above 35 is high. Anything below 25 is low.
+* Okay? So it depends on the stocks you're trading
+* will depend on what you see in Iv
+* alright.
+* This Iv affect scalping. Yes, so I just went through it. So if, for example, I mean doesn't affect it too much, but it does. So one it affects it. And if there's high Iv premiums are gonna be jacked up. So you're gonna be paying a lot more for the stocks that you typically trade if you're not used to that. Sometimes I've seen right now, Tesla trades that let's say, like 5 or $6. It can move up to like $10 double digits, whereas, like Spx moves, usually trades at like 8 or $9 with high Iv in the market. I've seen it trade at 13
+*  Unknown Speaker * Unknown Speaker
+* 01:04:46
+* $14 for an at the money contract.
+*  Masi * Masi
+* 01:04:49
+* so it does affect it in that way that you're paying paying more for your premium price. The other thing is, if IV is too low and you enter a position, and the move is too slow. You're not gonna get the premiums flip on it. You're not gonna get much of a move on your premium, even if the stock makes the move up or down, because Iv is there to increase that premium, it's gonna give it the volatility. So if there's no volatility there, or there's very little volatility. If there's no volume coming in.
+* you're not going to get the Roi that you want on that position, even if the stock moves and move so it can affect scalping as well.
+* Yes, so someone said, I noticed Iv crush when a stop drops quickly I get into chase it. Then everything slows down a minute later. Yes. So if there's an increase or a spike in volume, it can spike Iv as well. If, for example, random news comes out, or a big order or a lot of volume in the market. It can do that as well, and if you get caught in that pull back. You get the Iv crush as well.
+* Again. It depends on the expiration that you're trading. If you are trading closer to the end of the expiration. You'll see it a little bit more. Versus if you buy like further out expiration one or 2 weeks you won't see it as much.
+* All right, everyone good so far.
+* Okay.
+* Next thing we're gonna go through is volume and open interest.
+* Okay? And I know these are a lot of concepts and terms that I'm throwing at you guys. But I promise all of these at the end of the course, you'll see how I use every single one of these in most of my strategies. So they all make sense. Okay.
+* so volume and open interest. So volume is the number of contracts traded in one day on that strike price, a volume resets to 0 every single day. Okay.
+* when volume exceeds open interest on a given day. Usually it signifies that trading on that specific strike for that specific expiration date was high. So there's a lot of volume, a lot of trading, a lot of liquidity.
+* High volume shows liquidity, which is good, the more volume there is.
+* the easier it is to get in and out of your positions, the more the premium is going to move, and the higher. Roi, you get on that play.
+* Open interest is the number of open contracts on that specific strike.
+* Okay, this is an ongoing running total.
+* The closer to expiration date, the fewer number of new contracts that are open and the fewer number of contracts open in general, because obviously, people are closing out their contracts closer to the expiration date. So you're gonna see a lower open interest.
+* Okay?
+* So how do I use volume and open interest. Now
+* I'll go through this a little bit more cause I have a specific strategy I use, but in general, when you see volume and open interest I usually click, click, click, like the edit button on my options chain. And if you go into basic price and quotes
+* open interest and volume. Okay.
+* how I utilize this is all. Utilize this to correct, select my strike. So, for example, if I'm looking to buy an at the money. Strike on, Nvidia, I'll go over and look at which strike has higher open interest and volume, and I'll select that strike to trade because it has higher volume. It means higher liquidity. You're gonna get a bigger premium fluctuation. If it does move.
+* Okay? So basically, I use volume and open interest to select my strike prices, whether I'm swing trading, whether I'm day trading, whether I'm scalping.
+* I always, always. This is actually something that I do look at every time I take a trade, is the volume and open interest on that strike.
+* Okay.
+* the higher the volume and open interest usually signifies, especially if you see, like anomalies where you'll see, for example, this strike on Nvidia. The 2 are apple 200. Strike the 2, 1, 95 strike. Usually, if there's a lot of
+* volume and open interest significantly higher than the open interest and volume on the other strikes and on the put side or the opposite side. Whatever you're watching usually signifies that investors are looking to push the stock into that strike that price point.
+* Okay.
+* this is, in my opinion, really important to pay attention to, as it can really help you in selecting the correct strike price.
+* Okay?
+* The next 2 slides are just options, vocabulary that you guys can review just basic economic as economics as well. If you guys want to review as well.
+* and then alright. Next part we're gonna go through is understanding the market. So this is really, actually very important. A lot of people tend to overlook this, because when we were in the market that we were in from 2,019 until around 2021 end of 2021
+* market was really easy to trade. It was very clean price action. You really didn't have to pay attention to futures or anything like that. You just threw money at the market and made money. That's really how it worked at that time. That's why there was so many traders, and everyone was making a lot of money, because it was really easy to trade
+* over the past 2 years. What we've seen in the market probably 2 or 3 years
+* is kind of a shift where market is very dependent on news. It's very dependent on a catalyst. It's very dependent on the economy. And what's going to happen? Because the economy is kind of in a little bit of a bubble. Nobody knows where we're going to go, whether we're going to head into a recession, or whether
+* economy is going to hold steady the market just anticipates some type of news to get the ball rolling. Because of that, you need to understand market sentiment. You have to be able to read the mood of the market. Okay.
+* Are investors happy?
+* Are they fearful, are they Bullish? Are they bearish? So on and so forth. You need to be able to understand that. Okay, anything and everything can shape the market news.
+* Economic news, global news. Anything like that can shift market direction.
+* Okay.
+* here are, we're going to go through the market sentiment indicators. Now I'll go through all of them, and then I'll go through exactly which ones I watch on a day to day basis. Okay? So first, we have the vix.
+* The vix is your CBOE. Volatility index.
+* Okay. The vix is a real time. Representation of the market's expectation for volatility over the coming 3 days. Okay, it's usually utilized to measure the level of risk, fear, or stress in the market. If the vix is high.
+* There's a lot of fear in the market. Okay, usually market is bearish. If the vix is low, vice versa.
+* Investors are optimistic.
+* Market tends to be Bullish. Okay.
+* ticker for Vix is VIX. This is what it looks like. Right? So
+* let me go ahead and look at the vix on a higher timeframe here, if we look back into when the pandemic hit. Okay, Vix
+* spiked up, let me actually move this into 3 or
+* weekly.
+* There it goes through there. Okay, so you can see the vix spiked up around the time the pandemic hit. I don't know if it was 2020 or 2021. I think it was 2021,
+* or maybe I'm lying. Hold on. It's been so long.
+* But it doesn't feel like it's been that long. Here we go. Okay? So it was in 2020 ilot. We've got a huge spike in the Vix.
+* Okay?
+* When we started to cool off, Vix dropped back down. Kind of just cut
+* moved into this little bit of range. Now we're heading into all time. Lows on the vix. Okay, it's kind of holding right at these all time lows. The market is waiting for another big piece of news for it to actually make a move. Either bounce here, and we move down in the market, or we break this 11 low on the vix and continue on the Bullish trend that we're on.
+* Okay. So usually, I watch the vix on the 5 min timeframe during the day I'll look for wicles, which will go through in a second gap fills, and so on and so forth. I chart it just like I chart any other stock. I look for the main levels. And basically what I'll look for in the vix is if the market is making a move up. I want to see the Vix making a move down the market is making a move up, and the Vix is making a move up as well. Usually it signifies that it's not a strong move up in the market or vice versa.
+* Okay? So you wanna make sure that a lot of people don't like saying this, but the Vic should be moving inverse of whatever Nasdaq. And Es. Features are doing.
+* Okay.
+* Do you watch the vix as you make a trade, I'll watch some of these. Obviously I don't look for exactly something to break, or exactly something to happen, but I do watch it overall on the day. I want to make sure that if the futures are doing one thing and the Vix is also doing something that I'd like to see, so I do keep an eye on it throughout the day. If I'm entering a trade. No, I'm not necessarily looking at every single little move of the Vix. I just want to see an overall picture of it on the day.
+* Haven't gone through the other market sentiment indicators yet.
+* Okay.
+* alright. So next one we have is spy. So this is the Smp 500 etf. It's the Etf that tracks the Smp 500 so spy is really good to pay attention to as well. I do pay attention to usually, when I trade Spx, I don't pay too heavy of an attention to spy, but a lot of people like to trade spy so you can watch it and watch es features.
+* But again, same thing, same concept with the spy us, if you're looking for a move on overall market, you also want to see Spy making the move to and pay attention to what spy is doing as well. If it has a wic to fill. If it has a support level or resistance level, it could potentially hold the market at that support of resistance
+* the next one I don't watch
+* actually add up, because I don't trade really much of the Dow but it's the djia. It's the Dow Jones average. So it's index that chart that tracks the Dow. So if you'd like trading any of the airline stocks, bank stocks, this is something that you would watch. I don't watch it at all.
+* Then we have Q. Cu. It's the Etf that tracks the Nazac. 100
+* I do pay attention to Qq. But I don't watch Qq. As heavily as I watch spy just because I trade Spx, and so I like to watch Spy more heavily. However, if you like to trade the you can actually trade Qq as well. Similarly, to spy. If you trade a lot of the tech sector, this is really good to implement as well. Again, same concept. If it has wic fields, it has gap bills, support or resistance levels.
+* Those are levels to pay attention to and potentially see bounces or rejections
+* and forward slides. You see, this is just for knowledge. It's the gold future attracts the price of gold.
+* and then we have our features.
+* You have your es, and you're not set. Okay, so your Es is the S. And P. 500 emini futures. It is the future contract that track tracks the top 500 Co companies in the stock market. Okay?
+* The Nasac tracks the top 100 companies and the Nasdaq. Obviously, now.
+* your big names are gonna be the top of these lists. Apple Microsoft, Amazon. I think Nvidia is now ahead of Meta and Tesla. I'm almost positive on both of these lists. This needs to be updated this second list and first list.
+* think Nvidia has moved further up the list
+* a lot further up the list. But basically, you guys can see that because the Nasdaq is only a hundred stocks.
+* they hold a bigger percentage in the Nasac than they do in Es. So that is why these stocks, the tech sector will react more to what the Nasdaq is doing. Then es, okay, if one of these tickers has news and Nasda gives it the move. Sometimes it doesn't usually wait for. Yes, it'll still make the move, regardless
+* what you do want to see when you're looking at both features is for both of your features to be in sync. Okay, so what I mean by this is, if the Nasda is moving up. You also want to see Es moving moving up, or vice versa.
+* Okay.
+* these are going to be your leading indicators. Okay? First, it's price action. And then it's futures. Futures are going to be your leading indicators to anything. You trade. Okay.
+* outside of the fact that if your ticker you're if you're trading any of these names or any any tech sector name, if the ticker has news and it has volume, it can make the move, regardless of what features are doing. As long as they're they're not moving complete. Opposite of the stock. I have seen some of these tickers move regardless. But if you're trading spx or spy, you need to pay attention to what features are doing. If futures are not giving up the move. You're not going to get the move on Spx spy or Kiku queue.
+* Okay.
+* can everyone hear me? Okay.
+* okay, someone asked, is there difference watching spy? And versus spx. So Spx is not necessarily something to lead the market. Spx is very heavily dependent on what es features does. So if you're not necessarily trading. Spx. I. You don't necessarily need to watch it to trade spy. You just watch es features
+* do so spy spx and es basically have the chart just at different prices. Yes, because they all track the SNP. 500 es is just the leading indicator, and then it's spy and Spx.
+* Okay, Spx is the index spy is the Etf. Es is the future. They all track the S. And P. 500. But yes
+* is going to be the leading indicator. Same thing with Nasac Nasac is the feature. Ndx is the index. Qq. Is the Etf.
+* So when you trade spy or Svx, would you look strictly at Esr. Both.
+* I would look at both because I want both of them to be in sync.
+* But my main first indicator would be, if is es if es gives me the move, most likely I would take Svx and spy. But I want the Nasac to also be moving in sync. I don't want the Nasac to be doing something completely opposite of yes, and meet it to take a trade on spy or Svx. I wouldn't do that
+* any questions on that. So far.
+* everyone good so far on everything we went through before we move into the next section.
+* Alright. Next section we're going to go through is charts and count of 6. Okay.
+* so price action, what is price action? So I mentioned that price action is going to be your leading indicator, price, action trumps everything. Okay, there is no indicator that is going to replace price action for you. Okay, so price action comes first, everything else comes. Second, what is price action? Basically, it just refers to the up and down movement of a stock over a given period of time, depending on what timeframe that you're watching that stock on.
+* Okay?
+* all technical analysis, all chart patterns, chart formations are derived from price action. You need price action. That technical indicator needs the stocks historical price action to be able to chart itself. Which is why all indicators lag. Okay. The only leading indicators are going to be futures. Every other indicator you utilize is not
+* for entry and exits. It's not to tell you when to enter our exit. It is a lagging indicator. It is just a guide. Okay, you use indicators as a guide to support your thesis
+* behind the price action that you see on the stock that you're watching
+* alright.
+* Now depending on the timeframe that you watch a stock on, you could be seeing multiple different things. Someone looking at the one year daily timeframe could be seeing one thing versus someone seeing looking at the one day.
+* one day. 1 min or 2 min timeframe. Okay? So if you'll se see, for example, Netflix, on the one year daily timeframe. It was on a an uptrend versus on that specific day, same same day. This, this, the both of these were taken we were on an overall downtrend.
+* Okay?
+* So, depending on the timeframe you look at will depend on what you see in in features
+* alright
+* charting
+* alright. So when you're charting your support and resistance levels, you always want to utilize the top down approach. Okay, so what this means is you always start with the highest timeframe first and work your way down. Okay, so on, thinkorswim, it starts with a 3 year weekly timeframe, and you work your way down all the way to the 15 min. So I don't chart anything past the 15 min. I always chart up until the 15 min timeframe. And that's it.
+* Okay?
+* So you wanna start with the higher timeframe because it gives you the bigger picture of what the stock is doing.
+* The overall, broader picture of the stock before you work your way down to those intra day levels. Okay? And if you're charting from the 3 year weekly as you work your way down, you shouldn't have to add as many levels. Those levels should continuously hit
+* as a stock makes its way down into those smaller levels.
+* Okay.
+* okay, support and resistance levels. So support is a price level at which demand which means buying pressure is strong enough to stop the price from dropping any further
+* any area where the price of the stock tends to stop falling, which means buyers step in.
+* Okay? So you can see here, stock made a move down. We caught a support level here. Ended up bouncing. Okay.
+* that support level held again and then and broke. This was after hours, anyways, but ended up broken. But this is a 2 touch support here.
+* Okay, resistance is when price, a level at which selling is thought to be strong enough to stop the price from rising any further. It's where Sellers start to step in. You can see the stock makes them move down retests
+* resistance, resistance. Okay?
+* And it held that resistance again into the next day until it finally broke.
+* Okay.
+* alright. So we're going to go ahead and try to stock. So someone give me a stop to chart.
+* Please don't give me a penny stock, because I'm not going to charge that.
+* Nvidia. Okay, we could do Nvidia.
+* Let me remove
+* oops
+* and move up my drawings.
+* Alright. So like, I said, I always start on the 3 year weekly timeframe.
+* Okay?
+* And I work my way down. So right now Nvidia is at all time highs. Okay? So what you want to do is when you open the timeframe that you're watching.
+* You always want to chart the low and high of that timeframe. Okay.
+* so
+* the low here is 108. I was round, up or down, depending on where it's at. So if it's at 10813. I'll just round down to 108.
+* Okay, and then over here. 6, 2849. I'm gonna round this up to 629.
+* You don't have to do this. Just how I am able. I never take the point levels. Anyways, I always round it up to the nearest full dollar level or round it down.
+* Okay. to edit
+* these support and resistance levels. You just right? Click.
+* okay, edit properties. And then you can edit all of it. Here I set my colors to white with a dotted line, and then I make sure you save it as default. So you don't have to keep editing it.
+* Okay.
+* once you set the high and low of the timeframe, you want to start on the left hand side, because that's your historical data, and you're work your way to the right hand side. Okay? So if we look here, we have a little bit of a base here. So I'm gonna zoom in.
+* So we have a little bit of a base here, a little support here on Nvidia, and then you have your resistance to the upside. So I'm going to chart this resistance on Nvidia sitting at around 1 54. And then when you see resistance, you should see support. And I'm gonna try this at
+* 1 16.
+* Okay.
+* bounces. Here. we get a little bit of a break of the resistance. So I'm going to chart this
+* new high at 1 63
+* pulls back creates a new level of support because it doesn't hit back down to this 1 16 level. So I'm going to chart this as well. This is sitting at around 1 35.
+* Okay.
+* bounces off the support. So you want to see the breakup resistance or the breakdown of support breaks out of resistance. So what you're really looking for is, if it breaks the resistance or it breaks the support. Where does that trend end? Bounces, breaks resistance. Where does the trend end? Right here? Okay, so this is around 208
+* rejects. Comes back down.
+* creates a new level of support. Okay.
+* 1, 79.
+* Now we have a new range. Resistance, support. Resistance pulls back, breaks resistance. We have a new resistance.
+* 2, 30
+* pulls back. It pulls back right around to that. 2 8. But we do have a little bit of a wick down here. So I'm going to chart this at around 1, 96 as well. And if I right click this and extend it to the left.
+* it also hits these. So this makes sense. Okay.
+* we get the bounce off of 1 96 breakout of resistance, and then it goes into its all-time highs.
+* Okay?
+* And no, it doesn't go into all time highs. I lied
+* my God! Way far away from all time. Eyes. So it goes into this high at this time. So I'm gonna chart the top of the wic and the base here. So the top of the wic is around 307. I'm gonna also chart the base. This candle at 3, 35, just because the base and the wic have a significant distance in between them. So both of them are going to be levels also. The base of this candle is the top of this wic. So this base makes sense.
+* Okay.
+* we reject to come back down. Where do we find support? Right here at 2 72 comes back up. We find resistance at 302, and then the top of these, Wix here
+* at 3 12.
+* Okay. And we also have something at the top of this Wic. 3, 25,
+* which is the base of this candle.
+* comes down.
+* touches our previous support. Look! This was resistance. Once it breaks out of resistance on the way back down that resistance becomes support.
+* Okay, if it breaks support, that support, then becomes resistance
+* on the way back up. Okay, you can see that it's hitting. So it makes sense the levels we've charted make sense. Come back up. We have a new level here.
+* Okay. rejects. And now we're on a little downtrend. All of these are fine. Here we have a little bit of a level right here. 1, 44,
+* and the rest of these will look fine. Okay. scroll on over. We get an uptrend up trend.
+* Where does the trend end? Right around here? 6, 20 comes back down.
+* I'm sorry for 20. I lied 3, 72, and then the base of this candle, at 3 90 comes back up
+* 4, 40,
+* and then also the base of this candle. At 4 30
+* we do have a level of support here as well at 4. 5.
+* Does that make sense? How I just charted this
+* everyone
+* at some point. You you'll get to the point where you just eyeball it. And sometimes I don't realize that I'm doing that when I'm teaching. So is everyone okay with it? Sorry.
+* Okay. Now, we break out of the resistance here creates a new level of resistance.
+* 4, 81 top of this wic. 503,
+* and then the base of these 2 candles right here, because if I scroll my cursor over so base of this candle. and then right here in the middle.
+* these candles as well. So you kind of just want to scroll your cursor over and make sure that the level. You're charting makes sense all of these in between levels. They are levels. But sometimes you might want to see them on smaller time frames just to get a more in-depth picture. But this makes sense for 60 or 4 61 here.
+* Okay, so all this is charted right here we have a level
+* where we see some consolidation and at the base here
+* and then at the base of the switch here.
+* Okay, then we go into all time highs. And right now. This is fine, for now we do have levels in between here, but I want to see them on a smaller timeframe, because right here on this timeframe. It's a straight shot up. Yeah, I don't see any resistance yet until it hits that top.
+* Does that make sense so far.
+* Now I know this looks messy, but as we work our way down you'll see how clean it looks when you're scalping
+* right here. We missed the level. You can see this little zone.
+* Okay.
+* not that I see Nvidia coming down to these levels anytime soon, but it's good to have them charted in case we get there like a year from now and videos down. You wanna make sure that you have all those levels charted, and you can
+* chart them. So whoop! Let me go through this really quickly. Okay, I should have said this before I went through.
+* This is how I chart when I'm scalping and day trading. Okay, when I'm swing trading. If you guys have followed me on Instagram or on the newsletter or anything. And you see my charts for the week.
+* there's no levels basically on them. I'm looking at the pure chart on the 3 h, 4 h or 3 year, weekly, 4 h and daily time frames, because I want to see overall picture of a stock just my main levels and how big it can move throughout the week
+* when I'm scalping these levels, make sense scalping and day trading. swing, trading. You're going to look at the overall picture.
+* And I clear my, I have multiple like settings. So I clear these ones. And it's just a plain chart that I'm looking at the higher timeframes. Okay? So yes, because when we work our way down, let's say you're trading on the 5 min, where are all your levels?
+* Okay? So there's no levels here. Okay, so you work your way all the way down. And those levels will make sense.
+* Okay, so you do this from the 3 year weekly
+* all the way down to the 15 min 5 B 15 min.
+* Okay? So what I would like everyone to do.
+* This is going to be the homework 4 tomorrow or the end of the weekend by the time you guys are in the discord on Sunday night.
+* because charting is such a big
+* a factor into
+* day trading. Everyone needs to know how to chart properly. So what I would like everyone to do is to finish charting Nvidia
+* all the way down to the 15 min. When you guys get into the discord on Sunday, you'll have to DM, me for access. I want everyone's charts. I want to review everyone's charts, and then I'll send you feedback on your Nvidia chart as well.
+* Okay? So everyone has until Sunday night to chart and video all the way through. I kind of want to see where everyone's charting skills are at, because that'll help me identify where you're at in your trading as well.
+* Alright.
+* everyone good, because there's multiple levels here that we don't have charted, that you'll see on the look daily timeframe and 4 h timeframe.
+* So I'll let you guys gauge that
+* 4 h. Don't stress too much, because 4 HA little bit harder to look at specific levels at so don't stress too much. If you're trying to get into the nitty-gritty and make sure the levels make sense. Don't chart any random levels. Make sure that it's touched at least 2 times on the time frame that you're watching it on. That's a more significant level than just a random one. Touch on. It's a high or a low, unless it's a high or a low.
+* Do we have to round up or down the price levels. You don't have to. If that's not how you trade, you don't have to round them up or down. You don't have to adjust all of them. I'll understand. If I see it properly overall. I'll understand where you meant to chart it, because I don't edit every single level so I'll understand where you kind of wanted to chart it at.
+* Okay.
+* is there a reason on to chart? Only up to the 15 min? Is it because of too much noise. Yeah, one because of too much noise. And then 2. Usually I don't chart anything on the 5, 2, and 1 min timeframes, because I usually chart those throughout the day like. If, for example, a stock creates an intraday level, a 2 touch intraday level, which is throughout that same day. Then I'll consider it a level usually a level that just touches once on the 5
+* or 1 min or 2 min isn't really a significant level, unless it's a high of day or low of day, and usually every morning, which I'll go through my morning routine later. On Sunday I start on the 15 min, so I chart the 15 min every morning, which is why I don't chart it overall, because the 15 min changes a lot. So I don't chart the 15 min or past the 15 min. I'll open it on the 15 min and chart that way.
+* There's too much noise on the 5 min, 2 min and 1 min, because their intraday levels for you to
+* chart every single level that you see on there. So throughout the day. If I see a 2 touch level on the 5, 2 min or 1 min timeframe, then I'll chart that. But outside of that
+* I don't chart anything on those levels
+* you won't need to. You'll see, once you get it charted to the 15 min that it makes sense enough for you not to have to chart, and the 5 and 2 min time frames.
+* Okay.
+* alright. So how many days back do you look at the 15 min? 5 day?
+* So I keep the favorites favorites here. So 5 day, 15 min, 10 day, 30 min, 20 day, 1 h. Sometimes I'll adjust them if I want to see something, but when I'm charting I keep them pretty the same as what it is. The only thing that I have added on mine
+* is the 5 day, 2 min timeframe so if you customize your list down here, you can add whatever time frames that you want, so I'll have the 5 day
+* intraday 5 day, 2 min on mine as well.
+* and that's on there, too.
+* and that's it.
+* I don't like to really watch anything on the one day besides the one day, 1 min, but outside of that I don't even watch the one day 1 min timeframe. I always like to watch everything on at least a 5 day timeframe.
+* Okay. so that's your guys's homework. I want to see. Everyone's by
+* Sunday night. I'll get them reviewed and back to you guys, and honestly, with charting practice speaks perfect. The more that you practice charting the easier it will become.
+* that's just how it works.
+* How important our pre market levels. They are very important. I do pay attention to pre-market levels very heavily. I'll go through my pre-mark like my routine in the morning. Probably on Sunday. I think that's when I go through my daily strategy, but I always open every single chart on the 15 min timeframe, pre-market highs and Pre market lows after hours, highs and after hours lows. And for those of the people that don't know what that means is
+* this dark
+* black area is during market hours. The light, gray, shaded area is after market hours and in the pre market. So before market opens, if you see levels.
+* in that gray, shaded area. Those are significant levels, especially if it's a low. So the pre-market low here would be around 6, 11,
+* 6, 1150, the pre-market high.
+* 6, 25.
+* Okay, these are important. Okay, because those are levels that I will look to enter if it makes sense on the stock.
+* Okay.
+* for example, this Premarket low is really significant. 2 touch pre-market love. Okay? So yes.
+* they are very important. But the pre-market levels I only usually chart on the 15 min. So like I said I was open, and on the 15 min I'll look at it like this, and if there's any levels that I haven't charted, or I see levels that the stock has created. After hours in the pre market.
+* I will add those levels as well.
+* Yeah, you'll DM me the chart on discord once you gain access.
+* But I'll go through it on Sunday. So you guys don't have to worry about that just yet.
+* Everyone good with that
+* alrighty
+* moving right along alright reading candlesticks. So reading candlesticks is just as important as reading charts and chart patterns as they can really help you. Gauge overall direction on the stock price action of the stock, how it could potentially move, based on the candlestick formation and so on and so forth. So it's really important to pay attention to the candlesticks, you see, and how they're forming patterns, so on and so forth. So let's go through some of that.
+* So reading candlesticks.
+* So this is what each candlestick is going to represent. So every candlestick is going to have a high.
+* a low
+* and open and a close. Okay.
+* if
+* the close is higher than the open, that candlestick
+* closes green. if the close is lower than the open.
+* that candlestick closes red. Okay.
+* this signifies, buyers were in control on this time Frame. This signifies sellers were in control on this timeframe. Let's say we're watching, for example, the
+* 5 day 15 min. Okay, so this is
+* 5 day.
+* 15 min. That means that the chart you're watching is the 5 day chart, and each candle
+* represents 15 min worth of price action. Okay?
+* So let's say, in this 15 min this candle opened at a hundred dollars. Okay.
+* okay, that's where the candle opened on that 15 min timeframe.
+* Let's say that buyers pushed this stock
+* all the way up to one 5. So in 15 min the highest point that the stock hit was one 105.
+* Okay.
+* as buyers pushed it up, let's say, in the 15 min Sellers pushed it down all the way to 98, so the lowest point in 15 min that the stock hit was 98,
+* right.
+* The stock ended up closing
+* at 103 buyers ended up winning out on this 15 min and closed the scandal. Close the stock on the 15 min timeframe above where it opened.
+* Hey?
+* Same thing on this side. Okay. we have a high, let's say it opened at 1, 10 or the high was 1 10. It opened at 107
+* closed at 105, and the lowest point it hit was 102 K. That means when this candle, 15 min candle opened, it opened at a hundred 7
+* buyers tried to push it up to 1 10 sellers stepped in, pushed it back down to one. 2 buyers tried to pick it back up. Sellers ended up winning and closed it lower than where it opened candle in that 15 min? Closed Red.
+* Okay, any questions there?
+* Okay. alright.
+* How often do you watch candlesticks like before you trade. What do you mean?
+* I mean, you have to watch your candle 6 with your support levels. I'll go through when I look for entry. But you have to watch both of it, obviously, because if you need to see if the candle is actually breaking and holding above the level of support or resistance that you're watching. So you watch both together because the price action, the candle is going to show you the price. Action.
+* Nope.
+* alright, everyone good. So far
+* we move forward.
+* Okay, let's go ahead and move on.
+* Alright. So this little chart that I have here is a good chart to print out once you get the
+* Powerpoints, because it'll kinda help you identify Bullish versus bearish candlesticks, and so on and so forth. So over here we have your most bullish and most bearish. They're gonna be the candlesticks with minimal wicking. So these are the wicks that we call here. So the minimal wicking. So in this candle you can see that Sellers had control all throughout this candle. Buyers didn't weren't able to step in at all, and the candle close, completely red
+* and similar to here as well. Virus had full control
+* on these 2 candles here. So if you see buyers opened this stock right around here. Sellers tried to push it down. We can see that buyers ended up taking full control. Back up. Stock ended up closing higher than it opened. And you get this wid down here, signifying that there was a sellers there, but overall buyers took control of this stock.
+* and then the rest of them are pretty normal here, these 2, and then your least bearish and least bullish are the opposite of these ones.
+* Okay.
+* over here we have what's called a Doj candle. Okay? So your doj candles, your open and close, is going to be pretty much the same or very similar. You'll usually see these candles on the chart. They're either silver or grey candles. So that's how you'll know that the open and close was similar. Just signifies indecision in the market. Neither buyers or sellers had control of the stock at any given timeframe.
+* so there's no direction at that point.
+* Alrighty.
+* Alright! Next thing we're gonna go through is candlestick patterns. So there's 2 types of kind of patterns that will go through is your candlestick and your chart patterns. First, we're going to go through the candlestick patterns. There's 2 different types of patterns. You have your continuation patterns and you have your reversal patterns. Your continuation is just going to signify a continuation in the current price of the stock, and your reversals are going to signify a reversal.
+* Okay, you can find chart patterns or candlestick patterns on any time frame. The timeframe that you find it on is a timeframe that you play it on. If you find a pattern on the weekly Daily 4 h timeframe those are gonna be your swing Trading day trading patterns if you find it on the hourly day trading, if you find it on the 15 day levels. Those are, gonna be your scalping levels.
+* for those chart patterns.
+* Okay? And I do just want to say, also, there are a ton of patterns out there, whether it's chart patterns or candlestick patterns, they are a ton. These are just ones that I personally think you'll see the most of, or they're easier to catch and easier to identify for newer traders and their high probability setups.
+* So the first ones we have your bullish and bearish engulfing. So your bullish engulfing is basically identified by a short red candle followed by that red candle. You get a big green candle that completely engulfs or encompasses the candle prior to it the direction was down. This is a reversal pattern, so it signifies a redirection to the upside.
+* Okay.
+* then you have your bearish engulfing same thing, but inverse. So you have a big red candle. Okay? Prior to that you have a short green candle. That red candle completely engulfs the previous green candle. And this is in an uptrend. Okay, you'll find it as an uptrend, and it reverses and moves down into a downtrend.
+* Okay.
+* next, we have your Harami patterns. So these ones
+* I don't utilize as much anymore. But they're still very helpful. If you are able to find them. They're kind of the opposite of your bull, and bullish and bearish engulfings as they're inversed. So for a bullish Harami, you find it at the bottom of a downtrend. You see a big red candle. Okay? And after that you see a short green candle. So your red candle actually encompasses the green candle after it, and it signifies a reversal to the uptrend.
+* And the reason why I stopped using these is because it's inverse of the bullish and bearish engulfing, and sometimes I get them confused. So if you struggle with that, just focus on the bullish and bearish and golfing, as I think they're more their higher probability. You see them more often than you see the Harami patterns. Okay.
+* on a bear, Shirami you find at the top of an uptrend. You'll get a small red candle. The previous candle completely engulfs it, and you'll get a potential move to the downside. Okay, now, when I'm showing you guys these patterns obviously in hindsight, they look beautiful. They look good. But you want to make sure that you're playing them in conjunction with what you see in market sentiment. So you wanna make sure that market sentiment is also giving you the move prior to you taking any one of these place.
+* Okay.
+* next, we have your hammer and hanging dance. Now I think these are pretty easy to capture. If you pay attention. Then they're probably like, I think, the
+* the ones that you'll see the most of. So the last 2 that I went through are 2 candlestick patterns. So you need 2 candles for the pattern to actually create itself. These. This one is actually just a one candlestick pattern. So you only need to see one candlestick actually showing you the move for you to be able to take the pattern. So basically, your hanging man is going to be found at the top of an uptrend. It is characterized by a short
+* body with a long lower width.
+* Okay, this usually signifies a reversal to the downside.
+* All right. Your hammer is found at the bottom of a downtrend. Okay? Same shape, though. Okay, it is
+* a short body with a long lower wic here. Okay, so really depend depends on where you find these candles. They all look the same if you find it at the top of an uptrend, signifies a downtrend, and is a hanging man, if you find it at the bottom of a downtrend signifies a reversal to the upside. So these are both reversal candlestick patterns.
+* Okay.
+* any questions on these patterns
+* hanging man is for bullish and and bearish candle.
+* I'm sorry. I don't think I understand the question.
+* Could you clarify what you're asking.
+* please?
+* His hanging man for both bullish and bearish?
+* No, so it's a hanging man. If you find it at the top of an upturn, it signifies bearish momentum to the downside. It's a hammer.
+* If you find it at the bottom of a downtrend. It signifies bullish momentum to the upside. So your hanging man is going to signify
+* bearish momentum. Your
+* hammer is going to signify. Signify bullish momentum.
+* Yes, Rollin, that's true. So he said, it's my understanding that they look the same, but appear at different points in the chart to signal what may come next. Exactly.
+* Yep, they're both the same shaped candle. They look exactly the same, but depending on where you find it is going to depend on what it represents.
+* They're reversal candles. So if you see it signifies a reversal. If if you don't want to clarify it as a hanging man or hammer. If you see this candle, it signifies a reversal to the opposite side.
+* Alright.
+* alright. Next thing we're gonna go through is consolidation periods. So consolidation periods are general areas of indecision. So what you'll usually see is that the stock creates a trend up or down, and then it consolidates in between a level of resistance and support. And there's indecision. It's on a range between that resistance and that support until it finally breaks out of either the resistance or support, and we get either a continuation to the trend, or we get a reversal to the downside.
+* So an example of this
+* we go, Netflix here. This is the 20 day, 1 h timeframe you can see that Netflix was overall on an up trend here. Okay, we pulled back, and then you can see Netflix created a range. It wasn't until it broke to the upside of that range that it created another range, and then when it broke to the downside. We ended up rejecting all the way down. And reversing. And if we look at this on a
+* smaller timeframe, you can see very clearly. Netflix had a clear level of resistance and support.
+* and it was ranging in between that resistance and support. You wait for the breakout
+* to the next level of support.
+* When a stock is in a range like this, depending on what time frame you see the range, you can also play the inside of the range. So the rejection of the resistance or the bounce of the support can also be potential place that you take on a stock that's in a consolidation or in a range
+* any questions on consolidation periods. Usually you'll usually see consolidation periods after significant levels of a significant move up or down, and a consolidation period signifies healthy direction in the stock. You want to see the stock consolidate prior to it, continuing up or down. That's gonna signify that it's healthier, trend up or down instead of it straight shooting up or straight shooting down, as
+* usually those moves are parabolic, and you're not going to get a clean price direction. So whenever I stop,
+* move makes them move up or down, and
+* it consolidates or pulls back and goes into a range that's going to be a stronger move if it continues up.
+* Okay. So we always get to see a pull back or consolidation on a trend up or down, and usually, if you haven't seen it yet don't try to chase, because most likely you will get stuck in that consolidation or pull back. So you always want to wait. If a stock has made a significant move up or down for it to pull back. Oh, my God! This
+* fire truck is just non stop if it pulls back.
+* you want to wait for it to pull back prior to looking for an entry on the position, and we'll go through like entry points and stuff like that. But just keep that in mind.
+* It's really important to wait for the stock to consolidate prior to you entering any positions as you can get stuck in that period of consolidation.
+* Okay.
+* I find it hard to know what to do on these like Wednesday, where it looks like it's breaking down. But then, does it any tips or Tuesday to the upside? I assume it's breaking out of the range and trade the wrong direction. Let me go. Take a look. Are you talking about Spx?
+* Oh.
+* this chart on Netflix?
+* Yeah. So the one this is on the 15 min timeframe. So it's it's gonna show you a little, a little bit of a different. But if you see this what you usually what I usually wait for is a confirmation candle. So, for example, I'll now go through this more on Sunday. But really, what I like to wait for is a confirmation candle. So let's say, we're looking over here. We're looking for the break of 4 45. Okay, this candle, right? Here is your breakout candle. This candle is your confirmation candle. You can enter on that candle.
+* pulls back, never breaks back below or holds below 44, 45 pulls back, and then continues up
+* this right here. You never get a Confirmation candle. You don't get a hold above this level. Okay? Versus, let's say, even here you don't get a confirmation candle versus here. This is your confirmation candle for entry. This is your breakout straight shot down.
+* So that's usually how I avoid getting faked out. Is I always wait for a confirmation candle. Now, sometimes you still get faked out. That's just the market overall. Those are just days that the market aren't is not giving you good price action, but overall. I always wait for a confirmation candle. This will help you. Avoid getting faked out as much
+* on what timeframe for confirmation it depends what you're trading. If you're day trading or swing, trading or a scalping usually on scalping, I look for a 2 min confirmation candle cause that's where I look to enter. If I'm day trading, it'll depend on what timeframe I find to play on. Maybe the 5, maybe the 15 min, maybe even the 30 min. But if I'm scalping it, I always wait for a confirmation candle on the 2 min timeframe before I look for entry.
+* Okay.
+* any other questions on that
+* moving right along?
+* Alright. So that's tomorrow's section.
+* Alright, this is all. Tomorrow section you want to today. Section pretty fast. So I'm gonna go through fundamentals. Gonna skip around just a little bit. I don't wanna get into tomorrow section, but we'll go through a little bit of fundamentals, and then I'll give you guys the rest of your Friday back. Usually the fourth first session is pretty short. Tomorrow. Session is pretty jammed, packed so that one will be really important to pay attention to. But for now we'll do something fun fundamentals, because I think that's
+* easier. Tomorrow we'll go into the technicals, order, flow and bookmap so fundamental analysis. So
+* there's 2 types of analysis that you can do when you're trading. You have your technical analysis, which most of us are very familiar with, and then you have your fundamental analysis. Now, a lot of people try to overlook how important fundamental analysis can be to a trader as well. And it's really important to understand fundamentals of a stock, even if you're scalping it.
+* So basically, when you're looking at fundamentals, you're looking off. You're looking at external events, influences, financial statements, industry trends, sector trends sector rotations. So you're utilizing more revenue earnings, future growth product releases how that stock falls in its sector, and so on and so forth. This is all falls under the umbrella of fundamental analysis.
+* You have your quantitative analysis, and you have your qualitative fundamental analysis. Your quantitative is, gonna be your earnings, your revenue, your qualitative is, gonna be how it falls in its sector, product releases, and so on and so forth.
+* Catalyst. So a catalyst is any information that it can influence the stocks price it can directly it can pertain directly to the company, the industry, or the
+* whole world.
+* I, whenever I build my daily watch list, and I will show you guys if you have not seen it.
+* This is what it looks like.
+* Every stock that I put on my daily watch list always has news. Okay, I always make sure that I'm watching the stocks that have news. First.
+* as those are stocks that going to have the volume that are going to have the momentum to be able to make the move. They're more they're more higher, likely to have the volume behind it to clear past certain levels of support and resistance, so that you're able to get clean breakouts or bounces and be able to take clean scalps or day trades on the stock.
+* Okay, soft catalyst is gonna be an indirect relationship. Government regulations, the fed speaking global events. And then your hard catalyst is gonna refer directly to the stock. For example, if Tesla and decreases their prices of their cars, Netflix, increasing subscriptions, earnings so on and so forth. These are all really important factors to pay attention to when you are looking to trade a stock.
+* Okay?
+* So these are, I linked some helpful resources. Okay? So you have Ben Zinga. You have seeking alpha, which I don't use that often anymore. This market watch one, the really, the ones that I use the most right now are going to be these bottom 4. Okay, the first one that I always go to is
+* your
+* market beat. So this is, gonna be your analyst ratings. It's really important to pay attention to. Price. Target increases and decreases. Usually, when a stock has a price target increase or decrease, or an upgrade or downgrade, it tends to move throughout the day because it has volume.
+* So what I'll usually look for is the company. So if I see any stocks that I trade on a day to day basis. And this, this site is free. By the way, all of these sites that I'm gonna show you guys are free. If I see any stocks on my watch list. So I just like scroll here and look at the ticker. And let's see, Netflix, okay. Netflix is on my overall watch list.
+* I see that Netflix had a price target increase on it by citigroup. You want to pay attention to the bank. If it's a bigger bank has more impact.
+* Citigroup Needham, morgan, Stanley, Jp. Morgan. These are going to be the big banks. They're especially Morgan, St. Stanley and Goldman Sachs need him. Those are the top 3 that I see always always influence the Stocks price movement.
+* You want to see if the target was raised. It was downgraded. It was upgraded, it was upgraded. It's good. If it was downgraded, it's bad price. Target increases. Good price. Target decrease is bad. Okay?
+* And then the target that they have on it, and then the rating, okay.
+* alright.
+* Your outperform overweight and by ratings are going to be your best. Obviously sell
+* underweight are going to be not as great. hey?
+* Outperform means that it outperforms the other stocks in a sector. Okay.
+* buy means that they're looking to buy it. If it downgrades from buy to neutral. They stop buying it from buy to sell, so on and so forth. You kind of add it. It makes sense really simple to understand, so you won't have to really do too much digging. But I always pay attention to this first.
+* then I will go to us. Econo day. This is really important. We actually post this candle calendar every morning and every Sunday you wanna pay attention to what's going on throughout the day. If we has. If we have news during market open. If the fed is speaking, it's really important to pay attention to this calendar, and then, if you don't like this calendar for X factory.com
+* whoops
+* has a calendar as well. Both of these have tags, so if it's red, it usually signifies it's a high impact. News. Okay?
+* And it can be market moving.
+* Then we have Cnbc. It seems really simple. But I love Cnbc. I go into their investing. I think it's I use this on my my phone. I'll look at what's moving. They have the top 5 stocks that moved in the pre market. They have what's going on in the overall market. They have economic data that comes out. It's all here. So I love watch. I love looking at Cnbc. As well. I don't pay for any of these.
+* Okay, so they're all free.
+* And then the news on the Thinkorswim platform. So sometimes I'll go through the stock that I'm watching, or my watch list, and I'll go through live news here. So if you look here, it says live news, and any news that comes out on the ticker will come right here as well, and you can click on it, and it'll open the article.
+* hey?
+* So that's how I find news on my stocks. It's these top 4 down here.
+* Okay.
+* any questions on that
+*  Unknown Speaker * Unknown Speaker
+* 02:22:57
+* now, is there any questions on anything we've gone through so far today
+*  Masi * Masi
+* 02:23:50
+* in terms of price action. Do you use a paid service like dash trader? I use bookmap, which I'll go through tomorrow.
+* That's the only paid service right now that I use this bookmap.
+* I had to step out when you were going over the support and resistance levels. How far do you go back as far as the daily. How many days are you looking at or yearly? So I always go to the 3 year weekly timeframe.
+* and I start on the 3 year weekly timeframe.
+* and I work my way all the way down. This is not charted, so ignore this. I work my way all the way down to the 15 min. So I start on the three-year weekly and work my way down.
+* Do you think you have a natural bias, short or long. Of course we wanna be able to go both ways, but I personally tend to always look for the short working on improving that I used to have a natural bias of going long. Then I had one of going short. Now I find kind of a balance, and I just wait for the market to give me direction, which is why I always set a plan to both sides. That's kind of how I keep myself from
+* having a bias to one side or the other, sometimes depending on what market is showing me. It just obviously is showing that more buyers are aggressive, more sellers are aggressive, and I'll like one side more than the other. But I always have a plan for both sides of the market in case anything happens, and then I'll just take it, based on what I see in the market on that day. That keeps me from only having a bias to one side.
+* and that goes for any ticker that I trade. I always make sure that I have a play to both sides of that ticker
+* charting question as well. Can you reiterate from the weekly to the 15 min 15 min. You choose the support of resistance lines by seeing at least 2 points 2 touches at that point. Is that right? Yes, you always want to see at least 2 touches, unless it's a high of day, high of that chart frame or low, of that charm for chart frame.
+* You want to see at least 2 touches, and usually what I'll do is if I chart chart the level, I'll just kind of run my cursor over to the right and make sure that it's touched multiple times, and that the level makes sense. And that's how I confirm that it is a significant level
+* for the weekly timeframe. What does the 3 y. Mean? It means 3 years.
+* So let me just run down that since I don't think I did. If you look at the favorite timeframe, or whatever timeframe you're looking at. The first number is the number of days. So the 1, 3 year. So these 2 are yearly so 3 year weekly. So that means it's a 3 year chart timeframe, and each candle is a week's worth of price action one year, one day
+* is going to give you a year's worth of price action. So what happened over the past year and each candle is going to be a day's worth of price, action, and so on and so forth. 10 day, 30 min overall past 10 days. Each candle represents 30 min of price action.
+* Do you treat all levels the same, or some more significant to you as you trade? So highs of days, lows of days, are going to be the most significant ones all time highs and all time lows. That's why I always chart the high and low of the timeframes.
+* Any timeframe that has touched multiple times on multiple time frames. Sometimes people color code their time frames to identify, you know which ones are higher timeframe levels, what which ones are lower timeframe for me it's always going to be highs of days, lows of days. And then any psych level. So psychological levels are going to be a whole 100 point levels, 50 point levels or 10 point levels on depending on the stock that you're trading. So for example, Spx.
+* any 100.50 point levels are going to be my main magnet levels. If you're trading a stock like Nvidia, every 10 points, 50 points. Those are going to be significant? Psychological levels as well.
+* Alright, guys, is there any other questions?
+* Alright. So I know we kind of moved straight through in this class. Usually I'll do a break. But I know the first class is always pretty simple to go through. And all the high level, basic stuff. So that's why, I just power through it. Tomorrow.
+* So for today's homework, I want you guys to work on that charting in video, I'll get that from you guys. On Sunday night tomorrow we'll go through technicals technical indicators. We'll go through different orders. We'll go through Level 2 and bookmap.
+* And then on Sunday we'll go through all of my strategies and all of the criteria. They'll look for for entry and exit levels and how to build a strategy and risk management
+* on Sunday, like, I said, because I know I'll get an email asking for this. All of the Powerpoints and Recordings will be in the discord, and everyone will have access to them on Sunday night when you get access to the discord. So you won't be able to see the Powerpoints or Recordings prior to Sunday night. But you guys will get all the access to them on that at that time.
+* If you have any questions after tonight that we went through that you want to ask, feel free to email me. And yeah, I will send out the link for tomorrow and Sunday session right after I get off this call, and I hope everyone enjoys the rest of their Friday night, and I will see you guys tomorrow at 11 Am.
+* Have a good night.
+Next Steps
+1. Finish charting Nvidia all the way down to the 15 min by the end of the weekend. DM Masi your charts in the discord on Sunday night for review and feedback.

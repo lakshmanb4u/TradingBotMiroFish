@@ -1,0 +1,554 @@
+﻿Skip to Main Content
+Accessibility Overview
+ Zoom Logo 
+
+January Options Course Session 3- Shared screen with speaker view
+Jan 28, 2024 10:55 AM
+Download (4 files)
+Video Player is loading.
+00:00:00/03:02:16
+Speed
+Summary and smart chapters
+Meeting coach
+Summary
+Masi discussed trend trading strategies and their application in swing and day trading. He emphasized the importance of technical analysis to identify market momentum and trends. Masi also explained range trading strategies, the concept of breakout trading, and the significance of support and resistance levels. He shared his experience with a losing trade on Netflix and a profitable trade on STX puts. He also discussed recent trading strategies and experiences, breakout trading out of support or resistance levels, and the difference between Spx and Spy. Masi also explained how to adjust target lines and decide on profit taking based on the premium chart. He discussed strategies for swing trading, highlighting the importance of patterns, support and resistance levels, and trend line breaks. Masi also touched on day trading strategies, the use of patterns and key levels of support and resistance, and the significance of open interest and volume.
+Masi discussed trend trading strategies and their application in swing and day trading. He emphasized the importance of technical analysis to identify market momentum and trends. Masi also explained range trading strategies, the concept of breakout trading, and the significance of support and resistance levels. He shared his experience with a losing trade on Netflix and a profitable trade on STX puts. He also discussed recent trading strategies and experiences, breakout trading out of support or resistance levels, and the difference between Spx and Spy. Masi also explained how to adjust target lines and decide on profit taking based on the premium chart. He discussed strategies for swing trading, highlighting the importance of patterns, support and resistance levels, and trend line breaks. Masi also touched on day trading strategies, the use of patterns and key levels of support and resistance, and the significance of open interest and volume.
+Smart Chapters
+Playing...
+From 00:00
+Quiet moment
+From 19:11
+Trend Trading Concept and Application Explained
+From 30:01
+Range and Breakout Trading Strategies
+From 41:43
+Netflix Trade Mistakes and STX Profits
+From 48:05
+Trading Strategies and Experiences Shared by Masi
+From 56:14
+SPX vs Spy: Volatility and Trading Recommendations
+From 01:04:12
+Trading Strategies and Preferences
+From 01:19:32
+Target Lines and Profit Taking Explanation
+From 01:30:43
+Swing Trading Strategies With Masi
+From 01:40:29
+Swing Trading Strategies and Earnings Impacts
+From 01:48:32
+Patterns, Support, Resistance, and Volume Strategy in Day Trading
+From 01:57:00
+Open Interest and Volume in Stock Trading
+Quiet moment
+Audio Transcript
+Chat Messages
+*  Masi * Masi
+* 00:19:11
+* Are you guys? Good morning. Happy Saturday. So let's get started on today.
+* Alright, let's
+* see
+* alright before we go into the next section for today. Does anyone have any questions on any of the stuff we've gone through so far?
+* Alright, someone asked. For our homework. Did you want a screenshot of a certain timeframe or multiple timeframes. So I would like the 3 h. So let me just share my screen. So I didn't show you guys.
+* so you can send me a screenshot of the 3 h daily, and then 30 min and 15 min. That should be good enough to see where your charting is at. So just those 4 timeframes, 3 h daily, 30 min and 15 min.
+* Okay.
+* alright. So let's go ahead and get into the next section. So we're gonna go through obviously, trading strategies. The different strategies you can implement. I'll go through some of the trades that I've taken recently. We'll go through risk management the psychology of trading. And what type of account to break down, and then how to
+* size in and out of your accounts as well.
+* Alright. So there's a couple of different trading strategies that you can implement. Actually, there's multiple different ones that you could implement is, these are the ones that we're gonna be focusing on solely. So the first one we have here.
+* Okay, so the first one we have here is trend trading. So usually this relies on technical analysis to identify the overall market momentum, the trend of the market, and you can either. It's not just I used by swing traders so you can use it as a day trader, as a scalper. I will say that right now this is my most used strategy. I feel like this is the highest probability strategy, because market tends to drop around within the first
+* hour to 2 h of market open, and we've been getting a lot of midday moves around noon to 10'clock, and usually market creates some type of trend or
+* trend line, and you can catch a trend line break or trendline bounce on the market. And usually it looks something like this.
+* so you'll get a swing low. Okay, so this is the swing low. Here. First touch stop, bounces up, continues to touch the trend line. The more touches you get to that trend line, the higher probability setup it will be. You need at least a 2 touch trend line for it to actually count as a trend line break, so you can't enter. You can't take this as a trend line and then enter on this break. It wouldn't be a trend line break, so you need at least a 2 touch
+* on the trend line for you to be able to take the trend line. Break up or down.
+* Okay, and I'm going to go through an example of this
+* that I took
+* this week.
+* So we go to.
+* So I took this play Friday.
+* And there's actually 2 examples just in this scenario here. So the first one I did miss. So
+* I'm gonna actually add
+* my studies, too. So you guys can see alright. So
+* we have.
+* and a trend line can go from it could be an intra day trend line which formed in that day. It can start on a previous day. It could be a 30 min, Trendline. It could be a daily trend line depending on the timeframe. That you find the trend line is the the is how you would play it. So a higher timeframe swing day trade, lower entry timeframes, you can day trade or scalp it. So for this one, specifically, I scalped it. The swing low was the previous day here.
+* So if we look so, there's 2 trend lines here, so we have a higher trend line here. So we have 1, 2, 3 touch trend line. Okay? And then in that trend line we have another one that happened within 2 days. This is the swing low here, that third touch, 2, 3,
+* 4, touch on that fifth touch, that trend line broke, and this was a play I took on Spx, and if we just review my entry, I think was at 12
+* I believe it was at 12, so 1230 was my entry on this place, so if we zoom in.
+* So I showed you guys the overall trend, you wait for the breakout candle. So if you look here, this is your breakout candle here.
+* This is the 1230 candle that I entered. Spx puts on the targets of 48 95. These are the targets that I had 48, 90, and then my final target. At 48 85 on Spx. I scaled out at 1236, at 1238, and then my final exit. I only had 10 left at 1 47 on this candle right over here.
+* Okay, so if I just mark these for you. So this was my entry candle. Okay, I exited here
+* here and here. Okay. So when I exited here, I was out about 70%.
+* I exited another 20% here, and then I only had my runners at 10% at my final exit. Okay.
+* premium on this play went over 150 on the final exit right here it was at 100. So that like 120, okay, because it was a clean drop, 0 dte middle of the day. We had high volatility on the premiums.
+* Alright.
+* actually think this might have been right here. But I'll double check my entrance. Is either this one or this one where I did a 20.
+* Okay.
+* so it's a clean trend line break. Now, if we look over here similar things. So if you look the stock.
+* okay, we get a trend line up.
+* Okay, right here. We also have a trend line to the upside. So it's holding this downside Trendline and holding this upside trend line. So we're getting a squeeze at this point. So it's kind of like a symmetrical triangle.
+* If you look here, it's a very like weird looking, symmetrical triangle, but overall it's squeezing here we have an upper trend line. We have an O lower trend line, so it's gonna break out to one side or the other. You can see here ends up, breaking up to the upside. We get the Ema cross here. This candle would be your entry candle straight shot up. Your targets would be 4,900, and then that 4903.
+* Okay.
+* So 2 trend line breaks within one day on Spx, both high probability setups
+* on this Trendline break if we go ahead and look at es
+* whoops. Yes, for squeezing
+* over here. Okay, so this is was, this was what us was doing as es broke the trend line to the upside or the squeeze the upside. Spx also broke straight shot up.
+* Okay. so es would be your confirmation
+* alright. So that is an example of a trend line. Break
+* any questions on that.
+* Now. You can also find trend lines on higher time frames.
+* I have posted some, some of them sometimes. Well.
+* so if we go like to the daily here, we go on. Tesla. Okay.
+* thank you.
+* Okay. We have a swing, low oops. It's not my going tool. Where did they go?
+* Where am I, and try and talk about my whizzing? My mind?
+* This thing? Oh, it's Ariana. Okay, so this is the swing low. Here.
+* one touch, 2. Touch. This is a clean touch on the trend line here, and on that
+* fourth touch you get the Ema Cross you could potentially swing this play down, holds all the way down into its earnings at earnings, tests. Look down even more, but you would set profit targets. And this was a clean trend line swing.
+* Okay?
+* And you can see on this one here when we do break. So what you'll see sometimes when a trend line breaks is one of 2 things happen. It could be a clean break like we saw an Spx straight shot down, or if it's a higher level trend line, what you'll get is a trend line retest. So if you enter on this candle, your stop loss will always be the trend line, because what can happen is the stock will break, pull back, retest the trend line and continue up. This is gonna be a higher probability setup.
+* Okay? So you can also wait for the retest of the trend line and then enter on the rejection of the retest or you could take the breakout, the problem with waiting on the rejection of the retest depending on the stock that you're trading with the swing trade. It might work out, but with a scalp. Sometimes it breaks straight through, and it does not pull back and retest the trend line. So just be mindful of that when you are looking to take a
+* trend line break. Always have your trend line as your stop loss. It's better to just enter at that point and just keep your stop loss at the trend line.
+* Any questions on trend lines?
+* Someone asked you ever add on retest. I never add ever. I just enter. I don't add, on my positions I scale out, but I never scale in
+* any other questions
+* on tremendous
+* okay, alright. The next type of strategy we have is range trading. So I will say before I just go through all of this, this one and this one are the ones that I implement the most. I don't usually implement this or reversal trading, but I'll still go through it because some people like taking those types of traits.
+* So range trading is usually when the stock is consolidating, you enter at the balance of support or the rejection of resistance, and you just trade the range as long as it stays in that range depending on where you find the range is will depend on how you trade it. You can scalp it, or day trade, or even swing trade it. So if we go ahead and take a look
+* here, this is a range and
+* you have a resistance. You have a support. Okay, I would wait to see at least one touch.
+* 2 touch is gonna make it higher probability or higher significant range, but at least 2 touches on one side of the range, so either to touch, support, or to touch resistance. Before I would consider that significant range, you can take the rejection of this resistance. The rejection of this resistance or the balance of this support.
+* Okay.
+* now, I think we had a range.
+* See? On Svx.
+* meaning, maybe we did not.
+* Hmm. yeah. Range trading. Usually you're gonna find it on like higher time frames
+* with an intraday range. Sometimes it's hard to get the balance. She'll get a really quick scout. But usually I've seen range trades work better on higher timeframes, 30 min hourly daily time frames where you can potentially day traders when treated. But
+* for example, this actually is not a bad example here. So if we look here. this is Sbx's all-time high. So the 49 3.
+* So if you look here, this is the top, and this is the bottom. Okay.
+* alright. So if you look.
+* this is the resistance touched once support
+* support. So you get your 2 touch on the support. You could take the rejection of resistance.
+* Okay.
+* so this would be considered a potential range trade.
+* This also is a double bottom here, and a double top here, so you can even take the bounce here at support.
+* Any questions on that.
+* So we could continue to monitor monitor this range for treats. Yeah, honestly, this I mean, it's still in the range. Yes. So I think that's what you're asking. So as long as it stays in the range, you can continue to trade the range, or you can wait for the breakout, either to the upside of that range or to the downside of that range and take that break, too, because this is a significant range that it's in right now on the hourly timeframe. So either the break of support or the break of resistance. Both are 2.
+* Touch. Will be a good trade, or you can continue to trade it while it's in the range. So yes.
+* Okay, everyone good.
+* In your opinion. How well does rain trading work on lower timeframes? 5 or 2 min? They do work well, you can still catch ranges on the intra day timeframes as well. You just have to be quicker with your trades. They're going to be scout trades from one support to the resistance, and so on, and so forth, usually on an intricate timeframe. I don't like to take on a range
+* trade. I will just wait for the range to break out for me personally, that I consider that choppy if it's an intra day range, so I would just wait for the range to break out. That's a higher probability setup, if it especially if the range on both sides has touched at least 2 sides similar to this. If this was on the 5 min or 2 min timeframe, this is a high probability setup. I would wait for it to either break out of the top or break out of the bottom of that range.
+* That's gonna give you a more significant play and then playing in between the range, you can still play in between. The range is just not gonna be as significant of a move, whereas if it breaks the upside or downside of that range, you're gonna get a bigger percentage gain on your premium.
+* because usually when it does break out, it is a clean breakout, and it'll move all the way.
+* So it's always on an intraday timeframe. I would wait for it to break out. For range trading overall. Higher timeframes are gonna work best.
+* Alright.
+* No problem. Let's go ahead and continue on alright. The next one we have is gonna be breakout trading. So a lot of my trades, I will say my main strategy is breakout trading.
+* So breakout trading relies heavily on volume overall in the market overall. In that stock you can trade it day trade swing or scalpers, because the breakout can happen on any time. Frame again. The strategy that you implement, whether it's day trade, swing trade or a scalp will be dependent on the timeframe that you watch it. So that's really key on any strategy that you utilize. You're really dependent on support and resistance levels here.
+* and volume as well. The more volume there is, the better the breakout, the cleaner the breakout, and you're less likely to get faked out of that play. Okay? So
+* alright. So if we go through a little breakout. So here we go. This is an example.
+* You have your support. You have your resistance here. It's multiple touches. You wait for the breakout of support or the breakout of resistance. 90% of the time you will get and not 90%. But most of the time you'll get a retest. This resistance level is your stop loss.
+* Okay? And the stock continues up. You can either wait for the recess. Take the bounce here, or just take the bounce out of the the breakout.
+* Okay? Or take the play out of the breakout
+* alright, and let's go through an example of this.
+* Alright. So
+* traits I took this week
+* this week kind of sucked.
+* Let me actually okay. So I took Netflix here and actually took a loss. So I'm gonna go through that Netflix play with you guys. There was a lot of issues on this play. But I'll go through with you guys
+* breathing for that. So
+* let's open up Netflix.
+* Alright. So Netflix, on the day that I had taken this, was, had reported earnings. Okay? So I'm actually going to open up
+* Nasak. And yes for you guys. So you can see as well
+* that they were doing
+* okay. So this was
+* 1, 24,
+* 2 min timeframe on features. I always watch features on the 5 min, so features for me is always open on the 5 min. Everything else is open on the 2 min, and if I'm in a tree and then monitor it on the 5 min, which I'll go through in a second. But for now let's just
+* okay.
+* And then
+*  Unknown Speaker * Unknown Speaker
+* 00:43:29
+* so 24,
+*  Masi * Masi
+* 00:43:35
+* alright.
+* So initially, my play on Netflix was above 5 46, which targets of 5, 58 and 5 60. I missed this play on Netflix. This was right after its earnings. The next day I missed this play on Netflix, so I got a little bit of a fomo feel. So I waited for a pull back, and I was looking for entry above 5 60. So I entered this play. Let me just double check when I entered it.
+* I entered this play at 10 Am. On. My exit was 1006. Okay, so
+* enter display right when this candle broke out of 5 60. Now
+* the problem is one. I didn't wait for a confirmation candle 2. It was right at 10 Am. On. At 10 Am. On this day we had news coming out, so the reason why?
+* the reason why you always want to wait for a confirmation candle is, or wait for 10 Am. When we have news is that at 10 Am. Sometimes the market momentum can shift, depending on what that news comes out with. So at 10 Am. We had news. I didn't really pay attention to it, and then I entered on this 10 Am. Candle didn't wait for a confirmation candle. You go ahead and look at Nasak and es here this was es at 10 Am. Yes, right here it was actually trending. Is this 1 24?
+* Yeah, it was trending below. It's vwap level, as you guys can see. But Nasdaq was actually trending above its vwap level right here. So the problem is that I didn't wait one for Nasdaq to clear this pre-market high here because it didn't clear until 1015.
+* Am I looking at the right day. Okay, so Nasdaq didn't clear until 1015. Now Nasdaq was pushing the semiconductor sector on this day was pushing. So I held the Nasdaq up.
+* But Netflix just didn't have the momentum to be able to make the move. So, even though not Nazak ended up making a slight move up. Netflix ended up rejecting. Es wasn't doing anything. At this point we started to get a little bit of a move up on es as well. But Netflix just did not have the momentum. I ended up getting getting faked out on display. My stop was pretty tight. At 5 58 I exited display. I think it was at 1006. Once this candle held
+* below my stop, so this I got faked out on
+* and Netflix didn't have the momentum to be able to make the move up. So it ended up falling and then chopping around for the rest of the day. So
+* this wasn't a bad setup overall. There's just little things I could have waited for to have made this a higher probability setup and save myself from getting faked out on this play.
+* Okay?
+* So let me go through a trade that I was profitable on.
+* This will be
+* okay. So 122 I took Stx puts for the gap fill.
+* So let's go ahead and take a look.
+* This was on Monday, I believe.
+* Okay.
+* So Svx had a gap to fill
+* on
+* 1, 22
+* had gapped up from 48, 40
+* to 48, 53,
+* and so I was looking for the gap. Fill to the downside
+* on this trade. Now let me see.
+* 1030, 32,
+* 1047,
+* Umhm.
+* Just so. That makes sense.
+* Because we were on voice. I don't remember exactly after we look at this play again, because
+* I don't know.
+* I have to look through my notes. I think I took a trendline break here. It must have been this trend line break because entered at 1030.
+* Yeah, I'm I'm almost positive I took
+* this trend break on Svx like this
+* because
+* the gap fell didn't start until 40 53. Yes, so I took the trend line. Break here on Spx.
+* So this is not a good breakout rate. I mean, it is a breakout for the trend line. I entered at 1030 targets of 48, 53, and then 48 50 first target hit pulled back, and then we ended up getting the second target hit as well. Both targets on Scx. Hit ended up editing final at 1047. Once it hit 48 50 but this was a trend line break not a breakout
+* the breakouts this week. I don't. I didn't do well on the breakouts cause I took. I think my win rate this week was like a 55, maybe 60. I was green on the week, just due to my Friday play, because it was 150% on that play. But
+* yeah, it wasn't. It wasn't the cleanest week. Okay, let's go back into 1, 19.
+* Okay, so on 1 19, I entered Spx calls. So let's go through that. And I'm gonna do this like this. So we just look at Spx. And yes, for now.
+* And so
+* if we go into January nineteenth. So this is the following week at this point
+* or the previous week.
+* Alright. So so I was looking at 4,800. Now this is when you start to feel a little bit of Fomo because
+* this was a clean day all day, Mark Enda making a really clean move. So
+* I entered. Spx calls at 1111 4,800 calls and exited them at 1125. So let's go ahead and take a look at what's going on. So
+* hmm!
+* There's a summer day.
+* Oh, I tipped. Let me come back to these entries because I have to go look at my trade. Trader sync, where I actually write down all my notes cause
+* in the chat. It's a little whoops. It's a little hard to go through in the chat. So
+* I'll come back to my examples for you guys, for now that's the breakout trading out of the you could take it out of a supportive resistance level. You could take it out of the range. You can take it out for a gap, fill. Mostly breakout traits are gonna happen out of a support or resistance level, the more touches to that support and resistance level, the more volume you will need for the breakout, the more significant the play will be.
+* Could you talk more about how you'll be including trade opportunities you are focused on in the discord, ie. Before you trade. So I went through this yesterday. The full discord breakdown we live trade. Will announce on Sunday the days that we live. Trade. I if I'm on voice I call out all the trades. Sam types out my trades. If I'm not on voice, I type out the trades I take
+* and the discord, and they we all have our own trading ideas here in the morning that we post
+* and Sam posts his at night.
+* So you guys have multiple opportunities to take a look at what we're watching.
+* Alright. And then that last thing that the last type of training is gonna be reversal trading. So you take you're looking for this one I don't like really at all. II don't ever really implement this because what you're trying to kind of do is find the top or bottom of a trend. And in that
+* specific scenario you're trying to fight the trend, and you'd never want to fight the trend of the market. The trend is your friend. So you always wanna move in the direction that the market is moving. So reusable trading for me is just trying to fight, fight the trend, and I don't think it's the highest probability strategy to implement as a day traders. But you're pretty much trying to identify when the trend ends find significant levels of support or resistance with the stock of potentially bounce or reject. So these are going to be
+* going to be your all time. High, your high level, your higher level timeframe. So if it's a daily, higher, daily, low or hourly, higher, hourly low, or all time, high, all time low. These are levels that you're gonna see potential resistance or rejection. For example, we saw an Spx.
+* You could have taken a rejection play or a bounce play for the reversal, but overall
+* there, these 3, I think, are higher probability setups. And then to implement this, but I always like to go over. Just so people can see so pretty much. You're trying to find the reversal in the trend. So
+* I don't have really an example that I've taken on this because I don't usually but if we look here, this is kind of an example on Spx. So
+* basically on this day, Spx ended up filling. So it had a gap to fill. Here down ended up filling the gap all the way down, and, as you can see, the minute it filled the gap. We ended up getting the bounce back up and a clean break up
+* on this specific play instead of taking the reversal. I wouldn't consider this a reversal. What I would consider this is a oops. No
+* trend line. Break 1, 2, 3,
+* it breaks the trend line.
+* You can take the break out of the trend line. Okay, that to me, wi within this play, even though you could catch the reversal on the bounce, I would consider this a Trendline break. You get the em a cross.
+* 1, 2, 3 touch.
+* and the breakout to the upside.
+* So it's really depending on how you look at the play will depend on what type of strategy you're implementing. So someone could have looked at this as a reversal trade. Another person could have looked at this at the as a trend line break.
+* Okay, so this is a lot of what I've been seeing with Spx recently, specifically, is trend line breaks. That's you're gonna have the highest probability set up some trend line breaks with spx and futures. Because, like, I said, within the first hour, market tends to be sometimes choppy range bound unless you have, like a gap bill or a wick fill on Spx or Spi.
+* Okay.
+* any questions on that so far?
+* Why do you prefer Spx over spy. I noticed a lot of people complain about Spx spreads. So when I was trading in 2,01920 20, before all the stock split. I used to trade Tesla and Amazon that were very high volatility.
+* fast-moving stocks. So I was always used to stocks that were higher volatility, bigger moves. I was never used to trading Amd. Apple all of those full moving stocks, or even spy.
+* So when they all split the volatility drops we were, and getting at the moves. And that's when I started trading, Spx, because I was used to the volatility. Now, if you're not used to that.
+* Don't trade, Spx. It's better for you to trade spy, start out with spy, and then slowly move your way to Spx. If you jump right into Spx. 90% of time. People end up hating Spx because they don't understand the volatility. They're not used to the volatility. They're not used to. How the premiums move, or or how much they can take on a loss on Spx. And then they say, Oh, I hate Spx! It sucks. I don't know why anyone trades it, because
+* you're not understanding the risk that comes in with it. And you're not managing that risk properly. So I always tell all of my students or anyone new. That to trading is to start out with spy. It's lower volatility easier to trade for newer traders. You're not risking as much contracts are cheaper.
+* and spy is sometimes more liquid and has more volume, obviously, than Spx. There's no volume on Spx, because there's no shares traded. So you're not even able to see volume on Spx. You have to use volume through spy and Es to identify it. So
+* I always recommend people to start trading spy, but because I'm used to that level of volatility. And how it moves. Spx moves in 5 10 point increments it has gap fills and become very used to taking gap. Fill trades. So there's a lot of reasons why I trade Spx versus 5. But those are kind of my main. My main reasoning behind is because I've been used to trading stocks that move in bigger increments.
+* I don't like trade trading stocks that move in 50 cent increments. II that's price action that I'm I'm not unfamiliar with. But I just don't like I wanted to move fast quickly. And some people aren't used to that. If you're not used to that, you're not gonna like it. So it's better for you to trade or start off trading Spx.
+* and then move your way into S, or chat off, saying, Spy, and move your way into Spx. A lot of people. When I trade spy. The people that have are in my discord, that have smaller accounts, or just less risk. They enter when I spy when I enter Spx. So.
+* and that's always an option for you to be able to do. You're not obligated to start off with Spx, and I don't recommend anyone that's trading under a
+* $7,000 account to
+* trade Spx. Anyways, I think you should have at least $7,000 in your account to be trading Spx. It's just my personal opinion.
+* Okay.
+* yeah, Spx will make or break you. That's actually very true. But also, I just think it's the level of
+* risk, and how you trade it, and how patient you are with the stock, because I have had trades where I've taken significant losses with Spx. If I have not been patient, or if I've been too aggressive, you really have to be patient with stock. Wait for a high probability setup to show, and if it is a high probability setup. All of the boxes are ticked. It will give you moves that no other stock will give you at this time, like moment in time the way you only need one contract.
+* But the same thing with spy. If the spy has a high probability setup spy premiums can move to 5,000 within a couple of minutes. So that's why I always tell people just trade spy. It's cheaper. You're less likely to take a bigger loss.
+* Then are you more like you're still taking the same percentage loss, but on a smaller scale. So I think that helps a lot of people sometimes. When they're treating spi versus spx. So just keep that in mind. When you're starting off. Always start off with spy it moves the same. You watch es features. You watch NASA features. It still has the wic fills. There's still same type of setups that you can find on Spx. But, like, I said, on a lower volatility scale,
+* And I've seen a lot of people that started with Spx that moved into spy and love spy. They think it's so much easier to trade, it's less mentally exhausting to trade spy. So I would just recommend starting with spy and working your way into Spx
+* do gap fills happen daily on spx or spy gap fills happen. Usually spx gaps because there's no shares traded on Spx. There's no pre market, and after hours, data so depending on what futures do after hours in the pre-market will depend on. If Sx gaps up or down, if there's no movement on es in the Nasac, in the pre-market, especially es
+* in the pre-market or after hours. Spx is not going to get if there was movement on S. Es in the Nasdaq. Then you'll see a gap on Spx
+* for spy. Most like a spy doesn't gap. Usually you won't see a gap on spy. But you'll see. Wikiles.
+* Okay, any other questions so far on these strategies.
+* Okay.
+* here's an example of a breakout trade here on Spx. So if you see here it created a and I think I might have taken this play, but I'm not sure it created oops.
+* We created a base here.
+* Where's my? So we have a high of day
+* low of day. Touch that low twice. We're in a range. Okay, breakout
+* to the downside clean scout down
+* right
+* this for entry. You would enter
+* oops
+* the zoom in here. Oh, my God!
+* Zoom in here! We're looking at this play specifically.
+* this is your breakout candle.
+* This
+* here's your confirmation candle for entry. Okay, stop would be a break back above this level or the previous level of resistance, which in this case was most likely 47 30, because you can see it held here as well.
+* Okay.
+* But didn't even retest here, straight shot down on Spx or targets would be whatever levels you have next to the downside.
+*  Unknown Speaker * Unknown Speaker
+* 01:04:11
+* Okay.
+*  Masi * Masi
+* 01:04:12
+* which one is your favorite strategy of all the strategies. Right now, trend line, Trendline breaks.
+* because if you get catch a good trendline break it's clean.
+* So trend line breaks are my favorite. If we're looking at straight breakout trades, gap fills and width fills. so gap fills and wickfills on the breakout trading. But overall
+* for the current market that we're in trend line breaks are the best.
+* This confirmation candle mean, open or close and close below level, or just open below the level. I don't wait for it to close as long as one candle closes below the level. That's your breakout candle, so you can see this candle closed below my level. This was the breakout candle this candle opened below. I'm gonna enter at the open of this candle.
+* What are your favorite tickers to trade or watch daily? Expx? Obviously, right now, currently, Nvidia, Tesla and Video, Nvidia and Tesla are the most the cleanest price action, and then Amd as well, because Amd moves in conjunction with the chip sector. So if you want to trade something that's a little bit cheaper. Amd is a good alternative. So I think those are probably the best side of the tech sector that are the easiest to gauge price action on
+* any other questions. So far.
+* someone asked, in what case do you use as straddles or strangles? So
+* just to go through very quickly because I don't teach this, but I sometimes I'll implement them straddle and a strangle. Is this. So? It's another type of
+* strategy to implement.
+* There's a lot of different strategies within options trading that you can implement. The one that we're solely focusing on right now is buying naked calls and naked puts. Okay, there's a bunch of other ones. Selling calls, selling puts, butterflies. Iron condors is a bunch of different strategies. I solely focus on buying naked calls and buying naked puts. I think that's the easiest one. You don't need to overcomplicate your trading.
+* One of the type of spreads that sometimes I do implement. They're very like
+* sporadically is what you call a straddle and a strangle. So there's 2 separate ones.
+* Okay? So a straddle on the strangle. You're buying a contract on both sides of your position. So both sides of your stock. So let's say, Spx, so you're buying a call and a put on both sides in anticipation that the stock is going to make a significant move to one side. You don't know which side on a strangle. So you buy out of the money
+* a call and a put on either side. The stop makes a significant move.
+* Okay? And you, you know, one side, your winning side goes to 3, 400, and you're losing side. Just cancels out. Okay? So usually, you make about 100, 200, depending on how big. The move is
+* on the opposite hand. If you do a straddle, you're buying the same strike, and it's similar to the move moves in one direction you make a big big percentage gain. You could also strangle during market hours as well on Spx or Spi, because if we do get a big move you can catch 500 600 700
+* on a play. And it could be a really really good play. However, the downside to that is that if the stock consolidates or you don't get a move
+* you lose on both sides of your position. Okay, so you have to manage that risk on that very carefully for you to be able to make a profit usually only strangle on a day where there's fed a day into news. For example, if we have Cpi data coming out tomorrow, I would strangle Spx. I would buy a call and put in anticipation that there's a big move. Usually I ha!
+* And out of all the Cpi times that I've strangled, which is probably like 15 or 20 times.
+* I've only lost on 2. Okay, so it it. It is something that works sporadically.
+* but most of my strangles I've never lost. I would say I've only lost on 2 strangles where I've lost both sides of the position. That does not mean to implement them. Okay, you need to understand them a little bit more before you just randomly do strangle plays because they can't. You can lose a lot of money if you're not. If you don't enter at the right price or the right strike prices or at the right time.
+* And yeah, so that's just
+* another type of strategy that you can implement. But nothing that I would worry about too much. If I do enter a strangle, I let the discord know. I'm like Pam taking this strangle here. You guys can strangle spy if you don't want to do Spx.
+* The most I've made on a strangle is. I made. I took one call and put on either side on Spx. It cost me $800, and I made a 5,100 on that play with just one contract. That total position cost me $800. So the $400 on one side goes to 0, the other $400, 1, 2, $5,000, 5, 5,100, or some shit like that
+* on the opposite hand. I have strangled through the day, and I didn't time it properly, and I lost like 2,500, I think, and on both sides of the position. So it's really like a give and take. So
+* just be mindful of that. I'll go through like I said. If I take any, I'll show you guys you can just watch it and then see how it plays out. But you can take a loss on both sides. So just be mindful of those strategies.
+* Okay.
+* yes.
+* Do you constantly watch your trades, or do you set alerts? Usually I'm not in a position for that long of a period for me to set an alert for the most part I'm in and out within enough time for me to be able to sit and watch there. If it's a day trade or swing trade, I just set alerts. I'm not sitting there watching it all day. But if it's a scalp I'm I'm gonna sit there, and even if I get caught in a pull back, I'm gonna wait. I'm gonna sit there and wait until the play makes it to move.
+* I'm not gonna walk away from it.
+* I'll go through. So someone asked, What's the best time to scalp if you're working on 9 to 5 unlimited. I'll go through working and trading in the next section.
+* I have a section for that as well.
+* Could you take us through an example of a strangle trade. No, because II don't think it's something that you guys should be implementing. Yet I will show you an example of one that I took towards the end. But right now just focus on the main strategies because strangles are
+* II don't think that's something that you guys should be focusing on just right just yet. And right now, that's something that you implement as you continue your trading journey. And you have risk to be able to add on but I will go through an example I took. But later, right now, just focus on kind of what we're talking about now? And does anyone have like questions on any of the strategies we've gone through so far? And is everyone understanding the different ones
+* like I said. Right now, trend trading trend line breaks are. They're the highest probability setups I've seen. If you catch a trend line and it's a significant trend line, and you play it properly. They pay the most, the biggest roi, and they're the highest probability. Setups higher than probably gap fills and whip fills just because of what? How the market is moving. Currently, break break out. Breakouts of solely support and resistance are not working. You need something else to add onto it to make it a higher probability setup.
+* And the reason why I don't wanna go through strangles and shadows is because even this month. I've played one strangle. It didn't play out, and the market is not
+* giving you enough, or a big enough new move for you to be able to even take a strangle. Now this week and next week I think we have fed. And then Cpi we might see a potential opportunity. But right now there's nothing going on. So
+* just keep that in mind alright
+* moving right along.
+* Could we quickly summarize the strategies? Once I just went through them. So with a strangle.
+* if you, for example.
+* So this week, okay, let's say you're looking to strangle Spx
+* tomorrow into Tuesday or Tuesday into Wednesday. When the fed speaks, it will depend on where Spx is trading, on what target you have. So if Spx is trading at 48 90 and you're looking to strangle it these are way too expensive. If it's if it's if the contracts are this expensive, I'm not gonna strangle this
+*  Unknown Speaker * Unknown Speaker
+* 01:17:21
+* cause. Usually I'll take 20 points to the upside and 20 points to the downside on sp, on Spx.
+*  Masi * Masi
+* 01:17:27
+* So 20 points down from 48 90 is gonna be 49 10 to the call side, and then 48 70 to the put side. So, and probably even like 48 80, depending on what what type of move I see you don't wanna buy too far out of the money you wanna buy where you think the stock is going to potentially hit enough for you to be able to get that contract in the money, at least on one side.
+* So
+* I, if it's over $1,000. I don't recommend buying that contract. Do you want to buy less than spx on spy? Let's say you were to take spy. I don't strangle. I don't recommend strangling it. I just recommend buying a straddle, so you would buy the same strike with the highest open interest in volume. So if I were to strangle or take a straddle.
+* I would take the 487. It's currently trading out 487, or you could take like the 485. But you want to make sure that if you are
+* straddling it, it's the same price on both sides are very similar to the same price. So you're not buying significantly higher on one side or the other. Okay? But you wanna buy pretty much the same strike or the same exact strike on both sides. On spy. You don't want to buy too far out on spy. You can strangle it, but it doesn't. I seen that it doesn't work as well on spy. It works better for you to just buy the same
+* strike.
+* But that's really how you would do it, you would buy a position on either side with the target that you anticipate that it's either if it moves to the downside, what target do you have. If it moves to the upside, what target do you have? Just protect both sides again, there's good and bad to display, and if you don't do it properly. It's a gamble, and you can lose to both sides of the position. So it's not something that I would recommend as a new trader. To just start throwing your money at okay? Cause you can lose it.
+* Okay.
+* toss technical question, how do you get the price figures on your target lines. Okay, so if you have a target line here, you right click
+* edit properties. And this is where you change all the properties to that line. So it says, Show price. Okay, you can show it on either side, either to the left side, right side or do not show it at all.
+* Okay, you can extend it to the left or to the right, which is this price level, and then you can show the name if you want to, or if you don't want, I don't.
+* Okay, you can change the value to when it, whatever specific specific one you want.
+* you change the color, the style, the width. You always want to make sure you save it as default, so you don't have to continue doing it over and over again. You save it as default. Those will be your default set settings every time you set a price level.
+* How do you decide to take profit? If a tree doesn't get to the next level.
+* so usually it depends what I'm looking for for the most part. If this, if I have a profit target set, I wait for the stock to hit my profit target. that's just how I follow my trading plan. I'll go through trading plans in a second. But yeah, if I have a trading plan, and I have a profit target. I wait for the profit target to hit. It doesn't necessarily. Now, when I say hit, I don't mean that it has to exactly touch to that profit target.
+* For example, if I'm in a tree
+* and let's say my profit target is 47, 20 here. Okay, that whoops.
+* And actually think I took this play.
+* But let's say my profit target is 47, 20, okay? And I enter here
+* on that candle that held below 47 27. So this is my entry candle here. Okay. I'm not gonna wait for it to exactly touch to 47 20, I would probably scale out, either on this candle or even the candle before it. The reason behind that is, you don't want to get caught in a pull back. So you want to sell into strength.
+* So what what you, what that means is, as the stock makes the move down, the premium is making the move up. So if you wait for the stock to pull back, that premium is gonna pull back to. So instead of selling at the high of the premium. You're not losing some of that profit by waiting for a pull back, so I always sell on the push down of the stock and the push up of the premium because people are still trying to get in at that point. And you're optimizing your exit.
+* Okay, you're getting the highest probability premium or highest potential premium in this position. Okay, if you wait for it to touch exactly to that level, you can get caught in a pull back, and you can give back a sum or most of your premium. So always. I always always tell people to sell into strength. You always want to sell into strength. The stock is making the move up, down. The premium is making them move up. Okay, you sell as the premium pushes. You're optimizing your profit.
+* Okay.
+* so that's how I determine where exit and I never. I don't watch my my pnl. I always watch the premium chart. So I always have the premium chart up, and if I see that the premium is pushing the stock is approaching my target level, I'm gonna exit. I'm gonna scale out. I'm not gonna wait for it to pull back at my profit target. And then I'm losing my premium. You always want to sell into strength. That is the biggest, most important piece of advice I can give you as a scalper. Okay.
+* does anyone have any questions on that? Everyone good with what I mean by that.
+* Okay.
+* where is the premium chart? So on, thinkorswim, the premium chart is. Remember, I showed you guys going to options, whatever let's say, you're watching Tesla, and you're trading the 185. This is the premium chart. Okay.
+* obviously, it's going to look a little cleaner during market hours. But yeah. and I always watch the premium chart on the 1 min timeframe
+* for interactive brokers. It auto loads the premium chart whenever you enter a position. So you don't have to worry about it. It auto. If you follow the steps in my Youtube video, it auto loads that premium chart for you. So you can see it
+* okay, in this example, if you had held through that little pull back, it eventually hit the Pt. So you would still have losses lost some premium.
+* It depends on where you exit. If you exit, for example. Hold on, let me go back to that example.
+* If
+* so, we're talking about this. Okay, and I always watch it on the 2 min, because the 1 min will shoot you out
+* check.
+* So it depends on where you exit. Obviously, if you have. If you exit, you're going to get a different premium if you exit. Oh, my goodness, what is up with this thing?
+* You're going to get a different premium. If you exit.
+* for example, if you exit on this candle versus the pullback on these 2 candles. Yes, you're going to lose premium if you exit on the pullback versus if you exit on the push down of this candle.
+* however, if you hold the pull back and you exit on this, you're gonna gain more premium because it makes a more of a move down. So it depends on where you exit. Okay? And depends also on theta, because sometimes, if it's too late in the day, this pull back the theta decay, will. You? Won't make that much more, holding it straight to 47 20. So this is all kind of like
+* you need to use common sense. Okay,
+* what time are you trading the taking the trade? Does it make sense to hold.
+* Does it make sense to lock? It really just depends on a lot of different factors. The time that you're trading it, the expiration that you have, and so on, and so forth. If you're trading 0, Dt, and it's 30'clock, or it's 20'clock, or it's 10'clock. This you don't want to hold through this pull back. You want to exit as it pushes down.
+* If it's in the beginning of the day you have one dte and you still have some room. Yeah, you can hold through this pull back. If it touches straight to your profit target, you'll probably make another 50 cents, 70 cents, even a dollar on the push down.
+* But it all depends.
+* Okay.
+* yeah, active trader. Remember, I showed you guys yesterday. You can load it onto active trader, too. And that's easier to watch the premium chart as it moves. You can see it on active trader as well
+* would think or swim with interactive brokers like, I said, auto load. So you don't even have to touch anything.
+* Everyone good. Now. any other questions on that.
+* Let's go ahead and move forward.
+* Does interactive work brokers work well on the Mac. Yeah, I've used interactive brokers on my Mac. It works perfectly fine.
+* To be honest, Mac is probably stronger than most windows. Pcs, depending on what type of PC, you have. Alright.
+* let's just keep
+* holding on all along.
+* Okay, so we're going into specific strategies. And what I look for. I don't know why I keep doing that. What I look for for each strategy. So we're going to start off with swing training strategies. And this is
+* exactly what I look for when I look for swing trades. Okay?
+* So you want to choose out of the money strikes. So you want to choose out of the money strikes that makes sense. So, for example, if let's actually just look at a swing trade that I think was
+* higher probability. So
+* let's say you're looking at this swing on Tesla's trend line break. Okay?
+* So let's say on Tesla for the swing. You have a 2, 10.
+* You have a 2, 10
+* for profit target. So you think it's gonna hit 210. If it breaks out of this trend line break and makes them move down. Okay?
+* And let me, just
+*  Unknown Speaker * Unknown Speaker
+* 01:31:42
+* it's
+*  Masi * Masi
+* 01:31:44
+* okay. So you think it's gonna hit 2, 10. If I enter Tesla, it's sitting at around 2 40. Let's say around that I would probably take the 2 32, 20 strikes. So one of those 2 strikes. Okay, because I can at least make sure that. Okay, I have room. My next level down is 2, 10, or my target is 2, 10. I have a level at 2 20. But I want my my position to go to in the money so I can scale out as it pushes down.
+* So you're gonna look to take either the 2, 30 or 2, 20 strike. Okay, you don't wanna take necessarily 2, 10. Strike as it may be a little too far out. And you want your strike to go in the money.
+* Okay, so let's say it comes down hits 2, 30 hits to 20. Right around here. We start to get a little bit of a pull back, but your your position is in the money so you can scale out. You can scale out, drop your stop and the stock can potentially, you can hold the rest of your position into the 2 10 level. Your contracts are still in the money. So you're not gonna lose too much value as it pulls back and makes the move into 2 10.
+* Okay.
+* so you can either buy, buy right at where your profit is, or I usually buy at least a few points above or below the profit, so that the position can go to in the money prior to hitting my profit target in case we get a pullback, and I'll still be in the money, and I won't lose that much value on the position as I scale out.
+* Okay. So you wanna buy a little bit for out of the money price point you think the stock is going to touch.
+* I always swing at least 2 weeks out. Now, depending on the length of your swing. The timeframe that you find it on will depend on how you swing it. You always want to buy, even if it's a swing that you're looking to do overnight, or maybe like even a 2 day swing, or whatever the case may be. Buying at least 2 weeks out is going to give you that flexibility in case you get caught in a pull back. Okay.
+* the best thing you can do for a swing trade is to buy yourself time. Time is going to be your best friend on a swing trade. You don't buy yourself time. You are risking, losing a big chunk of that position.
+* Okay, you want to optimize entry and exit points. You want to buy on pullbacks. One thing that I always wait for is, if I'm looking to enter a swing on a position I always wait until the last hour of market open. Even probably the last 15 min. I wait to assess what the stock is doing where it's closing.
+* And then I look to take a potential swing. If, for example, you're looking to swing calls, you want to see the stock
+* towards the end of the day pushing up. Okay? Closing in the green. Okay, if you want to swing puts, you want to stop. You want to see a stop towards end of the day, start to close red. Okay.
+* so that's why you wait till the end of the day to assess. If you're going to enter that swing at that point or not.
+* alright.
+* pay attention to patterns, support and resistance levels. Ema crosses, so on and so forth. Pattern plays and trend line breaks are going to be the highest probability. Setups on swing trades as well as gap fills. Okay.
+* I've I've I've seen. Gap fills on higher timeframes fill even better than gap fills on intraday timeframes.
+* Okay?
+* Implied volatility. But below 30, it will most likely Bo be pretty low, because if you buy further out of the money timeframes are going to be, if you are looking for a further out swing daily, yearly 4 h, and then I just put the 3 day 5 min. You want to look for entries on the 5 min timeframe when you're swing trading.
+* and then a moderate delta. Most likely the Delta will be pretty low, just because you're giving yourself time. Theta will most likely be pretty low as well as you give yourself that time.
+* Okay.
+* any questions on this?
+* How can we learn better to understand chart times?
+* I'm not sure what you're what you're asking. Could you clarify, please? How often do you swing trade versus scalp swing trades are are for me?
+* I scalp like I said, probably 90% of my trades are scalp. 80 to 90% of my trades are scalps and kind of day treats sporadically. Swing trades, I would say, probably like 10. It really depends on the swing. I find I do take a swing.
+* it's on the higher timeframe, I see. Yeah, Phil, I see. A pattern break.
+* Yes. So you want to use multi timeframe analysis. So the reason why we use multiple timeframes is so that we can see what the stock is doing overall. If you're only looking at the 1 min timeframe 24, 7, you're not gonna be able to see the overall picture of the stock. So we do, multi timeframe analysis.
+* even if you're scalping. I watched the 2 min and the 5 min because the 2 min could potentially shake you out. It's a smaller timeframe, so we can get a big order. Come in and the stock pulls back and you get shaken out of the play. But if you look on the 5 min it's just pulling back, there's no reason for you to exit. The stock is just the there's low volume on the 5 min pull back.
+* So no reason for you to exit that play versus if you only watch it on the 2 min or 1 min you're gonna get all of these little sharp movements or pull backs in the stock that are, gonna make you or shake you out of the position. They're meant to shake you out of your position.
+* Okay, on top of that, you wanna watch the higher timeframes to get an understanding of one support and resistance levels that have touch not only on the higher timeframes, but are touching on those intraday time frames as well. Those are, gonna be the most significant support and resistance levels. These are gonna help. You identify areas where the stock could bounce potential entry points, potential exit points and so on and so forth. You also wanna look at the higher timeframes. If you already
+* day trading or scalping, you don't want to scalp or date. I'm sorry not Scalp day trading or swing trading. You don't want to swing trade a stock based off of what you see on a 5 min or 2 min timeframe that doesn't really make any sense. Okay? So that's why we use multi timeframe analysis. You wanna look at multiple timeframes. See what the stock is showing you overall. This is gonna help you from getting faked out. This is gonna help you from getting shaken out, taking poor trades
+* and taking higher probability traits that's going to be the differentiating, differentiating factor between whether you're taking high probability setups or low probability setups is multi timeframe analysis. You do not want to just stick to one timeframe and only focus on one timeframe.
+* Yep, no problem.
+* Anybody have any other questions on that.
+* So in the discord we do have a swing trading channel. So either myself or any one of my Admins or you guys have swing trade ideas you want to post feel free to post them. They're right here. Sam did take a couple of swings recently he took Amd. That was actually a really good swing.
+* So we posted in here as well, too, so feel free to utilize that channel if you like. Swing trading
+* does upcoming news earnings play into spacing swings. Yes, 1,000. So if a stock has earnings. You want to be mindful of that. If they have a news release, you want to be mindful of that. It's always by the rumors. Sell the news. So you want to buy whatever you know up until earnings. So this Tesla play. This was all before earnings. This was when earnings came out, and a gap down.
+* Buy the rumor. Sell the news. Okay? So even though it made the move down, you don't want to hold through earnings as that's a gamble.
+* But overall, that's how kind of catalysts or or news come into play when you are
+* swing training. Okay? Then that's the best way to put it, because people will jump on the hype
+* if even if it's not confirmed like. For example, what was the news recently? There was an airline that wanted to acquire
+* another airline, and
+* the judge. I forget what the I forget what companies they were, but there was a company that wanted to acquire an airline or something along those lines.
+* When that news hit both stocks made the move up. They both stocks like just were running for days, for weeks
+* when the news came out. I think it was this past week. The judge declined their request to acquire the stock plummeted.
+* Okay, so that's what we mean when we say, Buy room or sell the news. Okay? So until that news is confirmed, you play the vo, the volatility. You play the volume, the interest from the anticipation and excitement. But right before that news comes out you need to lock your position.
+* You got to get out because you anything can happen at that point. Don't know how investors are going to react.
+* Yeah. Jetblue wanted to buy spirit. There you go. Thank you guys, I knew it was airlines. But Jetblue wanted to buy spirit. Exactly. So.
+* Yeah. The Boeing incident. Boeing with their
+* whole little slip up there. Boeing has still been selling. Okay, so it's it's it's very significant, those. And then, after Boeing, the accident happened. There was another airline. There was another airline that completely grounded all of their Boeing aircraft or something along those lines. So it's just consistently bad news hitting this company.
+* So until they come out with something that could potentially help the stock or help the company. There's just no good news behind it, and there's no reason for you to buy that stock right now until obviously gets to close to all time lows. Then it would be a long term investment. But for an options, trader, you you just wanna
+* keep playing whatever the trend is, you don't want to play against the trend.
+* Okay.
+* so definitely pay attention to news like I said, I mentioned this yesterday, I think was the day before when I build my daily watch list.
+* The stocks have news that's the only way that I'll even watch that stock or bother to watch it. If there's no stocks with news. And there's economic news. I watch Spx and spy solely because they're gonna move off of economic news. Okay, they're I mean, everything's gonna move off of economic news. But they're gonna be the fastest movers. They're gonna react more.
+* Okay, fed interest rates. A fed member speaking. Whatever the case may be. The Presidential elections that are gonna come up, the market is going to move. All of that news market is gonna move. You pay attention to that news. That's gonna be significant.
+* Great.
+* Do we have any other questions on swing trades?
+* Alright
+* day trading strategies? Okay? So when you're day trading, there's a couple of different strategies that you can implement and there's a couple of different ways that you can play a day trade. Now I will say that recently I haven't been day trading very often, just because the market has not been giving
+* any day trades. You're pretty much taking very quick scalps or your swing trading. We haven't had a fully trending day. I think we had one this week, but overall we haven't had, like a significantly, either a sell off or a full a day over the this month, from what I've seen overall.
+* so I haven't been day trading too much, mostly focusing on scalps, and then some swing trades here and there. But from what I've seen, that's just how it's working out right now. But this is how I would implement date, my day trading strategies. And this is what I look for when I'm looking for a day trade
+* so whoops when you're day trading. There's multiple different strategies, obviously, that you can utilize. It just depends on what type of strategy you work well for. So you always want to buy
+* following week expiration if it's closer to the end of the week. So, for example, if it's Thursday or Friday, Friday, it's safe, for did he trade the following week? Expiration? You can 1,000 same by same week. Expiration. But it's higher risk. Okay? And
+* another thing is trading 0 dte day trading. 0 dte is high risk. Okay? So I would recommend buying at least one dte when you are day trading. Especially if it's towards the end of the day. Do not day trade 20'clock 0 dte expirations. It does not make any logical sense at all. If the stock rejects.
+* even if it keeps pulling back. If it's not a clean move up, you're not going to gain much on your premium, so always give yourself time. On a day trade as well
+* at the money you're in. The money strikes actually not in the money, this was, say, out of the money. I'll I'll fix these slides before I send them to you. You can buy at the money, but I would recommend, when you're day trading, buying slightly out of the money with the highest open interest in volume which I'll go through. You want to look at the hourly 30 min, 15 min and 5 min. 5 min is going to be F for entries. Even the 15 min are going to be for entries. Your 30 min and hourly time frames are going to be to monitor that position.
+* You can also find patterns, bounce plays on other time frames as well. So higher timeframes, like the weekly or daily. If you find up play or pattern
+* that you can also day trade that like I've gone through before. But you would still enter it on one of these 2 time frames as it's you're going to try and optimize your entry point and get the best entry. So that's where you want to enter it
+* right
+* pattern day trading. So you wanna look out for patterns. Trend line breaks double tops, double bottoms like, I've shown you guys these before you wanna use these in conjunction with key levels of support and resistance to look for potential entries. So if we go ahead and take a look here.
+* an example of this
+* alright. So if we look here.
+* you can see that
+* you can see that. Boeing here on this day made a move up, and then you can see move up, and then what does it do? It flags. So this is all in the pre market d pre market. And after hours. So you can utilize pre market data and after hours data to potentially take moves as well because you can see high probability setups form on those timeframes as well. You can see here we get the
+* The flag right out, open, it breaks out of the flag. You can day trade. This is the 30 min for an hour. Move up into the next profit. Target goes from 2, 20 to 2, 30, 10 point. Move up on Boeing.
+* Okay?
+* Okay? Same thing here on Tesla. We get a bull flag again in the pre-market. Okay? Oh, my God, stop doing this
+* myself. Stock makes them move up flags.
+* Add, open! This is your entry.
+* Yeah, this was when Tesla was
+* way thing. But you get about, you know, a 20 point move up here.
+* Great.
+* the next tape of day trading strategy. You can implement. It's not really it's a strategy. But also.
+* if the stock has a catalyst or is running, so you use volume and open interest. Usually this works really well with stock that has a strong catalyst behind it. If you're trading spy and Spx, you wanna look for news on the overall market. Okay.
+* you want to pay attention to the volume and open interest on specific strikes.
+* Okay, that is what's going to help you identify where there's levels that the stock could potentially move into where our investors trying to move that stock into what levels you find anomalies in the volume and open interest. So usually anomalies are. It's just
+* abnormally high amounts of volume and open interest in conjunction in comparison to the stock. The strikes around it, and you'll you'll know you'll see you'll be like, oh, this doesn't make sense. How does this strike have so much open interest in volume in comparison to the strikes around it? That should be kind of like a red flag like. Oh, what's going on here? Why are people buying so much of this strike?
+* And this works really well with stocks that are trading at the highs, which is a lot of stocks right now. Okay, if you notice, for example.
+* let's go into Nvidia.
+* and I'm gonna go into on demand. So I kind of show you. So let's go into
+* think. Nvidia started running and like
+* November, probably. Okay.
+* okay, so this is November first, Nvidia, let's see if it updates here.
+* This was November of last year. So about 2 months ago.
+* see if it Updates here.
+* Now, you can use this with day trading and swing trading you can. It works with either one when you pay attention to the volume and open interest, like I said, I pay attention to volume and open interest
+* on the strikes, no matter what I'm training. So Nvidia was at 418 in November. Okay.
+* if we go ahead. And okay. So it was still running in November. Hopefully, this loads. Okay.
+* I don't think it's gonna look properly. Oh, this is 1,500. Okay, so let's say.
+* we were watching it in November. If you had gone into probably like December December fifteenth.
+* why, it's not updating. Then we go to all the strikes
+* perfect.
+* and that
+* if we just look here, I don't think it's going to load all of them.
+* because it's being stupid.
+*  Unknown Speaker * Unknown Speaker
+* 01:53:14
+* 100'clock.
+*  Masi * Masi
+* 01:53:45
+* Alright
+* and video was at 4 32 in November. Let's
+* okay. So December fifteenth, look at. So we're looking about a month out from where it was okay.
+* So if it was at 4 30, if we go ahead and just look at some of the strikes moving down, you can see on Nvidia. There was significant volume all the way down here. But right here, at this 500 strike significant open interest on this 500 strike.
+* moving down 5, 25, and then even below that, look at what had the most open interest, this 600 strike.
+* Okay, this was December fifteenth. If we go into
+* the next month.
+* December fourteenth, on Nvidia. Let's see where it was trading at
+* 4, 82. So it went from. Let me show. This is right.
+* Okay.
+* alright. So before it pulled back, we were watching it from November first it moved into 500, the 500 level on November first. Okay, so it moved from 4 30 to 500.
+* Okay, that 500 strike had open interest in volume. Now we're in December fourteenth. We had a lot of volume on that 600 strike. If you go ahead and look still on that 600 strike December fifteenth.
+* Hopefully, this is accurate.
+* Still significantly higher. Open interest on that strike on the 5 50 strike, if we continue to look down into, let's say, the first week of January.
+* and this is kind of what you have to do when you're swing trading and and your day trading, you have to kind of do research. And this is the research that you want to do? You want to keep looking at what expiration, what strikes? Do you see? Significant volume and open interest? And you can see 505. Here we still have a lot of volume and open interest here, but I want to see where at what point they thought Nvidia would hit
+* that 600 level. Okay, look, January nineteenth, a lot more open interest on these strikes.
+* There's the 5 50. Look at the 600 strike. Okay. Now, if we move forward a month.
+* Okay? So that expiration was January nineteenth, where we had significant volume and open interest, not volume, but open interest on that
+* 600 strike on Nvidia.
+* Okay?
+* 5, 47. And video kept moving up. Okay, I think in video hit 600 before. Yeah. So I don't remember when it hit. 600 must have been this week, I guess. Damn is moved so much in a week. But you can see, overall. These profit targets are hitting. And there you go. January 20, fifth in video hit 600. Even before that, when do we hit 600? The twenty-second of January? Okay.
+* so whenever you see significant open interest and volume like that, and you'll notice what's significant versus what's not because you'll pay attention to those strikes
+* usually signifies that the stock is going to continue into those profit targets. Okay?
+* And this works really well with stops that are all time highs. You can even look at Amd. Amd. Probably looks very similar as well on those open on, on the the strikes, and where the open interest is sitting on those strikes.
+* Okay.
+* does that make sense? You can use open interest to swing trade, gonna use open interest to day trade. You can even use open interest to look at profit targets at all time highs. If you are scalping the stock.
+* Okay?
+* Any questions on day trading
+* with day trades, it's gonna be like, I said again, you want to make sure that the stock has news behind it. Anytime a stock has news. Those are going to be really good opportunities to be able to day trade it.
+* especially if it's upgraded, downgraded. If it's news on a product release, any type of news like that. Those are going to be really good opportunities for the stock to have the momentum and the volume that it needs to be able to catch a significant move either to the upside or downside.
+* Okay.
+* do you prefer to swing scalp or day trade scalp? I'm more of a I want my, I like instant gratification. I don't like waiting for a play to make the move. I'm kind of impatient. So yeah, I would say, scalping. There's a reason why most of my trades are scalps.
+* I'll add swing trades sporadically. Day trades like I said. Right now. I haven't been implementing that many day trades just because II don't see the opportunity there.
+* but yeah, scalping is is my go-to.
+* Open interests are actually options in play. Yes, so remember, we talked about open interest and volume. Open interests are the number of open contracts currently on that position on that strike
+* volume is the number of times that contract was traded in that day. So volume resets to 0. Open interest is a continuing, running, running, running tally of it, continuous running, tally.
+* open interest for a particular stripe can only go up and not reduce. No, obviously, it's going to go down. Once the expiration starts to grow closer, because people are going to start closing out their contracts. So as people close out their contracts, that open interest is going to decrease
+* i'll go through risk management in a couple of slides
+* okay.
+* let's go ahead and let's take a break here, since we just went through 2 h straight. Let's come back.
+* yeah, take a little bit of a break. Let's come back at 1 20, so I'll give you us 20 min. So let's come back at 1 20, and we'll go through the rest of scalping a 0 dte. I'll go through risk management
+* and building watch lists, and then psychology and whatnot.
+* Alright, guys. So let's take about a 20 min break. I'll talk to you guys at 1, 20.
+Next Steps
+1. Participants will send Masi screenshots of the 3h, 30m, and 15m timeframes for chart analysis.
+2. Masi will review the Netflix trade and identify where he could have improved the strategy.

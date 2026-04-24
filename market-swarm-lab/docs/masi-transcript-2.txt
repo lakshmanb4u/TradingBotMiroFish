@@ -1,0 +1,932 @@
+﻿Skip to Main Content
+Accessibility Overview
+ Zoom Logo 
+
+January Options Course Session 2- Shared screen with speaker view
+Jan 27, 2024 10:46 AM
+Download (5 files)
+Video Player is loading.
+00:00:00/03:25:26
+Speed
+Summary and smart chapters
+Meeting coach
+Summary
+Masi discussed technical analysis, highlighting the importance of charting all-time highs, psychological levels, and using options chains. He emphasized the need to understand price action charting before relying on technical indicators, and explained the use of EMAs in analyzing stock trends. Masi also discussed the role of market makers and electronic communications networks, the significance of the spread, and the use of Level 2 in sales and stock market trading. He concluded by discussing his trading setup and strategy, emphasizing the importance of focusing on a few main tickers, using tools like Bookmap and Level 2, and understanding resistance and support levels.
+Masi discussed technical analysis, highlighting the importance of charting all-time highs, psychological levels, and using options chains. He emphasized the need to understand price action charting before relying on technical indicators, and explained the use of EMAs in analyzing stock trends. Masi also discussed the role of market makers and electronic communications networks, the significance of the spread, and the use of Level 2 in sales and stock market trading. He concluded by discussing his trading setup and strategy, emphasizing the importance of focusing on a few main tickers, using tools like Bookmap and Level 2, and understanding resistance and support levels.
+Smart Chapters
+Playing...
+From 00:00
+Quiet moment
+From 24:27
+Technical Analysis and Trading Strategies
+From 01:00:28
+Market Makers and ECNs in Stock Trading
+From 01:21:28
+Level 2 Use in Sales and Trading
+From 01:39:29
+Bookmap's Benefits and Demonstration
+From 02:09:31
+Bookmap Feature Explanation in Trading
+From 02:22:48
+Trading Setup and Strategy Discussion
+From 02:37:02
+Chart Patterns and Trading Concepts
+From 03:00:35
+Trading Strategies and Risk Management Discussion
+Quiet moment
+Audio Transcript
+Chat Messages
+*  Masi * Masi
+* Alright, guys, let's go ahead and get started. Good morning. So
+* alright. So yesterday we did a little bit of the
+* intro to options, all of that good stuff. Now we're gonna dive into technicals and let me share my screen
+* harbor. And before we get into the next section, and does anyone have any questions on anything we went through yesterday? Anything that might have been confusing, or you mulled over and had more questions.
+* Please feel free to ask.
+* Okay, so I guess every10, here we go. Sorry
+* you may gone over this in your last QA. In the discord. But when charting all time highs. You just see psychological levels. I'll go through that because there's I use a couple of things. I'll go through what I do when I look at all time highs.
+* But when you're charting all time high, just to give you a high level overwe overview. Yes, so you want to look usually at every whole point level, depending on how the stock moves. It'll depend on the stock.
+* For example, Tesla usually moves in like 3 or $5 increments. So every 5 and 10 point is going to be a significant level. But then you also want to look at the options chain on the stock. And remember how I showed you guys volume and open interest. You want to look at what strike prices. There's significant volume and open interest, and those are going to be levels as well when a stock is at all time highs.
+* Alright. Okay. So if Noel has any other questions, we'll go ahead and get started in the next section.
+* So like, I said, we're gonna go through technical. So we're gonna go through the technical indicators that I utilize I don't use that many, but the ones that I use I use very heavily. And I have used all of them. I've used Macd Rsi adx. I've used a ton of indicators, and there are a ton that I have not used.
+* I don't think relying on. Indicators is a good way to trade. I think you really need to understand price action charting first rely on that, and then the addition of indicators is just to use as a guide to support.
+* the place that you're taking. So that's not to use an indicator to
+* enter a position or exit a position or anything like that because indicators like I mentioned yesterday, all lag, they all are derived from price action. So in order for the indicator to even be able to plot itself. It needs the stocks price action to be able to do that. So just keep that in mind when you are trading.
+* And when we go through these indicators. Okay, if you have a few that you like to utilize, by all means continue to use them. These are just the ones that I have narrowed down to and like. I said, I use these really heavily, and I use them for specific things, which is why I still implement them into my trading
+* alright. So the first one we have is your moving averages. So moving averages are going are pretty much. They're kind of like trend lines. It's gonna help you identify the trend of the stock. Kind of smooth out price action and be able to help. You see, a little bit cleaner.
+* You're not able to predict predict price direction. With moving averages, however, you can use them as a guide to see in conjunction with your support and resistance level. If a stock is looking to bounce, etc., etc.
+* There's 2 types of moving averages we are focusing on exponential moving averages. And now I have used both of these. I will say the exponential moving averages move a little bit quicker. They follow, they hug the price. A little bit closer than simple moving averages. So they are less laggy. Which is why I have specifically just utilized Emas instead of Smas. Okay.
+* so if we go ahead and look at what a moving average looks like. So there's different time frames that you can utilize moving averages. And there's different types of moving averages that you can use specifically. The ones that I utilize
+* are gonna be the 50 Ema, the 200 ema on higher time frames. And then I use the 9 ema and 21 ema on lower timeframes. Okay, so the 9 and 21 is when I'm day trading and scalping. When I look to take a swing or overall. Look at the bigger picture of the stock. I will use the 50 and 200 emes.
+* So specifically, if we look here, this is your 50, and Ema 50 and 200 Ema charted here. So if we look, let me get this little thing out.
+* So the yellow line is going to be your 200 Ema, and the orange line is going to be the smaller. Emh, your 50 Ema, basically, it's help, like I said, it's to help you identify the trend of the stock. I use them as supportive assistance levels, and I use them as a guide to identify trend reversals.
+* So
+* whenever you see a stock trending below both of its emas, obviously it is in a downtrend. Okay, you don't want to look to take calls when a stock is trending below its emas.
+* If a stock is trending above its emas, it's in an up trend, so you don't want to look to take puts when a stock is in an up trend. Okay, if you see the stock trading, these colors like nothing shows. If you see the stock trading in between. It's emas like this. It usually signifies indirection, and consolidation. So you just want to stay away from that stock at that point.
+* Okay.
+* another thing that I utilize them for. So if you see something like this where you see your emas cross so specifically, if you see the lower ema cross below the higher Ema, it signifies that the stock can reverse into a downtrend that is called a death cross.
+* Okay.
+* if you see your lower Ema cross above the higher Ema, it usually signifies a golden cross and a move into the upside. And this, says Golden Cross, it should say, death cross. By the way.
+* Okay, so this moves into the upside could signify a reversal up. Okay?
+* And you can see in this specific example how these emas lag. Because if we look here, you can see that the trend reverse this looks like a head earnings here and a gap down and then you see that Ema cross a little bit later. Once the trend gets stronger again over here, stock reversed. You see the Ema cross right around here once the trend gets a little bit stronger. Okay.
+* now, looking at this on a
+* smaller timeframe. So this is the 9 and 21 emas here.
+* Okay, so your 21. Ema is the purple line. The 9 Ema is our blue line. Here you can see right at open the 9 Ema cross below the 21. Ema stopped, move stopped, moved into a downtrend depending on where your levels are, you could take the break of this level here. We can see that it's trending below that 9 ema. As long as that trend holds below the 9 ema. This is a strong trend down and no reason for you to exit.
+* Okay, so you can use that 9 ema as a retest level, you can use it as a stop loss. You can see you can utilize it as a guide. As the stop continues down, so you can see it retested, retested that 9 Ema retested again the 9 ema and the level that you entered at before it continued down.
+* and it's a good example over here of how the stock is trending on top of its emas emas are extremely close to one another, and the stock is in a consolidation.
+* Okay.
+* does this make sense? And then another one? Here is a little bit just pure ema and price action. No levels, even charted like I said, you want to utilize these with your levels. But if we just look here, we can see just eyeballing this. This stock was in a range. Okay, okay? So it had a resistance level
+* 1, 2, 3 touch and a support level 1, 2. Okay, we're on the 2 min timeframe. This is a 9 and 21 Ema.
+* The stock is trending right on top of its emas emas are extremely close together. We get the cross right here we get volume stock breaks that lower trend line, this our lower support level. This is your entry. You can leave your stop loss at the previous support level. So stop loss would be here. And you can see, once it retested, retested that 9 Ema.
+* before continuing down. Okay, let's see, you missed this entry. This is the low of day. Here
+* stock pulls back, retest its emas. You can take the entry once it breaks low of day.
+* Okay, you can see continues down holds below those Eme's
+* until right around here, where it breaks both emas and the stock kind of consolidates and then reverses. Okay.
+* so just in this specific example. You have 2 entries here. You can even take the entry up here on if we look so let me show you the different entries. So we have this whoops.
+* We have
+* this support, this resistance. You can take the rejection of the resistance here for puts. But your first target would be that support level. Okay. okay, that's the first entry. Second entry is here. Break of support, miss. That one third entry is here.
+* or you can also take. I don't like. Sometimes you can take the rejection of the emas. But specifically, I don't really like this one, because all of these candles there's really not a lot of volume. You can see there's a lot of wicking on these candles. It was a little bit of a cleaner price action. Let's say, if we saw this on the 5 min you could probably take the rejection of the Emas as well, but usually I like to take breakout trades, so I would wait for the breakout of low of day on this candle for the move down to my next level.
+* Okay.
+* stop loss. Here would be this level stop loss here would be this level stop loss on this play would be the previous level. Whatever had resistance to the upside.
+* everyone clear on this so far.
+* So when I when I put my stop loss, this is what I usually wait for. So if I, for example, have
+* I usually wait? So let's say I put my stop, boss, here on this breakout of this support level. I usually wait for a candle to break above and hold, so just like I wait for a confirmation to hold below. I wait for a confirmation to hold above, to exit as well.
+* I don't use trailing stops. All my stops are mental. They're not physical stops
+* any questions on that.
+* Everyone good. So far. Emas makes sense.
+*  Unknown Speaker * Unknown Speaker
+* 00:38:02
+* Alrighty.
+*  Masi * Masi
+* 00:38:04
+* Move right along.
+* Alright. The next one we're gonna go through is actually, let's go through. This is the volume average indicator. Now.
+* I do pay attention to this indicator. I used to use it a lot more heavily prior to me getting bookmap but I still like to utilize it, because it's a good way to physically see volume kind of if you like, more of a visual learner. This is a lot easier. So this is the volume average indicator here.
+* And basically what it shows you is volume over the course of whatever timeframe that you're watching the stock with a moving average charted on it. Usually it's a 50 day moving average, so it'll give you where the volume is in conjunction with overall 50 days of volume
+* averaged out on the stock. Okay? So usually when I'm looking at this and let's just go ahead and plot these. So you guys can see?
+* let's go into a stock that's not really charted. Let's do.
+* And deep. Okay, So how you would add all of these. So if you're using thinkorswim
+* you would just go into edit studies.
+* And for the first one, your exponential moving averages just type in exponential. And it'll say, moving average exponential. Click, once, click twice. Those are your 2 moving averages. Okay, I usually go into the gear icon here and edit them.
+* so you can edit what length you have, so I keep it on the 9, and I usually keep my lower moving average orange. So just how I've always remembered it. and then I'll go into the second one. I'll change this to 21,
+* and I'll make this one yellow and apply. There are your moving averages
+* and then your volume average. I just type in volume, and then A. BG.
+* Says, volume average. And I don't change anything on this apply.
+* And there's your volume average in here. Okay?
+* So when I'm trading a stock, I utilize this indicator on the intra-day timeframe. So 5, 15 min, 2 min, 1 min.
+* And what I'm usually looking for is if the stock is looking to break a level of resistance or break a level of support. I'm looking for volume to also be above this moving average Li line. Usually what you'll see is in the first hour to an hour and a half of market open. It's always high, because that's the highest volume in the market, and then you'll start to see volume usually dip in around the 110'clock to around one Pm. Timeframe, and you can see here
+* what you usually want to look for is.
+* or what I utilize this for specifically is, excuse me.
+* when I'm looking for a stop to, let's say, make a move up, and let's say it's pulling back on pull backs. You want to see the volume dip. Okay, so this is actually a really good example right here. So
+* we can see that the stock makes this move up. Okay.
+* we can see the stock making them move up.
+* There we go. That's better. Stop, makes the move up here and pulls back. Okay, you can see the pull back here retests.
+* It's Emas.
+* If we come down into volume whoops, you can see that volume is high on this. Move up.
+* Okay.
+* When it pulls back you can see that volume dips. So what you want to see when you're in a stock. Let's say you're in a d tree, even if you're in a scalp and you're caught in a pullback
+* once you enter. Obviously you want to see that high volume. If you get stuck in a pullback, or if you're in a day trade and looking at a pullback to identify, if it's a reversal or not, you want to see this volume dip?
+* Okay? If the volume doesn't dip on the pullback could signify a reversal. Okay? Because it's a stronger pull back. It's it could potentially reverse at that point because there's volume behind it.
+* You want to see volume dip as a stock.
+* hold, support, or hold whatever level of support. You see, you want to see volume pull back up. So you want to see volume create a kind of a U shape on a pull back or okay. So if it creates this U shape, it just signifies that it is a pull back volume on the pullback is low. There's not a lot of sellers there, either, if you're on the upside or downside buyers there, and it signifies that the trend is still in place.
+* Okay.
+* okay, so that's one thing that I look at when I look at volume, and you can even see it over here. If you look down. This volume is high on the pull back slight pull back! We get a dip. We did get some orders. It looks like this was like a Spoof order, or something happened in the market. And volume was a little bit higher, but Overall held the 9 Ema's. This is why you kind of use everything in conjunction with one another. Because you don't want to. Just look at one thing, one thing.
+*  Unknown Speaker * Unknown Speaker
+* 00:43:13
+* be telling you other something, and then 3 other things could be pointing in another direction. So you want to look at the overall picture of what this stock is showing you.
+*  Masi * Masi
+* 00:43:21
+* Okay, so this is the volume average indicator.
+* Okay?
+* And you can see. Then towards end of the day, market volume tends to pick back up. Usually. Sometimes you'll see movement towards the end of the day. Sometimes you won't. It really just depends on what overall market is showing you. Sometimes it'll be choppy if you see that volume is continuously low, usually just signifies a choppy day, not a lot going on, so you can see, after the first hour what Amd. Made the move up for the rest of the day. We kind of had pretty low volume there.
+* There's a little bit of a move down here, but nothing too significant, and volume was trending pretty much below that moving average
+* throughout the rest of the day.
+* Okay, there's a volume, average indicator. Make sense.
+* Any questions so far, everyone. Okay.
+* does volume mean price action, no volume. It's just the amount of buyers and sellers that are present there.
+*  Unknown Speaker * Unknown Speaker
+* 00:46:01
+* Do you use simple moving average when trading? No, I use the exponential moving average.
+*  Masi * Masi
+* 00:46:08
+* I only use the exponential. One
+* price action we went through price action is just the up and down movement of a stocks chart. So the candlesticks are what's going to show you price action.
+* price action. Just reverse refers to the up and down movement on whatever time frame that you're watching the stock on so just literally, the historical movement of the stock is its price action
+* and volume is a number of buyers and sellers that are currently present
+* on the stock. Okay?
+* Or if you're looking at historical volume volume that buyers and sellers that were at that point
+* you mentioned, you don't usually look at a timeframe less than 15 min for trade, or the 1, 2, 3 min charts trend for confirmation. I never said that, I said. I don't chart below the 15 min. Okay, I use the 2 min timeframe for my entries and exits.
+* And I scap on the 2 min. I don't. I used to scop on the 1 min, but it's too much noise, and I think you can get shaking out and get faked out a lot more on the 1 min, so I've moved over to the 2 min so I do. My, I do watch the 2 min for entries and exits. I just don't chart anything past the 15 min timeframe unless it's an intraday level that has touch twice on that day.
+* yep! Are you charting on thinkorswim? Yes, I chart everything on thinkorswim. I watch my stocks on thinkorswim. I just use interactive brokers to fill in and out of my positions.
+* I know thinkersome is not available all over the world, so you can use trading view
+* for charting
+* if you're outside the Us. I think, like Canada, you can't use it or somewhere else.
+* Right?
+* Everyone good so far.
+* Next one. Can you guys hear me? My mic, just like muted itself. I just wanna make sure everyone can hear me. Okay.
+* the next indicator we're gonna go through is actually my favorite indicator. And I use these this very heavily with futures and just with any stock, and I'm gonna go through tomorrow. When I go through my strategies a strategy that I actually implement with both of the vwap and my moving averages. So
+* this one is my favorite one. It is called the vwap. It stands for the volume weighted average price. It is an intraday indicator. What this means is you cannot use this past the 15 min timeframe as it's literally useless. You can only use it on the intra day timeframes 15 and lower anything past the 15. I just have not found this helpful at all. So this is definitely for day traders and scalpers.
+* Okay, you can use it as a support and resistance level, you can as use it as a retest level. Most specifically, utilize it to identify trends on futures when I'm looking at the market. Okay?
+* So how we add, vwap.
+* you want to go into studies again. Edit studies. And we just type the vwap.
+* Okay, double click.
+* This you want to edit. So you want to go into the gear icon.
+* and the vwap is the purple band. So the vwap itself is just one band via, and then it has an upper and lower band, which I'll just apply. So you guys can see. So if you just put the whole Vwap indicator. This is what you're going to get free bands. I don't use the upper and lower band. I find them useless. Okay, so I will go ahead and go to the upper band and uncheck all of these
+* and go to the lower band and uncheck all of these.
+* Okay, I press apply. Ok, there's your Vw. Alright. So.
+* for let's say I'm watching es and Nazak. One thing that I look for when I'm looking at the vwap
+* is where Es and the Nasdaq are trending in conjunction to its view. OP. And you can just see just in this one example so very clear clearly what this view OP is showing you. Okay. So if you look here, you can see how many times Es holds vw, as support.
+* Okay, it is not until right around here that we break vwap. At this time yesterday market ended up making a move down before that. Yes, held Vwap. It was not able to make the move to the downside.
+* Okay. So what I usually will look for is where futures are trending in conjunction to its vwap. If futures are above vwap I will not take puts on the market.
+* This depends, obviously, on a little bit of a couple of different factors. But overall, if it's too close to it's view up to the downside. I'm not gonna look to take puts if it's trending below. Vw, on both features. I'm not gonna look to take calls on anything. Okay? So I wanna see an upside trend along the vwap on features for calls, for bullish momentum. And I wanna see? Vw, trending features trending below. Vw, for bearish momentum. Okay.
+* this is a very key support and resistance level. And it's very key to watch this when you're trading futures. Okay? Or any ticker.
+* Usually, when a stop comes back down to Vw. That viewop can either act as support or resistance if it breaks below. Vw, you can find a very good play on that stock on that ticker. Okay?
+* So I'm just gonna kind of high level. Give you a little bit of a play. Okay? So you can see here, Vbops holding. Let's go back to our amd example.
+* Okay, we're gonna use vwap in conjunction with those Emm's. And I'm gonna show you
+* how helpful this can be. Okay. So this is Amd at open. We see we have a low of day. We have a high of day. Okay?
+* So you can see here. Amd. Bounced
+* twice at this 174 50 level here, low of day as a high of day and also touch the hive here, so you can either take the breakout to the downside. Okay.
+* if you see something like this. We already talked about the Ema cross, but if you see both of your emas cross above, your vwap like this usually signifies the stock is moving into an uptrend, and you see, all of the bands further moving further away from each other can move into an up trend. This can trigger the fact that we can see a break to the upside, and you can look for entry. Now this specific play is a little
+* is a little bit difficult, just because this of this candle, but most likely this candle right here would be your entry to your next level to the upside. Okay, let's say you missed this
+* stock comes back down.
+* look at where it comes down to and holds straight at its vwap, pulls back, holds again. Okay, touches twice on this vwap.
+* pulls back again, break up the vwap. This candle would be your entry candle down.
+* and you can see your Emas cross below again.
+* Okay. on this example over here
+* you can even take the cross. Okay, so let's say you want to take it within the range. You could take the cross here and enter on this candle. But just understand that this is your target.
+* Okay, the high of date, because that's where it combs our reject. Sorry.
+* Okay, so this is a little bit of a smaller play.
+* Thanks.
+* Does a vwap make sense
+* on the breakout? You always want to wait for a confirmation candle, no matter what breakout you take. So the confirmation candle is going to be the candle that holds so this candle and this candle, this one, is kind of tricky, just because
+* this candle I would have most likely entered on this candle, because it's giving you a lot of volume to the Upside and Virus probably pushed this all the way up, so this would have been a little bit tricky, but Overall ended up still bouncing, holding its ema here, bouncing, and making the move up. But this play right here might have been a little bit tricky just looking at it from now, but if I were to have entered, I would have most likely entered on this candle just because it broke through most of the levels to the upside.
+* and it was a strong candle. At 1 point. In this 2 min there was a lot of volume there, but for these 2 plays you always want to wait for the Confirmation candle here and here
+* for this play. Stop loss would be a break and hold back above Vwap. You can even make your stop loss. This level here, as you can see a touch 1, 2, 3 times before it broke, and then for this one, for sure your stop loss would be a break and hold back below vwap
+* everyone good. So far any questions on that.
+* Alright.
+* go ahead and move along alright. The next thing we're gonna go through. So those are pretty much all the indicators. I use not pretty much. Those are the indicators I use. I don't use any other indicators. The only other things I use is going to be level 2 and bookmap, which I'll go through. But tho that for me is not an indicator, it's more of order flow, so I don't classify that as an indicator, but as indicators go, those are the 3 that I utilize. Okay, Emas Vwap and my volume average indicator. And that's it.
+* hey? Don't overcomplicate your charts
+* alright. The next thing we're going to go through is the different market participants and the different orders.
+* and bid and ask prices as well as spreads. So there's 2 different market participants in the market. These are pretty much the people quote unquote that make the market. So first, you have your market makers. These are going to be your big banks, your brokerage firms, and they are ready to buy and sell a stock at any given second in the trading day at the market price. Okay, so these are going to be the people that buy your order or your order gets cell sold to these people.
+* or you buy from them at a market order. So market price is through them.
+* They
+* create liquidity. Okay, that put volume into the market without market makers. Obviously be way too hard for us to be able to day trade or scout, because it'd be harder for us to get in and out of positions quickly.
+* Okay.
+* when you use a market order to fill, you are guaranteed to fill in and out. Okay, it's pretty much a guaranteed instant. Fill
+* the problem is
+* with the market order. The market makers set the spread between the bid and the ask price.
+* They do that because they make their profit is based off of the spread. So the wider the spread, the more profit they make.
+* so they profit off of giving you the worst. Fill in and the worst fill out. Okay, so the highest fill in and the lowest fill out.
+* Okay, but you're guaranteed to get out of a position
+* or get into a position.
+* The other one we have is the Ecns. These are the electronic computing communications networks. So
+* they're all the computerized systems that fill in and out of your positions. Okay.
+* So what it will do is it'll rate. Read a bid and ask price. And once that bid and ask price match.
+* the trade is executed so that these are going to be your limit orders. Okay.
+* your limit. Orders are only going to be filled at the price you select, or better. Okay.
+* they profit off of the commission.
+* Okay? So between the 2 of these, you always want to use limit orders.
+* Okay, and
+* limit orders. If we go through the bid and ask prices here.
+* So
+* the ask price is, gonna be the price at which the next lowest seller wants to sell their share for. So if you look at the ask price that's gonna be the price that you are going to be. People are selling their shares for, or selling the contract for that is, gonna be the ask price. That's what you're gonna be paying for. This is also called the premium price. If you're looking at it through options. The ask price is gonna be similar to the premium price.
+* The bid price is the next price that the next highest buyer would be willing to pay for a share. Okay.
+* this is what people are looking to buy into the stockboard.
+* Okay? So when you put in a limit order, once the seller's price and the virus price match. The order is executed. Okay, so they both get the price that they want.
+* The spread is the difference between the ask and the bid price the spread is going to be your biggest indicator of liquidity of volume within that
+* stock. Within that strike. Okay, within the options contract.
+* the tighter the spread, the more liquidity, the more volume, the easier it is to trade that position, the more your premium is going to move, and so on and so forth. Thus the wider the spread.
+* the harder it is for you to be profitable on that position.
+* Okay, so the spread is the difference between the asking price and the bid price. Okay. So, for example, let's say on this, the ask price was $50 and 50 cents. The bid price was $50. The spread between the ask and the bid is 50 cents.
+* Now.
+* what is a good spread?
+* This will depend on what ticker you're trading, usually anything less than 10 cents. Is going to be the best indicator of a good spread. If you're trading stocks like Amd. Tesla, Nvidia Netflix. Now with Spx and some higher volatility stocks.
+* sometimes you'll get a spread that's like 50 cents
+* 40 cents. That's still a decent spread on those contracts because they tend to move in bigger increments. So Spx tends moving like a dollar. $2 increments off of a 5 point, or, you know a 3 point move.
+* So that's okay for Spx. Anything that's a dollar and up should be a red flag.
+* Okay, anything that's over, even too close to a dollar for those lower volatility stocks should be a red flag. Okay. So you want it tight spread so you can get in and out of your position as quickly as possible. And you can, because as a scalper, if you fill in, let's say at
+* $50. Okay? Or let's say you get filling out. That's a horrible like that's too expensive. But let's say you get filled in at like $4 on your premium. Okay, as a scalper. You're in the position for like 2 min that. And let's say the big price is
+* $5 and 50 cents. That means that there is a difference of a dollar and 50 cents that you have to make if you get filled in at the ask. So in as a scalper you don't have a lot of time for the stock to make a full dollar 50 move. It could potentially make, you know, a 50 cent move or a 70 cent move. And you're still not profitable.
+* Okay, so that's why it's really important to pay attention to the spread that you're trading when you are scalping, especially okay. With day trading and swing trading. You can be a little bit more lenient on it because you have time, but when you are scalping you cannot you have to make sure that the spread is tight enough for you to be able to make a profit in the time that you are in that position. If the spread is too wide by the time you get filled in and the stock makes them move, you could still be right on the position.
+* Okay.
+* so pay attention to the spread at all times.
+* Okay.
+* and these are your order differences. So you kind of went through a little bit. You're going to have your market orders, your limit orders, and then a stop-off order. So the market orders like I said, they're going to sell your position your contract
+* immediately. It's like an instant. Fill instant, fill in instant fill out. But you get the worst. Fill price in and the worst fill price out.
+* Okay? Because you don't know what price you're going to get executed at the market maker decides the price that you get executed at, so it's kind of blindly selling your position
+* a limit order is going to be an order that sells or buys a security at a specific price, or better. So, it's only going to sell it at the limit price that you selected, or better.
+* Okay, it's never going to sell it at a worse price for you to make a lower profit.
+* I always use limit orders I buy
+* at the ask or mid price sometimes. or I will. And I sell at the bid.
+* Okay, buy the ask, sell it. The bid
+* limit orders. The only time that have ever used the market order is if the market is moving completely against me randomly, there's news or something, and I have to get out as quickly as possible before I lose my entire position. And I think that's only happened to me like
+* a handful of times where I'm in a position, and this market has news come out, and I have to immediately exit, or I will lose way. Too much waiting to get filled out.
+* A stop loss order is just that it's to sell a stock at your stop price. I don't use stop orders. II at on options at all. I don't use trailing stops. I don't use stop orders because I'm scalping. So for the most part I'm watching the position. I'll set an alert. Maybe if I'm day trading if I'm swing trading again I set an alert for swing trades. You don't have to watch it constantly so.
+* but with swing trades and day trades you can set trailing stops. I just personally never have for me alerts always work. I was just set an alert because the reason why I don't sell I use
+* stop loss orders or trailing stops is because sometimes and there can be a spoof order that comes in a big order that comes in and the stop shoots past your stop loss and it
+* stops you out. You get filled out, and then it continues in the direction that you're watching for me. I like to actually look at the position, see if it's actually holding below my stop first prior to me exiting, which is why I use alerts.
+* If the Alert goes off, I'll go ahead and pay attention to what's going on, and if I see that the stock is reversing on me at that point I will exit. But I want to be the deciding factor on that. I don't want to use a stop loss order to be the deciding factor on that, because that's gonna fill, regardless of what you what the market sees or what you see. If you set that it's gonna fill
+* the only thing that the only time that I think this is good is, if you're trading features, I do think you should trade futures with a stop loss. If you're not trading features with a stop loss. That's a whole different ball game. But
+* that's the only time. Okay.
+* how long does it take for a limit order to get filled instantly on interactive brokers? Now, we'll say, I used to use thinkorswim.
+* There was a little bit of a lag when trading on Thinkorswim to get filled in and out, I would have to try multiple times. But with interactive brokers I've never had, an it's an instant fill. Which is why I use limit orders. And I always get filled in and out. I had to switch to interactive brokers, though, because Thinkorsim had a little bit of a lag.
+* But yeah, I get filled in instantly.
+* The reason why I don't say that in my class, like I don't have that on these charts is because it depends on the broker that you're using for me. And why I promote interactive brokers is because it's literally the best one that I've used. There's there has not, I think there's been, maybe, like one or 2 times in the past
+* 2, 3 years that I've used interactive brokers where I have used a limit order and I have not gotten filled.
+* And that's saying a lot within. Think our swim there was so many times.
+* So yeah, that's why I don't recommend using market orders. Just use your limit orders.
+* Find a good bro good broker for me, it's interactive brokers, and you won't have an issue getting filled in. Now.
+* how long are we in a trade when swinging? And if we do want to use a stop loss. What range do we aim for? So the timeframe that you're in the swing trade will depend on the trade that you're taking. It'll depend on
+* a lot of factors which will go through swing trading strategies tomorrow. But II every swing trade is gonna be different. Some is gonna be the next day. Some are gonna be a couple of weeks. Some are. Gonna be a couple of months. It just depends on the play that you're watching
+* again. Stop loss range will depend on the play that you're watching to every stop loss is gonna change, depending on your risk management, your risk tolerance and what the chart is actually showing you.
+* Can you show us on Thinkorswim how you enter and exit with limit order calls are put. So there's 2 ways you can enter on thinkorswim the first way. If you go into the trade. Tab.
+* Let's say you want to buy the 190 put on
+* apple here. Okay, so we're an apple's thing. You want to buy the 1 90 put you click the ask the order. Entry comes up here.
+* confirm and send, and when you first open this you want to make sure you set the
+* auto send up here. so you'll have that have to check that, and then it'll just auto send. When you you just press, send. and it'll send it. This is not going to work on mine. But if we go to like.
+* so think our slim, if you want to. Practice, has this on-demand feature up here. Okay, so if you log into your live account. You click on demand.
+* Okay, it'll take you to any time in the past where you could trade. Obviously, simulated trading. Okay? So we're going to go to this timeframe on Apple since April 20, fourth, 2,020.
+* Okay, let's say we want to buy apple. Let's
+* okay, confirm and send.
+* Then it got filled. Virtual bar up here, you can see.
+* and then you can see your position right here.
+* and I know it's not going up.
+* I don't know why this is not pulling this up. but there's a way you can. I'll figure it out. I think it's this. Oh, here we go.
+* Okay, so this is your Tesla list is still not, or your apple is still not pulling up all the way. But we're down here. $50 on this apple play. Let's say you want to close it.
+* Click the position.
+* Why is this not
+* sorry, guys? I can use this in a while, and I forget how to
+*  Unknown Speaker * Unknown Speaker
+* 01:15:08
+* move this up.
+*  Masi * Masi
+* 01:15:20
+* so again you would do the same thing. So let's say, or we're in this put position. We're up $25. And I'm going to close the position
+*  Unknown Speaker * Unknown Speaker
+* 01:15:29
+* oops.
+*  Masi * Masi
+* 01:15:30
+* We go to the options chain. So we have the 2 80
+* put, okay, and we have 10. So
+* if I want to close the position.
+* I'll hit the bid. Okay, so it's gonna sell the 10 contracts, confirm and send
+* send. And we made $20 off that play.
+* That's one way to enter an exit position.
+* The other way is through active trader. So let's open
+* another chart. Let's say you're watching Tesla. I'm sorry, Apple. I don't know why I keep saying, Tesla, you pull up Apple's chart here.
+* and right on the right-hand side.
+* We have active trader right here. Okay, so you pull up active trader.
+* Once you pull up active trader, you have to kind of set it up.
+* So we go into apple here, and we'll go into options.
+* You type in this.
+* Okay? So let's say, we're looking at the apple. 280 calls. So I'll select that. So we're now on the 280 calls. This is not apples. Open apples chart.
+* Okay? So we're we're watching the 2 80 calls apple.
+* Okay? So you want to. And edit this, too. So what you'll do is
+* I get rid of the cause right now. It's going to buy at market and sell up market with 10
+* contracts, so I'll remove that. So I
+* remove these. I pull these down. and then I do buy at the ask and sell at the bid.
+* and I'll just edit them. You just move them around. Okay. So there. buy at the sell at the bid, or you can pick what price you want to buy or sell at, so if I pick it.
+* send.
+* it'll look to fill at that price that I selected. If I just do buy at the ask. then it filled it already.
+* Okay.
+* okay. And then, if I want to sell that, this is probably easier than clicking. You just click, sell at the bid.
+* sell it, and it sold it. Okay?
+* And you would monitor the trade the same way. So if you go here, there's your trade.
+* So we made $20 on the second trade. So total.
+* we have $40 on display.
+*  Unknown Speaker * Unknown Speaker
+* 01:17:51
+* Okay.
+*  Masi * Masi
+* 01:17:54
+* and this is what I was actually looking for. It's not under the tree, tab. It's under the Monitor tab. Once you enter a position of like how to bring fart there. So when you monitor your position. It's under the Monitor tab. So active trader on Thinkorsim is going to be the easiest way to fill in, out of, in and out of your positions.
+* Okay? And you just click auto. Send here so it'll auto send it, and you won't get the pop-up box
+* auto sends. It won't get the pop-up box.
+* Do you try to enter and exit at the mid price? I do on interactive brokers? But usually I just use the ask price.
+* Will you show us how to fill on interactive brokers tomorrow? So interactive brokers? I can't show you like this because I use hot keys. So I do have a video on Youtube. That shows how to set up your hotkeys on interactive brokers. I'll show you the 2 ways that you can set them up. But II literally can't show you how to fill, because I use my hotkeys on my stream deck
+* or my keyboard on my computer so I physically can't show you. But
+* I'll show you how to set it up, because really easy but make sure by tomorrow I was gonna tell you guys this in the end, that you have interactive brokers set up so that if you have any questions I can just go through it tomorrow as well. But I have 2 Youtube videos on interactive brokers that goes through the entire setup and how to set your chart and Tai platform up to hotkeys and book trader. So it's really different than how you fill in on on thinkers, because it's just all using hot keys or buttons.
+* Yep.
+* any questions on that so far.
+* Alright, let's move right along
+* alright. So the next thing we're going to go through is level 2 and times in sales.
+* So what is level 2 and time itself so level 2 is going to show you a ranked list of all my order on things got filled up. Finally.
+* let me get out of on demand. Okay.
+* so level 2 is going to show you the list of best bid and ask prices from each of the market participants. So it's just literally going to show you all of the orders that are waiting to be filled at specific prices or have filled at specific prices.
+* It's gonna help you understand price action market depth. If buyers or sellers are in control of the position and so on and so forth. Okay.
+* so what you want to look for when you're looking at level 2, or what you
+* see when you're looking at level 2 is this?
+*  Unknown Speaker * Unknown Speaker
+* 01:22:21
+* Where's the sleep.
+*  Masi * Masi
+* 01:22:25
+* So over here we have the name of the stock. So this is Boeing's level. 2 BA, Boeing. Okay, this is the current price of that stock at the time.
+* This was the last buy order that was filled, and this was the last cell order that was filled.
+* Okay.
+* this is a list of the market makers.
+*  Unknown Speaker * Unknown Speaker
+* 01:22:50
+* Okay.
+*  Masi * Masi
+* 01:22:51
+* on the left side you have your buy side. So these are the bid prices
+* and the size. So the size is in multiples of 100. S(020) 010-0500 over here we have the ask price. So the seller's price.
+* and then the size of the order again in multiples of 100.
+* Okay. so
+* one thing I will say, level 2 takes time. Okay, you
+* need to
+* watch it a few times before you learn how to actually utilize it now, because I've started using bookmap. I don't rely too heavily on Level 2, but I think it's really helpful to know both of them.
+* So how do you read level 2. What to look out for now? Just looking at? It can be a lot all at once, but you only need to really understand what to look for. Okay, let's say
+* you are in calls. Okay? So you're in calls on a stock on BA, let's say.
+*  Unknown Speaker * Unknown Speaker
+* 01:23:54
+* and BA is currently at 1, 27.
+*  Masi * Masi
+* 01:23:58
+* Okay, you entered at the break of 1, 27 on BA,
+* your target, let's say on B 8 is 1 29.
+* Okay, in between 127 and 1 29, we have a level at 1 28.
+*  Unknown Speaker * Unknown Speaker
+* 01:24:14
+* Okay?
+*  Masi * Masi
+* 01:24:16
+* So
+* let's say you're in calls. You exited. You're approaching the 1 28 level here. Okay, so this is your 1, 28, as BA is approaching 1, 28 into your profit target of 1 29. You want to see that from 1 28
+* to 1, 29. Okay? So you're in calls. You want to see if anywhere on the cell side, you see significant sellers sitting. Okay.
+* let me backtrack.
+* Let me start over. Forget what I said. For now. Okay, first.
+* I went out of order.
+* Let's say you want to enter Va at the break of 1, 27,
+* or 1, 28. Actually, let's say, okay. So you're looking to buy calls as BA breaks 1, 28.
+* What you want to see on the bid side first, you want to see orders come in at 1 28
+* with bigger size. So you know, 10,
+* 20,
+* 11, because this is in multiples of a hundred. Okay?
+* So you want to see by orders. So the price execution here should be at 1 28 or higher. This 1 28 level should be holding as you look to enter. So let's say it holds, and you look to enter here. You saw the orders coming in. 1, 28 is on. The bids are a holding, and it's increasing steadily. Okay.
+* let's say your target is 1 30.
+* You then, once you're in the position when I go over to the cell side and see from 1, 28 into 1 30. Are there any levels where you see significant sellers?
+* Okay, so let's say, at 1, 29,
+* 1, 2950. You see a large cell order. Let's say, you see, like 30.
+* Okay? And you see, like 10. So you see, sellers sitting at 1 2950,
+* waiting for their orders to be sold
+* are waiting for their orders to be filled. That should show you that at this level you might see some resistance. So at this level
+* you should take some profit.
+* Okay.
+* that's if you're in calls to the upside.
+* Let's say you're looking for puts.
+* Okay, let's say you're looking to take puts
+* below 1 29 on. BA, okay.
+* so what you want to do is you want to look at the the bid side again? Sorry.
+* Okay. As the stock approaches 1, 29. You want to see 1, 29 drop off.
+* Okay. So every order should be going in below 1, 29, okay, with higher size.
+* The order should be going in at below. 1 29.
+* I'm sorry, not with higher sizing, but the bid size should be dropping below 129. The ask side should be higher orders. Okay? So bigger cell orders are coming in.
+* You enter the position
+* once you enter the position. Okay, let's say your target is 1 25
+* you want to see on the bid side.
+* at any level between 129 and your profit target of 125. Do you see any significant buyers? Let's say, at 127, you see a wall of buyers sitting.
+* Okay should
+* signify that at this level, you could see some support at this level. You might need to take some profits.
+* Okay.
+* so to recap again.
+* if you're in calls.
+* Okay? First thing you want to see
+* your level. Let's say your level is 1, 28. The bid should be above your level and steadily increasing with higher size orders.
+* Once you're in the position, this is for entry. Once you enter the position, you look at the ask side and see if any levels from where you entered to your profit target. You see strong sellers sitting.
+* Okay.
+* let's say your inputs at 1, 27. You wanna see the bids dropping below your level.
+* and steadily holding below that level with higher cell orders coming in
+* for entry. Once you enter, you look at the bid side. and see if between 1, 27 and your profit target at 1 25.
+* Do you see any big buyers sitting with bigger size?
+* Okay. does that make sense?
+* Someone said, how do I get this screen? If you go into thinkorswim.
+* it says, level 2 right here and you click it. And there's your level 2.
+* Now the downside to level 2 is that sometimes you can have Spoof orders. You can have. It shows you every order whether the order gets filled, whether it's cancelled, whether it didn't get filled, whether it's a Spoof order, it shows you every single order that has been put through, filled or not, canceled or not on level 2, which can be a little bit confusing.
+* because sometimes
+* it's not going to fill. It's just an order that got canceled, and it's still on there.
+* So what do you do you use times and sales? Okay? So use level 2 in conjunction with times and sales.
+* Times and sales is going to show you. Every single order that has been filled. Okay. is going to show you every order that has been filled. You cannot hide anything from times and sales.
+* Okay.
+* usually love times in sales is used by scalpers or day traders because you're getting immediate price action on the stock. What's going on? Buyers are heavy sellers are heavy who's in control. So on and so forth.
+* Okay, you can identify momentum if you see acceleration and orders to one side or the other.
+* So times and sales before I go through, it is right here.
+* Okay.
+* it's not going to show you because the market is closed right now.
+* So basically, this is what it looks like. so you will have the time. The order was filled at the price, the order was filled at
+* the bid price. At that time
+* the ask price at the time was filled, and the size the order was filled, for these are not in multiples of 100. This is straight up the size.
+* Okay.
+* the colors represent. So let's say, this was ordered at one. This was filled at 1, 2740. This was filled at 1, 2741. It signifies that this order was filled at a higher price than the order previous to it. Okay, order was filled at a higher price. It's not until right here that this order was filled at a lower price. So it's red.
+* higher price green. Okay?
+* So what do we look for in times and sales.
+* Okay, let's say you're looking for calls above 1, 28.
+* Okay.
+* What you want to see
+* is the price execution
+* going in at the ask price or higher.
+* You want to see 1 28 populating and consistently increasing. Okay, so higher priced orders are coming in consistently above 1 28.
+* The orders are getting filled close to, or are right at the ask.
+* because that means that buyers are just trying to get into the position. They don't care what they get filled out. They're willing to pay the asking price just to get filled in with higher size
+* to the upside. And you want to can see that consistently printing higher priced orders, higher size going in at the ask
+* on the opposite side. Let's say you want puts. Okay
+* at 1 27. You want to see the price execution going in at the bid price or lower.
+* Okay, so buyers are willing to pay. Our sellers are willing to pay buyers whatever
+* are willing to sell at whatever price the buyers want.
+* They don't care. They just want to exit the position.
+* Okay? So the print should be coming in at 1, 27, and continuously decreasing with higher orders.
+* with the price execution going in at the bid or lower.
+* So if you see if you're more of a visual learner, let's say the stock is approaching a level, and you're in it, or you're looking to enter. If you see puts and you see a whole print of consistent red with big size. It signifies that the price execution is decreasing. Sellers are in control of the position, and it's steadily it's going to go. It could potentially move. Make the move down.
+* If you see a whole bunch of green print size consistently coming in higher and higher and higher at the ask price. High volume, high size
+* signifies an uptrend could break to the upside.
+* Okay.
+* data for level 2 and times in sales look concentrated on current market price, no visibility around target price to initiate position to exit. That's not true. Times in sales is concentrated on current market price, but level 2 can show you
+* Orders that have not been filled yet at yet that are sitting at specific prices.
+* So for level 2, you can actually see levels that you could potentially look for exit support or resistance levels approaching, depending on what? What side of the position you're in
+* if you see higher walls like a wall of seller sitting, or a wall of buyers sitting at a specific level that could be a potential exit point for you.
+* Times and sales is more concentrated on current market price. What the stock is currently doing, because these are orders that are coming in at that point, which is why mostly scalpers and day traders utilize it with Level 2 again, mostly scalpers and day traders utilize level 2 as well, but
+* you can definitely find exit points on level 2 as you look for where you see walls of buyers and sellers similar to when we go through bookmap, it's the same exact thing you look for where you see walls of buyers and sellers to look for potential exit points, or even entry points.
+* Any other question on level 2 end times in sales.
+* I put a little breakdown of reading times and sales here for you guys to kind of print out when you're learning it. It's easier to see.
+* this, when you kind of see a breakdown of what to look out for.
+* Is there a way to practice reading level 2 and times and sales. Yes, there's 2 ways. One you can use on demand feature with Thinkorsim. So if you go into on demand.
+* you might have to wait, I would say, probably like
+* 15 min. Let it run a little bit. Because it's a little lat delayed and laggy at first, but if you give it like 10 to 15 min, once it starts running. Then you can really see level 2 and times and sales. It's just slower, which I think is a little bit better, because during market hours it's hard to learn, because it's moving so fast. So this is one way to learn it the other way is to record your screen.
+* You can use ice cream recorder or obs to record your screen and then go back and re-watch what level 2 and times and sales was doing at that time.
+* because you need to slow it down. Times and sales moves extremely fast as does level 2, so you can be hard to catch specific things. So if you're learning, you want to slow it down, re-watch it, and then you can learn what to look out for a lot
+* better clicker.
+* So instead, do you rely heavily on level 2 in time and sales I did before I started using book map. Now I rely more on bookmap than I do on level 2 and times in sales. I still always have times and sales up, no matter what, and I always have level 2 up.
+* Because I still think it's helpful to visualize it. But book map has kind of taken over order flow for me. So I mostly focus on book map. The reason why I teach both of it is because level 2 and times in sales is free book map you have to pay for. So I want to give people the option to look at both
+* if they want to.
+* But I will say, once I show you guys bookmap, there's really no comparison like it's just.
+* there's no comparison to it. So it's worth it, in my opinion.
+*  Unknown Speaker * Unknown Speaker
+* 01:39:49
+* Okay.
+*  Masi * Masi
+* 01:40:44
+* I'm going to show you guys bookmap today. But
+* after the break.
+* okay, so what we'll go ahead and do, we'll go ahead and take a break. I'll give you guys a 20 min break, because there's just a lot of information that I just threw at you guys. So let's break until 1250. So a little over 20 min, and then we'll come back at 1250, and we'll go through book, map and chart patterns and all that good stuff.
+* Okay.
+* alright, guys, let's get back into it any questions on anything we've gone through so far.
+* I know it's a lot of information today.
+* but I promise everything will come together tomorrow.
+* Alright, if there's no questions we'll go ahead and get started. So the next thing we're going to go through before we go through chart patterns is, I'm going to go through a book map. So bookmap is another way to utilize order, flow to
+* understand what's going on in the market, whether buyers are heavy or sellers are heavy, what levels you could potentially see
+* buyers stepping in or sellers stepping in and so on and so forth. So it's really helpful to identify entry points helpful to identify supportive resistance levels and profit targets. Okay?
+* So
+* when will the recordings be available? They will be available in the discord on Sunday night when you guys get access all right. So we're obviously market is closed right now. So we're gonna have to do it in replay mode. But I'll show you guys how to sign up for a book map after I go through it a little bit.
+* So basically, you can look at any ticker you want on book map for me personally. Usually, I'm paying attention mostly to esth. And then as that to get a feel of what's going on in the overall market. I'll also pay attention to sometimes whatever ticker that I'm watching, or another member is watching. I'll pay attention for them to see where there's liquidity, or where there's buyers or sellers, so on and so forth. So this may or may not load properly. I'm on my macbook. So sometimes this does.
+* It's kind of annoying. But let's see if we can
+* open data file. So you can record bookmap. And it automatically records everything to your system.
+* you don't even have to have anything recording for you. Bookmap does their own like recording. So it's kind of cool.
+* Let's see if it populates
+* or not.
+* 9, 20
+* to Januaryteenth.
+* Let's do
+* hear me not
+* do what I wanted to do right now.
+* So book web is sometimes really heavy, so running it on your Mac. Mac sometimes slows it down a little bit, so it's better to run it on a desktop, or at least have a separate screen. Okay, here you go.
+* I think we can kind of see.
+* So you can zoom in and out to have our timeframe you want. I usually have mindset to every like. It's like a 5 min increment.
+* So
+* zoom out as much as I can, and know what it. It'll be way easier than what it looks like right now.
+* it's being kind of annoying.
+* So yeah, mine's on. Es is usually spaced out to like every 5 min or so.
+* So basically. And then I'll zoom in as much as I need to to look at what's going on on kind of a level to level basis.
+* So basically when you
+* so when you're looking at book map, like, I said, book map is gonna show you a order flow. So it's gonna show you where there's buyers sitting where there's sellers sitting. If orders are getting filled at those levels,
+* so pretty much, you can color code it. So up here it has 3 different color coding systems. I keep mine on the bottom one. If you don't like color coding it, you don't have to. You can just watch the orders on the right hand side. I like to see it visually, so I have mine color coded, and you can make it as dark or as bright, or whatever works for you and your eyes.
+* So I keep mine to right about here, and like I said, I do a 5.5 min increments. So you can see down here 9, 23, 9, 2330. You can go all the way down to like 1 s increments even but like I said, I zoom pretty far out of mine, just so I can see an overall picture.
+* When I'm trading. So just looking at this. Obviously, this is right before market open. And this is moving a little slow, but
+* basically what you want to see. So if I'm looking at Es features here, and I'm looking to the upside and downside prior to market open. I can see that to the upside. We have sellers sitting at around 48, 32. So we have some seller city. You could see it's marked by this red column as well, and then
+* you can see right before market open. We have about 5 min to the downside. We have a heavy, a buyer sitting at 48 20. So before market opens, those are, gonna be my main 2 levels on es, obviously depending on what I see with my price action first. So I'll chart the stock first and then depending on my support and resistance levels that I have, I'll pay attention to what I see on book map as well.
+* So, just looking at book map like I said, 2048, 24,820 to the Downside is going to be support, and then that 48, 30, and then now even 48, 35 to the upside is going to be resistance.
+* So what you want to see happen when you're looking for, to either break to the upside or to the downside. Let's say you're looking for a break to the downside. Okay, you see it approaching. Let's say this, 48, 20 level. Okay? And hopefully, it approaches this, so we can kind of see it.
+* You see it approaching this 48, 20 level. What you want to see on bookmap
+* is you want to see heavy sell orders come in similar to what you see here. Okay, heavier cell orders coming in as the stock approaches that level. That means there's significant sellers stepping in to this of the position at that point as it approaches that level, you want to see the orders get filled. So you want to see all of these orders.
+* They'll get filled through. If you see a a red bubble here, it'll show all the orders that get filled. So if you see those orders get filled. What can happen is one of 2 things. Those orders get filled extremely quickly right on the spot, and the stock continues down. That signifies a strong sell.
+* Okay, what can happen is if those orders slowly get filled and you'll notice that, like you can see here, these orders are slowly getting filled. There they got filled, and the stock is continuing down to hold you. Wanna see these orders continuously coming down if you start to see it holding something like this. That means that it's not a significant cell. But if you see something like this, you can see
+* getting filled getting filled, and sellers are still heavy to the downside signifies that it's a strong cell, and you can look to enter. Now let's see if it clears this 48 20 level
+* as it approaches here.
+* so we can see sellers are still still very heavy on this. We're starting to see a little bit of virus coming in at 48 20 wasn't able to clear just yet.
+* This is right at Market Open. We're getting a lot of volume. So this is not gonna be. Whoever is not muted. Please mute yourself.
+*  Grace’s iPad * Grace’s iPad
+* 02:12:27
+* I thought I muted everyone
+* and the glorious destinies out of
+*  Masi * Masi
+* 02:12:39
+* okay. Oh, fuck.
+* So then I'll zoom in slightly once it's approaching that level, and you can see their orders got filled. Now you want to see consistent cell orders come in into the next level
+* should have paused. So I really don't know what happened here, so we can see here at 48 20. I don't know what just happened to book map, but
+* 48 20. These orders got filled. Okay, what you want to see once the orders get filled is the sell to continue down. You want to see heavier sellers continue to come in into the next level, and you can see that it did. It must have stopped reporting at some point here, but you can see that it did continue to hold. But you want to see sellers stay consistently heavy. You don't want to see it go into buying pressure at any point, as a stock breaks that level.
+* If you start to see that sellers slow down slightly, the orders get filled, and then, you see, slowly, buyers kind of stepping in. It could mean that we could potentially bounce. So you want to see heavy selling pressure clear all the way through. That signifies that the stock is going to continue on the path that it's on to the downside.
+* If you see, that's one thing. The second thing that you want to look at is something like this. Let me show you guys actually posted this in the discord.
+* If you see something like this on bookmap.
+* Okay, so
+* this is kind of a really good example. Here you can see that
+* on es, we were holding this 48, 88 level. You can see it touched once, twice. It even touched one other time. Previous to this example. Here and then to the upside, we have a huge wall. So it's not it. The wall goes from around 48, 96 t04899484900. Even almost okay. So this means that this is kind of a zone in book map. Okay?
+* So you don't wanna enter what I did here on this day, cause I took a rejection. I took a breakout play is that I entered on, let's say, like the break of 48 96. But I didn't realize that there is a whole wall from 48 96 to 48 99 that the stock needs to clear prior to me entering that position. So if you see something where it's a wall.
+* you want to wait for that entire wall to clear if you just see a specific level. So, for example, right here it was just one level, the 48 88 level below 48 88. I had room all the way down to 48 80. So there's an 8 point room, our 8 point drop on es.
+* so that signifies that the stock has room to drop. So if you're trading spx or spy, you could potentially take that play, as Es has 8 points before the next significant level, where there is buyers sitting. Okay? And you can see in this example
+* how it filled these orders initially filled some of the orders on this whoops
+* filled some of the orders.
+* What the hell's going on right here, but not too significant. On the retest. Pull back here, retest. It filled the rest of these orders, and you see strong selling pressure all the way down.
+* Okay, here where you see seller step in. Buyers, step in. Sellers. Try to fill buyers. Step back in.
+* Okay.
+* versus here. You can see sellers held all the way through.
+* Okay, so that's the difference. And that's what you want to look out for when you're looking for a stock to break through a level
+* of support and resistance on bookmap to break through a wall of sellers or buyers and that's for entry for exit. You're gonna look for pretty much the same thing. I don't like you doing this.
+* You're gonna look for pretty much the same thing so like I said this was a play that I actually took on Spx with Es. It cleared and had 8 points to the next level of support. You look for levels in between that where there's some buyers sitting or there's significant buyers sitting. And then you could potentially take profit. This would be the final profit target, because there's significant buyers. But anywhere between that, if you see any levels where there's buyers waiting,
+* then you want to also take profit at those levels as well.
+* Okay, bookmap like level 2 and times and sales takes time. It's a lot easier to read. A lot easier to see? Obviously, when when market is live, because it's very visual. Okay, you look for red. You look for big orders. The numbers are marked here. The levels are marked here. So it's really, really easy to identify where there's buying pressure, where there's resistance, where there's a selling pressure where there's support.
+* Okay.
+* you can tell there's a wall. Someone asked, how can you tell? There's a wall, because you can see here
+* from there's significant
+* sellers here, significant sellers here, and significant sellers here. Okay, you can see, there's a lot of sellers sitting in between these 3 levels. There's still walls of sellers sitting, sitting, sitting at every single level. So from here from 48, 99, from 48, 96 to 48, 99 is a wall.
+* Okay?
+* So it needs to clear that entire thing before I would look for entry. That is how you avoid getting faked out.
+* Yes, you can add vwap on book map. You can add a couple of things on bookmap. So if you go into studies and confirmations, Vwap is right there. I have Viewop added on my book map.
+* There's a couple of other things I have added, but for now don't worry about any of the of that. You can add candle 6. You can play around with it. There's a bunch of things you can add for me. Personally, I just have vwap the rest of this is already defaulted to add on there, and that's really all you need for bookmap. I do have one other add on in addition, which is market pulse, but you have to pay for that. So
+* I'll show you guys what it looks like. I don't know if it'll come up or not on this. But
+*  Unknown Speaker * Unknown Speaker
+* 02:18:55
+* let's see.
+*  Masi * Masi
+* 02:18:59
+* it's a volume pressure indicator. So this is what it looks like.
+* It's this little Widget, and it'll show you. Yes, and Nasdaq. And if buyers are heavy or sellers are heavy. It's actually very visually
+* easy to see volume in the market. If it loads here it'll I'll show you guys so for bookmap. I'll send you guys a link to sign up in the email
+* bookmap overall it is you have to pay for it. It's not free. So in total for to view futures and any other tickers that you want to look at. It is $89 a month for bookmark, and the data through Dx feed or rhythmic data, whatever you want to look at.
+* And then I think this add on, I'm not completely sure. The price of this, I think, is another like 5 bucks or something like that to add market pulse. But this is what market pulses. So you can see
+* clearly, whether buyers or sellers are setting. How many millions of buyers or sellers are there? So this shows you can see their buyers stepped in right at that. 48 15 level. Those orders got filled. You can see that they got filled. You can see that there's volume there a more selling volume than buying volume. But you can see that once it filled those orders we got a little bit of a bounce
+* volume dropped back, and buyers are still there present. So you want to always see one side taking control over the other. To identify with this. If there's a lot of volume in the market, if it's in the millions. Anything in the hundreds of thousands usually signifies low volume on es in the Nasda and market tends to be choppy.
+* So I use this little widget in kind of conjunction with what I see on es. And then as that. And that's how I utilize book map.
+* Okay, so you can also do this via level 2 in times in sales. You're not obligated to utilize bookmap
+* but it's just I have been using it. I think it's been like 7 or 8 months now, probably even longer, and it's
+* pretty much become a staple in my trading strategy. I don't enter a trade without looking at what I see on bookmarks.
+* Mossy doesn't make sense to watch Es, regardless to what stock you trade. Yeah, you want to pay attention to both features on Nasak. And es. Now, it depends. Like, if you're trading BA, or you're trading some of the bank stocks. Usually they don't. If they have news behind it, they don't follow to significantly, significantly, to what? Yes, and the Nasdaq are doing. But if you're trading any of the tech sector you wanna make sure
+* you don't want to focus too much on Es, mostly Nasdaq. But you want to make sure that they're both in sync as long as they're both in sync moving in the same direction as Long Nasac is going, they're going to react more heavily to what the Nasdaq is doing. Spy and Spx are going to react more heavily to what es is doing.
+* My bookmark doesn't have order, book and volume in the upper right hand corner. Is that a higher package or a setting. This is not a higher package. It should auto populate. I didn't add this.
+* let me double check. It might be in the.
+* I don't know about this.
+* please?
+* I think it's this. You just make sure this is checked. and the volume is checked on these 2.
+* But I don't think you need a higher subscription for it.
+* To be honest, you would think that. I have traded on just my ipad and my macbook when I travel. That's my trading setup. So that's just 2 screens. And I still watch book map. And I still can. I mean, obviously, it's I feel like there's experience involved in it, too, because I'm able to see everything very quickly over time and just click back and forth.
+* but that's just
+* I don't think you need that many screens. I think one screen is more than enough, like a decent size screen and your like laptop, and you should be good to start off with
+* when I first started trading. That's all I had. When I was at work it was different. I only had pretty much my ipad and my phone but when I started trading at home I had one screen. It was a 36 inch screen and my laptop, and that's what I would trade on. I would fill my orders in on my phone, and I would watch on my laptop and my screen.
+* That was when I was trading on Thinkorswim. But
+* even now I have 2 monitors. But I pretty much could get away with using one like, because I have just have so much space.
+* Just figure out how to kind of
+* set everything up to where you can see it very clearly. Focus on 2 or 3 main tickers that you're watching. Don't focus on every single ticker, and only have those charts up.
+* Have your bookmap and level 2 on each chart up, and then, just wherever you fill. And that's all you really need.
+* Book map just with level, just like level 2 and times in sales is going to take time to learn just watch it throughout the day. See what you see. But I do think it's easier to learn and utilize book map than it is level 2 and time and sales, I think. Level 2 takes a little bit longer to learn and it's a little bit more difficult because you can't visually see the colors and stuff and a lot. A lot of people are visual learners. So
+*  Unknown Speaker * Unknown Speaker
+* 02:25:17
+* okay.
+*  Masi * Masi
+* 02:25:24
+* any other questions on that
+* is this, the 2 min. So you can scroll out and in. So this is the 5 min chart. How it would look like if you scroll back in, you can go all the way down. This is like the 1 min
+* you can scroll even further 15. Second.
+* it just depends on how you like it. I usually like mine sitting at the 5 min overall when I'm looking at it, and then, as it approaches a level that I'm watching, then I'll zoom in into like the 2 or 1 min kind of breakout, so I can see if it's actually filling the orders or not.
+* Everyone good. Any questions on this so far.
+* Could you elaborate on the wall you saw as a resistance. So, for example, if we're looking at this on es
+* you can see at 48 35, actually, let's go.
+* This might not be the best example. So right here. And let's look at this.
+* And so we're just zoomed out here on yes, you can see that?
+* We have looking at the downside. We had a little wall here, oops a little bigger.
+* We had a wall here.
+* We had a huge wall
+* here of buyers. This, these colors are like crazy kids to shit.
+* Okay?
+* And then to the upside, we had a wall here.
+* Okay.
+* so this is the overall levels that the stock was trending in between, that it needed to break. You can see that it tested the bottom. It tested the buyers.
+* I tested. The sellers wasn't able to clear those buyers to the downside and the stock bounce to the upside buyers were able to take control fully broke out, and the stock continued up.
+* Okay.
+* so. But throughout the day it was kind of just trending in between here wasn't able to break to the downside wasn't able to clear the buyers, but to the upside it was able to clear the wall of sellers, and then the stock continued up. Anytime you see this right now.
+* like, if you if you saw on my screen, if you see this where it's like this, it's because
+* I closed my computer and bookmap was still running, and it was recording. So it just kind of stopped recording at this point. It won't record if your screen is in like screen saver mode, or anything like that, it'll stop recording. So this doesn't mean anything other than my screen. Just stop recording.
+* Okay, but you can see, broke out of this wall
+* continued up. We had a little bit of a wall here that it pulled back on, but filled and then continued up.
+* Okay, into the next wall of 48 30 wasn't able to clear those sellers. Yeah. Wasn't able to clear those sellers and the stock rejected and came back down to its V wall.
+*  Unknown Speaker * Unknown Speaker
+* 02:30:53
+* okay.
+*  Masi * Masi
+* 02:31:10
+* the blue shaded area is the same thing. It just signifies that there's not that many sellers or buyers there at that point.
+* that's all it is. It's just showing you that there's less buyers or sellers in comparison to the other levels.
+* The shading is showing you what's heavy, and what's not heavy. If it's blue shaded dark blue, there's very minimal buying or selling. So to the upside, there's very minimal sellers sitting there. If it's a little bit of a lighter blue. There's still sellers there, but not too heavy. If it's orange, you don't have to color code it. You can literally keep it as gray and white. If that's more helpful for you and just looking at it like this, the color coding is just for people that like to see it visually. I like to see it visually. So if there's red signifies that there's heavy
+* sellers or buyers sitting there, if it's yellow, there's still still some that you should keep an eye out, for if it's light blue or blue usually signifies that there's nothing heavy there just yet. As it approaches that level we may be able to see. But if we scroll up here you can see that that heavy selling
+* is at 48, 30, and then above 48, 30 is 48, 35, because between there, there's really not a lot of sellers sitting. And then from 48, 35, next level we see is 48, 30, 48, 40, still not too heavy. But there is some sitting at that level, and that's what this should tell you
+* so? Someone asked. I'm trying to understand the green and red dots more. Sometimes I see a big green dot and the price reverses and doesn't go higher. Same with the big red dots. So really, it depends on what you're seeing getting filled. So if you hover over it, it'll tell you. I can't move my mouse, but it'll tell you. Ask the volume it got filled at, and the price it got filled that
+* at the time. So you want heavy volume to come in, so you can see here we got volume coming in here kind of cleared, but then buyers stepped back in heavier volume on the buyer, buy, buy side, and pulled the stock back up again. Came down slightly. We got some sellers sitting here, but buyers are still active now as it approaches this big wall, you can see.
+* In comparison to where the buyers are sitting on these 2 fill orders versus these sell orders. You can see, sellers are not as heavy. Okay, so it has to be heavier volume coming in. There's not a lot of volume coming in on the sell side on these red dots.
+* buyer step back in again, tries again. Still not enough volume to come in. Still, not enough orders getting filled, steps back in, buyer step in again. No sellers right here at this point.
+* and then bounces off of the wall. And right here you get significant buying volume coming in across Vwap. That volume stays consistent. There's no sellers. I don't see any selling pressure really right here at all. Virus hold all throughout the wall with heavy buying. Even when sellers start to step in. It's not heavy selling pressure. It's similar to watching your volume. Average indicator. Okay, not heavy sellers stepping in.
+* Buyers are still heavy. We pull back slightly, still not heavy sellers stepping in buyers, still heavy buyers continuous up. This is not going to be clear, but you can see overall. So that's what you're kind of looking for. If you want to see, sell orders come in as to be heavier sellers and in control. Usually you'll see this at a rejection or a bounce point is where you want to pay attention to the volume of the orders that are coming in.
+* Okay. So here we start to slow down. There's a wall again. We start. We had some salary selling. Come down, come down, come down.
+* slowed down. We're getting lower volume. Really, no volume at this point. As it approaches the wall, we bounce back up.
+* Okay, comes back down. Very minimal volume bounces back up. You need heavy volume to clear this amount of buyers on this at this, at these levels. Okay.
+* yeah. So always hover over and see how much is actually getting filled, at what price points, and so on and so forth, because that'll help you identify if it is heavy selling pressure or buying pressure. If the stock is going to be able to break or not, and you want to see it continuously hold continuously held here, continuously held here.
+* Okay, this was a rejection play. This was a bounce play. Okay?
+* And obviously use this in conjunction with the levels you've actually charted as well to kind of identify where your entry points are where your exit points. Are
+* any other questions on that?
+* All right, moving right along.
+* Exit out of this
+* alright. Next thing we're gonna go through is chart patterns. Okay? So we went through candlestick patterns. Now, we're gonna go through chart patterns. I think there are so many chart patterns out there that you can learn from the ones that I've selected are the ones that one I use heavily and I think are the easiest to identify. To get started off with when you're first training and they are the highest probability setups, in my opinion.
+* Okay, so the first ones we have are your triangle patterns. These are probably my favorite patterns to take especially if the market is choppy or it's in a consolidation period. You'll usually see triangle patterns a lot when we are in those type of market conditions.
+* another thing is.
+* what did I want to say? Oh, these are high probability setups really easy to catch.
+* So the first one we have, we have your ascending triangle. So we have the resistance level here that stays the same
+* at the bottom. We have a trend line that's making higher lows. The stock squeezes. Another name for these is what I wanted to say is a squeeze. So if we say the stock is squeezing usually signifies that it's in a triangle pattern.
+* the break out of the resistance would be your entry. What usually happens is stock breaks out the trend line is your stop loss so that resistance level is your stop loss cause it can come back retest that, and continue up
+* on a descending triangle, you have a level of support that stays consistent. You have lower highs breakout to the downside.
+* Now I will say on these 2 that the breakout can happen on either side. If it just breaks out to the upside for this one. If it breaks down to the downside, it just fails, and similar to this, if it breaks this way it fails. But I've seen this breakout happen on either side
+* for a symmetrical triangle. You have lower, highs.
+* higher lows, the stock squeezes, has nowhere to go either up or down on a symmetrical triangle. The breakout can happen on at the either side. It's a high high probability on whatever side it breaks out.
+* Okay?
+* And a most recent example of this.
+* let's turn my phone in here
+* and we go to.
+* Yes.
+* you can see here. Yes, was in a squeeze. Okay.
+* you can even see this on the 5 min.
+* Lower, highs, higher lows, stock breaks up to the outside upside, it goes straight into the next level of resistance that I had on it.
+*  Unknown Speaker * Unknown Speaker
+* 02:41:29
+* Okay.
+*  Masi * Masi
+* 02:41:35
+* here's another example. This was Tesla.
+* When you're looking at a chart pattern, you can find the pattern on any time frame, but when you find it you play it on the time frame that you find it on. So if you find it on the 2 min you play it on the 2 min, 5 min, 5 min. If you find it on the daily, you would play it as a daily
+* chart pattern, so you would swing trade it or day trade it so, depending on the time frame, you find it will depend on what strategy you implement to take that position.
+* Okay.
+* stock squeezes lower, hot. higher lows breakout happens to the downside.
+* You wait for one candle to hold. This is the same concept, one candle to hold open and hold below. That is your entry candle right
+* right
+* moving right along
+* alright. Next we have your double tops and double bottoms.
+* This is very simple. So you have a neckline on a double top. This is a bearish pattern. So you're looking for a move down
+* you have. I'm sorry it's not resistance. This is resistance.
+* resistance. and your neckline is your support. You wait for the breakout of the neckline for entry for puts
+* on a double bottom. This is a Bullish pattern.
+* You have resistance.
+* support, support, breakout of resistance for calls.
+*  Unknown Speaker * Unknown Speaker
+* 02:43:46
+* Okay.
+*  Masi * Masi
+* 02:43:47
+* an example.
+* this is on the 4 h timeframe. So this would be a swing trade. You can even day trade this. This was on Microsoft stock was trending down oops. Stock was trending down.
+* created a base. This is the neckline resistance.
+* Touch the base again. You can even take the bounce here into the neckline, or you wait for the breakout for entry above.
+*  Unknown Speaker * Unknown Speaker
+* 02:44:31
+* Okay.
+*  Masi * Masi
+* 02:44:35
+* next we have our bear and bull flags.
+* So for a bull flag. What you'll see is a strong move up, stop, makes a move up it, then channels
+* down
+* breakout of the upper channel for calls
+* on a bare flag. It's the inverse stock makes them move down. channels up.
+* break out to the downside. For puts
+* an example of this.
+* Here we have BA.
+* Stock makes them move up channels down
+* breakout of the upper trend line, break and hold of the upper trend line for calls.
+* Sock makes them move down. Sometimes it's not as clean.
+* so you kind of have to look for it channels up
+* breakout for books.
+* any questions so far.
+* Alright.
+* Next we have the bear and bull pennet similar to bear and both flags. But instead of a channel, what you'll see on a bull bear pennant and bull pennet is, you'll get a triangle flag kind of situation happening instead of a channel still similar thing on a bull flag. Move up.
+* we get a squeeze, break out of the upper trend line for calls, move down.
+* squeeze. break out of the lower trend line for puts.
+* Got it.
+* and we have an example.
+*  Unknown Speaker * Unknown Speaker
+* 02:47:12
+* Right?
+*  Masi * Masi
+* 02:47:14
+* We get the move up
+* flags.
+* This candle is your entry.
+* We get the move down. blacks.
+* This candle is your entry.
+* Stop! Loss would be the upper trend line. Here, stop! Loss would be the lower trend line here.
+* Yeah, Bullpen and bull flag is the same thing. But it's just the way the flag is.
+* shaped pretty much.
+* Okay. Any questions on the pattern so far
+* on a bare pennant. You pointed to the green candle right after the red breaking the flag in terms of I take it. You chose that point to enter because it cleared the bottom. Trendline Yup. So this most likely this candle
+* most likely opened a year. Red. so you just keep the trend line azure retest, or you can wait for the retest to happen and enter on the rejection. It just depends on your style of trading.
+* Great.
+* Okay? The next thing we're gonna go through is trading gaps. So a gap usually is an area of a stocks
+* chart where it moves up or down with really minimal trading. Usually you'll see gaps happen after earnings, or if a news comes out in the pre-market after hours a stock will gap up or down in the next day.
+* A gap fill is just the price of the stock filling through the pre-gap and post gap level because there's minimal trading going on in between the gap.
+* Once it starts to fill that gap, it tends to fill the gap all the way through. Okay.
+* so I'm going to show you some examples of this.
+* Actually, I'm going to show you a more recent example. So let's go to
+* gaps you can find on any time frames depending on the timeframe, you find it will depend on how you trade it. I'm going to remove my studies.
+* So we see Apple had a gap
+* down. Okay, so gap down from this
+* 1 92 level, let's say down to around 188, 45. Okay.
+* you can see that on this day it tried to break some of the gap. You can probably scalp some of it up, but on this day it was a clean gap. Fill all the way up the full day filled that gap.
+* Okay, so this would be a good trade day trade here, swing trade on the daily timeframe. You can even scalp it as it makes the move up.
+* Okay.
+* Another stock that tends to always get is Spx.
+* Recently, Sx hasn't been having the cleanest gap fills but it does fill its gap, most likely. So you'll see here.
+* We had a gap
+* from 48, 88.
+* So a gapped up from 48, 64 up to 48, 88 now right at open it filled some of the gap down to 48, 80 held that support level, and then we started to bounce. It wasn't until later later in the day we got a little bit of a move and then eventually ended up filling the gap. But this wasn't a clean gap.
+* so you could potentially scalp this as it continues to fill. But overall, this in general was just not a clean gap fill. Okay?
+* So it could do something like this, or it could fill the gap all the way down. It depends on what you see overall in the market. Will depend on what type of gap fill you. Get on the stock that you're trading. Sometimes we get really clean gap fills on Spx. It will start filling it, and it will fill that gap all the way up or all the way down. Recently we haven't been getting that many clean fills, but you can see over here.
+* It was a smaller gap, and pretty much filled the gap all the way down. So on and so forth. Right now there's a couple of gaps just because of earnings. Netflix has a gap on the daily timeframe. If it does come back down.
+* This is a gap. Fill on Netflix
+* that could fill. Okay?
+* So something to keep an eye out to the downside.
+* Okay?
+* Same concept, if you're looking for a gap. Fill. You wait for a candle to hold above or below the gap level that you're watching for entry.
+*  Unknown Speaker * Unknown Speaker
+* 02:55:15
+* and
+*  Masi * Masi
+* 02:55:17
+* similarly, to gap fills. You have something called wix and wic fills. Usually you'll see Wix on a spy or Qq. But it's very similar to a gap in it that once it starts to fill it will fill all the way through. For example.
+* you can see that spy had a wic here, wicked multiple times in the pre market. Now in the pre market, it did fill some of this wic. So now the wic fill is from this pre market level here, which is the Pre market high up until
+* end of this week. Here, at 4 88. This week ends here at 4 86. Okay, so there's going to be a level here at 4 87. Sorry, and then 4 88. So it did again. Oh, I'm sorry. I've really messed this one up. I apologize.
+* I didn't see that this was all in the pre market. This filled all the way in the pre-market.
+* but you can see at open it filled some of the rest of the get wic up right at open. This was actually a really poor example, but you can see that if it wicks like this, sometimes it'll fill the wic and gap in the pre-market, and you will have an opportunity to really trade it. But it's very similar to gap fills in it. If you see a wic like this? The stock tends to fill the wic. There's another wic that. Oh, here we go!
+* That spy has a couple of weeks. Let me see if I can find them for you guys that to fill
+* to the upside and downside. Okay, right here.
+* Here's a wic on spy. So below a 4, 48, 84, 40. Here it has a wic fill all the way down to 4, 83. So if a spy comes back down below 4, 84, 40. It can fill this wic all the way down. This is a good opportunity to watch on spy as well.
+* Okay.
+* if you have levels in between where the gap is and the the pre-gap level and the post gap level, or the pre-wic level and the post-wic level.
+* those can be significant profit targets. So I always set profit targets. If it is a bigger size gap or wic, I will set multiple profit targets as the stock makes the way up or down to fill that gap, or wic
+* any questions on this.
+* If you buy 0 dte at market open, and it becomes immediately in the money, but you decide to hold it throughout the day, because you think it will fill the gap. Will time decay, eat at your premiums at all. This is hypothetical, and it depends on what happens with the stock. If
+* it pulls back
+* significantly. Yes, it will. Time. Decay will eat at your premiums. If it continues to just make the gap fill all the way down with minimal pull backs. No, it won't
+* eat at your premium premiums as much, but it depends on how the stock actually moves. If it's a clean move up or down, or if there's significant pullbacks or consolidation periods. Yes, of course, 100% time decay will affect your premium
+* especially, I mean at market open until around, I would say 12. You don't get hit very heavily with time decay, but anytime after that time decay will eat at your premium. It's very like
+* difficult to day trade 0 dte
+* unless it goes directly in your direction with minimal pullbacks.
+* Any other questions on that?
+* Okay.
+* so pretty much done with today's session. So do you guys have any questions on anything we've gone through today. Now, before you guys ask questions. Tomorrow we're gonna go through trading strategies, swing trading day trading, scalping strategies, trend line breaks. How I use volume and open interest to identify plays as well. We'll go through risk management. Some of my rules. What type of account to open, and then
+* entries and exits as well throughout all the strategies I'll go through, and then some of the plays that I've taken good and bad. I'll go through as well, so that will all come tomorrow. So anything that we've gone through over the past 2 days. You guys have any questions, anything you want me to touch on. Again.
+* okay, I missed the last hour, last night, we'll be giving copy of the Powerpoint, everyone will get the Powerpoint slides and the recordings tomorrow night. Once you guys get into the discord.
+* Could you talk about what you cover in the discord in terms of emerging technical patterns and gaps, etc. So actually, I can go through what you guys get in the discord right now. So
+* just a high level run through once you start, I would go into like the start here pattern or start here. Channel, you guys won't need to really pay attention to any of this, but all of the channels are here, so you can kind of read through the channels
+* and see what channel represents. What
+* this is our announcements, Tab. So if I have a webinar running, if we have any news, I announce what days we'll be trading live on voice on Sundays, pay attention to the announcements, because this is where we announce all of that
+* on Sunday nights. At 7 Pm. We have my Admins. We have 2 Admins Sam and Nick Sam. Hosts a. QA. Not a. QA. Webinar, a weekly prep. Webinar. Sunday's at 7 pm. So you I'll always post the link here. So you guys can join that webinar. It is recorded if you're not able to join at that time and then watch it later.
+* If I do a. QA. Webinar, I'll post a link up here again Sunday nights. I didn't. I announce what days we're trading live on, voice
+* if you want to introduce yourself. This is our Member introductions. You want to leave a testimonial. Feel free to do that. Coming down here. This is the upcoming signals channel. So if we are on voice you'll get the signals a on here through. The mossy, alert Sam types out the signals for me when I'm speaking it on voice. If we are not on voice, I will type out the signals myself. These are traits that I'm actually taking
+* the main options chat. You guys can talk, talk amongst each other, ask questions, talk to us, whatever the lounge just is, you can talk about whatever that's not
+* disrespectful to anyone else in the community
+* member profit losses. You guys can post your profits and losses if you'd like
+* trading questions. If you guys have any trading questions of any sort. Post them here, or DM them to me. But our community members are extremely helpful. They all love helping one another so feel free to post them on here. If you're not comfortable, feel free to DM them to me or any one of the Admins
+* trader psychology, we do a trader psychology once a week. One of our Admins, either myself, Sam or Nick will get on voice, and they will just kind of go through trader psychology for the week. What we went through emotions, what they saw amongst some of our community members that you need to improve on, so on and so forth.
+* We have a crypto chat. I don't think anyone really speaks too much in this, but
+* down here we I post my trading game plan every morning Nick posts his levels and his charts every morning. Sam posts his watchlist at night.
+* Trades review. So I recently started reusing this channel again. I will post my trade reviews. So any trades that I took on the day I'll post a breakdown of the trade, and how I felt I did, and so on and so forth.
+* Trade ideas. If you guys have any ideas you want to post in here and then swing trade ideas, Sam, sometimes post swing trades. I'll post swing trades and other people do as well.
+* Down here we have the weekly calendar, so earnings or any calendar. Remember, I go. I went through the Forex calendar with you guys as well as the Us. Economy day. We post that in here as well.
+* Nick posts the Morning News
+* and any market updates, upgrades or downgrades. Sam posts, screenshots here as well. If you guys don't want to go and look yourself the library, there is a ton and ton of books, resources, videos that people have posted over the
+* lifetime of this discord in this library. It has a ton of great stuff. I posted my books in here that I've read and liked. So feel free to check this out. Browse
+* weekly webinars, all of the recordings and Sam's Powerpoints will be posted here on Sundays.
+* my Youtube videos, if you want to scroll through. I have a bookmap video. My interactive brokers videos are all in here. So go ahead and check that out as well.
+* Now, down here, once you guys gain access, there will be a section that says January. Course. Students in that section. You guys will have your Powerpoints and you will have your recordings. Okay.
+* now, when we announce when we're doing voice, you just click this little voice thing, give discord access to your microphone, and whatever that it asked for, and you'll be able to hear us speaking. Live on, voice
+* alright, and that is the discord.
+* Can you go over what you do in during the pre market? Is there a systemic systemic process? So I'll go through that tomorrow. How I
+* create my watch list and my levels and whatnot.
+* What are the backgrounds on Sam and Nick? Do they have a bio somewhere to get to know them? I don't think they do, but you guys can feel free to ask them. I'll give you guys a little rundown, so I've known Nick for about 5 years, Sam, for about 2 or 3 years. They've known each other for a very long time. Nick was actually the one that put me onto options. He actually told me to start trading options in 2,019,
+* and Nick has been trading for similar amount of time that I have been at. But he was trading. He traded crypto before he's traded options, equities, and now he's trading futures. So he'll post his futures, treats as well in the chat.
+* Nick has
+* options account, I remember, back in 2020 into 2,021 he grew his account to over a mill. It was like within a year. It was. It's insane. When he was sizing a lot heavier. Sam also trades Sam trades a little bit of on a smaller scale.
+* He, Sam. One thing I will tell you about Sam. Sam is the charting king his charts are immaculate, his patterns are amazing. When Sam post charts there's something to pay attention to, because 90% of the Chi time those plays always end up
+* playing out. Really well, they're both amazing traders. Sam has a lot of knowledge on the market, like, if you have any questions regarding the market or anything, he is amazing to go to similar to Nick.
+* If you need tough love Nick and I are the ones to go to for that but anything regarding chat patterns. Sam's really, really good. He has a lot of knowledge in the market as well. But yeah, they're both really great traders. And I've known them both for a very long time. So they're great Admins to have in the chat.
+* and you guys can ask them whatever you want in regards to their trading. I'm sure they'll post a little background on themselves if you want to know.
+* Is there any other questions on all the stuff that we went through.
+* How many options contracts is good to buy in one trade. That'll depend on you and your account size
+* and your risk management, and I'll but go through risk management tomorrow, and how to size in and out of your positions. But it's going to differ from person to person.
+* Yeah, no, I just want this to be helpful for you guys.
+* obviously, you've paid for a course. So I want to make sure that everyone understands it properly. Literally, I don't hide anything in my course. Everything that I teach is literally what you'll see me trading when at when you guys get into the discord, and you see us live trading. It's all of these strategies, all of these plays. There's nothing that
+* I have like under my sleeve that I trade that I don't teach in my course. Everything that I trade is exactly how I teach, how I've become profitable, and strategies that have actually gotten me to the point that I am right. Now.
+* how do you decide whether to buy weekly expiration or dailies? I'll go through that tomorrow as well. It'll depend on the strategy that you're implementing, obviously. But I'll go through more in-depth
+* in terms of scalping. When do you usually look for a pattern? I assume, when you trade, you're looking at support and resistance. Mainly first. Right? Yes, so always support and resistance patterns. I don't go looking for, unless
+* on Sunday nights, when I build my weekly watch list. I will look at the overall picture and see if I see any patterns or anything like that, but on a scalping timeframe. I don't look for patterns if I see one, and then I'll trade it. It's kind of as it appears. I'm like, okay, hey, guys, I see a bull flag here forming on the 5 min, or I see this forming on this minute. Then I will play the
+* that pattern. But I don't go out of my way to just look for pattern, please.
+* What do the gray and black zones mean on active trader? They mean the same thing that the gray and black zones mean here. So it's just after hours
+* and pre-market data.
+* This is during market hours, the dark but black, and then the gray shaded is after hours, and in the print market.
+* what resources have you used to learn? Or to continue learning? Are there specific books or youtubers that you recommend, in addition to you. So books I've posted all in the library. There's literally a
+* I think a huge like. Pdf, drive of all of my books that I posted. I think it's pinned actually.
+* Oh, also, if you need data for interactive brokers, this is all the data I have.
+* I'm trying to see. I know.
+* Okay, maybe I did infinite
+* I will PIN it in here for you guys afterwards. But there's literally a Pdf drive.
+* All of the books. I think it might be right at the top. Oh, here we go! It's right at the top. These are all the books that I like.
+* The only book that's not on here is Al Brookes. All of Al Brooks books are amazing. So I definitely recommend reading those understanding options is probably the easiest read to understand options trading
+* so those 2 books I would recommend the most in regards to psycho psychology books. Trade mindfully is a really good one, and there's another book
+* I forget what it's called. I'll post it as well it might be in here.
+* The Discipline Trader, by Mark Douglas, another really good one as well.
+* Okay.
+* Oh, trade mindfully the discipline trader and trading in the zone there, though that one is also by Mark Douglas, I'm almost positive. Those are all all really good books in terms of youtubers.
+* I don't necessarily watch Youtube videos. And I never did when I was trading, but because there wasn't really wasn't as saturated as it is. Now, there are a ton of youtubers out there right now,
+* options, trading youtubers. II honestly, I'm not gonna lie. II don't really know. I know options traders that are on the Instagram space. But on Youtube, I'm not really that familiar with who's on Youtube. But if you guys want, I can definitely ask around and get that. But the only options trader that I like. That's on Instagram.
+* is Aristotle. If you guys have heard of him or not, I think he's really great, I think he does post Youtube videos as well. His trading strategy is kind of similar to how I trade as well. So you guys can check him out.
+* Is there a trading strategy for the first few minutes after market open that you'll be discussing, so I'll go through one of the trading strategies, but I don't usually trade within the first couple of mark minutes after market opens. It's very. It depends on the levels that are breaking. But I'll show you guys exactly what I look for when I look to take a play in general depend, regardless of whatever time it is.
+* So when scalping, we're really mostly looking at support and resistance. Yes.
+* Oh, yeah. There's some people just posted, some project finance for Youtube.
+* Stopping goes by so fast. How do you concentrate so quickly to make your place. It does take time and experience. The best thing you can do is just focus on one or 2 tickers. Don't focus on so many different tickers at a time. The less
+* mit Ctl and tickers you focus on the less stocks you focus on. You really want to get very familiar, familiarized with their price action, really learn the ins and outs of how the stock moves, and it makes it a lot easier for you to know what? To look for, an order flow, what to look for on the stock, what to look for for volume and and that becomes a lot easier with time. So it does take some time, because scalping is so fast.
+* but once you get there it becomes a little bit easier. The best thing you can do is find a good broker that fills you really quickly and really, just focus on one or 2 stocks that you really learn their price action.
+* and that'll make it a lot easier as well. So you're not pulled from one spot to another to another to another.
+* Have you ever had a bad losing streak. If so, how did you overcome it? Yeah,
+* In my journey I would say there was one really bad losing streak it was in started in October of 2021,
+* and I was going through a lot emotionally, and I literally blew through. I think it was like
+* $100,000 and a matter of a month and a half.
+* and I have never. I hadn't done that since. I like blew through an account since I first started trading. And at that point I was still on Youtube and Instagram. So it was really devastating because I didn't want to teach anyone. And if anyone was following me at that point I kind of stopped posting on Youtube.
+* because it just was not. I was just was not doing well in my training. So I had to re
+* re up my account obviously, and and start to grow up. Really, how you overcome that. Honestly, if you are not mentally okay, if you're not emotionally okay, if you're going through a lot in your personal life, don't trade. That's probably my biggest piece of advice. Subconsciously, you might think that it's not affecting you, but it 1,000 is
+* if there's anything that can hinder your Psyche that can emotionally affect you, or is emotionally affect you, it will trickle into your trading. You may not see it, and you may not be able to identify what is wrong, but that is the issue. So that's my biggest
+* piece of advice is, if you're ever having something going wrong in your life, it's not a good time to start trading, and it's not a good time to trade. It's a great way to blow through an account. Really, that's the only time that I have ever
+* recently had a really bad losing streak
+* in November of last year. I did end the month green, but there was price action that was going on, that it was really wasn't understanding on a month to month basis for me. It depends. It depends on what the market is doing some months I have crazy gains. I have like an 80 85 win rate, and then some months it's like 50. It just. I'm barely making it green on the month.
+* But it really just depends. I always try to identify within that first week of the month how the month is looking. I try to identify what's going on in the economy so that I can avoid certain days to trade certain weeks to trade.
+* And that's kind of how I avoid having those big losing streaks, and I always always on a month to month basis. Stay really consistent with my sizing. I'll go through how you should size and stuff, but I try to stay as consistent as possible on that month. One month I may size up 30 contracts, but if I size up on one day, I will continue that size throughout the rest of the month, because what happens is, if I size 30 contracts. One day I take a loss.
+* I don't want to size down the next day, because then I'm not going to be able to make that position back up. I just try to stay as consistent as possible.
+* And that's another thing that I always recommend is when you're sizing. You want to stay consistent just because you're consistently profitable. One week doesn't mean you go and size up to double your contract size the next week.
+* Yeah, a lot of people try to overlook the psychology, emotional side of training. But that is what's gonna take you from being, you know, petty little trader to someone that really has this as a full-time career, and can and really focus on it and make a ton of money
+* or just be consistent with it. Because if you are not someone that takes that seriously. You're gonna struggle as a traitor.
+* and everyone has different habits. And I promise you anything you're going through. I have gone through any issue, revenge, trading bag holding over trading. I have experienced all of it. I have experience bag holding. I have held positions multiple times within a week within a month to 0. Okay, I have bag bag held. And honestly, and
+* there's nothing that I can tell you that is, gonna make you stop doing or implementing those bad habits. It's it's just until you learn your lesson. Honestly, one thing that did help me a lot is became is I became more disciplined in my
+* day to day life. Whatever I said I was going to do I did. If I said I wanted to go on a diet. If I said I wanted to be consistent in the gym. I did that. If I said I wanted to read a book a day, I did that not a day. But you know what I mean.
+* anything that I said I was going to do. I did, and when I became more disciplined in my personal life. That discipline then trickled into my trading. I stopped bag holding. I step. Revenge, traded revenge, trading, and you guys will see it. In my trading. I have a rule. If I take 2 red trades back to back, I'm not going to take any other trades. It does not matter what the market is doing. I don't care if it sells off. I have to stick to my rules. There'll be another day where it sells off. There'll be another day where I catch it.
+* But yeah, there's just certain rules that I'll go through that I've implemented. That helped me. But if you're not disciplined as a person. If you're not patient as a person, those are things that you need to work on. Those are habits that you need to work on, because ultimately they're gonna affect you as a traitor. Even if you think they they're not, they 1,000 will. And once you are able to identify those characteristics, and you're able to
+* make sure that they don't hinder your trading. You can't control your you can control your emotions. You can't turn off your emotions as a trader. But as long as you learn how to control those emotions they're not going to be able to hinder you while you're trading.
+* Yeah, revenge, revenge trading, you know. You just have to sometimes accept the loss. And that's it is what it is. That's why I give myself a 2 lost rule. I just have to accept it because you can. I have had these where I've spiraled, and I've revenge traded, and it's ended really bad. So you can blow through an entire account doing something like that.
+* Yeah. Tomorrow I'll go through how to take profits when to take profits again. That's that's something that's going to be on you ultimately. But I'll go through exactly how I go about doing it.
+* because everyone likes to do it a little bit differently. Some people like to grow accounts. Some people like to take profits and reset their account. But I'll go through the different options you have, and you know, you can figure out what works best for you.
+* for traders, that over trade and revenge trade. Yeah, for sure, you need to be withdrawing profits consistency.
+* Alright, guys. So I'll go ahead and give you guys the best rest of your Saturday. So really, early, so hopefully, you guys can enjoy it. The link for tomorrow session I sent out in last night's email. So make sure that you guys are aware of that. And yeah, hopefully, if you guys have any questions again, feel free to email me, and I will see you guys tomorrow morning
+* have a good rest of your day.
+Next Steps
+1. Masi will show how to fill on Interactive Brokers using hotkeys in a YouTube video.
+2. Masi will discuss how to create a watchlist and levels, and when to look for patterns in the pre-market session tomorrow.
