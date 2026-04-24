@@ -40,6 +40,12 @@ from schwab_intraday_service import SchwabIntradayService
 from uw_collector_service import UWCollectorService
 from forecasting_service import TimesFMForecastingService
 from signal_scorer import score_ticker
+try:
+    sys.path.insert(0, str(ROOT / "services" / "agent-seeder"))
+    from masi_agent import run_masi_agent
+    _MASI_AGENT = True
+except Exception:
+    _MASI_AGENT = False
 
 
 def run(ticker: str) -> dict:
@@ -53,6 +59,15 @@ def run(ticker: str) -> dict:
 
     result = score_ticker(price, intraday, uw, forecast)
     result["ticker"] = ticker
+
+    # Run Masi Agent (LLM reading bars + /ES + /NQ)
+    if _MASI_AGENT:
+        try:
+            masi = run_masi_agent(intraday, uw, spx_vwap=intraday["current"]["vwap"])
+            result["masi_agent"] = masi
+        except Exception as e:
+            result["masi_agent"] = {"action": "ERROR", "reason": str(e)}
+
     print("done")
     return result
 
@@ -103,6 +118,25 @@ def print_signal(r: dict) -> None:
         print(f"    T1 (70% out): ${ep.get('target_1',0):.2f}  R:R {ep.get('risk_reward_t1','?')}")
         print(f"    T2 (30% runner): ${ep.get('target_2',0):.2f}  R:R {ep.get('risk_reward_t2','?')}")
         print(f"    Stop Loss:    ${ep.get('stop_loss',0):.2f}")
+
+    # Masi Agent (LLM)
+    ma = r.get("masi_agent", {})
+    if ma and ma.get("action") not in (None, "ERROR", ""):
+        print(f"\n{'='*52}")
+        print(f"  MASI AGENT (Kimi K2 reads bars + /ES + /NQ)")
+        print(f"{'='*52}")
+        print(f"  Action:     {ma['action']}")
+        print(f"  Setup:      {ma.get('setup','')}")
+        print(f"  Entry:      ${ma.get('entry',0):.2f}")
+        if ma.get('target_1'): print(f"  T1 (70%):   ${ma['target_1']:.2f}")
+        if ma.get('target_2'): print(f"  T2 (30%):   ${ma['target_2']:.2f}")
+        if ma.get('stop'):     print(f"  Stop:       ${ma['stop']:.2f}")
+        print(f"  Confidence: {ma.get('confidence',0)}%")
+        print(f"  Reason:     {ma.get('reason','')}")
+        print(f"  /ES:  {ma.get('es_quote',{}).get('last','?')} (VWAP {ma.get('es_vwap','?')})")
+        print(f"  /NQ:  {ma.get('nq_quote',{}).get('last','?')} (VWAP {ma.get('nq_vwap','?')})")
+    elif ma.get("action") == "ERROR":
+        print(f"\n  Masi Agent: error — {ma.get('reason','')}"[:80])
 
 
 if __name__ == "__main__":

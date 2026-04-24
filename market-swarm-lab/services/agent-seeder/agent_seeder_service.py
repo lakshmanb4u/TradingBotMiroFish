@@ -356,6 +356,31 @@ class AgentSeederService:
                 }
             roster.append(cont_agent)
 
+        # ── Masi Agent (LLM-powered, reads 2-min bars + /ES + /NQ) ────────────
+        try:
+            from masi_agent import run_masi_agent
+            intraday_data = normalized_bundle.get("intraday", {})
+            uw_data_for_masi = normalized_bundle.get("uw", {})
+            spx_vwap = intraday_data.get("current", {}).get("vwap", 0)
+            masi_result = run_masi_agent(intraday_data, uw_data_for_masi, spx_vwap)
+            masi_action = masi_result.get("action", "HOLD")
+            masi_bias = "bullish" if masi_action == "BUY_CALLS" else ("bearish" if masi_action == "BUY_PUTS" else "neutral")
+            roster.append({
+                "id": "masi_001",
+                "archetype": "masi",
+                "prompt_section": f"Masi Agent: {masi_result.get('reason', '')}",
+                "initial_bias": masi_bias,
+                "bias_strength": round(min(1.0, masi_result.get("confidence", 50) / 100), 3),
+                "weight": 2.0,  # Masi agent counts double
+                "reddit_influence_score": 1.0,
+                "memory": {"decisions": [], "outcomes": [], "confidence": 0.7, "influence": 2.0},
+                "masi_signal": masi_result,
+            })
+            _log.info("[masi_agent] added to roster: %s conf=%s setup=%s",
+                masi_action, masi_result.get('confidence'), masi_result.get('setup'))
+        except Exception as _masi_exc:
+            _log.warning("[masi_agent] skipped: %s", _masi_exc)
+
         archetypes = {
             "retail": {
                 "count": 40,
