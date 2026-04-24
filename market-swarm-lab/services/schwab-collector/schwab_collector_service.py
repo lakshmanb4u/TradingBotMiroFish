@@ -186,7 +186,8 @@ class SchwabCollectorService:
         total_put_vol = 0
         iv_values: list[float] = []
         atm_iv = 0.0
-        last_price = float(quote.get("lastPrice", 0) or quote.get("mark", 0) or 0)
+        q = quote.get("quote") or quote.get("extended") or quote
+        last_price = float(q.get("lastPrice", 0) or q.get("mark", 0) or 0)
 
         for exp_key, strikes in call_map.items():
             for strike_str, contracts in strikes.items():

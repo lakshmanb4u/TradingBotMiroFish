@@ -10,10 +10,8 @@ Subsequent runs auto-refresh silently.
 from __future__ import annotations
 
 import base64
-import hashlib
 import json
 import os
-import secrets
 import time
 import urllib.parse
 import webbrowser
@@ -21,6 +19,11 @@ from pathlib import Path
 from typing import Any
 
 import requests
+from dotenv import load_dotenv
+
+# Auto-load .env from project root
+_ROOT = Path(__file__).resolve().parents[2]
+load_dotenv(_ROOT / ".env")
 
 CLIENT_ID = os.environ.get("SCHWAB_CLIENT_ID", "")
 CLIENT_SECRET = os.environ.get("SCHWAB_CLIENT_SECRET", "")
@@ -89,20 +92,11 @@ def get_valid_token() -> str:
 
 
 def interactive_login() -> None:
-    """One-time interactive OAuth2 PKCE login."""
-    # PKCE
-    code_verifier = secrets.token_urlsafe(64)
-    code_challenge = base64.urlsafe_b64encode(
-        hashlib.sha256(code_verifier.encode()).digest()
-    ).rstrip(b"=").decode()
-
+    """One-time interactive OAuth2 login (no PKCE — Schwab Individual Trader API)."""
     params = {
         "response_type": "code",
         "client_id": CLIENT_ID,
         "redirect_uri": CALLBACK_URL,
-        "scope": "readonly",
-        "code_challenge": code_challenge,
-        "code_challenge_method": "S256",
     }
     auth_url = AUTH_URL + "?" + urllib.parse.urlencode(params)
 
@@ -116,6 +110,8 @@ def interactive_login() -> None:
     code = urllib.parse.parse_qs(parsed.query).get("code", [None])[0]
     if not code:
         raise ValueError("No auth code found in redirect URL.")
+    # URL-decode the code (Schwab may return it encoded)
+    code = urllib.parse.unquote(code)
 
     resp = requests.post(
         TOKEN_URL,
@@ -127,7 +123,6 @@ def interactive_login() -> None:
             "grant_type": "authorization_code",
             "code": code,
             "redirect_uri": CALLBACK_URL,
-            "code_verifier": code_verifier,
         },
         timeout=15,
     )

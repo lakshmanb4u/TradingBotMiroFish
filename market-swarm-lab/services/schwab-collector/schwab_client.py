@@ -53,9 +53,10 @@ class SchwabClient:
         """Real-time quote for a single symbol (e.g. 'SPY')."""
         symbol = symbol.upper()
         try:
-            data = self._get(f"quotes/{symbol}")
+            data = self._get("quotes", params={"symbols": symbol})
             quote = data.get(symbol, data)
-            _log.info("[schwab] quote %s: %s", symbol, quote.get("lastPrice"))
+            last = (quote.get("quote") or quote.get("extended") or {}).get("lastPrice")
+            _log.info("[schwab] quote %s: %s", symbol, last)
             return quote
         except Exception as exc:
             _log.warning("[schwab] get_quote failed for %s: %s — using fixture", symbol, exc)
