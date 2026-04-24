@@ -348,6 +348,30 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
     except Exception as _me:
         pass
 
+    # 4e2. Unusual Whales — live options flow + dark pool + GEX
+    uw_dir = str(ROOT / "services" / "uw-collector")
+    if uw_dir not in sys.path:
+        sys.path.insert(0, uw_dir)
+    try:
+        from uw_collector_service import UWCollectorService
+        last_price = normalized_bundle.get("price", {}).get("last_price", 0.0)
+        uw_data = UWCollectorService().collect(ticker, current_price=last_price)
+        normalized_bundle["uw"] = uw_data
+        normalized_bundle["uw_signals"] = uw_data.get("signals", [])
+        # Merge UW flow bias into options_features
+        if normalized_bundle.get("options_features"):
+            normalized_bundle["options_features"]["uw_flow_bias"] = uw_data.get("flow_bias", "neutral")
+            normalized_bundle["options_features"]["gex_flip_level"] = uw_data.get("gex_flip_level")
+        import logging as _logging
+        _logging.getLogger(__name__).info(
+            "UW: flow_bias=%s gex_flip=%s alerts=%d dp=%d",
+            uw_data.get("flow_bias"), uw_data.get("gex_flip_level"),
+            uw_data["summary"]["flow_alerts_count"], uw_data["summary"]["darkpool_count"]
+        )
+    except Exception as _uw_exc:
+        import logging as _logging
+        _logging.getLogger(__name__).warning("UW collector failed: %s", _uw_exc)
+
     # 4f. Divergence detection
     try:
         from divergence_engine import compute_divergence
@@ -434,6 +458,8 @@ def run_demo(ticker: str = Query(default="NVDA")) -> dict:
             "intraday": normalized_bundle.get("intraday", {}),
             "intraday_signals": normalized_bundle.get("intraday_signals", []),
             "options_features": normalized_bundle.get("options_features", {}),
+            "uw": normalized_bundle.get("uw", {}),
+            "uw_signals": normalized_bundle.get("uw_signals", []),
         }
         strategy_signal = StrategyEngineService().generate_signal(ticker, strategy_context, horizon="1d")
         risk_eval = RiskEngineService().evaluate(strategy_signal, strategy_context)

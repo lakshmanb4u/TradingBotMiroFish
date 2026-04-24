@@ -99,25 +99,39 @@ class AgentSeederService:
             "trend_strength": float(timesfm_source.get("trend_strength", 0.0)),
         }
 
-        # Build options_flow_context for institutional + momentum agents (Schwab)
+        # Enrich options_features with UW data if available
+        uw_data = normalized_bundle.get("uw", {})
+        if uw_data:
+            options_features = dict(options_features)  # copy
+            options_features["uw_flow_bias"] = uw_data.get("flow_bias", "neutral")
+            options_features["gex_flip_level"] = uw_data.get("gex_flip_level")
+            options_features["uw_signals"] = uw_data.get("signals", [])
+            options_features["uw_alert_count"] = uw_data.get("summary", {}).get("flow_alerts_count", 0)
+
+        # Build options_flow_context for institutional + momentum agents (Schwab + UW)
         options_features = normalized_bundle.get("options_features", {})
         options_flow_context: dict[str, Any] | None = None
         if options_features:
-            flow_bias = options_features.get("flow_bias", "neutral")
+            flow_bias = options_features.get("uw_flow_bias") or options_features.get("flow_bias", "neutral")
             iv_rank = options_features.get("iv_rank", 0.0)
             cpr = options_features.get("call_put_ratio", 1.0)
+            gex_flip = options_features.get("gex_flip_level")
+            uw_alerts = options_features.get("uw_alert_count", 0)
+            uw_sigs = options_features.get("uw_signals", [])
+            uw_sig_summary = "; ".join([s.get("reason", "") for s in uw_sigs[:3]]) if uw_sigs else ""
             options_flow_context = {
                 "summary": (
-                    f"Options flow: {flow_bias.upper()} bias. "
-                    f"Call/Put ratio {cpr:.2f}, IV rank {iv_rank:.1f}, "
-                    f"ATM IV {options_features.get('atm_iv', 0):.2f}. "
-                    f"Call vol {options_features.get('total_call_volume', 0):,}, "
-                    f"Put vol {options_features.get('total_put_volume', 0):,}."
+                    f"Options flow: {flow_bias.upper()} bias (UW: {uw_alerts} alerts). "
+                    f"Call/Put ratio {cpr:.2f}, IV rank {iv_rank:.1f}, ATM IV {options_features.get('atm_iv', 0):.2f}. "
+                    + (f"GEX flip level: ${gex_flip:.2f}. " if gex_flip else "")
+                    + (f"UW signals: {uw_sig_summary}" if uw_sig_summary else "")
                 ),
                 "flow_bias": flow_bias,
                 "iv_rank": iv_rank,
                 "call_put_ratio": cpr,
                 "atm_iv": options_features.get("atm_iv", 0.0),
+                "gex_flip_level": gex_flip,
+                "uw_signals": uw_sigs[:5],
             }
 
         # Build kalshi_context for institutional agents
