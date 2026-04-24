@@ -86,6 +86,24 @@ def print_signal(r: dict) -> None:
     print(f"  Momentum:  {w['momentum']}")
     print(f"  Intraday:  {w['intraday']}")
 
+    # Masi strategies fired
+    masi = [s for s in r.get("masi_strategies", []) if s.get("name") != "HIGH_VOLUME_WINDOW"]
+    if masi:
+        print(f"\n  Masi Strategies ({len(masi)} fired):")
+        for s in masi:
+            print(f"    + {s['name']}: {s['reason'][:75]}")
+
+    for warn in r.get("masi_warnings", []):
+        print(f"  !! {warn}")
+
+    # Masi exit plan
+    ep = r.get("masi_exit_plan", {})
+    if ep and r["ACTION"] != "HOLD":
+        print(f"\n  Masi Exit Plan:")
+        print(f"    T1 (70% out): ${ep.get('target_1',0):.2f}  R:R {ep.get('risk_reward_t1','?')}")
+        print(f"    T2 (30% runner): ${ep.get('target_2',0):.2f}  R:R {ep.get('risk_reward_t2','?')}")
+        print(f"    Stop Loss:    ${ep.get('stop_loss',0):.2f}")
+
 
 if __name__ == "__main__":
     tickers = sys.argv[1:] if len(sys.argv) > 1 else ["SPY"]
