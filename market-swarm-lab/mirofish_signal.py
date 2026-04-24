@@ -41,8 +41,13 @@ from uw_collector_service import UWCollectorService
 from forecasting_service import TimesFMForecastingService
 from signal_scorer import score_ticker
 try:
+    from ensemble_scorer import ensemble_score
+    _ENSEMBLE = True
+except Exception:
+    _ENSEMBLE = False
+try:
     sys.path.insert(0, str(ROOT / "services" / "agent-seeder"))
-    from masi_agent import run_masi_agent
+    from masi_agent import run_masi_agent, _fetch_futures_bars, _fetch_futures_quote, _compute_vwap
     _MASI_AGENT = True
 except Exception:
     _MASI_AGENT = False
@@ -59,6 +64,24 @@ def run(ticker: str) -> dict:
 
     result = score_ticker(price, intraday, uw, forecast)
     result["ticker"] = ticker
+
+    # Run ensemble scorer (4 agents vote)
+    if _ENSEMBLE and _MASI_AGENT:
+        try:
+            es_bars  = _fetch_futures_bars("/ES", 5)
+            nq_bars  = _fetch_futures_bars("/NQ", 5)
+            es_quote = _fetch_futures_quote("/ES")
+            nq_quote = _fetch_futures_quote("/NQ")
+            es_price = es_quote.get("last", 0)
+            nq_price = nq_quote.get("last", 0)
+            ens = ensemble_score(price, intraday, es_bars, nq_bars, es_price, nq_price)
+            ens["es_price"] = es_price
+            ens["nq_price"] = nq_price
+            ens["es_vwap"]  = _compute_vwap(es_bars[-40:]) if es_bars else 0
+            ens["nq_vwap"]  = _compute_vwap(nq_bars[-40:]) if nq_bars else 0
+            result["ensemble"] = ens
+        except Exception as e:
+            result["ensemble"] = {"action": "ERROR", "reason": str(e)}
 
     # Run Masi Agent (LLM reading bars + /ES + /NQ)
     if _MASI_AGENT:
@@ -118,6 +141,31 @@ def print_signal(r: dict) -> None:
         print(f"    T1 (70% out): ${ep.get('target_1',0):.2f}  R:R {ep.get('risk_reward_t1','?')}")
         print(f"    T2 (30% runner): ${ep.get('target_2',0):.2f}  R:R {ep.get('risk_reward_t2','?')}")
         print(f"    Stop Loss:    ${ep.get('stop_loss',0):.2f}")
+
+    # Ensemble signal
+    ens = r.get("ensemble", {})
+    if ens and ens.get("action") not in (None, "ERROR", ""):
+        print(f"\n{'='*52}")
+        print(f"  ENSEMBLE (4 agents vote — 59.6% backtested)")
+        print(f"{'='*52}")
+        action_e = ens['action']
+        arrow_e = '▲' if action_e=='BUY' else ('▼' if action_e=='SELL/SHORT' else '—')
+        print(f"  {arrow_e} {action_e}  ({ens.get('confidence','?')})  Bulls:{ens.get('votes_bull',0)}/4  Bears:{ens.get('votes_bear',0)}/4")
+        if action_e != 'HOLD':
+            print(f"  Entry:    ${ens.get('entry',0):.2f}")
+            print(f"  T1 (70%): ${ens.get('target_1',0):.2f}")
+            print(f"  T2 (30%): ${ens.get('target_2',0):.2f}")
+            print(f"  Stop:     ${ens.get('stop_loss',0):.2f}  R:R {ens.get('risk_reward','?')}")
+        else:
+            print(f"  No trade — agents disagree or outside Masi window")
+        print(f"\n  Agent votes:")
+        for name, res in ens.get('agents', {}).items():
+            icon = '✅' if res['vote']=='bull' else ('❌' if res['vote']=='bear' else '◼')
+            print(f"    {icon} {name:<22} score={res['score']:+d}  → {res['vote'].upper()}")
+        if ens.get('es_price'):
+            hv = '✅ In high-vol window' if ens.get('in_hv_window') else '⚠️  Outside high-vol window'
+            print(f"  /ES: ${ens.get('es_price','?')} (VWAP ${ens.get('es_vwap',0):.2f})  /NQ: ${ens.get('nq_price','?')} (VWAP ${ens.get('nq_vwap',0):.2f})")
+            print(f"  {hv}")
 
     # Masi Agent (LLM)
     ma = r.get("masi_agent", {})
