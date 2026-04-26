@@ -6,6 +6,7 @@ Usage:
     python earnings_sympathy_signal.py --reporter INTC
     python earnings_sympathy_signal.py --ticker AMD
     python earnings_sympathy_signal.py --reporter MSFT --reporter GOOGL
+    python earnings_sympathy_signal.py backtest --as-of 2026-04-19 --reporter INTC --sympathy AMD
 
 Options:
     --week current      Scan all upcoming reporters this week (default)
@@ -14,6 +15,12 @@ Options:
     --days N            Look-ahead window in days (default: 14)
     --top N             Show top N candidates (default: 5)
     --debug             Enable debug logging
+
+Backtest subcommand:
+    backtest            Point-in-time replay with zero lookahead bias
+    --as-of DATE        Replay date (YYYY-MM-DD)
+    --reporter TICKER   The reporting company
+    --sympathy TICKER   The sympathy ticker to evaluate
 """
 from __future__ import annotations
 
@@ -41,6 +48,11 @@ except ImportError:
     pass
 
 from sympathy_service import SympathyService
+
+# Lazy import for backtest (heavy deps)
+def _load_backtest():
+    from backtest_replay import BacktestReplayEngine
+    return BacktestReplayEngine()
 
 
 # ── Formatting ─────────────────────────────────────────────────────────────────
@@ -115,7 +127,121 @@ def _print_reporter_header(reporter: str, date: str | None, time: str | None) ->
 
 # ── Main ───────────────────────────────────────────────────────────────────────
 
+def _run_backtest(args: argparse.Namespace) -> None:
+    """Run the point-in-time backtest replay."""
+    if not args.as_of:
+        print("ERROR: --as-of DATE required for backtest")
+        sys.exit(1)
+    if not args.reporter:
+        print("ERROR: --reporter TICKER required for backtest")
+        sys.exit(1)
+    if not args.sympathy:
+        print("ERROR: --sympathy TICKER required for backtest")
+        sys.exit(1)
+
+    print(f"\n{_bar()}")
+    print(f"  Pre-Earnings Sympathy BACKTEST")
+    print(f"  Replay date : {args.as_of}")
+    print(f"  Reporter    : {args.reporter[0].upper()}")
+    print(f"  Sympathy    : {args.sympathy.upper()}")
+    print(f"  ⚠️  No lookahead bias — all data clamped to as-of date")
+    print(_bar())
+
+    engine = _load_backtest()
+    result = engine.run(
+        as_of=args.as_of,
+        reporter=args.reporter[0].upper(),
+        sympathy_ticker=args.sympathy.upper(),
+    )
+
+    c = result.get("backtest_conclusions", {})
+    passing = result.get("passing_candidates", [])
+    skipped = result.get("skipped_candidates", [])
+    outcomes = result.get("outcomes", [])
+
+    print(f"\n  Underlying price as-of {args.as_of}: ${result.get('underlying_price_as_of','?')}")
+    print(f"  Reporter earnings: {result.get('reporter_earnings_date','?')} {result.get('reporter_earnings_time','') or ''}")
+
+    print(f"\n{_bar()}")
+    print(f"  WOULD DETECTOR HAVE FIRED?")
+    print(_bar())
+    print(f"  Calls selected : {'YES ✅' if c.get('would_have_selected_calls') else 'NO ❌'}  ({c.get('n_passing_calls',0)} candidates)")
+    print(f"  Puts selected  : {'YES ✅' if c.get('would_have_selected_puts') else 'NO ❌'}  ({c.get('n_passing_puts',0)} candidates)")
+
+    if passing:
+        print(f"\n  Passing candidates:")
+        for i, can in enumerate(passing[:args.top], 1):
+            _print_candidate(can, i)
+
+    _print_skipped(skipped, limit=8)
+
+    # Outcomes
+    if outcomes:
+        print(f"\n{_bar()}")
+        print(f"  ACTUAL OUTCOMES (post-event)")
+        print(_bar())
+        for o in outcomes:
+            if not o.get("outcome_available", True):
+                print(f"  {o.get('option_type','?')} ${o.get('strike','?')}: {o.get('reason','no data')}")
+                continue
+            hits = []
+            if o.get("did_it_hit_2x"): hits.append("2x ✅")
+            if o.get("did_it_hit_5x"): hits.append("5x ✅")
+            if o.get("did_it_hit_10x"): hits.append("10x ✅")
+            if o.get("expired_worthless"): hits.append("expired worthless ❌")
+            hits_str = "  ".join(hits) if hits else "below 2x"
+            tp = o.get("take_profit_simulation", {})
+            print(f"\n  {o.get('option_type','?')} ${o.get('strike','?')} exp {o.get('expiry','?')}")
+            print(f"     Entry: ${o.get('option_entry_price','?')}  |  MFE: {o.get('max_favorable_excursion_multiple','?')}x  |  {hits_str}")
+            if tp:
+                print(f"     TP simulation: net {tp.get('net_return_multiple','?')}x  (${tp.get('total_realized_pnl','?')} on ${tp.get('cost_basis','?')} cost)")
+            for label, wd in (o.get("outcomes_by_window") or {}).items():
+                print(f"     {label:20s}: underlying ${wd.get('underlying_exit','?')} (+{wd.get('underlying_move_pct','?')}%)  option est ${wd.get('option_exit_price','?')} ({wd.get('return_multiple','?')}x)")
+
+    # Conclusions
+    print(f"\n{_bar()}")
+    print(f"  CONCLUSIONS")
+    print(_bar())
+    print(f"  Lookahead bias: {c.get('lookahead_bias_check','?')}")
+    print(f"  Best outcome multiple: {c.get('best_outcome_multiple','?')}x  ({c.get('best_outcome_type','?')} ${c.get('best_outcome_strike','?')})")
+    print(f"  Any hit 2x:  {'YES ✅' if c.get('any_hit_2x') else 'NO ❌'}")
+    print(f"  Any hit 5x:  {'YES ✅' if c.get('any_hit_5x') else 'NO ❌'}")
+    print(f"  Any hit 10x: {'YES ✅' if c.get('any_hit_10x') else 'NO ❌'}")
+    if c.get("synthetic_data_warning"):
+        print(f"  ⚠️  SYNTHETIC DATA: {c.get('caveat','')}")
+    if not c.get("uw_data_available"):
+        print(f"  ⚠️  UW flow data unavailable for historical date — weight redistributed")
+
+    # Source audit
+    _print_source_audit({
+        k: v.get("status", "?") for k, v in result.get("source_audits", {}).items()
+    })
+
+    run_key = result.get("run_key", "")
+    if run_key:
+        out_dir = ROOT / "state" / "backtests" / "earnings_sympathy" / run_key
+        print(f"\n  Full report: {out_dir}/backtest_report.md")
+    print(f"\n{_bar()}\n")
+
+
 def main() -> None:
+    # Check for backtest subcommand first
+    if len(sys.argv) > 1 and sys.argv[1] == "backtest":
+        bt_parser = argparse.ArgumentParser(description="Backtest replay")
+        bt_parser.add_argument("subcommand")
+        bt_parser.add_argument("--as-of", required=True, help="Replay date YYYY-MM-DD")
+        bt_parser.add_argument("--reporter", action="append", required=True)
+        bt_parser.add_argument("--sympathy", required=True, help="Sympathy ticker")
+        bt_parser.add_argument("--top", type=int, default=5)
+        bt_parser.add_argument("--debug", action="store_true")
+        bt_args = bt_parser.parse_args()
+        logging.basicConfig(
+            level=logging.DEBUG if bt_args.debug else logging.WARNING,
+            format="%(levelname)s  %(name)s  %(message)s",
+        )
+        _run_backtest(bt_args)
+        return
+
     parser = argparse.ArgumentParser(
         description="Pre-Earnings Sympathy Detector",
         formatter_class=argparse.RawDescriptionHelpFormatter,

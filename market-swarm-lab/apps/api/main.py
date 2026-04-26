@@ -799,6 +799,141 @@ def debug_sentiment(ticker: str = Query(default="SPY")) -> dict:
     }
 
 
+@app.get("/earnings-sympathy/scan")
+def earnings_sympathy_scan(
+    days: int = Query(default=14, description="Look-ahead window in days"),
+) -> dict:
+    """Run full pre-earnings sympathy scan for all upcoming reporters."""
+    import sys
+    from pathlib import Path
+
+    ROOT = Path(__file__).resolve().parents[2]
+    sym_dir = str(ROOT / "services" / "earnings_sympathy")
+    for _sd in [
+        sym_dir,
+        str(ROOT / "services" / "schwab-collector"),
+        str(ROOT / "services" / "uw-collector"),
+        str(ROOT / "services" / "price-collector"),
+    ]:
+        if _sd not in sys.path:
+            sys.path.insert(0, _sd)
+
+    try:
+        from sympathy_service import SympathyService
+        result = SympathyService().scan_week(days_ahead=days)
+        return {
+            "run_id": result.get("run_id"),
+            "scan_date": result.get("scan_date"),
+            "reporters_scanned": result.get("reporters_scanned"),
+            "passing_candidates": result.get("passing_candidates", [])[:10],
+            "skipped_count": len(result.get("skipped_candidates", [])),
+            "source_audit": result.get("source_audit", {}),
+        }
+    except Exception as exc:
+        return {"error": str(exc), "passing_candidates": [], "skipped_count": 0}
+
+
+@app.get("/earnings-sympathy/reporter")
+def earnings_sympathy_reporter(
+    reporter: str = Query(description="Reporter ticker (e.g. INTC)"),
+) -> dict:
+    """Scan sympathy options for a specific earnings reporter."""
+    import sys
+    from pathlib import Path
+
+    ROOT = Path(__file__).resolve().parents[2]
+    for _sd in [
+        str(ROOT / "services" / "earnings_sympathy"),
+        str(ROOT / "services" / "schwab-collector"),
+        str(ROOT / "services" / "uw-collector"),
+        str(ROOT / "services" / "price-collector"),
+    ]:
+        if _sd not in sys.path:
+            sys.path.insert(0, _sd)
+
+    try:
+        from sympathy_service import SympathyService
+        result = SympathyService().scan_reporter(reporter.upper())
+        return result
+    except Exception as exc:
+        return {"error": str(exc), "reporter": reporter.upper(), "passing_candidates": []}
+
+
+@app.get("/earnings-sympathy/candidates")
+def earnings_sympathy_candidates(
+    min_score: int = Query(default=70, description="Minimum final_score filter"),
+    days: int = Query(default=14, description="Look-ahead window in days"),
+) -> dict:
+    """Get top passing candidates filtered by minimum score."""
+    import sys
+    from pathlib import Path
+
+    ROOT = Path(__file__).resolve().parents[2]
+    for _sd in [
+        str(ROOT / "services" / "earnings_sympathy"),
+        str(ROOT / "services" / "schwab-collector"),
+        str(ROOT / "services" / "uw-collector"),
+    ]:
+        if _sd not in sys.path:
+            sys.path.insert(0, _sd)
+
+    try:
+        from sympathy_service import SympathyService
+        result = SympathyService().scan_week(days_ahead=days)
+        passing = [c for c in result.get("passing_candidates", []) if c.get("final_score", 0) >= min_score]
+        return {
+            "run_id": result.get("run_id"),
+            "min_score_filter": min_score,
+            "total_passing": len(result.get("passing_candidates", [])),
+            "filtered_candidates": passing,
+            "source_audit": result.get("source_audit", {}),
+        }
+    except Exception as exc:
+        return {"error": str(exc), "filtered_candidates": []}
+
+
+@app.get("/debug/earnings-sympathy")
+def debug_earnings_sympathy() -> dict:
+    """Debug endpoint: show earnings calendar and sympathy map config."""
+    import sys
+    from pathlib import Path
+
+    ROOT = Path(__file__).resolve().parents[2]
+    sym_dir = str(ROOT / "services" / "earnings_sympathy")
+    if sym_dir not in sys.path:
+        sys.path.insert(0, sym_dir)
+
+    try:
+        from earnings_calendar_service import EarningsCalendarService
+        from sympathy_map import SympathyMapper
+
+        calendar = EarningsCalendarService()
+        mapper = SympathyMapper()
+        upcoming = calendar.fetch_upcoming(days_ahead=14)
+
+        sympathy_preview = {}
+        for event in upcoming[:5]:
+            sympathy_preview[event.ticker] = mapper.get_sympathy_tickers(event.ticker)
+
+        cfg_path = ROOT / "config" / "sympathy_strategy_config.json"
+        import json
+        cfg = json.loads(cfg_path.read_text()) if cfg_path.exists() else {}
+
+        return {
+            "upcoming_count": len(upcoming),
+            "upcoming": [e.to_dict() for e in upcoming],
+            "sympathy_preview": sympathy_preview,
+            "config": cfg,
+            "data_dirs": {
+                "options_positioning": str(ROOT / "data" / "options_positioning"),
+                "historical_sympathy": str(ROOT / "data" / "historical_sympathy"),
+                "run_artifacts": str(ROOT / "state" / "runs"),
+            },
+        }
+    except Exception as exc:
+        return {"error": str(exc)}
+
+
 @app.post("/backtest")
 def run_backtest(
     ticker: str = Query(default="SPY"),

@@ -129,13 +129,14 @@ class SympathyService:
                 "skipped_count": len(result["skipped_candidates"]),
             })
 
-        passing, skipped = self._scorer.rank_candidates(all_candidates)
+        passing, score_skipped = self._scorer.rank_candidates(all_candidates)
+        all_skipped.extend(score_skipped)
 
         run_id = self._save_run(
             tag="week_scan",
             events=[e.to_dict() for e in events],
             passing=passing,
-            skipped=skipped,
+            skipped=all_skipped,
         )
 
         return {
@@ -145,7 +146,7 @@ class SympathyService:
             "reporters_scanned": len(events),
             "reporter_results": reporter_results,
             "passing_candidates": passing,
-            "skipped_candidates": skipped,
+            "skipped_candidates": all_skipped,
             "source_audit": self._source_audit(),
         }
 
@@ -312,20 +313,37 @@ class SympathyService:
             }]
 
         # 2. OI + Volume analysis
+        underlying_price = chain_result.get("underlying_price", 0.0)
         positioning = self._oi.analyze(sympathy_ticker, contracts)
 
-        # 3. IV dislocation
-        iv_analysis = self._iv.analyze(sympathy_ticker, contracts)
-
-        # 4. Historical sympathy moves
+        # 3. Historical sympathy moves (needed for IV analyzer sector fallback)
+        sector = self._mapper.get_sector(reporter)
+        past_dates = [e.date for e in past_reporter_events]
         hist = self._hist.compute(
             reporter=reporter,
             sympathy_ticker=sympathy_ticker,
-            past_reporter_events=past_reporter_events,
+            past_earnings_dates=past_dates,
+            sector=sector,
         )
+        # Attach historical_score for scorer (computed from hist stats)
+        from iv_dislocation_analyzer import IVDislocationAnalyzer as _IVA
+        hist["historical_score"] = _IVA._historical_score(hist)
+
+        # 4. IV dislocation
+        iv_analysis = self._iv.analyze(
+            reporter=reporter,
+            sympathy_ticker=sympathy_ticker,
+            contracts=contracts,
+            underlying_price=underlying_price,
+            past_earnings_dates=past_dates,
+            sector=sector,
+        )
+        # Flag iv_expanded for scorer hard filter
+        iv_analysis["iv_expanded"] = iv_analysis.get("iv_skipped", 0) == len(contracts)
 
         # 5. Technical confirmation (uses Schwab intraday)
-        technical = self._tech.confirm(sympathy_ticker)
+        direction_bias = "bullish" if hist.get("direction_consistency", 0.5) > 0.6 else "neutral"
+        technical = self._tech.analyze(sympathy_ticker, underlying_price, direction_bias)
 
         # 6. UW flow (optional)
         uw_flow: dict | None = None

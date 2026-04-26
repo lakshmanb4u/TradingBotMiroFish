@@ -22,3 +22,5 @@ state/cache/
 
 # macOS
 .DS_Store
+state/runs/
+state/backtests/
