@@ -301,6 +301,107 @@ Without it, the forecasting service uses a deterministic trend extrapolation fal
 
 ---
 
+## MiroFish Live Alert System
+
+In addition to the batch simulation pipeline above, this repo includes a real-time intraday alert system built on top of the ensemble scorer.
+
+### Files
+
+| File | Purpose |
+|---|---|
+| `mirofish_live.py` | Single-ticker live poller (original) |
+| `mirofish_alerts.py` | **Multi-ticker alert scanner** (30 symbols, WhatsApp delivery) |
+| `mirofish_signal.py` | One-shot signal CLI for any ticker |
+| `services/strategy-engine/ensemble_scorer.py` | 4-agent ensemble voting engine |
+
+### How the Ensemble Works
+
+4 independent agents vote on each ticker every 5 minutes:
+
+| Agent | Signal | Backtested Accuracy |
+|---|---|---|
+| VWAP + Futures | /ES and /NQ alignment vs VWAP | 49.4% |
+| EMA + RSI | 9/21 EMA cross + RSI overbought/oversold | 56.3% |
+| Trendline + Levels | Morning high/low breakouts | 53.1% |
+| Volume + Momentum | Volume-confirmed price momentum | 57.1% |
+| **Ensemble (3/4 agree)** | **Majority vote** | **59.6% (+9.6% edge)** |
+
+Signal fires only when 3/4 agents agree. Outside high-vol windows (9:30–11:30 and 14:00–16:00 ET), requires 4/4.
+
+### Post-Mortem Fixes (Applied 2026-04-26)
+
+Based on Friday Apr 25 session analysis (SPY/ARM, 11 signals, 0 T1 hits):
+
+1. **Opening range filter** — no entries before 10:00 ET (avoids morning flush stops)
+2. **EOD block** — no new entries after 15:00 ET (prevents late-day stops with no time to reach T1)
+3. **Intraday ATR targets** — T1/T2 scaled to actual bar range, not annualised vol (T1 was $8 away on a $5 range day)
+4. **UW flow gate** — BUY suppressed when UW flow = BEARISH + net put sweeps detected
+5. **60-min signal cooldown** — was 15 min, caused 11 duplicate signals on same thesis
+
+### Watchlists (`mirofish_alerts.py`)
+
+```
+--watchlist mega     AAPL MSFT GOOGL META AMZN NVDA TSLA
+--watchlist semis    NVDA AMD QCOM ARM AVGO INTC ASML AMAT KLAC LRCX
+--watchlist ai       NVDA META MSFT GOOGL AMZN CLS CDNS SNPS FN ANET VRT SMCI ARM PLTR
+--watchlist options  SPY QQQ NVDA TSLA META AAPL MSFT GOOGL AMD ARM
+--watchlist all      All 30 tickers (default)
+```
+
+### Running Manually
+
+```bash
+# Full 30-ticker scan, WhatsApp alerts via openclaw notify
+python3 mirofish_alerts.py
+
+# Mag 7 only
+python3 mirofish_alerts.py --watchlist mega
+
+# Custom tickers
+python3 mirofish_alerts.py NVDA CLS CDNS META
+
+# Terminal only (no WhatsApp)
+python3 mirofish_alerts.py --no-notify
+
+# One-shot signal for any ticker
+python3 mirofish_signal.py NVDA ARM
+```
+
+### Auto-Start on macOS (launchd)
+
+A launchd plist is configured at:
+```
+~/Library/LaunchAgents/com.mirofish.alerts.plist
+```
+
+This automatically starts `mirofish_alerts.py --watchlist all` every **Monday–Friday at 6:25 AM PT (9:25 AM ET)**, 5 minutes before market open. Restarts on crash. Exits cleanly at market close.
+
+```bash
+# Manual controls
+launchctl start com.mirofish.alerts    # start now
+launchctl stop com.mirofish.alerts     # stop now
+launchctl unload ~/Library/LaunchAgents/com.mirofish.alerts.plist  # disable
+
+# Live logs
+tail -f ~/Library/Logs/mirofish_alerts.log
+tail -f ~/Library/Logs/mirofish_alerts_error.log
+```
+
+### WhatsApp Alert Format
+
+When a signal fires, a compact message is sent via `openclaw notify`:
+
+```
+🐟 MiroFish Signal [10:41 ET]
+▲ NVDA $890.24 — BUY (87%) [HIGH-VOL]
+Bulls: 3/4  Bears: 1/4  UW: BULLISH
+Entry: $890.24  Stop: $883.10  R:R 1:1.87
+T1 (70%): $900.90  T2 (30%): $911.56
+⚡ Large call sweep $1.2M premium
+```
+
+---
+
 ## License
 
 MIT
