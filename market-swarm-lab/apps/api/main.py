@@ -70,6 +70,34 @@ def debug_price(ticker: str = Query(default="SPY")) -> dict:
     }
 
 
+@app.get("/debug/live-signal")
+def debug_live_signal(ticker: str = Query(default="SPY")) -> dict:
+    """GET /debug/live-signal?ticker=SPY
+    Returns full signal payload: ensemble + regime + TimesFM + MASi verdict.
+    """
+    import sys
+    from pathlib import Path
+    ROOT = Path(__file__).resolve().parents[2]
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    from mirofish_alerts import debug_live_signal as _debug
+    return _debug(ticker)
+
+
+@app.get("/debug/daily-regime")
+def debug_daily_regime(force: bool = Query(default=False)) -> dict:
+    """GET /debug/daily-regime
+    Returns today's cached daily regime (or computes fresh with ?force=true).
+    """
+    import sys
+    from pathlib import Path
+    ROOT = Path(__file__).resolve().parents[2]
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    from daily_regime import compute_regime
+    return compute_regime(force=force)
+
+
 @app.get("/debug/news")
 def debug_news(ticker: str = Query(default="SPY")) -> dict:
     import sys
