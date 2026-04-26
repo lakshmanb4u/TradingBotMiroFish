@@ -162,21 +162,55 @@ class PointInTimeOHLCV:
         return bars, audit
 
     def _load(self, ticker: str) -> tuple[list[dict], dict]:
-        # Try Alpha Vantage (historical daily — safe for backtesting)
+        # Fix 2026-04-26: AV client now retries full→compact automatically.
+        # Also added yfinance as a second fallback so backtests don't silently
+        # fail with underlying_price=$0 when AV rate-limits.
+
+        # 1. Alpha Vantage (retries full→compact internally)
         if _AV_AVAILABLE:
             try:
                 client = AlphaVantageClient()
                 records = client.fetch_daily(ticker, outputsize="full")
-                return records, {
-                    "provider": "alpha_vantage",
-                    "status": "live_historical",
-                    "point_in_time_safe": True,
-                    "note": "Daily OHLCV — no intraday, no lookahead on daily close",
-                }
+                if records:
+                    return records, {
+                        "provider": "alpha_vantage",
+                        "status": "live_historical",
+                        "point_in_time_safe": True,
+                        "note": "Daily OHLCV — no intraday, no lookahead on daily close",
+                    }
             except Exception as exc:
                 _log.warning("[backtest] AV fetch failed for %s: %s", ticker, exc)
 
-        # Try fixture files
+        # 2. yfinance fallback — free, reliable, 2y history
+        try:
+            import yfinance as yf
+            t = yf.Ticker(ticker)
+            hist = t.history(period="2y", interval="1d")
+            if not hist.empty:
+                records = [
+                    {
+                        "date":   idx.strftime("%Y-%m-%d"),
+                        "open":   float(row["Open"]),
+                        "high":   float(row["High"]),
+                        "low":    float(row["Low"]),
+                        "close":  float(row["Close"]),
+                        "volume": int(row["Volume"]),
+                    }
+                    for idx, row in hist.iterrows()
+                ]
+                records.sort(key=lambda b: b["date"])
+                _log.info("[backtest] yfinance fallback used for %s (%d bars)", ticker, len(records))
+                return records, {
+                    "provider": "yfinance",
+                    "status": "live_historical_fallback",
+                    "point_in_time_safe": True,
+                    "note": "yfinance fallback — daily OHLCV, no lookahead (dates clamped to as-of)",
+                    "record_count": len(records),
+                }
+        except Exception as exc:
+            _log.warning("[backtest] yfinance fallback failed for %s: %s", ticker, exc)
+
+        # 3. Local fixture files
         for fixture_dir in [
             _ROOT / "infra" / "fixtures" / "market_data",
             _ROOT / "state" / "raw" / "ohlcv",
@@ -200,7 +234,7 @@ class PointInTimeOHLCV:
             "provider": "none",
             "status": "unavailable",
             "point_in_time_safe": False,
-            "note": "No historical OHLCV available for this ticker",
+            "note": "No historical OHLCV available for this ticker (AV + yfinance + fixture all failed)",
         }
 
 
@@ -280,9 +314,29 @@ def _build_synthetic_chain(
         }
 
     # Estimate realized vol from last 20 days
-    closes = [b["close"] for b in bars[-21:]]
-    returns = [math.log(closes[i] / closes[i - 1]) for i in range(1, len(closes))]
+    # Fix 2026-04-26: guard against identical consecutive closes (returns=[0,...]) which
+    # caused ZeroDivisionError in math.log and zero rv_daily leading to iv_est=0 and
+    # division by zero in Black-Scholes d1 formula (iv_est * sqrt(T) == 0).
+    closes = [b["close"] for b in bars[-21:] if b.get("close", 0) > 0]
+    if len(closes) < 5:
+        return [], {
+            "provider": "synthetic",
+            "status": "unavailable",
+            "point_in_time_safe": False,
+            "note": "Insufficient valid close prices for vol estimation",
+        }
+    returns = [math.log(closes[i] / closes[i - 1]) for i in range(1, len(closes))
+               if closes[i - 1] > 0 and closes[i] > 0]
+    if not returns:
+        return [], {
+            "provider": "synthetic",
+            "status": "unavailable",
+            "point_in_time_safe": False,
+            "note": "Could not compute log returns (zero or identical prices)",
+        }
     rv_daily = math.sqrt(sum(r**2 for r in returns) / len(returns))
+    # Guard: if rv is near-zero (flat ticker), use a minimum of 20% annual vol
+    rv_daily  = max(rv_daily, 0.20 / math.sqrt(252))
     rv_annual = rv_daily * math.sqrt(252)
 
     # Use realized vol * 1.15 as estimated IV (options typically trade above RV)
