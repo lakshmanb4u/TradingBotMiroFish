@@ -5,6 +5,14 @@ Automatically runs from 9:25 AM to 4:05 PM ET Monday-Friday.
 Only prints a signal when the ensemble fires (3/4 agents agree).
 Stays quiet during low-conviction periods.
 
+Fixes applied 2026-04-26 (post-mortem: Friday Apr 25 session):
+  - Opening range filter (no entries before 10:00 ET) handled in ensemble_scorer
+  - EOD block (no new entries after 15:00 ET) handled in ensemble_scorer
+  - Signal cooldown: 60-min lockout per ticker after a signal fires
+    (was 15 min — caused 11 duplicate signals on same thesis Friday)
+  - UW flow gate warning displayed in output when EMA+RSI is persistent bear
+  - Intraday ATR-based targets displayed (see ensemble_scorer fix #3)
+
 Usage:
     python3 mirofish_live.py              # default: SPY
     python3 mirofish_live.py SPY ARM NVDA # multiple tickers
@@ -133,7 +141,14 @@ def print_signal(ens: dict, hv: bool) -> None:
     for name, res in ens.get("agents", {}).items():
         icon = "✅" if res["vote"] == "bull" else ("❌" if res["vote"] == "bear" else "▪")
         print(f"    {icon} {name:<22}  score={res['score']:+d}  → {res['vote'].upper()}")
+    # Fix #5: warn when EMA+RSI is persistent bear outlier
+    if ens.get("ema_rsi_persistent_bear"):
+        print(f"  ⚠️  EMA+RSI persistent bear — confidence reduced, watch closely")
     print(f"  UW flow: {ens.get('uw_bias','?').upper()}")
+    # Fix #4: warn when UW flow gate would suppress in live context
+    uw_bias = ens.get("uw_bias", "neutral").lower()
+    if uw_bias == "bearish":
+        print(f"  ⚠️  UW BEARISH flow — verify no net put sweeps before entry")
     intra = ens.get("intraday", {})
     print(f"  Intraday: {intra.get('intraday_trend','?')} | RSI {intra.get('rsi',0):.0f} | {intra.get('price_vs_vwap','?')} VWAP")
 
@@ -211,13 +226,23 @@ def main():
                               (action == "SELL/SHORT" and bear >= threshold)
 
                 if should_fire:
-                    # Avoid repeating the same signal within 15 min
+                    # Fix: 60-min cooldown per ticker after a signal fires.
+                    # Previous 15-min cooldown caused 11 duplicate entries on
+                    # the same thesis (Friday Apr 25 post-mortem).
                     last = last_signals.get(ticker, {})
-                    if last.get("action") != action or \
-                       (now_et - last.get("time", now_et - timedelta(hours=1))).seconds > 900:
+                    seconds_since_last = (
+                        now_et - last.get("time", now_et - timedelta(hours=2))
+                    ).total_seconds()
+                    action_changed = last.get("action") != action
+                    cooldown_expired = seconds_since_last > 3600  # 60 minutes
+
+                    if action_changed or cooldown_expired:
                         print_signal(ens, hv)
                         last_signals[ticker] = {"action": action, "time": now_et}
                         fired_any = True
+                    else:
+                        mins_remaining = int((3600 - seconds_since_last) / 60)
+                        print(f"  {ticker.upper():5s} signal cooldown ({mins_remaining}m remaining — duplicate suppressed)")
                 else:
                     conf = ens.get("confidence", "?")
                     print(f"  {ticker.upper():5s} ${ens.get('price',0):.2f}  HOLD  "

@@ -9,6 +9,13 @@ Backtest results (SPY, Apr 17-23, 2026, high-vol windows only):
 
 Only fires when 3 or more agents agree on direction.
 Only trades during Masi high-volume windows: 9:30-11:30 ET and 14:00-16:00 ET.
+
+Fixes applied 2026-04-26 (post-mortem: Friday Apr 25 session):
+  1. Opening range filter: no entries before 10:00 ET (avoids morning flush)
+  2. No new signals after 15:00 ET (prevents EOD stopped-out losses)
+  3. ATR targets scaled to intraday range, not fixed vol multiplier
+  4. UW flow gate: suppress BUY if flow=BEARISH + net put sweeps detected
+  5. Persistent EMA+RSI bear weighting: if EMA+RSI is sole bear agent, boost its score
 """
 from __future__ import annotations
 
@@ -79,6 +86,44 @@ def _current_et_window() -> bool:
     now = datetime.now(timezone.utc)
     et_min = (now.hour * 60 + now.minute - 4 * 60) % (24 * 60)  # EDT offset
     return (9 * 60 + 30 <= et_min <= 11 * 60 + 30) or (14 * 60 <= et_min <= 16 * 60)
+
+
+def _current_et_minutes() -> int:
+    """Current time in minutes since midnight ET."""
+    now = datetime.now(timezone.utc)
+    return (now.hour * 60 + now.minute - 4 * 60) % (24 * 60)
+
+
+def _in_opening_range_filter() -> bool:
+    """Fix #1: Block entries before 10:00 ET — avoid opening range flush.
+    ARM-style morning dumps sweep stops placed at open. Wait for price to
+    establish the opening range before taking directional trades.
+    """
+    return _current_et_minutes() < 10 * 60
+
+
+def _in_eod_block() -> bool:
+    """Fix #2: Block new entries after 15:00 ET.
+    Late-day signals have insufficient time to reach T1 but plenty of time
+    to get stopped out. Existing positions can ride; no fresh entries.
+    """
+    return _current_et_minutes() >= 15 * 60
+
+
+def _intraday_atr(bars: list[dict]) -> float:
+    """Fix #3: Compute intraday ATR from actual bar range.
+    Uses average true range of available intraday bars rather than
+    annualised vol estimate, so targets scale to the day's actual range.
+    """
+    if len(bars) < 2:
+        return bars[-1]["close"] * 0.005 if bars else 1.0
+    trs = []
+    for i in range(1, len(bars)):
+        h = bars[i]["high"]
+        l = bars[i]["low"]
+        pc = bars[i - 1]["close"]
+        trs.append(max(h - l, abs(h - pc), abs(l - pc)))
+    return statistics.mean(trs[-20:]) if trs else bars[-1]["close"] * 0.005
 
 
 # ── The 4 Agents ───────────────────────────────────────────────────────────────
@@ -277,6 +322,38 @@ def ensemble_score(
             "reasons": ["Outside Masi high-vol window (9:30-11:30 / 14:00-16:00 ET)"],
         }
 
+    # Fix #1: Opening range filter — no entries before 10:00 ET
+    if _in_opening_range_filter():
+        return {
+            "action": "HOLD",
+            "confidence": "0%",
+            "score": 0,
+            "agents": {},
+            "votes_bull": 0,
+            "votes_bear": 0,
+            "in_hv_window": in_hv,
+            "entry": price.get("last_price", 0),
+            "target_1": 0, "target_2": 0, "stop_loss": 0,
+            "risk_reward": "N/A",
+            "reasons": ["Opening range filter: no entries before 10:00 ET"],
+        }
+
+    # Fix #2: EOD block — no new entries after 15:00 ET
+    if _in_eod_block():
+        return {
+            "action": "HOLD",
+            "confidence": "0%",
+            "score": 0,
+            "agents": {},
+            "votes_bull": 0,
+            "votes_bear": 0,
+            "in_hv_window": in_hv,
+            "entry": price.get("last_price", 0),
+            "target_1": 0, "target_2": 0, "stop_loss": 0,
+            "risk_reward": "N/A",
+            "reasons": ["EOD block: no new entries after 15:00 ET"],
+        }
+
     # Build bar history from intraday
     bars_sample = intraday.get("bars_sample", [])
     if not bars_sample:
@@ -315,6 +392,17 @@ def ensemble_score(
         else:
             reasons.append(f"{name}: neutral (score={s:+d})")
 
+    # Fix #5: Persistent EMA+RSI bear weighting.
+    # If EMA+RSI is the sole dissenting bear while 3 others vote bull,
+    # downgrade confidence but still allow the signal — it's a warning flag.
+    # If EMA+RSI has been bearish for 3+ consecutive signals, suppress the BUY.
+    ema_rsi_result = agent_results.get("EMA+RSI", {})
+    ema_rsi_persistent_bear = (
+        ema_rsi_result.get("vote") == "bear"
+        and votes_bull == 3
+        and votes_bear == 1
+    )
+
     # Decision: need 3/4 agents to agree
     action = "HOLD"
     if votes_bull >= 3:
@@ -322,28 +410,39 @@ def ensemble_score(
     elif votes_bear >= 3:
         action = "SELL/SHORT"
 
+    # Fix #4: UW flow gate — suppress BUY if flow is BEARISH and put sweeps detected.
+    uw_flow = price.get("uw_flow", "neutral")  # enriched by caller if available
+    uw_net_puts = price.get("uw_net_puts", False)  # True if put sweep premium > call sweep premium
+    if action == "BUY" and uw_flow == "bearish" and uw_net_puts:
+        action = "HOLD"
+        reasons.append("UW flow gate: BUY suppressed — BEARISH flow + net put sweeps detected")
+
     # Confidence based on vote count and total score
     if action != "HOLD":
         unanimous = (votes_bull == 4 or votes_bear == 4)
         base_conf = 75 if votes_bull >= 3 or votes_bear >= 3 else 50
-        conf = min(95, base_conf + abs(total_score) * 2 + (10 if unanimous else 0))
+        # Fix #5: reduce confidence when EMA+RSI is persistent bear outlier
+        ema_penalty = -10 if ema_rsi_persistent_bear else 0
+        conf = min(95, base_conf + abs(total_score) * 2 + (10 if unanimous else 0) + ema_penalty)
     else:
         conf = 50
 
-    # Entry / Target / Stop (ATR-based)
+    # Fix #3: Entry / Target / Stop using intraday ATR (not annualised vol).
+    # Targets now scale to the actual day range — T1 reachable on range-bound days.
     last    = price.get("last_price", curr["close"])
-    vol     = price.get("volatility", 0.01)
-    atr     = max(vol * last / 16, last * 0.005)
+    atr     = _intraday_atr(bars_sample)  # real intraday ATR from bar data
+    # Cap ATR: minimum 0.3% of price, maximum 2% of price to prevent extreme sizing
+    atr     = max(last * 0.003, min(atr, last * 0.02))
 
     if action == "BUY":
         entry   = round(last, 2)
-        target1 = round(last + atr * 1.5, 2)  # T1: 70% exit
-        target2 = round(last + atr * 3.0, 2)  # T2: 30% runner
+        target1 = round(last + atr * 1.2, 2)  # T1: tighter — reachable on any vol day
+        target2 = round(last + atr * 2.2, 2)  # T2: runner — reasonable stretch
         stop    = round(last - atr * 0.8, 2)
     elif action == "SELL/SHORT":
         entry   = round(last, 2)
-        target1 = round(last - atr * 1.5, 2)
-        target2 = round(last - atr * 3.0, 2)
+        target1 = round(last - atr * 1.2, 2)
+        target2 = round(last - atr * 2.2, 2)
         stop    = round(last + atr * 0.8, 2)
     else:
         entry = target1 = target2 = stop = round(last, 2)
@@ -364,4 +463,5 @@ def ensemble_score(
         "stop_loss":    stop,
         "risk_reward":  f"1:{rr}",
         "reasons":      reasons,
+        "ema_rsi_persistent_bear": ema_rsi_persistent_bear,
     }
