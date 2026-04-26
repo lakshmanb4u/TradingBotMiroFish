@@ -187,7 +187,77 @@ def print_signal(r: dict) -> None:
         print(f"\n  Masi Agent: error — {ma.get('reason','')}"[:80])
 
 
+# ── Backtest subcommand ───────────────────────────────────────────────────────
+
+def _run_backtest_cli(argv: list[str]) -> None:
+    """Parse and run point-in-time backtest.
+
+    Usage:
+      python mirofish_signal.py backtest --ticker SPY --start 2026-04-01 --end 2026-04-25 --timeframe 2min
+      python mirofish_signal.py backtest --ticker SPX --start 2026-04-01 --end 2026-04-25 \\
+        --timeframe 2min --confirm-with ES,SPY
+    """
+    import argparse
+
+    bt_dir = ROOT / "services" / "backtest"
+    if str(bt_dir) not in sys.path:
+        sys.path.insert(0, str(bt_dir))
+
+    parser = argparse.ArgumentParser(
+        description="MiroFish Point-in-Time Replay Backtester",
+        prog="mirofish_signal.py backtest",
+    )
+    parser.add_argument("backtest_cmd")  # consumes the 'backtest' literal
+    parser.add_argument("--ticker",       required=True, help="SPY | SPX | QQQ")
+    parser.add_argument("--start",        required=True, help="YYYY-MM-DD")
+    parser.add_argument("--end",          required=True, help="YYYY-MM-DD")
+    parser.add_argument("--timeframe",    default="5min", help="2min | 5min | 15min")
+    parser.add_argument("--confirm-with", default="",    help="Comma-separated: ES,SPY,QQQ")
+    parser.add_argument("--masi",         action="store_true", help="Enable MASi LLM veto")
+    parser.add_argument("--no-timesfm",   action="store_true", help="Disable TimesFM")
+    parser.add_argument("--debug",        action="store_true")
+    args = parser.parse_args(argv)
+
+    if args.debug:
+        logging.basicConfig(level=logging.DEBUG, format="%(levelname)s %(name)s %(message)s")
+    else:
+        logging.basicConfig(level=logging.WARNING)
+
+    confirm = [c.strip().upper() for c in args.confirm_with.split(",") if c.strip()]
+
+    from point_in_time_replay import run_backtest
+    result = run_backtest(
+        ticker       = args.ticker,
+        start        = args.start,
+        end          = args.end,
+        timeframe    = args.timeframe,
+        confirm_with = confirm,
+        use_masi     = args.masi,
+        use_timesfm  = not args.no_timesfm,
+    )
+
+    import json
+    print("\n" + "="*60)
+    print("  BACKTEST COMPLETE")
+    print("="*60)
+    summary = result.get("summary", {})
+    if summary:
+        print(f"  Signals:       {summary.get('total_signals','?')}")
+        print(f"  Win rate:      {summary.get('win_rate_pct','?')}%")
+        print(f"  Profit factor: {summary.get('profit_factor','?')}")
+        print(f"  Total R:       {summary.get('total_r','?')}")
+        print(f"  Max DD (R):    {summary.get('max_drawdown_r','?')}")
+        print(f"  Options mode:  {result.get('options_pnl_mode','?')}")
+    print(f"  Output:        {result.get('output_dir','?')}")
+    print("="*60 + "\n")
+
+
 if __name__ == "__main__":
+    # Intercept 'backtest' subcommand before normal signal logic
+    if len(sys.argv) > 1 and sys.argv[1] == "backtest":
+        _run_backtest_cli(sys.argv[1:])
+        sys.exit(0)
+
     tickers = sys.argv[1:] if len(sys.argv) > 1 else ["SPY"]
 
     print(f"\nMiroFish Signal Engine")

@@ -275,7 +275,12 @@ def ensemble_score(
     es_price: float = 0.0,
     nq_price: float = 0.0,
     require_hv_window: bool = True,
+    replay_ts: datetime | None = None,
 ) -> dict[str, Any]:
+    """Backtest-safe variant: pass replay_ts to override wall-clock time filters.
+    replay_ts must be a timezone-aware datetime in UTC.
+    When replay_ts is set, ORF and EOD checks use that timestamp instead of now().
+    """
     """
     Run all 4 agents and return ensemble signal.
 
@@ -323,7 +328,16 @@ def ensemble_score(
         }
 
     # Fix #1: Opening range filter — no entries before 10:00 ET
-    if _in_opening_range_filter():
+    # In backtest replay, use replay_ts instead of wall clock
+    if replay_ts is not None:
+        et_mins = ((replay_ts.hour - 4) % 24) * 60 + replay_ts.minute
+        _orf = et_mins < 10 * 60
+        _eod = et_mins >= 15 * 60
+    else:
+        _orf = _in_opening_range_filter()
+        _eod = _in_eod_block()
+
+    if _orf:
         return {
             "action": "HOLD",
             "confidence": "0%",
@@ -339,7 +353,7 @@ def ensemble_score(
         }
 
     # Fix #2: EOD block — no new entries after 15:00 ET
-    if _in_eod_block():
+    if _eod:
         return {
             "action": "HOLD",
             "confidence": "0%",
