@@ -1,0 +1,163 @@
+{
+  "ticker": "AMD",
+  "as_of": "2026-04-19",
+  "fetched_at": "2026-04-26T03:06:01.696976+00:00",
+  "endpoints": {
+    "flow_alerts": {
+      "data": [],
+      "audit": {
+        "endpoint": "/api/stock/AMD/flow-alerts",
+        "http_status": 200,
+        "point_in_time_safe": false,
+        "response_dates": [
+          "2026-04-24"
+        ],
+        "record_count": 0,
+        "note": "UW returned current data (['2026-04-24']) not 2026-04-19 \u2014 UNAVAILABLE for backtest"
+      }
+    },
+    "flow_recent": {
+      "data": [],
+      "audit": {
+        "endpoint": "/api/stock/AMD/flow-recent",
+        "http_status": 200,
+        "point_in_time_safe": false,
+        "response_dates": [
+          "2026-04-24"
+        ],
+        "record_count": 0,
+        "note": "UW returned current data (['2026-04-24']) \u2014 UNAVAILABLE for 2026-04-19"
+      }
+    },
+    "options_volume": {
+      "data": {
+        "date": "2026-04-24",
+        "call_volume": 946787,
+        "put_volume": 852102,
+        "call_volume_ask_side": 433867,
+        "call_volume_bid_side": 420704,
+        "put_volume_ask_side": 382478,
+        "put_volume_bid_side": 391707,
+        "net_call_premium": "80071578.0000",
+        "net_put_premium": "-23627646.00",
+        "put_premium": "483433520.00",
+        "call_premium": "2122034271.0000",
+        "avg_30_day_call_volume": "309452.6667",
+        "avg_30_day_put_volume": "249709.5",
+        "avg_7_day_call_volume": "442458.1429",
+        "avg_7_day_put_volume": "268992",
+        "bearish_premium": "1128883018.0000",
+        "bullish_premium": "1241961634.0000",
+        "put_open_interest": 1644111,
+        "call_open_interest": 1513828,
+        "avg_3_day_put_volume": "286811",
+        "avg_3_day_call_volume": "407556.6667"
+      },
+      "audit": {
+        "endpoint": "/api/stock/AMD/options-volume",
+        "http_status": 200,
+        "point_in_time_safe": false,
+        "response_date": "2026-04-24",
+        "requested_date": "2026-04-19",
+        "note": "UW returned 2026-04-24 not 2026-04-19 \u2014 date param silently ignored. UNAVAILABLE for backtest."
+      }
+    },
+    "iv_rank": {
+      "data": null,
+      "audit": {
+        "endpoint": "/api/stock/AMD/iv-rank",
+        "http_status": 200,
+        "point_in_time_safe": false,
+        "available_dates": [
+          "2026-04-20",
+          "2026-04-21",
+          "2026-04-22",
+          "2026-04-23",
+          "2026-04-24"
+        ],
+        "note": "No IV rank for 2026-04-19 \u2014 available: ['2026-04-20', '2026-04-21', '2026-04-22', '2026-04-23', '2026-04-24']. UNAVAILABLE."
+      }
+    },
+    "darkpool": {
+      "data": [],
+      "audit": {
+        "endpoint": "/api/darkpool/AMD",
+        "http_status": 200,
+        "point_in_time_safe": false,
+        "record_count": 0,
+        "note": "Dark pool: date param returns empty for 2026-04-19. Large batch also contains no Apr 19 records. Rolling window may not reach back this far. UNAVAILABLE."
+      }
+    }
+  },
+  "positioning_summary": {
+    "ticker": "AMD",
+    "as_of": "2026-04-19",
+    "data_quality": "partial",
+    "options_volume": {
+      "call_volume": 946787,
+      "put_volume": 852102,
+      "call_put_ratio": 1.111,
+      "call_ask_side_volume": 433867,
+      "call_bid_side_volume": 420704,
+      "put_ask_side_volume": 382478,
+      "put_bid_side_volume": 391707,
+      "net_call_premium": 80071578.0,
+      "net_put_premium": -23627646.0,
+      "bullish_premium": 1241961634.0,
+      "bearish_premium": 1128883018.0,
+      "call_open_interest": 1513828,
+      "put_open_interest": 1644111,
+      "call_volume_vs_30d_avg": 3.06,
+      "put_volume_vs_30d_avg": 3.41,
+      "response_date": "2026-04-24",
+      "pit_warning": true
+    },
+    "premium_bias": "neutral",
+    "bullish_premium_pct": 52.4,
+    "iv_rank": null,
+    "flow_alerts": null,
+    "flow_recent": null,
+    "darkpool": null,
+    "pre_positioning": {
+      "bullish_call_positioning": false,
+      "bearish_put_positioning": false,
+      "repeated_call_sweeps": false,
+      "unusual_call_volume": false,
+      "unusual_put_volume": false,
+      "call_put_ratio_bullish": false,
+      "premium_bias_bullish": false,
+      "premium_bias_bearish": false,
+      "confidence": "low",
+      "signals": [
+        "\u26a0\ufe0f options_volume data is NOT from Apr 19 \u2014 using as directional proxy only"
+      ]
+    }
+  },
+  "overall_audit": {
+    "total_endpoints_tried": 5,
+    "point_in_time_safe_count": 0,
+    "quality": "poor",
+    "summary": {
+      "flow_alerts": {
+        "status": "\u274c unavailable",
+        "note": "UW returned current data (['2026-04-24']) not 2026-04-19 \u2014 UNAVAILABLE for backtest"
+      },
+      "flow_recent": {
+        "status": "\u274c unavailable",
+        "note": "UW returned current data (['2026-04-24']) \u2014 UNAVAILABLE for 2026-04-19"
+      },
+      "options_volume": {
+        "status": "\u274c unavailable",
+        "note": "UW returned 2026-04-24 not 2026-04-19 \u2014 date param silently ignored. UNAVAILABLE for backtest."
+      },
+      "iv_rank": {
+        "status": "\u274c unavailable",
+        "note": "No IV rank for 2026-04-19 \u2014 available: ['2026-04-20', '2026-04-21', '2026-04-22', '2026-04-23', '2026-04-24']. UNAVAILABLE."
+      },
+      "darkpool": {
+        "status": "\u274c unavailable",
+        "note": "Dark pool: date param returns empty for 2026-04-19. Large batch also contains no Apr 19 records. Rolling window may not reach back this far. UNAVAILABLE."
+      }
+    }
+  }
+}
