@@ -213,9 +213,14 @@ def _run_backtest_cli(argv: list[str]) -> None:
     parser.add_argument("--end",          required=True, help="YYYY-MM-DD")
     parser.add_argument("--timeframe",    default="5min", help="2min | 5min | 15min")
     parser.add_argument("--confirm-with", default="",    help="Comma-separated: ES,SPY,QQQ")
-    parser.add_argument("--masi",         action="store_true", help="Enable MASi LLM veto")
-    parser.add_argument("--no-timesfm",   action="store_true", help="Disable TimesFM")
-    parser.add_argument("--debug",        action="store_true")
+    parser.add_argument("--masi",               action="store_true", help="Enable MASi LLM veto")
+    parser.add_argument("--no-timesfm",         action="store_true", help="Disable TimesFM")
+    parser.add_argument("--threshold-profile",  default="normal",
+                        choices=["loose","normal","strict"],
+                        help="Signal threshold profile (loose|normal|strict)")
+    parser.add_argument("--debug-votes",         action="store_true",
+                        help="Write per-bar vote log to debug_votes.csv")
+    parser.add_argument("--debug",               action="store_true")
     args = parser.parse_args(argv)
 
     if args.debug:
@@ -227,13 +232,15 @@ def _run_backtest_cli(argv: list[str]) -> None:
 
     from point_in_time_replay import run_backtest
     result = run_backtest(
-        ticker       = args.ticker,
-        start        = args.start,
-        end          = args.end,
-        timeframe    = args.timeframe,
-        confirm_with = confirm,
-        use_masi     = args.masi,
-        use_timesfm  = not args.no_timesfm,
+        ticker             = args.ticker,
+        start              = args.start,
+        end                = args.end,
+        timeframe          = args.timeframe,
+        confirm_with       = confirm,
+        use_masi           = args.masi,
+        use_timesfm        = not args.no_timesfm,
+        threshold_profile  = args.threshold_profile,
+        debug_votes        = args.debug_votes,
     )
 
     import json
@@ -241,6 +248,7 @@ def _run_backtest_cli(argv: list[str]) -> None:
     print("  BACKTEST COMPLETE")
     print("="*60)
     summary = result.get("summary", {})
+    calib   = result.get("calibration", {})
     if summary:
         print(f"  Signals:       {summary.get('total_signals','?')}")
         print(f"  Win rate:      {summary.get('win_rate_pct','?')}%")
@@ -248,7 +256,14 @@ def _run_backtest_cli(argv: list[str]) -> None:
         print(f"  Total R:       {summary.get('total_r','?')}")
         print(f"  Max DD (R):    {summary.get('max_drawdown_r','?')}")
         print(f"  Options mode:  {result.get('options_pnl_mode','?')}")
+    elif calib:
+        print(f"  (No trades) Bars evaluated: {calib.get('total_bars_evaluated','?')}")
+        print(f"  Bars with 3+ votes: {calib.get('bars_with_3plus_votes',0)}")
+        top = calib.get('top_rejection_reasons',[])
+        if top: print(f"  Top rejection: {top[0]['reason']} ({top[0]['count']}x)")
     print(f"  Output:        {result.get('output_dir','?')}")
+    if result.get("config",{}).get("threshold_profile"):
+        print(f"  Profile used:  {result['config']['threshold_profile']}")
     print("="*60 + "\n")
 
 

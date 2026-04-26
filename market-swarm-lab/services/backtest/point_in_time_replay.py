@@ -60,6 +60,156 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 UW_KEY = os.environ.get("UW_API_KEY", "")
 
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Threshold config — loaded from config/backtest_thresholds.json
+# ─────────────────────────────────────────────────────────────────────────────
+
+_CONFIG_PATH = _ROOT / "config" / "backtest_thresholds.json"
+
+_DEFAULT_THRESHOLDS = {
+    "min_votes_bull":       3,
+    "min_votes_bear":       3,
+    "min_volume_ratio":     1.0,
+    "allow_no_uw_context":  True,
+    "allow_timesfm_fallback": True,
+    "regime_required":      False,
+    "masi_required":        False,
+    "require_hv_window":    False,
+    "cooldown_minutes":     60,
+}
+
+
+def load_thresholds(profile: str = "normal") -> dict:
+    """Load threshold config for the given profile (loose|normal|strict)."""
+    base = dict(_DEFAULT_THRESHOLDS)
+    if _CONFIG_PATH.exists():
+        try:
+            raw = json.loads(_CONFIG_PATH.read_text())
+            # Merge top-level defaults from file
+            for k, v in raw.items():
+                if k not in ("_comment", "_profiles", "profiles"):
+                    base[k] = v
+            # Apply profile overrides
+            profiles = raw.get("profiles", {})
+            if profile in profiles:
+                base.update(profiles[profile])
+                base.pop("_description", None)
+        except Exception as e:
+            _log.warning("[thresholds] config load failed: %s", e)
+    else:
+        # Apply built-in profiles if config file absent
+        if profile == "loose":
+            base.update({"min_votes_bull": 2, "min_votes_bear": 2,
+                          "min_volume_ratio": 0.5, "cooldown_minutes": 30,
+                          "regime_required": False, "require_hv_window": False})
+        elif profile == "strict":
+            base.update({"min_votes_bull": 4, "min_votes_bear": 4,
+                          "min_volume_ratio": 1.5, "regime_required": True,
+                          "require_hv_window": True, "cooldown_minutes": 90})
+    base["_profile"] = profile
+    return base
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Debug vote logger — records per-bar vote breakdown
+# ─────────────────────────────────────────────────────────────────────────────
+
+class VoteLogger:
+    """Records per-bar vote data and rejection reasons for calibration."""
+
+    def __init__(self, run_dir: Path, enabled: bool = False) -> None:
+        self.enabled  = enabled
+        self.run_dir  = run_dir
+        self._rows:   list[dict] = []
+        self._rejections: dict[str, int] = {}
+        self._vote_dist:  dict[int, int] = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0}
+
+    def log(
+        self,
+        bar: "Bar",
+        ind: dict,
+        ens: dict,
+        uw: dict,
+        rejection_reason: str,
+        signal_fired: bool,
+    ) -> None:
+        bull = ens.get("votes_bull", 0)
+        bear = ens.get("votes_bear", 0)
+        max_votes = max(bull, bear)
+        self._vote_dist[min(max_votes, 4)] = self._vote_dist.get(min(max_votes, 4), 0) + 1
+
+        if rejection_reason:
+            self._rejections[rejection_reason] = self._rejections.get(rejection_reason, 0) + 1
+
+        if not self.enabled:
+            return
+
+        agents = ens.get("agents", {})
+        row = {
+            "ts":           bar.ts.isoformat(),
+            "price":        round(bar.close, 4),
+            "vwap":         round(ind.get("vwap", 0), 4),
+            "ema9":         round(ind.get("ema9", 0), 4),
+            "ema21":        round(ind.get("ema21", 0), 4),
+            "ema50":        round(ind.get("ema50", 0), 4),
+            "rsi14":        round(ind.get("rsi14", 50), 2),
+            "vol_ratio":    round(bar.volume / max(ind.get("avg_volume", 1), 1), 3),
+            "uw_bias":      uw.get("flow_bias", "neutral"),
+            "action":       ens.get("action", "HOLD"),
+            "votes_bull":   bull,
+            "votes_bear":   bear,
+            "score":        ens.get("score", 0),
+        }
+        # Per-agent votes
+        for name, res in agents.items():
+            safe_name = name.replace("+", "_").replace("/", "_").replace(" ", "_")
+            row[f"agent_{safe_name}_vote"]  = res.get("vote", "?")
+            row[f"agent_{safe_name}_score"] = res.get("score", 0)
+        row["rejection_reason"] = rejection_reason
+        row["signal_fired"]     = signal_fired
+        self._rows.append(row)
+
+    def write(self) -> dict:
+        """Write debug_votes.csv and return calibration summary."""
+        if self.enabled and self._rows:
+            path = self.run_dir / "debug_votes.csv"
+            # Collect all fieldnames from all rows (agent cols vary by run)
+            all_keys: list[str] = []
+            seen: set[str] = set()
+            for row in self._rows:
+                for k in row:
+                    if k not in seen:
+                        all_keys.append(k)
+                        seen.add(k)
+            with open(path, "w", newline="") as f:
+                writer = csv.DictWriter(f, fieldnames=all_keys, extrasaction="ignore")
+                writer.writeheader()
+                writer.writerows(self._rows)
+            _log.info("[votes] debug_votes.csv written (%d rows)", len(self._rows))
+
+        return self._calibration_summary()
+
+    def _calibration_summary(self) -> dict:
+        total = sum(self._vote_dist.values())
+        top_rejections = sorted(
+            self._rejections.items(), key=lambda x: -x[1]
+        )[:10]
+        return {
+            "total_bars_evaluated": total,
+            "vote_distribution": {
+                f"{k}_of_4_votes": v
+                for k, v in sorted(self._vote_dist.items())
+            },
+            "top_rejection_reasons": [
+                {"reason": r, "count": c} for r, c in top_rejections
+            ],
+            "bars_with_3plus_votes": self._vote_dist.get(3, 0) + self._vote_dist.get(4, 0),
+            "bars_with_2votes":      self._vote_dist.get(2, 0),
+            "bars_with_1vote":       self._vote_dist.get(1, 0),
+            "bars_with_no_votes":    self._vote_dist.get(0, 0),
+        }
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Bar stream — yields candles one at a time, chronologically
 # ─────────────────────────────────────────────────────────────────────────────
@@ -1179,6 +1329,8 @@ class BacktestEngine:
         confirm_with: list[str] | None = None,
         use_masi: bool = False,
         use_timesfm: bool = True,
+        threshold_profile: str = "normal",
+        debug_votes: bool = False,
     ) -> None:
         self.ticker       = ticker.upper()
         self.start        = start
@@ -1187,6 +1339,8 @@ class BacktestEngine:
         self.confirm_with = [c.upper() for c in (confirm_with or [])]
         self.use_masi     = use_masi
         self.use_timesfm  = use_timesfm
+        self.thresholds   = load_thresholds(threshold_profile)
+        self.debug_votes  = debug_votes
 
         # Sub-components
         self._bar_stream  = BarStream(ticker, start, end, freq_min)
@@ -1276,13 +1430,21 @@ class BacktestEngine:
 
     def run(self) -> dict:
         """Execute the full replay loop."""
+        th = self.thresholds
+        self._run_dir.mkdir(parents=True, exist_ok=True)
+        vote_log = VoteLogger(self._run_dir, enabled=self.debug_votes)
+
         print(f"\n{'='*60}")
         print(f"  MiroFish Point-in-Time Replay")
         print(f"  Ticker: {self.ticker}  |  {self.start} → {self.end}")
         print(f"  Timeframe: {self.freq_min}min  |  Bars: {self._bar_stream.bar_count}")
+        print(f"  Threshold profile: {th.get('_profile','normal')}  "
+              f"(min_votes={th['min_votes_bull']} vol≥{th['min_volume_ratio']}x "
+              f"cooldown={th['cooldown_minutes']}m)")
         print(f"  Confirm with: {self.confirm_with or 'none'}")
         print(f"  Options PnL mode: {self._opt_pnl.mode}")
         print(f"  MASi: {'on' if self.use_masi else 'off'}  TimesFM: {'on' if self.use_timesfm else 'off'}")
+        print(f"  Debug votes: {'on — writing debug_votes.csv' if self.debug_votes else 'off (use --debug-votes)'}")
         print(f"{'='*60}")
 
         if self._bar_stream.bar_count == 0:
@@ -1304,6 +1466,13 @@ class BacktestEngine:
 
         for bar, history in self._bar_stream.stream():
             bar_count += 1
+
+            # Always update open trades every bar (stops/targets checked here)
+            self._sim.update(bar)
+
+            # EOD force-close at 20:00 UTC (16:00 ET)
+            if bar.ts.hour >= 20 and bar.ts.minute >= 0:
+                self._sim.close_eod(bar)
 
             # Update confirmation streams up to this timestamp
             conf_bars_dict: dict[str, list[dict]] = {}
@@ -1350,35 +1519,77 @@ class BacktestEngine:
             bull   = ens.get("votes_bull", 0)
             bear   = ens.get("votes_bear", 0)
 
+            # ─ Gate checks with rejection tracking ───────────────────────────
+            rejection = ""
+
+            # Volume filter
+            vol_ratio = bar.volume / max(ind.get("avg_volume", 1), 1)
+            if vol_ratio < th["min_volume_ratio"] and not rejection:
+                rejection = f"low_volume_ratio_{vol_ratio:.2f}"
+
             # Regime gate
-            allowed = regime_today.get("trading_params", {}).get("allowed_actions", ["BUY","SELL/SHORT"])
-            if action not in allowed:
-                continue
+            if th["regime_required"] and not rejection:
+                allowed = regime_today.get("trading_params", {}).get("allowed_actions", ["BUY","SELL/SHORT"])
+                if action not in allowed:
+                    rejection = f"regime_blocked_{action}_in_{regime_today.get('regime','?')}"
+            elif not rejection:
+                allowed = regime_today.get("trading_params", {}).get("allowed_actions", ["BUY","SELL/SHORT"])
+                if action not in allowed:
+                    rejection = f"regime_direction_{action}_blocked"
 
-            # Vote threshold
-            min_votes = regime_today.get("trading_params", {}).get("min_ensemble_votes", 3)
+            # Vote threshold (threshold profile overrides regime min_votes)
+            regime_min = regime_today.get("trading_params", {}).get("min_ensemble_votes", 3)
             hv = self._is_high_vol(bar.ts)
-            threshold = max(min_votes, 4 if not hv else min_votes)
+            # Profile threshold takes precedence; outside HV always needs 4 in normal/strict
+            profile_min = th["min_votes_bull"] if action in ("BUY", "HOLD") else th["min_votes_bear"]
+            if th.get("require_hv_window") and not hv:
+                min_votes = 4  # strict
+            else:
+                min_votes = profile_min
 
-            fired = (action == "BUY" and bull >= threshold) or \
-                    (action == "SELL/SHORT" and bear >= threshold)
-            if not fired:
-                continue
+            if not rejection:
+                fired = (action == "BUY" and bull >= min_votes) or \
+                        (action == "SELL/SHORT" and bear >= min_votes)
+                if not fired:
+                    if action == "HOLD":
+                        rejection = f"hold_score_{ens.get('score',0)}_bull{bull}_bear{bear}"
+                    else:
+                        votes = bull if action=="BUY" else bear
+                        rejection = f"votes_{votes}_of_4_need_{min_votes}"
 
-            # Opening range filter
-            if bar.ts.hour == 9 and bar.ts.minute < 55:  # ET 09:55 after UTC offset
-                continue
+            # UW context gate
+            if not rejection and not th["allow_no_uw_context"]:
+                if uw_ctx.get("flow_bias") == "neutral" and not uw_ctx.get("call_volume"):
+                    rejection = "uw_context_unavailable"
 
-            # EOD filter: no new trades after 14:45 ET
-            et_hour = (bar.ts.hour - 4) % 24 if bar.ts.tzinfo else bar.ts.hour
-            et_min  = bar.ts.minute
-            if et_hour >= 14 and et_min >= 45:
-                continue
+            # Opening range filter (10:00 ET = 14:00 UTC)
+            if not rejection:
+                et_min_of_day = ((bar.ts.hour - 4) % 24) * 60 + bar.ts.minute
+                if et_min_of_day < 10 * 60:  # before 10:00 ET
+                    rejection = "opening_range_filter"
+
+            # EOD filter (14:45 ET = 18:45 UTC)
+            if not rejection:
+                if et_min_of_day >= 14 * 60 + 45:
+                    rejection = "eod_filter"
 
             # Cooldown
-            if not self._sim.can_open(self.ticker, action, bar.ts):
+            if not rejection:
+                cooldown_secs = th["cooldown_minutes"] * 60
+                last_ts = self._sim._last_signal_ts.get(self.ticker)
+                if last_ts and (bar.ts - last_ts).total_seconds() < cooldown_secs:
+                    mins_left = int((cooldown_secs - (bar.ts - last_ts).total_seconds()) / 60)
+                    rejection = f"cooldown_{mins_left}m_remaining"
+
+            # Log vote data for calibration
+            vote_log.log(bar, ind, ens, uw_ctx, rejection, signal_fired=(not rejection and action != "HOLD"))
+
+            if rejection or action == "HOLD":
                 continue
 
+            fired = True  # passed all gates
+
+            # ─ Signal fired — all gates passed ───────────────────────────
             # Apply regime stop adjustment
             ens = dict(ens)
             stop_mult = regime_today.get("trading_params", {}).get("stop_multiplier", 1.0)
@@ -1409,7 +1620,7 @@ class BacktestEngine:
                 except Exception:
                     masi_verdict = "DEGRADED"
 
-            # Open trade (entry at next bar open — we'll use next bar if available)
+            # Open trade (entry at next bar open)
             signal_count += 1
             trade = self._sim.open_trade(
                 signal   = ens,
@@ -1422,39 +1633,77 @@ class BacktestEngine:
             _log.info("[replay] signal @%s %s %s (regime=%s tf=%s masi=%s)",
                       bar.ts, action, self.ticker,
                       regime_today.get("regime"), tf_agreement, masi_verdict)
-
-            # Update all open trades
-            self._sim.update(bar)
-
-            # EOD close
-            et_close_hr = 12  # 16:00 ET = 20:00 UTC
-            if bar.ts.hour >= 20 and bar.ts.minute >= 0:
-                self._sim.close_eod(bar)
+            print(f"  ★ SIGNAL {action} {self.ticker} @{bar.ts.strftime('%m-%d %H:%M')}  "
+                  f"${bar.close:.2f}  bull={bull} bear={bear}  "
+                  f"regime={regime_today.get('regime','?')}")
 
         # Force-close any remaining open trades
         if self._bar_stream._bars:
             self._sim.close_eod(self._bar_stream._bars[-1])
 
+        # Write calibration data
+        calibration = vote_log.write()
+
         print(f"\n  Bars processed: {bar_count}")
         print(f"  Signals fired:  {signal_count}")
         print(f"  Trades closed:  {len([t for t in self._sim.all_trades if not t.open])}")
 
+        # Print calibration summary
+        print(f"\n  ── Vote Distribution ──")
+        for k, v in calibration.get("vote_distribution", {}).items():
+            pct = v / max(calibration.get("total_bars_evaluated", 1), 1) * 100
+            bar_str = "█" * min(int(pct / 2), 30)
+            print(f"  {k:15s}: {v:5d} ({pct:5.1f}%)  {bar_str}")
+        print(f"  Bars with 3+ votes: {calibration.get('bars_with_3plus_votes', 0)}")
+        print(f"\n  Top rejection reasons:")
+        for r in calibration.get("top_rejection_reasons", [])[:8]:
+            print(f"    {r['count']:4d}x  {r['reason']}")
+
+        # Diagnosis
+        if signal_count == 0:
+            print(f"\n  ⚠️  ZERO SIGNALS DIAGNOSIS:")
+            top_rej = calibration.get("top_rejection_reasons", [])
+            if top_rej:
+                top = top_rej[0]["reason"]
+                if "hold" in top or "votes" in top:
+                    print(f"     Primary cause: THRESHOLD too strict ({top})")
+                    print(f"     Try: --threshold-profile loose")
+                elif "orf" in top or "opening" in top:
+                    print(f"     Primary cause: OPENING RANGE FILTER blocking all bars")
+                    print(f"     Check: bar timestamps and ET offset conversion")
+                elif "eod" in top:
+                    print(f"     Primary cause: EOD FILTER blocking all bars")
+                    print(f"     Check: bar timestamps and UTC/ET conversion")
+                elif "regime" in top:
+                    print(f"     Primary cause: REGIME GATE blocking signals")
+                    print(f"     Try: --threshold-profile loose (regime_required=false)")
+                else:
+                    print(f"     Primary cause: {top}")
+            print(f"     3+vote bars: {calibration.get('bars_with_3plus_votes',0)}  "
+                  f"2vote bars: {calibration.get('bars_with_2votes',0)}")
+
         # Write reports
         config = {
-            "ticker":       self.ticker,
-            "start":        self.start.isoformat(),
-            "end":          self.end.isoformat(),
-            "timeframe":    f"{self.freq_min}min",
-            "confirm_with": self.confirm_with,
-            "use_masi":     self.use_masi,
-            "use_timesfm":  self.use_timesfm,
+            "ticker":            self.ticker,
+            "start":             self.start.isoformat(),
+            "end":               self.end.isoformat(),
+            "timeframe":         f"{self.freq_min}min",
+            "confirm_with":      self.confirm_with,
+            "use_masi":          self.use_masi,
+            "use_timesfm":       self.use_timesfm,
+            "threshold_profile": self.thresholds.get("_profile", "normal"),
+            "thresholds":        {k: v for k, v in self.thresholds.items() if not k.startswith("_")},
         }
         writer = ReportWriter(self._run_dir)
         stats  = writer.write(
-            trades          = self._sim.all_trades,
-            config          = config,
-            source_audit    = self._source_audit,
+            trades           = self._sim.all_trades,
+            config           = config,
+            source_audit     = self._source_audit,
             options_pnl_mode = self._opt_pnl.mode,
+        )
+        # Write calibration report
+        (self._run_dir / "calibration_report.json").write_text(
+            json.dumps(calibration, indent=2)
         )
         self._write_source_audit()
 
@@ -1462,6 +1711,7 @@ class BacktestEngine:
             "run_key":        self.run_key,
             "config":         config,
             "summary":        stats,
+            "calibration":    calibration,
             "options_pnl_mode": self._opt_pnl.mode,
             "source_audit":   self._source_audit,
             "output_dir":     str(self._run_dir),
@@ -1490,23 +1740,26 @@ def run_backtest(
     confirm_with: list[str] | None = None,
     use_masi: bool = False,
     use_timesfm: bool = True,
+    threshold_profile: str = "normal",
+    debug_votes: bool = False,
 ) -> dict:
     """Entry point for CLI and API."""
     import re
     m = re.match(r"(\d+)min?", timeframe)
     freq_min = int(m.group(1)) if m else 5
 
-    from datetime import date as _date
     start_date = datetime.strptime(start, "%Y-%m-%d").date()
     end_date   = datetime.strptime(end,   "%Y-%m-%d").date()
 
     engine = BacktestEngine(
-        ticker       = ticker,
-        start        = start_date,
-        end          = end_date,
-        freq_min     = freq_min,
-        confirm_with = confirm_with,
-        use_masi     = use_masi,
-        use_timesfm  = use_timesfm,
+        ticker             = ticker,
+        start              = start_date,
+        end                = end_date,
+        freq_min           = freq_min,
+        confirm_with       = confirm_with,
+        use_masi           = use_masi,
+        use_timesfm        = use_timesfm,
+        threshold_profile  = threshold_profile,
+        debug_votes        = debug_votes,
     )
     return engine.run()

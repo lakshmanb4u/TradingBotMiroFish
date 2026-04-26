@@ -1,0 +1,53 @@
+{
+  "_comment": "Default thresholds for MiroFish point-in-time replay backtester.",
+  "_profiles": "Override with --threshold-profile loose|normal|strict",
+
+  "min_votes_bull": 3,
+  "min_votes_bear": 3,
+  "min_volume_ratio": 1.0,
+  "allow_no_uw_context": true,
+  "allow_timesfm_fallback": true,
+  "regime_required": false,
+  "masi_required": false,
+  "require_hv_window": false,
+  "cooldown_minutes": 60,
+
+  "profiles": {
+    "loose": {
+      "_description": "Low bar — good for diagnosing whether signal engine is working at all",
+      "min_votes_bull": 2,
+      "min_votes_bear": 2,
+      "min_volume_ratio": 0.5,
+      "allow_no_uw_context": true,
+      "allow_timesfm_fallback": true,
+      "regime_required": false,
+      "masi_required": false,
+      "require_hv_window": false,
+      "cooldown_minutes": 30
+    },
+    "normal": {
+      "_description": "Production thresholds — matches live scanner",
+      "min_votes_bull": 3,
+      "min_votes_bear": 3,
+      "min_volume_ratio": 1.0,
+      "allow_no_uw_context": true,
+      "allow_timesfm_fallback": true,
+      "regime_required": false,
+      "masi_required": false,
+      "require_hv_window": false,
+      "cooldown_minutes": 60
+    },
+    "strict": {
+      "_description": "High conviction only — UW and regime required",
+      "min_votes_bull": 4,
+      "min_votes_bear": 4,
+      "min_volume_ratio": 1.5,
+      "allow_no_uw_context": false,
+      "allow_timesfm_fallback": false,
+      "regime_required": true,
+      "masi_required": false,
+      "require_hv_window": true,
+      "cooldown_minutes": 90
+    }
+  }
+}
