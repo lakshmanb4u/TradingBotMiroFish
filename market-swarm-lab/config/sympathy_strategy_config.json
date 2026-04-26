@@ -1,0 +1,15 @@
+{
+  "max_risk_per_trade": 500,
+  "max_lotto_allocation_pct": 0.05,
+  "min_final_score": 75,
+  "max_spread_pct": 15,
+  "min_volume": 100,
+  "min_open_interest": 500,
+  "min_dte": 3,
+  "max_dte": 14,
+  "avoid_own_earnings_within_days": 5,
+  "max_premarket_move_pct_before_skip": 3.0,
+  "max_candidates_to_llm": 3,
+  "min_final_score_for_llm": 70,
+  "llm_timeout_seconds": 15
+}
