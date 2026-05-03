@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly files('lib/bm-l1api.jar', 'lib/bm-simplified-api-wrapper.jar')
+}
+
+jar {
+    archiveBaseName = 'BookmapOrderflowRecorder'
+    archiveVersion = '1.0.0'
+    manifest {
+        attributes 'Implementation-Title': 'BookmapOrderflowRecorder',
+                   'Implementation-Version': '1.0.0'
+    }
+}
+
+task fatJar(type: Jar) {
+    archiveBaseName = 'BookmapOrderflowRecorder-all'
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
