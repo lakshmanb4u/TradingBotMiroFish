@@ -49,10 +49,32 @@ SYMBOLS = {
 
 def _sym_cfg(symbol: str) -> dict:
     sym_uc = symbol.upper()
+    # Exact match first
+    if sym_uc in SYMBOLS:
+        return SYMBOLS[sym_uc]
+    # Substring match (handles ESH5, ESM6, etc.)
+    for k in ['ESH5', 'ESM6', 'ESU6', 'ESZ6', 'ESH6', 'ESM7',
+              'NQH5', 'NQM6', 'NQU6', 'NQZ6', 'NQH6', 'NQM7',
+              'GCZ5', 'GCG6', 'GCJ6', 'GCM6', 'GCQ6', 'GCV6',
+              'MES', 'MNQ', 'MGC', 'BTC', 'ETH', 'CL', 'MCL']:
+        if k in sym_uc:
+            # Map to base symbol
+            base_map = {
+                'ESH5': 'ES', 'ESM6': 'ES', 'ESU6': 'ES', 'ESZ6': 'ES',
+                'ESH6': 'ES', 'ESM7': 'ES',
+                'NQH5': 'NQ', 'NQM6': 'NQ', 'NQU6': 'NQ', 'NQZ6': 'NQ',
+                'NQH6': 'NQ', 'NQM7': 'NQ',
+                'GCZ5': 'GC', 'GCG6': 'GC', 'GCJ6': 'GC', 'GCM6': 'GC',
+                'GCQ6': 'GC', 'GCV6': 'GC',
+                'MES': 'MES', 'MNQ': 'MNQ', 'MGC': 'MGC',
+                'BTC': 'BTC', 'ETH': 'ETH', 'CL': 'CL', 'MCL': 'MCL',
+            }
+            return SYMBOLS[base_map.get(k, 'ES')]
+    # Fallback substring
     for k, v in SYMBOLS.items():
         if k in sym_uc:
             return v
-    return SYMBOLS['ES']          # sane default
+    return SYMBOLS['ES']
 
 # ─── Data Classes ───────────────────────────────────────────────────────────
 
