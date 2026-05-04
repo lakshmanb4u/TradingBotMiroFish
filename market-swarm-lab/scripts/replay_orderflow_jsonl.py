@@ -109,6 +109,7 @@ class Trade:
     mfe: float         # in ticks
     exit_reason: str
     signal: str
+    trailing_stop: float = 0.0   # 0 = not active
 
 @dataclass(slots=True)
 class Signal:
@@ -177,7 +178,11 @@ class OrderflowReplay:
         return datetime.fromisoformat(s)
 
     # ── Replay ──────────────────────────────────────────────────────────────
+    # ── Replay (Correct Execution) ────────────────────────────────────────
     def replay(self, start_ts=None, end_ts=None):
+        """Event-driven replay with proper stop/target/time evaluation."""
+        self._stats = {'stop_hit': 0, 'target_hit': 0, 'time_exit': 0,
+                       'trailing_stop': 0, 'total_trades': 0}
         equity = 0.0
         open_trade: Optional[Trade] = None
 
@@ -187,6 +192,7 @@ class OrderflowReplay:
             if end_ts and ev.ts > end_ts:
                 break
 
+            # Update book / bars regardless
             if isinstance(ev, DepthEvent):
                 self._on_depth(ev)
             elif isinstance(ev, TradeEvent):
@@ -194,51 +200,177 @@ class OrderflowReplay:
                 if ev.size >= SWEEP_SIZE_THRESHOLD:
                     self._detect_sweep(ev)
 
-                # manage position
-                if open_trade:
-                    # Only process exit if event symbol matches trade symbol
-                    if ev.symbol == open_trade.symbol:
-                        self._update_mae_mfe(open_trade, ev)
-                        if self._should_exit(open_trade, ev):
-                            open_trade.exit_ts = ev.ts
-                            open_trade.exit_price = ev.price
-                            open_trade.pnl = self._pnl(open_trade)
-                            self.trades.append(open_trade)
-                            equity += open_trade.pnl
-                            self.equity.append((ev.ts, equity))
-                            open_trade = None
+            # ━━ Evaluate position management on EVERY event ━━
+            if open_trade:
+                if ev.symbol != open_trade.symbol:
+                    # Symbol mismatch — skip
+                    continue
 
-                # new signal? only if no open trade (single position)
-                if not open_trade and ev.symbol != '':
-                    sig = self._check_signal(ev)
-                    if sig:
-                        cfg = _sym_cfg(ev.symbol)
-                        contracts = max(1, int(MAX_RISK_PER_TRADE / (STOP_TICKS * cfg['tick_value'])))
-                        open_trade = Trade(
-                            entry_ts=ev.ts, exit_ts=None, symbol=ev.symbol,
-                            direction=sig.direction, entry_price=ev.price,
-                            exit_price=None, contracts=contracts,
-                            pnl=0.0, mae=0.0, mfe=0.0, exit_reason='', signal=sig.reason)
-                        self.signals.append(sig)
+                # Update MAE/MFE on trade events only (depth levels are not market prices)
+                if isinstance(ev, TradeEvent):
+                    self._update_mae_mfe(open_trade, ev)
 
-        # close any remaining open trades at end of replay
+                exit_result = self._evaluate_exit(open_trade, ev)
+                if exit_result:
+                    open_trade.exit_ts = ev.ts
+                    open_trade.exit_price = exit_result['fill_price']
+                    open_trade.exit_reason = exit_result['reason']
+                    open_trade.pnl = self._pnl(open_trade)
+                    self.trades.append(open_trade)
+                    equity += open_trade.pnl
+                    self.equity.append((ev.ts, equity))
+                    # Stat collection
+                    self._stats['total_trades'] += 1
+                    if exit_result['reason'] == 'stop':
+                        self._stats['stop_hit'] += 1
+                    elif exit_result['reason'] == 'target':
+                        self._stats['target_hit'] += 1
+                    elif exit_result['reason'] == 'time':
+                        self._stats['time_exit'] += 1
+                    elif exit_result['reason'] == 'trailing_stop':
+                        self._stats['trailing_stop'] += 1
+                    open_trade = None
+
+            # ━━ Signal detection on trades only (entry occurs on next trade event) ━━
+            if not open_trade and isinstance(ev, TradeEvent) and ev.symbol != '':
+                sig = self._check_signal(ev)
+                if sig:
+                    cfg = _sym_cfg(ev.symbol)
+                    contracts = max(1, int(MAX_RISK_PER_TRADE / (STOP_TICKS * cfg['tick_value'])))
+                    open_trade = Trade(
+                        entry_ts=ev.ts, exit_ts=None, symbol=ev.symbol,
+                        direction=sig.direction, entry_price=ev.price,
+                        exit_price=None, contracts=contracts,
+                        pnl=0.0, mae=0.0, mfe=0.0, exit_reason='', signal=sig.reason)
+                    self.signals.append(sig)
+
+        # Close remaining at last trade of same symbol
         if open_trade:
-            # Find last trade event for this symbol
             last_price = open_trade.entry_price
             last_ts = open_trade.entry_ts
-            for ev in reversed(self.events):
-                if isinstance(ev, TradeEvent) and ev.symbol == open_trade.symbol:
-                    last_price = ev.price
-                    last_ts = ev.ts
+            for rev_ev in reversed(self.events):
+                if isinstance(rev_ev, TradeEvent) and rev_ev.symbol == open_trade.symbol:
+                    last_price = rev_ev.price
+                    last_ts = rev_ev.ts
                     break
             open_trade.exit_ts = last_ts
             open_trade.exit_price = last_price
+            open_trade.exit_reason = 'replay_end'
             open_trade.pnl = self._pnl(open_trade)
             self.trades.append(open_trade)
             if self.equity:
                 self.equity.append((last_ts, self.equity[-1][1] + open_trade.pnl))
             else:
                 self.equity.append((last_ts, open_trade.pnl))
+
+    def _get_best_bid_ask(self, sym: str) -> Tuple[float, float]:
+        """Return (best_bid, best_ask) from current orderbook."""
+        ob_sym = self.ob.get(sym, {'bid': {}, 'ask': {}})
+        bids = sorted(ob_sym.get('bid', {}).keys(), reverse=True)
+        asks = sorted(ob_sym.get('ask', {}).keys())
+        best_bid = bids[0] if bids else 0.0
+        best_ask = asks[0] if asks else 999999.0
+        return best_bid, best_ask
+
+    def _evaluate_exit(self, tr: Trade, ev) -> Optional[dict]:
+        """
+        Return {'reason': str, 'fill_price': float} if trade should exit, else None.
+        Evaluated on every event (depth + trade). Uses book-aware fills.
+        """
+        cfg = _sym_cfg(tr.symbol)
+        tsz = cfg['tick_size']
+        now = ev.ts
+
+        # Update trailing stop first
+        self._update_trailing(tr, ev)
+
+        best_bid, best_ask = self._get_best_bid_ask(tr.symbol)
+
+        # ━━ TIME EXIT (check every event) ━━
+        if (now - tr.entry_ts).total_seconds() >= TIME_EXIT_SECONDS:
+            # Use mid for time exit fill
+            fill = (best_bid + best_ask) / 2 if best_bid and best_ask < 999999 else \
+                   (ev.price if isinstance(ev, TradeEvent) else tr.entry_price)
+            return {'reason': 'time', 'fill_price': fill}
+
+        # ━━ STOP & TARGET (bid/ask-aware) ━━
+        if tr.direction == 'LONG':
+            stop_level = tr.entry_price - STOP_TICKS * tsz
+            tgt_level = tr.entry_price + TARGET_TICKS * tsz
+
+            # For long: stop fills if trade THROUGH best_bid <= stop_level
+            # or if trade price itself is below stop (aggressive stop-loss sweep)
+            if isinstance(ev, TradeEvent):
+                if ev.price <= stop_level:
+                    fill = max(ev.price, best_bid) if best_bid else ev.price
+                    return {'reason': 'stop', 'fill_price': fill}
+                if ev.price >= tgt_level:
+                    fill = min(ev.price, best_ask) if best_ask < 999999 else ev.price
+                    return {'reason': 'target', 'fill_price': fill}
+            else:
+                # Depth update: if best_bid drops through stop, we hit stop on next trade
+                if best_bid <= stop_level:
+                    return {'reason': 'stop', 'fill_price': best_bid}
+                if best_ask >= tgt_level:
+                    return {'reason': 'target', 'fill_price': best_ask}
+
+            # Trailing stop — only evaluate on trade events (market price)
+            if isinstance(ev, TradeEvent) and tr.trailing_stop > 0.0 and ev.price <= tr.trailing_stop:
+                return {'reason': 'trailing_stop', 'fill_price': ev.price}
+
+        else:  # SHORT
+            stop_level = tr.entry_price + STOP_TICKS * tsz
+            tgt_level = tr.entry_price - TARGET_TICKS * tsz
+
+            if isinstance(ev, TradeEvent):
+                if ev.price >= stop_level:
+                    fill = min(ev.price, best_ask) if best_ask < 999999 else ev.price
+                    return {'reason': 'stop', 'fill_price': fill}
+                if ev.price <= tgt_level:
+                    fill = max(ev.price, best_bid) if best_bid else ev.price
+                    return {'reason': 'target', 'fill_price': fill}
+                if tr.trailing_stop > 0.0 and ev.price >= tr.trailing_stop:
+                    return {'reason': 'trailing_stop', 'fill_price': ev.price}
+            else:
+                if best_ask >= stop_level:
+                    return {'reason': 'stop', 'fill_price': best_ask}
+                if best_bid <= tgt_level:
+                    return {'reason': 'target', 'fill_price': best_bid}
+
+        return None
+
+    def _update_trailing(self, tr: Trade, ev):
+        """Update trailing stop at breakeven (1:1) then trail 0.5R behind MFE.
+        Only evaluated on trade events (market prices). Depth events are stale levels."""
+        if not isinstance(ev, TradeEvent):
+            return
+        cfg = _sym_cfg(tr.symbol)
+        tsz = cfg['tick_size']
+
+        # Current MFE in ticks relative to entry
+        if tr.direction == 'LONG':
+            mfe_ticks = (ev.price - tr.entry_price) / tsz
+        else:
+            mfe_ticks = (tr.entry_price - ev.price) / tsz
+
+        # Only trail when profitable by at least 1:1
+        if mfe_ticks < STOP_TICKS:
+            return
+
+        # Activate breakeven on first 1:1 profit
+        if tr.trailing_stop == 0.0:
+            tr.trailing_stop = tr.entry_price
+
+        # Trail: move stop toward favorable direction, never reverse
+        trail_buffer = 0.5 * STOP_TICKS * tsz
+        if tr.direction == 'LONG':
+            new_stop = ev.price - trail_buffer
+            if new_stop > tr.trailing_stop:
+                tr.trailing_stop = new_stop
+        else:
+            new_stop = ev.price + trail_buffer
+            if new_stop < tr.trailing_stop:
+                tr.trailing_stop = new_stop
 
     def _on_depth(self, ev: DepthEvent):
         side = self.ob[ev.symbol][ev.side]
@@ -345,15 +477,17 @@ class OrderflowReplay:
 
         return None
 
-    def _update_mae_mfe(self, tr: Trade, ev: TradeEvent):
+    def _update_mae_mfe(self, tr: Trade, ev):
+        """Update MAE/MFE on any price event (trade or depth)."""
         cfg = _sym_cfg(tr.symbol)
         tsz = cfg['tick_size']
+        price = ev.price
         if tr.direction == 'LONG':
-            mae_ticks = (tr.entry_price - ev.price) / tsz
-            mfe_ticks = (ev.price - tr.entry_price) / tsz
+            mae_ticks = (tr.entry_price - price) / tsz
+            mfe_ticks = (price - tr.entry_price) / tsz
         else:
-            mae_ticks = (ev.price - tr.entry_price) / tsz
-            mfe_ticks = (tr.entry_price - ev.price) / tsz
+            mae_ticks = (price - tr.entry_price) / tsz
+            mfe_ticks = (tr.entry_price - price) / tsz
         tr.mae = max(tr.mae, mae_ticks)
         tr.mfe = max(tr.mfe, mfe_ticks)
 
@@ -491,6 +625,29 @@ Events: {len(self.events):,} | Symbols: {', '.join(self.bars.keys())}
         md += f"\n## Sweeps\nTotal: {len(self.sweeps)}\n"
         md += f"- Sell sweeps: {len([s for s in self.sweeps if s.sweep_type=='sell_sweep'])}\n"
         md += f"- Buy sweeps:  {len([s for s in self.sweeps if s.sweep_type=='buy_sweep'])}\n"
+
+        # Execution breakdown
+        md += "\n## Execution Breakdown\n"
+        stats = getattr(self, '_stats', {})
+        md += f"- **Stop hit**: {stats.get('stop_hit', 0)} ({stats.get('stop_hit',0)/n*100:.0f}%)\n"
+        md += f"- **Target hit**: {stats.get('target_hit', 0)} ({stats.get('target_hit',0)/n*100:.0f}%)\n"
+        md += f"- **Time exit**: {stats.get('time_exit', 0)} ({stats.get('time_exit',0)/n*100:.0f}%)\n"
+        md += f"- **Trailing stop**: {stats.get('trailing_stop', 0)} ({stats.get('trailing_stop',0)/n*100:.0f}%)\n"
+        md += f"- **Replay end**: {n - sum(stats.get(k,0) for k in ['stop_hit','target_hit','time_exit','trailing_stop'])}\n"
+
+        # Execution validation assertions
+        md += "\n## Execution Validation\n"
+        for t in tr:
+            if t.exit_reason == 'stop':
+                md += f"✓ STOP: {t.symbol} {t.direction} entry={t.entry_price:.2f} exit={t.exit_price:.2f} mae={t.mae:.1f}t\n"
+            elif t.exit_reason == 'target':
+                md += f"✓ TARGET: {t.symbol} {t.direction} entry={t.entry_price:.2f} exit={t.exit_price:.2f} mfe={t.mfe:.1f}t\n"
+            elif t.exit_reason == 'time':
+                md += f"✗ TIMEOUT: {t.symbol} {t.direction} entry={t.entry_price:.2f} exit={t.exit_price:.2f} mae={t.mae:.1f}t mfe={t.mfe:.1f}t\n"
+            elif t.exit_reason == 'trailing_stop':
+                md += f"✓ TRAIL: {t.symbol} {t.direction} entry={t.entry_price:.2f} exit={t.exit_price:.2f}\n"
+            else:
+                md += f"? UNK: {t.symbol} {t.direction} reason={t.exit_reason}\n"
 
         # session breakdown
         md += "\n## Sessions\n"
