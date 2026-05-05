@@ -305,18 +305,17 @@ class RealBacktestEngine:
         
         win_rate = wins / total_trades if total_trades > 0 else 0
         
-        # PnL metrics
-        total_pnl = sum(r['pnl'] for r in df_results)
-        avg_pnl = total_pnl / total_trades if total_trades > 0 else 0
-        avg_r = sum(r['r_multiple'] for r in df_results) / total_trades if total_trades > 0 else 0
+        # PnL metrics (using pnl_ticks and r_multiple)
+        total_r = sum(r['r_multiple'] for r in df_results)
+        avg_r = total_r / total_trades if total_trades > 0 else 0
         
         winning_trades = [r for r in df_results if r['outcome_type'] in ['TARGET1_HIT', 'TARGET2_HIT']]
         losing_trades = [r for r in df_results if r['outcome_type'] == 'STOP_HIT']
         
-        avg_win = sum(r['pnl'] for r in winning_trades) / len(winning_trades) if winning_trades else 0
-        avg_loss = sum(r['pnl'] for r in losing_trades) / len(losing_trades) if losing_trades else 0
+        avg_win = sum(r['r_multiple'] for r in winning_trades) / len(winning_trades) if winning_trades else 0
+        avg_loss = sum(r['r_multiple'] for r in losing_trades) / len(losing_trades) if losing_trades else 0
         
-        pf = avg_win / abs(avg_loss) if avg_loss != 0 else 0
+        pf = avg_win / abs(avg_loss) if avg_loss < 0 else (1.0 if avg_loss == 0 and avg_win > 0 else 0)
         
         # By direction
         longs = [r for r in df_results if r['direction'] == 'LONG']
@@ -331,12 +330,11 @@ class RealBacktestEngine:
             'losses': losses,
             'timeouts': timeouts,
             'win_rate': win_rate,
-            'total_pnl': total_pnl,
-            'avg_pnl_per_trade': avg_pnl,
+            'total_r': total_r,
             'avg_r_multiple': avg_r,
             'profit_factor': pf,
-            'avg_winning_trade': avg_win,
-            'avg_losing_trade': avg_loss,
+            'avg_winning_r': avg_win,
+            'avg_losing_r': avg_loss,
             'long_win_rate': long_wr,
             'short_win_rate': short_wr,
             'avg_mae': sum(r['mae'] for r in df_results) / len(df_results),
@@ -392,7 +390,7 @@ if __name__ == "__main__":
     jsonl_path = Path("/Users/laxman_2026_mac_mini/.openclaw/workspace/market-swarm-lab/state/orderflow/bookmap_api/es_orderflow_2026-05-04.jsonl")
     
     engine = RealBacktestEngine(signals_csv, jsonl_path)
-    stats = engine.run_backtest(max_signals=100)  # Test on first 100 for speed
+    stats = engine.run_backtest(max_signals=None)  # Run ALL 672 signals
     engine.save_results()
     
     print("\n" + "=" * 70)
