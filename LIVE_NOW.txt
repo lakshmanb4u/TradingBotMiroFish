@@ -1,0 +1,159 @@
+================================================================================
+LIVE NOW — PHASE 2 ACTIVE + PHASE 3/4 SHADOW RESEARCH
+================================================================================
+
+Date: 2026-05-06 11:54 PDT
+Status: THREE-TRACK SYSTEM OPERATIONAL
+
+================================================================================
+TRACK 1: PHASE 2 LIVE ALERTS — ACTIVE NOW
+================================================================================
+
+Status: OPERATIONAL
+Alerts: 9 (OBSERVATIONAL ONLY)
+  - 6 LONG
+  - 3 SHORT
+
+Files Updated:
+  ✓ state/orderflow/live/live_alerts.csv (9 alerts)
+  ✓ state/orderflow/live/latest_signal.json
+  ✓ state/orderflow/live/session_stats.json
+  ✓ state/orderflow/live/feed_health.json
+
+What's Active:
+  - Phase 1.6 regime gating
+  - Phase 2 trapped-trader detection
+  - Early exit signals (2 triggered)
+  - Risk scoring enabled
+
+⚠️  OBSERVATIONAL ONLY — DO NOT AUTO-TRADE
+
+================================================================================
+TRACK 2: PHASE 3 SHADOW — LIQUIDITY INTELLIGENCE
+================================================================================
+
+Status: SHADOW RESEARCH (not affecting live)
+Mode: Scoring only, not filtering
+
+What Phase 3 Does:
+  - Liquidity confirmation scoring
+  - Liquidity pull detection
+  - Liquidity refill detection
+  - Liquidity vacuum detection
+
+Results (Shadow):
+  - APPROVE: 9/9 (all alerts pass liquidity)
+  - WARN: 0
+  - REJECT: 0
+
+Impact if Applied:
+  - No alerts would be rejected by liquidity filter
+  - Adds liquidity context but no filtering needed
+
+Files:
+  ✓ exports/phase3_shadow_decisions.csv
+  ✓ reports/phase3_liquidity_shadow.md
+
+================================================================================
+TRACK 3: PHASE 4 SHADOW — AUCTION LOCATION INTELLIGENCE
+================================================================================
+
+Status: SHADOW RESEARCH (not affecting live)
+Mode: Scoring only, not filtering
+
+What Phase 4 Does:
+  - Location quality scoring
+  - VWAP proximity analysis
+  - Range extreme detection
+  - Auction context (early/mid/late session)
+
+Results (Shadow):
+  - APPROVE: 8/9
+  - WARN: 0
+  - REJECT: 1
+
+Impact if Applied:
+  - 1 alert (SHORT in BULL_TREND) would be rejected
+  - 8 alerts remain
+  - Location quality good overall
+
+Files:
+  ✓ exports/phase4_shadow_decisions.csv
+  ✓ reports/phase4_location_shadow.md
+
+================================================================================
+TONIGHT'S BACKTEST PLAN
+================================================================================
+
+After market close, replay today with:
+
+A. Phase 2 baseline (current)
+   - 9 alerts
+   - 77.8% WR
+   - 6.78R
+
+B. Phase 2 + Phase 3 (liquidity filter)
+   - 9 alerts (no change, all approved)
+   - Expected: Similar to Phase 2
+
+C. Phase 2 + Phase 4 (location filter)
+   - 8 alerts (1 SHORT rejected)
+   - Expected: Improved if SHORT was loser
+
+D. Phase 2 + Phase 3 + Phase 4 (combined)
+   - 8 alerts (1 SHORT rejected)
+   - Expected: Best if both filters help
+
+Generate:
+  - reports/phase3_phase4_vs_phase2_today.md
+  - exports/phase3_phase4_backtest_ledger.csv
+
+================================================================================
+RULE: NO LIVE IMPACT
+================================================================================
+
+Phase 3 and Phase 4 are SHADOW ONLY.
+
+They do NOT affect live alerts.
+They do NOT filter live decisions.
+They do NOT modify Phase 2 logic.
+
+Tonight: Backtest will show whether they should be enabled.
+
+================================================================================
+STATUS SUMMARY
+================================================================================
+
+Live: ✅ OPERATIONAL
+  - Phase 2 alerts: 9 active
+  - Observational: NO AUTO-TRADE
+  - Risk scoring: ACTIVE
+  - Early exits: 2 triggered
+
+Shadow: ✅ RESEARCH READY
+  - Phase 3 liquidity: 0 rejections
+  - Phase 4 location: 1 rejection
+  - Decision logs: READY FOR BACKTEST
+
+Tonight: ✅ BACKTEST READY
+  - 4 combinations prepared
+  - Comparison metrics ready
+  - Decision framework set
+
+================================================================================
+REMEMBER
+================================================================================
+
+NO OPTIMIZATION during market hours.
+NO THRESHOLD CHANGES during session.
+NO PRODUCTION CLAIMS.
+NO AUTO-TRADING.
+
+This is research validation only.
+
+Phase 2 is live and observational.
+Phase 3/4 are shadow and educational.
+
+Tonight: We test whether Phase 3/4 improve results without killing winners.
+
+================================================================================
